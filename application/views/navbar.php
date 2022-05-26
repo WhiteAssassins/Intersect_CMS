@@ -45,11 +45,7 @@
             <?php
                 }else{
             ?>
-             <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('logs'); ?>">
-                   Logs
-                    </a>
-                </li>
+           
                
                 </li>
                 <li class="nav-item dropdown">
