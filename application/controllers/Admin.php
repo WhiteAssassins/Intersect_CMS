@@ -609,7 +609,7 @@ class Admin extends CI_Controller {
                 $archivo = "archivo";
                 $config['upload_path'] = "img/news";
                 $config['file_name'] = $filename;
-                $config['allowed_types'] = "jpg";
+                $config['allowed_types'] = "*";
                 $config['max_size'] = "50000";
                 $config['max_width'] = "2000";
                 $config['max_height'] = "2000";

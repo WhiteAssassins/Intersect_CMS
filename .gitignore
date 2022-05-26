@@ -17,3 +17,6 @@ application/logs/*
 /vendor/
 application/config/config.php
 application/config/paypallib_config.php
+
+
+/img

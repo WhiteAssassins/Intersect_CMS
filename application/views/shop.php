@@ -5,14 +5,7 @@
     <h3 class="font-weight-bold text-center  mb-4">Tienda</h3>
 
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <div class="controls-top mb-4">
-        <a class="btn-floating primary-color" href="#multi-item-example" data-slide="prev">
-          <i class="fas fa-chevron-left"></i>
-        </a>
-        <a class="btn-floating primary-color" href="#multi-item-example" data-slide="next">
-          <i class="fas fa-chevron-right"></i>
-        </a>
-      </div>
+      
       <div class="carousel-inner" role="listbox">
         <div class="carousel-item pt-3 active">
         <?php 
