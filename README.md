@@ -15,4 +15,4 @@
 
 # Adicional
 * Discord https://discord.gg/2XcYgevUws
-* Twitter https://twitter.com/whiteasassinsr/
+* Twitter https://twitter.com/whiteassassinsr/
