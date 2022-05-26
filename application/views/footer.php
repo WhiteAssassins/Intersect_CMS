@@ -83,7 +83,6 @@ $('#modal1').on('hidden.bs.modal', function (e) {
     var interval1;
     const changeNumber = () => {
       currentNumber += value;
-      //checks if currentNumber reached numberTo
       (deltaPositive && currentNumber >= numberTo) || (!deltaPositive &&currentNumber<= numberTo) ? currentNumber=numberTo : currentNumber;
       this.text(parseInt(currentNumber));
       currentNumber == numberTo ? clearInterval(interval1) : currentNumber;  
