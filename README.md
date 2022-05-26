@@ -6,6 +6,7 @@
 * Apache Server 
 * Intersect Server
 # Instalación
+https://www.ascensiongamedev.com/topic/6512-intersect-cms-novo/
 
 # Fotos
 ![N|Solid](https://i.postimg.cc/65v014v3/1.png)
