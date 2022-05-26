@@ -18,10 +18,8 @@ class Products extends CI_Controller {
     public function index(){
         $data = array();
         
-        //Toma los datos de los txt
         $data['products'] = $this->product->getRows(array('limit'=>10));
         
-        //carga la vista
         $this->load->view('header');
 		$this->load->view('navbar');
         $this->load->view('shop', $data);
@@ -31,10 +29,8 @@ class Products extends CI_Controller {
     public function details($url_slug){
         $data = array();
         
-        //tome los datos del txt
         $data['products'] = $this->product->getRows(array('url_slug'=>$url_slug));
         
-        //carga la vista
         $this->load->view('header');
 		$this->load->view('navbar');  
         $this->load->view('products/details', $data);
