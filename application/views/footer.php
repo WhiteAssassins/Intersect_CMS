@@ -14,12 +14,12 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/pro/cards.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/pro/dropdown/dropdown.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/pro/buttons.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/addons-pro/timeline.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
