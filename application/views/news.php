@@ -5,7 +5,7 @@
     <?php 
             $resultado = $this->db->get('news');
             $rest = $resultado->result_array(); 
-            foreach ($rest as $key) {              
+            foreach (array_reverse($rest) as $key) {       
         ?>
       <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
         <div class="card hoverable cards-novo" style="     margin-bottom: 40px;">
