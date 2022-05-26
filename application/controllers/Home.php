@@ -98,6 +98,7 @@ class Home extends CI_Controller {
             $rest = $resultado->result_array();
             $data = [
                 'user'=>$rest[0]['user'],
+				'rol'=> 1,
                 'login'=>true
             ];
             $this->session->set_userdata($data);

@@ -15,10 +15,15 @@ class Logs extends CI_Controller {
 	
 	public function index()
 	{	
-		$this->load->view('header');
-		$this->load->view('sidebar');  
-		$this->load->view('logs');
-		$this->load->view('footer');
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+			$this->load->view('header');
+			$this->load->view('sidebar');  
+			$this->load->view('logs');
+			$this->load->view('footer');	
+		}else{
+			$base_url = base_url();
+			header("Location: $base_url");
+		}
 
 	}
 	

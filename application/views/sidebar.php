@@ -1,10 +1,6 @@
 
-
-
-  <!-- SideNav slide-out button -->
   <a href="#" data-activates="slide-out" class="btn btn-dark p-3 button-collapse"><i
     class="fas fa-bars"></i></a>
-
 
 <div id="slide-out" class="side-nav2 side special-color-dark" style="width: 240px; transform: translateX(0px);">
   <ul class="custom-scrollbar ps">
