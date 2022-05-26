@@ -6,10 +6,9 @@
 	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/brands.css">
 	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/iconos.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/addons-pro/timeline.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/addons-pro/timeline.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/addons/datatables.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css"> 
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/animate.css">
