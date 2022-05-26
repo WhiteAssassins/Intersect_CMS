@@ -6,7 +6,7 @@ $restlog = $resultadolog->result_array();
 
 <div class="card card-cascade narrower cards-novo">
 
-  <!--Card image-->
+
   <div
     class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 justify-content-between align-items-center ">
 
@@ -16,15 +16,12 @@ $restlog = $resultadolog->result_array();
 
     
   </div>
-  <!--/Card image-->
 
   <div class="px-4 ">
 
     <div class="table-wrapper">
-      <!--Table-->
       <table class="table table-hover mb-0">
 
-        <!--Table head-->
         <thead>
           <tr>
           
@@ -50,9 +47,6 @@ $restlog = $resultadolog->result_array();
             </th>
           </tr>
         </thead>
-        <!--Table head-->
-
-        <!--Table body-->
         <tbody>
         <?php 
                                      
@@ -70,9 +64,7 @@ $restlog = $resultadolog->result_array();
                             }
                         ?>  
         </tbody>
-        <!--Table body-->
       </table>
-      <!--Table-->
     </div>
 
   </div>
