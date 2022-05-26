@@ -16,3 +16,4 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 application/config/config.php
+application/config/paypallib_config.php
