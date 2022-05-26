@@ -44,7 +44,7 @@
         <div class="media white z-depth-1 rounded cards-novo">
           <i class="fas fa-server fa-lg pink z-depth-1 p-4 rounded-left text-white mr-3"></i>
           <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>FPS Server</small></p>
+            <p class="text-uppercase text-muted mb-1"><small>CPS Server</small></p>
             <h5 class="font-weight-bold mb-0"><?php $serverstats = $this->Apiserverstats->serverinfo();  echo $serverstats['cps']; ?></h5>
           </div>
         </div>
