@@ -1,6 +1,5 @@
 <div id="slide-out" class="side-nav2 side special-color-dark" style="width: 240px; transform: translateX(0px);">
   <ul class="custom-scrollbar ps">
-    <!-- Logo -->
     <li>
       <div class="logo-wrapper waves-light waves-effect waves-light">
         <a class="white-text" href="<?php echo base_url('home');?>">
@@ -9,9 +8,6 @@
     </a>
       </div>
     </li>
-    <!--/. Logo -->
-   
-    <!-- Side navigation links -->
     <li>
       <ul class="collapsible collapsible-accordion">
       <li><a href="<?php echo base_url('home');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Inicio</a>
@@ -30,6 +26,4 @@
         </li>
       </ul>
     </li>
-    <!--/. Side navigation links -->
-
 </div>
