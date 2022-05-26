@@ -85,7 +85,6 @@ class Home extends CI_Controller {
         $resultado = $this->db->get('users');
         $num = $resultado->num_rows();
         if($num == 0){
-            //no encontro el login
             $this->load->view('header');
             $data = [
                 'sms'=>'Usted no es Administrador',
@@ -102,7 +101,6 @@ class Home extends CI_Controller {
                 'login'=>true
             ];
             $this->session->set_userdata($data);
-            //echo $this->session->userdata('username');
             $this->load->view('header');
             $this->load->view('navbar');
             $this->load->view('home');
