@@ -32,7 +32,7 @@ class Shop extends CI_Controller {
 			$failURL = base_url().'shop/fail';
 			$notifyURL = base_url().'shop/ipn'; 
 			$product = $this->paypalmodel->getProducts($id);
-			$userID = 1; //current user id
+			$userID = 1;
 			$logo = base_url().'Your_logo_url';
 			 
 			$this->paypal_lib->add_field('return', $returnURL);
@@ -52,7 +52,6 @@ class Shop extends CI_Controller {
 
 	function paymentSuccess(){
  
-        //get the transaction data
         $paypalInfo = $this->input->post();
            
         $data['item_number'] =  $_POST['item_number']; 
@@ -61,17 +60,14 @@ class Shop extends CI_Controller {
         $data['currency_code'] = $_POST['mc_currency'];
         $data['status'] = $_POST["payment_status"];
 
-        //pass the transaction data to view
         $this->load->view('shop/paymentSuccess', $data);
      }
 
 	 function paymentFail(){
-        //if transaction cancelled
         $this->load->view('shop/paymentFail');
      }
 
 	function ipn(){
-        //paypal return transaction details array
         $paypalInfo    = $this->input->post();
  
         $data['user_id'] = $paypalInfo['custom'];
@@ -85,9 +81,7 @@ class Shop extends CI_Controller {
         $paypalURL = $this->paypal_lib->paypal_url;        
         $result    = $this->paypal_lib->curlPost($paypalURL,$paypalInfo);
          
-        //check whether the payment is verified
         if(preg_match("/VERIFIED/i",$result)){
-            //insert the transaction data into the database
             $this->paypalmodel->storeTransaction($data);
         }
     }
