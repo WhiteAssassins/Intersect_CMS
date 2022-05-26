@@ -134,6 +134,8 @@ class Admin extends CI_Controller {
 							}
 		}
 	}else{
+		$pedido['sms'] = 'Su sesión a Expirado por favor vuelva a reconectarse';
+		echo json_encode($pedido);
 		$base_url = base_url();
 		header("Location: $base_url");
 	}
