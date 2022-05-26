@@ -8,7 +8,7 @@
 # Instalación
 
 # Fotos
-![N|Solid](https://i.postimg.cc/zDj5H3By/Captura-de-pantalla-174.png)
+![N|Solid](https://i.postimg.cc/65v014v3/1.png)
 ![N|Solid](https://i.postimg.cc/h4wsr1h6/2.png)
 ![N|Solid](https://i.postimg.cc/qvHLfBsG/3.png)
 
