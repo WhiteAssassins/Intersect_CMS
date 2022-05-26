@@ -29,14 +29,8 @@
             <h5 class="font-weight-bold mb-0"><?php $serverstats = $this->Apiserverstats->serverinfo();  echo $serverstats['onlineCount']; ?></h5>
           </div>
         </div>
-
-
       </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
       <div class="col-lg-3 col-md-6 mb-4">
-
         <div class="media white z-depth-1 rounded cards-novo">
           <i class="fas fa-id-badge fa-lg teal z-depth-1 p-4 rounded-left text-white mr-3"></i>
           <div class="media-body p-1">
@@ -44,11 +38,7 @@
             <h5 class="font-weight-bold mb-0"><?php $players = $this->Apiplayers->player();  echo $players['Total']; ?></h5>
           </div>
         </div>
-
       </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
       <div class="col-lg-3 col-md-6 mb-4">
 
         <div class="media white z-depth-1 rounded cards-novo">
@@ -58,31 +48,13 @@
             <h5 class="font-weight-bold mb-0"><?php $serverstats = $this->Apiserverstats->serverinfo();  echo $serverstats['cps']; ?></h5>
           </div>
         </div>
-
       </div>
-      <!--Grid column-->
-
     </div>
-    <!--Grid row-->
-
   </section>
-  <!-- Section: Block Content -->
-
-
 </div>
-
 <div class="container my-1 px-0 rounded">
-
-
-<!--Section: Content-->
-
 <div class="row">
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -96,15 +68,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -118,18 +83,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -140,17 +95,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -162,45 +108,12 @@
                     </div>
   </div>
 </div>
-
-</div>
-
-
-
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 <div class="container my-1 px-0 rounded">
-
-
-<!--Section: Content-->
-
-
 <div class="row">
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -216,16 +129,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -241,16 +146,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -262,19 +159,8 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
-
-
-
-
-
-
 <div class="col-lg-3 col-md-6 mb-4">
-
 <div class="media white z-depth-1 rounded cards-novo">
   <div class="media-body p-1">
   <div class="md-form "> 
@@ -287,11 +173,7 @@
                     </div>
   </div>
 </div>
-
 </div>
-
-
-
 </div>
 </div>
 
