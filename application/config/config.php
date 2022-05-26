@@ -76,7 +76,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'spanish';
 
 /*
 |--------------------------------------------------------------------------
@@ -521,10 +521,7 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['apiip'] = '52.144.46.171:5400';
-//$config['apiuser'] = 'WhiteAssassins';
-//$config['apipass'] = '079DC5B862FE910FBEF8602265613A84AF5A5E5A2DA0D912EECEF637CF8957D1';
+$config['apiip'] = '127.0.0.1:5400';
 
-//$config['apiip'] = 'localhost';
-$config['apiuser'] = 'WhiteAssassins';
-$config['apipass'] = '079DC5B862FE910FBEF8602265613A84AF5A5E5A2DA0D912EECEF637CF8957D1';
+$config['apiuser'] = 'apiuser';
+$config['apipass'] = 'apipass';
