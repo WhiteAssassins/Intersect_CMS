@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card card-cascade wider reverse">
           <div class="view view-cascade overlay " style="margin-top: 40px;">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(142).jpg" alt="Sample image" >
+            <img class="card-img-top" src="<?php echo base_url('img/news/'); echo $newss['img']; ?>" alt="Sample image" >
             <a href="#!">
               <div class="mask rgba-white-slight"></div>
             </a>
