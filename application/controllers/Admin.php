@@ -17,14 +17,50 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
     }
 	
-	public function index()
-	{	
+
+	/*
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////Start Load Views///////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
+	public function index(){	
 		$this->load->view('header');
         $this->load->view('sidebar');
 		$this->load->view('admin');
 		$this->load->view('footer');
 	}
-	
+	public function news(){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/news');
+		$this->load->view('footer');
+	}
+	public function shop(){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/shop');
+		$this->load->view('footer');
+	}
+	public function config(){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/config');
+		$this->load->view('footer');
+	}
+	/*
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////End Load Views///////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
+
+
+
+
+	/*
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////Start Dashboard///////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
 	public function global(){
 		$pedido['status'] = 0;
 		$txt = $this->input->post('txt');
@@ -44,8 +80,7 @@ class Admin extends CI_Controller {
 					],
 					  ];
 					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					  $client = new Client([						  
 						'base_uri' => 'http://'.$apiip.'/api/v1/chat/global',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -54,8 +89,7 @@ class Admin extends CI_Controller {
 							'headers' => [
 								"authorization" => "Bearer ".$accesstoken['access_token'],
 							],
-							'form_params' => $global,
-							
+							'form_params' => $global,							
 						  ]);
 						  $estado = json_decode($res->getBody(), true);
 						  if ($res->getStatusCode() == '200')
@@ -77,10 +111,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-}
-
-
 
 	public function direct(){
 		$pedido['status'] = 0;
@@ -100,10 +132,10 @@ class Admin extends CI_Controller {
 						"G"=> 53,
 						"B"=> 71
 					],
-					  ];
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					];
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
+						
 						'base_uri' => 'http://'.$apiip.'/api/v1/chat/direct/'.$user,
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -114,9 +146,9 @@ class Admin extends CI_Controller {
 							],
 							'form_params' => $global,
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -124,9 +156,9 @@ class Admin extends CI_Controller {
 									'user' => 'N/A',
 									'action' =>  'Mensaje Directo',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -134,7 +166,7 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
-	}
+		}
 	}
 
 	public function proximity(){
@@ -155,10 +187,10 @@ class Admin extends CI_Controller {
 						"G"=> 53,
 						"B"=> 71
 					],
-					  ];
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					];
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
+						
 						'base_uri' => 'http://'.$apiip.'/api/v1/chat/proximity/'.$map,
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -169,9 +201,9 @@ class Admin extends CI_Controller {
 							],
 							'form_params' => $global,
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -179,9 +211,9 @@ class Admin extends CI_Controller {
 									'user' => 'N/A',
 									'action' =>  'Mensaje de Proximidad',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -189,11 +221,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
 
 	public function ban(){
 		$pedido['status'] = 0;
@@ -210,10 +239,10 @@ class Admin extends CI_Controller {
 					'duration' => $time,
 					'reason' => $reason,
 					'moderator' => $this->session->userdata('user'),
-					  ];
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					];
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
+						
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/ban',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -224,9 +253,9 @@ class Admin extends CI_Controller {
 							],
 							'form_params' => $global,
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -234,9 +263,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Ban',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -244,13 +273,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
-
-
 
 	public function unban(){
 		$pedido['status'] = 0;
@@ -262,8 +286,8 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 			
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/unban',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -274,9 +298,9 @@ class Admin extends CI_Controller {
 							],
 							
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -284,9 +308,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Desbaneado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -294,12 +318,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
-
 
 	public function mute(){
 		
@@ -317,10 +337,10 @@ class Admin extends CI_Controller {
 					'duration' => $time,
 					'reason' => $reason,
 					'moderator' => $this->session->userdata('user'),
-					  ];
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					];
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
+						
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/mute',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -331,9 +351,9 @@ class Admin extends CI_Controller {
 							],
 							'form_params' => $global,
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -341,9 +361,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Muteado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -351,15 +371,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}	
 	}
-		
-	}
-
-
-
-
-
-
 
 	public function unmute(){
 		$pedido['status'] = 0;
@@ -371,8 +384,8 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 			
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/unmute',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -383,9 +396,9 @@ class Admin extends CI_Controller {
 							],
 							
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -393,9 +406,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Desmuteado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -403,17 +416,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
-
-
-
-
-
-
 
 	public function kick(){
 		$pedido['status'] = 0;
@@ -425,8 +429,8 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 			
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/kick',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -437,9 +441,9 @@ class Admin extends CI_Controller {
 							],
 							
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -447,9 +451,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Expulsado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -457,16 +461,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
-
-
-	
-
-
 
 	public function kill(){
 		$pedido['status'] = 0;
@@ -478,8 +474,8 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 			
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/kill',
 						'timeout'  => 5.0,
 						'http_errors' => false
@@ -490,9 +486,9 @@ class Admin extends CI_Controller {
 							],
 							
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -500,9 +496,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Asesinado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -510,17 +506,8 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
-
-
-
-
-
-
-
-
-
 
 	public function tp(){
 		$pedido['status'] = 0;
@@ -535,10 +522,10 @@ class Admin extends CI_Controller {
 				$global = [
 					'MapId' => $map,
 					
-					  ];
-					  $apiip = $this->config->item('apiip');
-					  $client = new Client([
-						  
+					];
+					$apiip = $this->config->item('apiip');
+					$client = new Client([
+						
 						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/admin/warpto',
 						'timeout'  => 5.0,
 						]);
@@ -548,9 +535,9 @@ class Admin extends CI_Controller {
 							],
 							'form_params' => $global,
 							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') 
+						]);
+						$estado = json_decode($res->getBody(), true);
+						if ($res->getStatusCode() == '200') 
 							{
 								$time = date("F j, Y, g:i a");
 								$datos = array (
@@ -558,9 +545,9 @@ class Admin extends CI_Controller {
 									'user' => $user,
 									'action' =>  'Teletransportado',
 									'time' =>  $time,
-								   );
+								);
 								
-								   $this->db->insert('logs', $datos);
+								$this->db->insert('logs', $datos);
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -568,21 +555,23 @@ class Admin extends CI_Controller {
 								echo json_encode($pedido);
 								
 							}
+		}
 	}
-	}
+	/*
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////End Dashboard/////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
+	
 
 
 
 
-
-
-	public function news(){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/news');
-		$this->load->view('footer');
-	}
-
+	/*
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////Start News///////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
 
 	public function addnews(){
 		$data = array();
@@ -650,8 +639,6 @@ class Admin extends CI_Controller {
         
     }
 
-
-
 	public function delnews(){
 		$id = $this->input->post('id');
         $this->db->delete('news', array ('id' => $id)); 
@@ -659,7 +646,6 @@ class Admin extends CI_Controller {
         header("Location: $base_url/admin/news");
         
     }
-
 
 	public function editnews(){
 		$id = $this->input->post('id');
@@ -692,13 +678,21 @@ class Admin extends CI_Controller {
 	}
 
 
-	public function shop(){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/shop');
-		$this->load->view('footer');
-	}
+	/*
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////End News//////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
 
+
+
+
+
+	/*
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////Start Shop///////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
 
 	public function delproduct(){
 		$id = $this->input->post('id');
@@ -779,7 +773,6 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-
 	public function editproducts(){
 		$id = $this->input->post('id');
 		$name = $this->input->post('name');
@@ -808,12 +801,18 @@ class Admin extends CI_Controller {
 	}
 
 
+	/*
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////End Shop//////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
 
-	public function config(){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/config');
-		$this->load->view('footer');
-	}
+
+
+
+
+
+
+	
 
 }
