@@ -24,28 +24,48 @@ class Admin extends CI_Controller {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	*/
 	public function index(){	
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$this->load->view('header');
         $this->load->view('sidebar');
 		$this->load->view('admin');
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	public function news(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('admin/news');
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	public function shop(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('admin/shop');
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	public function config(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('admin/config');
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	/*
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +82,7 @@ class Admin extends CI_Controller {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	*/
 	public function global(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$txt = $this->input->post('txt');
 		if($txt == ''){
@@ -112,9 +133,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function direct(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$txt = $this->input->post('txt');
 		$user = $this->input->post('user');
@@ -167,9 +193,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function proximity(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$txt = $this->input->post('txt');
 		$map = $this->input->post('map');
@@ -222,9 +253,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function ban(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$reason = $this->input->post('reason');
 		$user = $this->input->post('user');
@@ -274,9 +310,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function unban(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$user = $this->input->post('user');
 		if($user == '' ){
@@ -319,10 +360,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function mute(){
-		
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$reason = $this->input->post('reason');
 		$user = $this->input->post('user');
@@ -372,9 +417,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}	
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function unmute(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$user = $this->input->post('user');
 		if($user == '' ){
@@ -417,9 +467,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function kick(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$user = $this->input->post('user');
 		if($user == '' ){
@@ -462,9 +517,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function kill(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$user = $this->input->post('user');
 		if($user == '' ){
@@ -507,9 +567,14 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function tp(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$pedido['status'] = 0;
 		$user = $this->input->post('user');
 		$map = $this->input->post('map');
@@ -556,6 +621,10 @@ class Admin extends CI_Controller {
 								
 							}
 		}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	/*
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -574,6 +643,7 @@ class Admin extends CI_Controller {
 	*/
 
 	public function addnews(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$data = array();
         $txtData = array();         
         setlocale(LC_TIME, "spanish");
@@ -635,26 +705,41 @@ class Admin extends CI_Controller {
 		$this->load->view('sidebar');
         $this->load->view('admin/news', $data, false);
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
         
         
     }
 
 	public function delnews(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
         $this->db->delete('news', array ('id' => $id)); 
         $base_url = base_url();
         header("Location: $base_url/admin/news");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
         
     }
 
 	public function editnews(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
 		$this->load->view('header');
         $this->load->view('admin/editnews', array('id' => $id));
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 	
 	public function editnewss(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
 		$title = $this->input->post('title');
 		$descrip = $this->input->post('descrip');
@@ -675,6 +760,10 @@ class Admin extends CI_Controller {
         $this->db->update('news', $datos); 
 		$base_url = base_url();
 		header("Location: $base_url/admin/news");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 
@@ -695,14 +784,20 @@ class Admin extends CI_Controller {
 	*/
 
 	public function delproduct(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
         $this->db->delete('products', array ('id' => $id)); 
         $base_url = base_url();
         header("Location: $base_url/admin/shop");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
         
     }
 
 	public function addproduct(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$data = array();
         $txtData = array();         
         $user = $this->session->userdata('user');
@@ -762,18 +857,27 @@ class Admin extends CI_Controller {
 		$this->load->view('sidebar');
         $this->load->view('admin/shop', $data, false);
 		$this->load->view('footer');
-        
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 
 	}
 
 	public function editproduct(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
 		$this->load->view('header');
         $this->load->view('admin/editproduct', array('id' => $id));
 		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 	public function editproducts(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
 		$name = $this->input->post('name');
 		$descrip = $this->input->post('descrip');
@@ -798,6 +902,10 @@ class Admin extends CI_Controller {
         $this->db->update('products', $datos); 
 		$base_url = base_url();
 		header("Location: $base_url/admin/shop");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	}
 
 
