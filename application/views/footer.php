@@ -18,11 +18,22 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
+
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
+    <script>
+      $(document).ready(function() {
+  // SideNav Button Initialization
+  $(".button-collapse").sideNav();
+  // SideNav Scrollbar Initialization
+  var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+  var ps = new PerfectScrollbar(sideNavScrollbar);
+});
+</script>
     <script>
       $(document).ready(function () {
   $('#dt-filter-select').dataTable({
