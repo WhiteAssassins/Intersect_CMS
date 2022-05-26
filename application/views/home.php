@@ -1,8 +1,5 @@
 
 <div class="container my-5 z-depth-1 px-0 rounded">
-
-
-<!--Section: Content-->
 <section class="white-text p-4 rounded cards-novo">
   
   <h3 class="text-center font-weight-bold mb-4 pb-2">Estadisticas</h3>
@@ -58,28 +55,21 @@
   </div>
 
 </section>
-<!--Section: Content-->
 
 
 </div>
     
   
-<!--SECTION FEATURES-->
 <div class="container my-5 p-5 z-depth-1 unique-color-dark cards-novo">
 
 
-  <!--Section: Content-->
   <section class="text-center white-text">
 
-    <!-- Section heading -->
     <h2 class="font-weight-bold mb-4 pb-2 text-uppercase">Caracteristicas</h2>
-    <!-- Section description -->
     <p class="lead mx-auto mb-5">Contamos con Muchas Caracteristicas Atractivas para los Usuarios.</p>
 
-    <!-- Grid row -->
     <div class="row">
 
-      <!-- Grid column -->
       <div class="col-md-4 mb-4">
 
         <i class="fas fa-trophy fa-3x purple-text"></i>
@@ -88,9 +78,6 @@
         </p>
 
       </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
       <div class="col-md-4 mb-4">
 
         <i class="fas fa-dog fa-3x purple-text"></i>
@@ -99,9 +86,6 @@
         </p>
 
       </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
       <div class="col-md-4 mb-4">
 
         <i class="fas fa-hammer fa-3x purple-text"></i>
@@ -110,13 +94,10 @@
         </p>
 
       </div>
-      <!-- Grid column -->
 
     </div>
-    <!-- Grid row -->
 
   </section>
-  <!--Section: Content-->
 
 
 </div>
