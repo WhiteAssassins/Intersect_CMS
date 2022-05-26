@@ -1,7 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Checkea si la url amigable existe
- */
 if(!function_exists('isUrlExists')){
     function isUrlExists($tblName, $urlSlug){
         if(!empty($tblName) && !empty($urlSlug)){
