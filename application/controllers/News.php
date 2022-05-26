@@ -27,10 +27,8 @@ class News extends CI_Controller {
 	public function details($url_slug){
         $data = array();
         
-        //tome los datos del txt
         $data['newss'] = $this->newss->getRows(array('url_slug'=>$url_slug));
         
-        //carga la vista
         $this->load->view('header');
 		$this->load->view('navbar');  
         $this->load->view('news/details', $data);
