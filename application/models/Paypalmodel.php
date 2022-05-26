@@ -4,7 +4,6 @@ class Paypalmodel extends CI_Model{
     {
         $this->load->database();
     }
-    //get and return product rows
     public function getProducts($id = ''){
         $this->db->select('id,name,image,price');
         $this->db->from('products');
@@ -20,7 +19,6 @@ class Paypalmodel extends CI_Model{
         return !empty($result)?$result:false;
     }
  
-    //insert transaction data
     public function storeTransaction($data = array()){
         $insert = $this->db->insert('payments',$data);
         return $insert?true:false;
