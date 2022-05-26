@@ -1,0 +1,41 @@
+/*CODIGO DE MI CSS*/
+.navbar-novo{
+    background-color: rgb(0 0 0 / 50%) !important; 
+    color: black !important;
+}
+.cards-novo{
+    background-color: rgb(0 0 0 / 50%) !important; 
+    color: white !important;
+    border-radius: 10px !important;
+}
+.sidebar-novo{
+    background-color: rgb(0 0 0 / 50%) !important; 
+    color: white !important;
+}
+body{
+    background-repeat: no-repeat;
+    background: rgb(34,193,195) !important;
+    background: linear-gradient(135deg, rgb(45 84 116) 23%, rgb(82 18 18) 100%) !important;; 
+    height: 100%;
+}
+.wow {
+    visibility: hidden;
+  }
+  .footer-bottom{
+    position: fixed;
+    width: 100%;
+}
+.filter-white{
+    filter: invert(96%) sepia(1%) saturate(2%) hue-rotate(190deg) brightness(111%) contrast(100%);
+}
+td{
+    color: white !important;
+}
+th{
+    color: white !important;
+}
+.form-admin{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/*fin modo oscuro*/
