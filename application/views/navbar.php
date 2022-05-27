@@ -18,6 +18,11 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('playersonline'); ?>">
+                    Personajes Online
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('users'); ?>">
                     Listado Usuarios
                     </a>
