@@ -14,6 +14,7 @@ class Admin extends CI_Controller {
 		$this->load->model('Apiplayers');
 		$this->load->model('Apimap');
 		$this->load->model('Apievent');
+		$this->load->model('Apiquest');
 		$this->load->model('newss');
 		$this->load->model('shops');
         $this->load->helper('common');
@@ -97,6 +98,17 @@ class Admin extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('admin/events');
+		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+	public function quests(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/quests');
 		$this->load->view('footer');
 	}else{
 		$base_url = base_url();

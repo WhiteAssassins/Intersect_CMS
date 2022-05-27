@@ -11,19 +11,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
     <ul class="navbar-nav ml-auto">
-      <!--
-    <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('users'); ?>">
-                    Listado Usuarios
-                    </a>
-                </li>
--->
-                <li class="nav-item">
+                 <li class="nav-item">
                   <a href="<?php echo $conf1['0']['download'] ?>"
                     class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
                     <i class="fas fa-download mr-1"></i>Descargar
                   </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('users'); ?>">
+                    Listado Usuarios
+                    </a>
+                </li>
+                
 
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('players'); ?>">

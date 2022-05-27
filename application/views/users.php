@@ -4,13 +4,11 @@
     <tr>
       <th class="th-sm">Nombre
       </th>
-      <th class="th-sm">Genero
+      <th class="th-sm">Tiempo Jugado
       </th>
-      <th class="th-sm">Nivel
+      <th class="th-sm">Baneado
       </th>
-      <th class="th-sm">Experiencia
-      </th>
-      <th class="th-sm">Estado
+      <th class="th-sm">Muteado
       </th>
     </tr>
   </thead>
@@ -23,13 +21,10 @@
         ?>
 
     <tr>
-    <?php $a = $key['Power']; 
-    ?>
       <td><?php echo $key['Name']; ?></td>
-      <td><?php echo $a['Editor'];?></td>
-      <td><?php echo $key['Power']['Ban']; ?></td>
-      <td><?php echo $key['Exp']; ?></td>
-      <td><?php if($key['Dead'] == false){ echo "Vivo";}else{ echo "Muerto"; } ?></td>
+      <td><?php echo $key['PlayTimeSeconds']/60 ." Minutos"; ?></td>
+      <td><?php if($key['IsBanned'] == false){ echo "No";}else{ echo "Si"; }?></td>
+      <td><?php if($key['IsMuted'] == false){ echo "No";}else{ echo "Si"; }?></td>
     </tr>
     <?php } ?>
   </tbody>
@@ -37,13 +32,11 @@
     <tr>
       <th>Nombre
       </th>
-      <th>Genero
+      <th>Tiempo Jugado
       </th>
-      <th>Nivel
+      <th>Baneado
       </th>
-      <th>Experiencia
-      </th>
-      <th>Estado
+      <th>Muteado
       </th>
     </tr>
   </tfoot>

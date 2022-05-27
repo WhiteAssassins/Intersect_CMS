@@ -28,6 +28,8 @@
         </li>
         <li><a href="<?php echo base_url('admin/events');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-calendar"></i> Eventos</a>
         </li>
+        <li><a href="<?php echo base_url('admin/quests');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-question"></i> Misiones</a>
+        </li>
         <li><a href="<?php echo base_url('logs');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-stream"></i> Logs</a>
         </li>
         <li><a href="<?php echo base_url('admin/adminaccounts');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-user-alt"></i> Cuentas Administrador</a>

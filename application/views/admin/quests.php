@@ -11,19 +11,14 @@
   </thead>
   <tbody>
   <?php 
-            $objects = $this->Apiobjects->object();
-            $datos = json_encode($objects['entries'], True);
+            $quests = $this->Apiquest->quest();
+            $datos = json_encode($quests['entries'], True);
             $datos2 = json_decode($datos, True);
             foreach ($datos2 as $key) {              
         ?>
 
     <tr>
-      <td>
-        <?php 
-        echo $key['Key']; 
-       // print_r($datos);
-        ?>
-      </td>
+      <td><?php echo $key['Key']; ?></td>
       <td><?php echo $key['Value']['Name'] ?></td>
     </tr>
     <?php } ?>
