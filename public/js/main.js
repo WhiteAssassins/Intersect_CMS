@@ -16,6 +16,9 @@ $(function(){
     $(document.body).on('click','.btn_modal_addproduct',function(){
         $('#modal_addproduct').modal()
     })
+    $(document.body).on('click','.btn_modal_addadminaccount',function(){
+        $('#modal_addadminaccount').modal()
+    })
 
 
     $(document.body).on('click','.modo_btn',function(){
