@@ -56,17 +56,6 @@ class Admin extends CI_Controller {
 		header("Location: $base_url");
 	}
 	}
-	public function config(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/config');
-		$this->load->view('footer');
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
 	/*
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////End Load Views///////////////////////////////////////////////////////////////////////////////////
@@ -833,7 +822,7 @@ class Admin extends CI_Controller {
                 $archivo = "archivo";
                 $config['upload_path'] = "img/products";
                 $config['file_name'] = $filename;
-                $config['allowed_types'] = "png";
+                $config['allowed_types'] = "*";
                 $config['max_size'] = "50000";
                 $config['max_width'] = "2000";
                 $config['max_height'] = "2000";
