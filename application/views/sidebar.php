@@ -24,7 +24,7 @@
         </li>
         <li><a href="<?php echo base_url('logs');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Logs</a>
         </li>
-        <li><a href="<?php echo base_url('admin/config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Configuración</a>
+        <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Configuración</a>
         </li>
         <li><a href="<?php echo base_url('home/logout');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Desconectarse</a>
         </li>
