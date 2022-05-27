@@ -1,4 +1,8 @@
-
+<?php
+    $conf = $this->db->get('config');
+    $conf1 = $conf->result_array();
+?>
+<body>
 <nav class="mb-1  navbar navbar-expand-lg navbar-dark info-color navbar-novo" style="z-index: 2;">
   <a class="navbar-brand" href="<?php echo base_url(); ?>"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
@@ -15,10 +19,17 @@
                 </li>
 -->
                 <li class="nav-item">
+                  <a href="<?php echo $conf1['0']['download'] ?>"
+                    class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
+                    <i class="fas fa-download mr-1"></i>Descargar
+                  </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('players'); ?>">
                     Listado Personajes
                     </a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('shop'); ?>">
                    Tienda

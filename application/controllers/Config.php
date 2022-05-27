@@ -105,6 +105,30 @@ class Config extends CI_Controller {
 	}
 	}
 
+	public function download(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$id = 1;
+		$link = $this->input->post('link');
+		$where = [
+			'id'=>$id,
+
+		];
+		$this->db->where($where);
+		$resultado = $this->db->get('config');
+		$datos = [
+			'download'=>$link
+
+		];
+		$this->db->where('id', $id);
+        $this->db->update('config', $datos); 
+		$base_url = base_url();
+		header("Location: $base_url/config");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+
 
 
 

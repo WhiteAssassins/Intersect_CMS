@@ -54,6 +54,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="media white z-depth-1 rounded cards-novo">
+                    <div class="media-body p-1">
+                        <div class="md-form "> 
+                            <form method="POST" action="<?php echo base_url('config/download'); ?>" class="form-admin">
+                                <h4 class="text-center font-weight-bold mb-4 pb-2">Boton de Descarga</h4>
+                                <input type="text" id="prefixInside" class="form-control" name="link" placeholder="Link Descarga" value="<?php echo $key['download']; ?>">
+                                <button type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">Cambiar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <?php } ?>
