@@ -5,17 +5,14 @@
 <!DOCTYPE html>
 <html lang="es" style="height:100% ;">
 <head>
+<meta name="viewport" content="width=device-width">
     <title><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></title>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/fontawesome.css">
-	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/brands.css">
 	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/iconos.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css"> 
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/animate.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $conf1['0']['analytics'] ?>"></script>
 <script>

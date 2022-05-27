@@ -15,11 +15,18 @@ class Users extends CI_Controller {
 	
 	public function index()
 	{	
+		$conf = $this->db->get('config');
+		$conf1 = $conf->result_array(); 
+       if($conf1['0']['mant'] == 1 AND $this->session->userdata('login') == false){
+            $this->load->view('header');
+            $this->load->view('mant');
+        }else{
 		$this->load->view('header');
 		$this->load->view('navbar');  
 		$this->load->view('users');
 		$this->load->view('footer');
 	}
+}
 	
 	
 }
