@@ -22,6 +22,12 @@
         </li>
         <li><a href="<?php echo base_url('admin/news');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Noticias</a>
         </li>
+        <li><a href="<?php echo base_url('admin/objects');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Objetos</a>
+        </li>
+        <li><a href="<?php echo base_url('admin/maps');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Mapas</a>
+        </li>
+        <li><a href="<?php echo base_url('admin/events');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Eventos</a>
+        </li>
         <li><a href="<?php echo base_url('logs');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Logs</a>
         </li>
         <li><a href="<?php echo base_url('admin/adminaccounts');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-chevron-right"></i> Cuentas Administrador</a>

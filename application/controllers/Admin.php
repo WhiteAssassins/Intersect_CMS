@@ -10,7 +10,10 @@ class Admin extends CI_Controller {
 		$this->load->model('Apiregister');
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
+		$this->load->model('Apiobjects');
 		$this->load->model('Apiplayers');
+		$this->load->model('Apimap');
+		$this->load->model('Apievent');
 		$this->load->model('newss');
 		$this->load->model('shops');
         $this->load->helper('common');
@@ -61,6 +64,39 @@ class Admin extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('admin/adminaccounts');
+		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+	public function objects(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/objects');
+		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+	public function maps(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/maps');
+		$this->load->view('footer');
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+	public function events(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/events');
 		$this->load->view('footer');
 	}else{
 		$base_url = base_url();
