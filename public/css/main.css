@@ -14,8 +14,6 @@
 }
 body{
     background-repeat: no-repeat;
-    background: rgb(34,193,195) !important;
-    background: linear-gradient(135deg, rgb(45 84 116) 23%, rgb(82 18 18) 100%) !important;; 
     height: 100%;
 }
 .wow {
@@ -37,5 +35,8 @@ th{
 .form-admin{
     padding-left: 10px;
     padding-right: 10px;
+}
+::-moz-color-swatch {
+    border-color: red;
 }
 /*fin modo oscuro*/

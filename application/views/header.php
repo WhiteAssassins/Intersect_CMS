@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
     
 </head>
+<?php 
+    $conf = $this->db->get('config');
+    $conf1 = $conf->result_array();
+    foreach ($conf1 as $key){
+?>
+<body style="background: linear-gradient(135deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
+
+<?php } ?>
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog o" role="document">
         <div class="modal-content cards-novo">

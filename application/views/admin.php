@@ -6,7 +6,7 @@
         echo '<div class="alert alert-info text-center">'.$error.'</div>';
     };
 ?>
-<div class="container my-3">
+<div class="container my-1">
   <section>
     <div class="row">
       <div class="col-lg-3 col-md-6 mb-4 ">
