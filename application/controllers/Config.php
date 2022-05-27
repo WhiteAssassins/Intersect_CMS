@@ -81,7 +81,29 @@ class Config extends CI_Controller {
 
 
 
+	public function analitycs(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+		$id = 1;
+		$google = $this->input->post('google');
+		$where = [
+			'id'=>$id,
 
+		];
+		$this->db->where($where);
+		$resultado = $this->db->get('config');
+		$datos = [
+			'analytics'=>$google
+
+		];
+		$this->db->where('id', $id);
+        $this->db->update('config', $datos); 
+		$base_url = base_url();
+		header("Location: $base_url/config");
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
 
 
 

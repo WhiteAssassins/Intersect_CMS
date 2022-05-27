@@ -1,3 +1,7 @@
+<?php
+    $conf = $this->db->get('config');
+    $conf1 = $conf->result_array();
+?>
 <!DOCTYPE html>
 <html lang="es" style="height:100% ;">
 <head>
@@ -13,11 +17,17 @@
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/animate.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
-    
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $conf1['0']['analytics'] ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '<?php echo $conf1['0']['analytics'] ?>');
+</script> 
 </head>
 <?php 
-    $conf = $this->db->get('config');
-    $conf1 = $conf->result_array();
+
     foreach ($conf1 as $key){
 ?>
 <body style="background: linear-gradient(135deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
