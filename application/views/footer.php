@@ -1,9 +1,12 @@
 <footer class="page-footer font-small navbar-novo footer-bottom">
 
 
-<div class="footer-copyright text-center py-3">© <?php echo date('Y')?> Copyright:
-  <a href="#">AEWhite Devs</a>
-     <a href="#"></a>
+<div class="footer-copyright text-center py-3"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?>  © <?php echo date('Y')?> Copyright:
+  <a href="#">AEWhite Devs </a>|
+     <a href="<?php echo base_url('legal'); ?>">Legal Notice </a>|
+     <a href="<?php echo base_url('terms'); ?>">Terms and Conditions </a>|
+     <a href="<?php echo base_url('privacity'); ?>">Privacity </a>
+     
 </div>
 
 
