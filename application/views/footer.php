@@ -1,7 +1,7 @@
 <footer class="page-footer font-small navbar-novo footer-bottom">
 
 
-<div class="footer-copyright text-center py-3">© 2022 Copyright:
+<div class="footer-copyright text-center py-3">© <?php echo date('Y')?> Copyright:
   <a href="#">AEWhite Devs</a>
      <a href="#"></a>
 </div>
