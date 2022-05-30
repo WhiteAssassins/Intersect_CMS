@@ -115,6 +115,33 @@ $tr = array(
             'administrativepanel' => 'Yönetici Paneli',
             'name' => 'İsim',
             'language' => 'Deyim',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Sınıf',
+            'gender' => 'Cinsiyet',
+            'exp' => 'Tecrübe Puanı',
+            'map' => 'Harita',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Oynama Süresi',
+            'banned' => 'Banlı',
+            'muted' => 'Susturulmuş',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Seviye',
+            'status' => 'Durum',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Ürün Detayları',
+            'atackan' => 'Saldırı Animasyonu',
+            'interacan' => 'Etkileşim Animasyonu',
+            'return' => 'Geri Dön',
+            'buy' => 'Satın Al',
+            'paymentmethod' => 'Ödeme Yöntemi',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Son Haberler',
+            'writedby' => 'tarafından yazılmıştır',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'maintenance' => 'Bakım & Onarım',
+            'maintenancemessage' => 'Merhaba, Bakımdayız. Yakında geri döneceğiz',
+            'maintenanceenter' => 'Yönetici olarak giriş yapın',
+            'enter' => 'Giriş',
            );
         
                    return array($es, $en, $tr);
