@@ -9,6 +9,7 @@
 
     <h2 class="font-weight-bold mb-4 pb-2 text-uppercase">{features}</h2>
     <a href="https://mdbootstrap.com/docs/b4/jquery/content/icons-list/index.html">{iconlist}</a>
+    <h3>Example fas fa-trophy</h3>
     <form method="POST" action="<?php echo base_url('config/editmenus'); ?>" class="form-admin">
     
     <p class="lead mx-auto mb-5"><div class="md-form mb-4"><input type="text" class="form-control" placeholder="{descriptionmenu}" name="menuheader" value="<?php echo $conf1[0]['menuheader']; ?>"></div></p>
