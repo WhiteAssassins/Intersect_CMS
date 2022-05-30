@@ -7,9 +7,8 @@ class Apiusers extends CI_Model{
         $this->load->model('Apigettoken');
         $accesstoken = $this->Apigettoken->apitoken();
         $client = new Client([
-          'base_uri' => 'http://'.$apiip.'/api/v1/users',
+          'base_uri' => 'http://'.$apiip.'/api/v1/users?pageSize=5000',
           'timeout'  => 5.0,
-          'pageSize'  => 50,
         ]);
         $res = $client->request('GET','',[
           'headers' => [
