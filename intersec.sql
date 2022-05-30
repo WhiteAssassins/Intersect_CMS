@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2022 a las 07:04:18
--- Versión del servidor: 10.4.22-MariaDB
+-- Tiempo de generación: 30-05-2022 a las 23:39:36
+-- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -21,6 +21,41 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `intersec`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `config`
+--
+
+CREATE TABLE `config` (
+  `id` int(11) NOT NULL,
+  `color1` text NOT NULL,
+  `color2` text NOT NULL,
+  `mant` int(11) NOT NULL,
+  `analytics` text NOT NULL,
+  `download` text NOT NULL,
+  `legal` text NOT NULL,
+  `terms` text NOT NULL,
+  `privacity` text NOT NULL,
+  `menu1icon` text NOT NULL,
+  `menu1header` text NOT NULL,
+  `menu1text` text NOT NULL,
+  `menuheader` text NOT NULL,
+  `menu2icon` text NOT NULL,
+  `menu2header` text NOT NULL,
+  `menu2text` text NOT NULL,
+  `menu3icon` text NOT NULL,
+  `menu3header` text NOT NULL,
+  `menu3text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `config`
+--
+
+INSERT INTO `config` (`id`, `color1`, `color2`, `mant`, `analytics`, `download`, `legal`, `terms`, `privacity`, `menu1icon`, `menu1header`, `menu1text`, `menuheader`, `menu2icon`, `menu2header`, `menu2text`, `menu3icon`, `menu3header`, `menu3text`) VALUES
+(1, '#2d5474', '#521212', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -98,19 +133,26 @@ CREATE TABLE `products` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user` text DEFAULT NULL,
-  `pass` text DEFAULT NULL
+  `pass` text DEFAULT NULL,
+  `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `user`, `pass`) VALUES
-(1, 'Admin', 'e3afed0047b08059d0fada10f400c1e5');
+INSERT INTO `users` (`id`, `user`, `pass`, `email`) VALUES
+(1, 'Admin', 'e3afed0047b08059d0fada10f400c1e5', 'admin@admin.admin');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `logs`
@@ -141,22 +183,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `config`
+--
+ALTER TABLE `config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=571;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
