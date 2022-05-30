@@ -29,6 +29,10 @@
     foreach ($conf1 as $key){
 ?>
 <body style="background: linear-gradient(135deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
+<div id="mdb-preloader" class="flex-center">
+  <div id="preloader-markup">
+  </div>
+</div>
 
 <?php } ?>
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
