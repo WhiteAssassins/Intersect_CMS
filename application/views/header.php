@@ -34,7 +34,7 @@
     <div class="modal-dialog o" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">Login Admin</h4>
+            <h4 class="modal-title w-100 font-weight-bold">Login</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -52,9 +52,12 @@
                     <input type="password" id="defaultForm-pass" class="form-control validate" name="pass">
                     <label data-error="Error" data-success="Correcto" for="defaultForm-pass">Contraseña</label>
                 </div>
+                <a href="<?php echo base_url('recover'); ?>">Se Olvido de su Contraseña?</a>
         </div>
+        
                 <div class="modal-footer d-flex justify-content-center">
                     <button class="btn purple-gradient" type="submit">Login</button>
+                    
                 </div>
                 </form>
             </div>
