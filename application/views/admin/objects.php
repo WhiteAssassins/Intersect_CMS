@@ -2,9 +2,9 @@
 <table id="dt-filter-select" class="table" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th class="th-sm">Key
+      <th class="th-sm">{key}
       </th>
-      <th class="th-sm">Nombre
+      <th class="th-sm">{name}
       </th>
      
     </tr>
@@ -30,9 +30,9 @@
   </tbody>
   <tfoot>
     <tr>
-      <th>Key
+      <th>{key}
       </th>
-      <th>Nombre
+      <th>{name}
       </th>
      
     </tr>

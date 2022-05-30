@@ -6,7 +6,7 @@ $restnews = $resultadonews->result_array();
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">Crear nueva Cuenta Admin</h4>
+            <h4 class="modal-title w-100 font-weight-bold">{addadminaccount}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -15,25 +15,25 @@ $restnews = $resultadonews->result_array();
             <form action="<?php echo base_url('admin/adminadd'); ?>" method="post"  enctype="multipart/form-data">
                 <div class="md-form mb-5">                    
                     <input type="text" id="defaultForm-email" class="form-control validate" name="user">
-                    <label for="defaultForm-email">Usuario</label>
+                    <label for="defaultForm-email">{user}</label>
                 </div>
                 <div class="md-form mb-4">                  
                     <input type="text" id="defaultForm-pass" class="form-control validate" name="pass">
-                    <label for="defaultForm-pass">Contraseña</label>
+                    <label for="defaultForm-pass">{password}</label>
                 </div>
                 <div class="md-form mb-4">                  
                     <input type="text" id="defaultForm-pass" class="form-control validate" name="pass1">
-                    <label for="defaultForm-pass">Repetir Contraseña</label>
+                    <label for="defaultForm-pass">{confirmpassword}</label>
                 </div>
                 <div class="md-form mb-4">                  
                     <input type="email" id="defaultForm-pass" class="form-control validate" name="email">
-                    <label for="defaultForm-pass">Correo</label>
+                    <label for="defaultForm-pass">{email}</label>
                 </div>
                   
         </div>
         
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">Crear Cuenta</button>
+                    <button class="btn purple-gradient" type="submit">{addadminaccount}</button>
                 </div>
                 </form>
             </div>
@@ -47,7 +47,7 @@ $restnews = $resultadonews->result_array();
           <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light btn_modal_addadminaccount " >
             <i class="fas fa-plus mt-0"></i>
           </button>
-          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">Cuentas Administrador</a>
+          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">{adminaccounts}</a>
         </div>
   </div>
   <div class="px-4 ">
@@ -56,22 +56,22 @@ $restnews = $resultadonews->result_array();
         <thead>
           <tr>
             <th class="th-lg">
-              <a>ID
+              <a>{id}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Nombre
+              <a>{name}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Correo
+              <a>{email}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Accion
+              <a>{action}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>

@@ -11,15 +11,40 @@ class Config extends CI_Controller {
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
+		$this->load->model('Langs');
     }
 	
 	public function index()
 	{	
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$this->load->view('header');
-			$this->load->view('sidebar');  
-			$this->load->view('admin/config');
-			$this->load->view('footer');	
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/config', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/config', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/config', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/config', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 		}else{
 			$base_url = base_url();
 			header("Location: $base_url");
@@ -133,9 +158,30 @@ class Config extends CI_Controller {
 
 	public function legal(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-        $this->load->view('admin/legal');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/legal', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('admin/legal', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('admin/legal', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/legal', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -144,9 +190,30 @@ class Config extends CI_Controller {
 
 	public function terms(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-        $this->load->view('admin/terms');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/terms', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('admin/terms', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('admin/terms', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/terms', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -154,9 +221,29 @@ class Config extends CI_Controller {
 	}
 	public function privacity(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-        $this->load->view('admin/privacity');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/privacity', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('admin/privacity', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('admin/privacity', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/privacity', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -164,9 +251,29 @@ class Config extends CI_Controller {
 	}
 	public function menus(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-        $this->load->view('admin/menus');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/menus', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('admin/menus', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('admin/menus', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/menus', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");

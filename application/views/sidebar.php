@@ -14,29 +14,29 @@
     </li>
     <li>
       <ul class="collapsible collapsible-accordion">
-      <li><a href="<?php echo base_url('home');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-home"></i> Inicio</a>
+      <li><a href="<?php echo base_url('home');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-home"></i> {home}</a>
         </li>
-        <li><a href="<?php echo base_url('admin');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <li><a href="<?php echo base_url('admin');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-tachometer-alt"></i> {dashboard}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/shop');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-shopping-cart"></i> Tienda</a>
+        <li><a href="<?php echo base_url('admin/shop');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-shopping-cart"></i> {shop}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/news');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-newspaper"></i> Noticias</a>
+        <li><a href="<?php echo base_url('admin/news');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-newspaper"></i> {news}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/objects');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-box"></i> Objetos</a>
+        <li><a href="<?php echo base_url('admin/objects');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-box"></i> {objects}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/maps');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-map"></i> Mapas</a>
+        <li><a href="<?php echo base_url('admin/maps');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-map"></i> {maps}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/events');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-calendar"></i> Eventos</a>
+        <li><a href="<?php echo base_url('admin/events');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-calendar"></i> {events}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/quests');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-question"></i> Misiones</a>
+        <li><a href="<?php echo base_url('admin/quests');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-question"></i> {quests}</a>
         </li>
-        <li><a href="<?php echo base_url('logs');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-stream"></i> Logs</a>
+        <li><a href="<?php echo base_url('logs');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-stream"></i> {logs}</a>
         </li>
-        <li><a href="<?php echo base_url('admin/adminaccounts');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-user-alt"></i> Cuentas Administrador</a>
+        <li><a href="<?php echo base_url('admin/adminaccounts');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-user-alt"></i> {adminaccounts}</a>
         </li>
-        <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-cog"></i> Configuración</a>
+        <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-cog"></i> {config}</a>
         </li>
-        <li><a href="<?php echo base_url('home/logout');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-sign"></i> Desconectarse</a>
+        <li><a href="<?php echo base_url('home/logout');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-sign"></i> {disconnect}</a>
         </li>
 
 

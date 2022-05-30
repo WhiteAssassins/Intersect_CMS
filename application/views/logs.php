@@ -12,7 +12,7 @@ $restlog = $resultadolog->result_array();
 
     
 
-   <center> <a href="#"  class="white-text mx-3">Logs</a></center>
+   <center> <a href="#"  class="white-text mx-3">{logs}</a></center>
 
     
   </div>
@@ -26,22 +26,22 @@ $restlog = $resultadolog->result_array();
           <tr>
           
             <th class="th-lg">
-              <a>Administrador
+              <a>{admin}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Usuario
+              <a>{user}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Accion
+              <a>{action}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Fecha
+              <a>{date}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>

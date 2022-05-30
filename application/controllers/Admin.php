@@ -19,6 +19,7 @@ class Admin extends CI_Controller {
 		$this->load->model('shops');
         $this->load->helper('common');
         $this->load->library('form_validation');
+		$this->load->model('Langs');
     }
 	
 
@@ -29,10 +30,34 @@ class Admin extends CI_Controller {
 	*/
 	public function index(){	
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-        $this->load->view('sidebar');
-		$this->load->view('admin');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -40,10 +65,34 @@ class Admin extends CI_Controller {
 	}
 	public function news(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/news');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/news', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/news', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/news', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/news', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -51,10 +100,34 @@ class Admin extends CI_Controller {
 	}
 	public function shop(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/shop');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/shop', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/shop', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/shop', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/shop', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -62,10 +135,34 @@ class Admin extends CI_Controller {
 	}
 	public function adminaccounts(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/adminaccounts');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/adminaccounts', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/adminaccounts', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/adminaccounts', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/adminaccounts', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -73,10 +170,34 @@ class Admin extends CI_Controller {
 	}
 	public function objects(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/objects');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/objects', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/objects', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/objects', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/objects', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -84,10 +205,34 @@ class Admin extends CI_Controller {
 	}
 	public function maps(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/maps');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/maps', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/maps', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/maps', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/maps', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -95,10 +240,34 @@ class Admin extends CI_Controller {
 	}
 	public function events(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/events');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/events', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/events', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/events', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/events', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -106,10 +275,34 @@ class Admin extends CI_Controller {
 	}
 	public function quests(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('admin/quests');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/quests', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/quests', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/quests', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/quests', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -779,9 +972,30 @@ class Admin extends CI_Controller {
 	public function editnews(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
-		$this->load->view('header');
-        $this->load->view('admin/editnews', array('id' => $id));
-		$this->load->view('footer');
+		$lang = $this->Langs->lang();
+		switch($this->session->userdata('lang')){
+			case "es":
+				$this->parser->parse('header', $lang[0]); 
+				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[0]); 
+				$this->parser->parse('footer', $lang[0]); 
+				break;
+			case "en":
+				$this->parser->parse('header', $lang[1]); 
+				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[1]); 
+				$this->parser->parse('footer', $lang[1]); 
+				break;
+			case "tr":
+				$this->parser->parse('header', $lang[2]); 
+				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[2]);
+				$this->parser->parse('footer', $lang[2]);  
+				break;
+			default:
+				$this->parser->parse('header', $lang[0]); 
+				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[0]); 
+				$this->parser->parse('footer', $lang[0]); 
+				break;
+
+		}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");
@@ -917,9 +1131,26 @@ class Admin extends CI_Controller {
 	public function editproduct(){
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 		$id = $this->input->post('id');
-		$this->load->view('header');
-        $this->load->view('admin/editproduct', array('id' => $id));
-		$this->load->view('footer');
+		$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[0]); 
+					break;
+
+			}
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");

@@ -6,7 +6,7 @@ $restnews = $resultadonews->result_array();
     <div class="modal-dialog" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">Añadir nuevo Producto</h4>
+            <h4 class="modal-title w-100 font-weight-bold">{addproduct}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -16,28 +16,28 @@ $restnews = $resultadonews->result_array();
                 <div class="md-form mb-5">
                     
                     <input type="text" id="defaultForm-email" class="form-control validate" name="name">
-                    <label for="defaultForm-email">Nombre</label>
+                    <label for="defaultForm-email">{name}</label>
                 </div>
 
                 <div class="md-form mb-4">
                    
                     <input type="text" id="defaultForm-pass" class="form-control validate" name="descrip">
-                    <label for="defaultForm-pass">Descripción</label>
+                    <label for="defaultForm-pass">{description}</label>
                 </div>
                 <div class="md-form mb-4">
                    
                    <input type="text" id="defaultForm-pass" class="form-control validate" name="price">
-                   <label for="defaultForm-pass">Precio</label>
+                   <label for="defaultForm-pass">{price}</label>
                </div>
                <div class="md-form mb-4">
                    
                    <input type="text" id="defaultForm-pass" class="form-control validate" name="aatk">
-                   <label for="defaultForm-pass">Animación Ataque</label>
+                   <label for="defaultForm-pass">{atackan}</label>
                </div>
                <div class="md-form mb-4">
                    
                    <input type="text" id="defaultForm-pass" class="form-control validate" name="ainterac">
-                   <label for="defaultForm-pass">Animación Interacción</label>
+                   <label for="defaultForm-pass">{interacan}</label>
                </div>
                 
         </div>
@@ -48,12 +48,12 @@ $restnews = $resultadonews->result_array();
         <input type="file" name="archivo">
     </a>
     <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="Foto del Producto">
+        <input class="file-path validate" type="text" placeholder="{productpic}">
     </div>
 </div>
 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">Subir Noticia</button>
+                    <button class="btn purple-gradient" type="submit">{addproduct}</button>
                 </div>
                 </form>
             </div>
@@ -67,7 +67,7 @@ $restnews = $resultadonews->result_array();
           <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light btn_modal_addproduct " >
             <i class="fas fa-plus mt-0"></i>
           </button>
-          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">Productos</a>
+          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">{products}</a>
         </div>
   </div>
   <div class="px-4 ">
@@ -76,32 +76,32 @@ $restnews = $resultadonews->result_array();
         <thead>
           <tr>
             <th class="th-lg">
-              <a>Nombre
+              <a>{name}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Precio
+              <a>{price}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Descripción
+              <a>{description}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>A.Ataque
+              <a>{atackan}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>A.Interacción
+              <a>{interacan}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Acción
+              <a>{action}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>

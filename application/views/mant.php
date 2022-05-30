@@ -7,11 +7,11 @@
     <form method="POST" action="<?php echo base_url('mant/login'); ?>" id="form_ban" class="form-admin" >
                         <h4 class="text-center font-weight-bold mb-4 pb-2">{maintenanceenter}</h4>
                         <div class="md-form mb-4">
-                        <input type="text" id="prefixInside" class="form-control" name="user" placeholder="Usuario" autocomplete="new-text" >
+                        <input type="text" id="prefixInside" class="form-control" name="user" placeholder="{user}" autocomplete="new-text" >
                         <br>
                         </div>
                         <div class="md-form mb-4">
-                        <input type="password" id="prefixInside" class="form-control" name="pass" placeholder="Contraseña" autocomplete="new-password" >
+                        <input type="password" id="prefixInside" class="form-control" name="pass" placeholder="{password}" autocomplete="new-password" >
                         <br>
                         </div>
                         <button type="submit" class="btn btn-outline-primary waves-effect">{enter}</button>

@@ -6,7 +6,7 @@ $restnews = $resultadonews->result_array();
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">Crear nueva Noticia</h4>
+            <h4 class="modal-title w-100 font-weight-bold">{addnews}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -15,14 +15,14 @@ $restnews = $resultadonews->result_array();
             <form action="<?php echo base_url('admin/addnews'); ?>" method="post"  enctype="multipart/form-data">
                 <div class="md-form mb-5">                    
                     <input type="text" id="defaultForm-email" class="form-control validate" name="title">
-                    <label for="defaultForm-email">Titulo</label>
+                    <label for="defaultForm-email">{title}</label>
                 </div>
                 <div class="md-form mb-4">                  
                     <input type="text" id="defaultForm-pass" class="form-control validate" name="descrip">
-                    <label for="defaultForm-pass">Descripción</label>
+                    <label for="defaultForm-pass">{description}</label>
                 </div>
                 <div class="md-form mb-4 pink-textarea active-pink-textarea"> 
-                <textarea id="tiny" name="txt" placeholder="Texto de la Noticia"></textarea>
+                <textarea id="tiny" name="txt" placeholder="{textnews}"></textarea>
 </div>              
         </div>
         <div class="md-form mb-4">
@@ -32,12 +32,12 @@ $restnews = $resultadonews->result_array();
         <input type="file" name="archivo">
     </a>
     <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="Foto de la Noticia">
+        <input class="file-path validate" type="text" placeholder="{newspic}">
     </div>
 </div>
 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">Subir Noticia</button>
+                    <button class="btn purple-gradient" type="submit">{uploadnews}</button>
                 </div>
                 </form>
             </div>
@@ -51,7 +51,7 @@ $restnews = $resultadonews->result_array();
           <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light btn_modal_addnews " >
             <i class="fas fa-plus mt-0"></i>
           </button>
-          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">Noticias</a>
+          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">{news}</a>
         </div>
   </div>
   <div class="px-4 ">
@@ -60,22 +60,22 @@ $restnews = $resultadonews->result_array();
         <thead>
           <tr>
             <th class="th-lg">
-              <a>Titulo
+              <a>{title}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Descripcrión
+              <a>{description}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Fecha
+              <a>{date}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>
             <th class="th-lg">
-              <a>Accion
+              <a>{action}
                 <i class="fas fa-sort ml-1"></i>
               </a>
             </th>

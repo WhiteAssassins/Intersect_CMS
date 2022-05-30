@@ -11,6 +11,7 @@ class Recover extends CI_Controller {
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
+		$this->load->model('Langs');
     }
 	
 	public function index()
@@ -18,13 +19,33 @@ class Recover extends CI_Controller {
 		$conf = $this->db->get('config');
 		$conf1 = $conf->result_array(); 
 		if($conf1['0']['mant'] == 1){
-			$lang = $this->Langs->lang();
-			$this->parser->parse('header', $lang[0]);
-			$this->parser->parse('mant', $lang[0]);
+			$base_url = base_url();
+            header("Location: $base_url/mant");
 		}else{
-			$this->load->view('header');
-			$this->load->view('recover');
-			$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('recover', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('recover', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('recover', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('recover', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 		}
 
 	}
