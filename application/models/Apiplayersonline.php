@@ -8,9 +8,8 @@ class Apiplayersonline extends CI_Model{
         $accesstoken = $this->Apigettoken->apitoken();
         $apiip = $this->config->item('apiip');;
         $client = new Client([
-          'base_uri' => 'http://'.$apiip.'/api/v1/players/online',
+          'base_uri' => 'http://'.$apiip.'/api/v1/players/online?pageSize=5000',
           'timeout'  => 5.0,
-          'pageSize'  => 50,
         ]);
         $res = $client->request('GET','',[
           'headers' => [
