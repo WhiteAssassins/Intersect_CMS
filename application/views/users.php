@@ -22,7 +22,7 @@
 
     <tr>
       <td><?php echo $key['Name']; ?></td>
-      <td><?php echo $key['PlayTimeSeconds']/60 ." Minutos"; ?></td>
+      <td><?php $time = $key['PlayTimeSeconds']/60/60 ; echo substr($time, 0, 5)." Horas" ?></td>
       <td><?php if($key['IsBanned'] == false){ echo "No";}else{ echo "Si"; }?></td>
       <td><?php if($key['IsMuted'] == false){ echo "No";}else{ echo "Si"; }?></td>
     </tr>
