@@ -1,6 +1,6 @@
 <div class="container my-5 py-5 cards-novo">
   <section class="text-center">
-    <h3 class="font-weight-bold mb-5">Detalles del Producto</h3>
+    <h3 class="font-weight-bold mb-5">{productdetail}</h3>
     <div class="row">
       <div class="col-lg-6">
         <div id="carousel-thumb1" class="carousel slide carousel-fade carousel-thumbnails mb-5 pb-4" data-ride="carousel">
@@ -22,11 +22,11 @@
         <div class="font-weight-normal"> 
           <p class="ml-xl-0 ml-4"><?php echo $products['descrip']; ?>.</p>
           <p class="ml-xl-0 ml-4">
-            <strong>Animacióm de Ataque: </strong><?php echo $products['aatk']; ?></p>
+            <strong>{atackan}: </strong><?php echo $products['aatk']; ?></p>
           <p class="ml-xl-0 ml-4">
-            <strong>Animación de Interacción: </strong><?php echo $products['ainterac']; ?></p>   
+            <strong>{interacan}: </strong><?php echo $products['ainterac']; ?></p>   
           <div class="mt-5">
-            <p class="grey-text">Elige tu metodo de pago</p>
+            <p class="grey-text">{paymentmethod}</p>
             <div class="row text-center text-md-left">
               <form method="POST" action="<?php echo base_url('shop/shoping'); ?>">
               <div class="col-md-4 col-12 ">
@@ -45,9 +45,9 @@
             </div>
             <div class="row mt-3 mb-4">
               <div class="col-md-12 text-center text-md-left text-md-right">
-              <a href="<?php echo base_url('shop'); ?>" type="button" class="btn btn-primary btn-rounded">Volver</a>
+              <a href="<?php echo base_url('shop'); ?>" type="button" class="btn btn-primary btn-rounded">{return}</a>
                 <button type="submit" class="btn btn-primary btn-rounded">
-                  <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Comprar</button>
+                  <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> {buy}</button>
               </div>
             </div>
             </form>

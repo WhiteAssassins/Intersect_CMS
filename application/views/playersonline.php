@@ -2,15 +2,15 @@
 <table id="dt-filter-select" class="table" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th class="th-sm">Nombre
+      <th class="th-sm">{name}
       </th>
-      <th class="th-sm">Clase
+      <th class="th-sm">{class}
       </th>
-      <th class="th-sm">Genero
+      <th class="th-sm">{gender}
       </th>
-      <th class="th-sm">Experiencia
+      <th class="th-sm">{exp}
       </th>
-      <th class="th-sm">Mapa
+      <th class="th-sm">{map}
       </th>
     </tr>
   </thead>
@@ -33,15 +33,15 @@
   </tbody>
   <tfoot>
     <tr>
-      <th>Nombre
+      <th>{name}
       </th>
-      <th>Clase
+      <th>{class}
       </th>
-      <th>Genero
+      <th>{gender}
       </th>
-      <th>Experiencia
+      <th>{exp}
       </th>
-      <th>Mapa
+      <th>{map}
       </th>
     </tr>
   </tfoot>

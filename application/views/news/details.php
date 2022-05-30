@@ -11,13 +11,13 @@
           </div>
           <div class="card-body card-body-cascade text-center  cards-novo" style="margin-top: 4px;">
             <h3 class="font-weight-bold"><a><?php echo $newss['title']; ?></a></h3>
-            <p>Escrito por <a><strong><?php echo $newss['admin']; ?></strong></a>, <?php echo $newss['date']; ?></p>
+            <p>{writedby} <a><strong><?php echo $newss['admin']; ?></strong></a>, <?php echo $newss['date']; ?></p>
           </div>
         </div>
         <div class="mt-5 white-text">
         <?php echo $newss['txt']; ?>
         </div>
-        <a href="<?php echo base_url('news'); ?>" class="btn btn-outline-primary btn-rounded waves-effect">Volver</a>
+        <a href="<?php echo base_url('news'); ?>" class="btn btn-outline-primary btn-rounded waves-effect">{return}</a>
       </div>
     </div>
     <hr class="mb-5 mt-4">

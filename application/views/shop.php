@@ -2,7 +2,7 @@
 
   <section>
 
-    <h3 class="font-weight-bold text-center  mb-4">Tienda</h3>
+    <h3 class="font-weight-bold text-center  mb-4">{shop}</h3>
 
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
       

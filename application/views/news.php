@@ -1,6 +1,6 @@
 <div class="container mt-5 cards-novo">
   <section class="text-center">
-    <h3 class="font-weight-bold mb-5" style="padding-top:40px ;">Ultimas Noticias</h3>
+    <h3 class="font-weight-bold mb-5" style="padding-top:40px ;">{lastnews}</h3>
     <div class="row">
     <?php 
             $resultado = $this->db->get('news');

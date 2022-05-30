@@ -1,11 +1,11 @@
 <footer class="page-footer font-small navbar-novo footer-bottom">
 
 
-<div class="footer-copyright text-center py-3"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?>  © <?php echo date('Y')?> Copyright:
+<div class="footer-copyright text-center py-3"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?>  © <?php echo date('Y')?> {copyright}:
   <a href="#">AEWhite Devs </a>|
-     <a href="<?php echo base_url('legal'); ?>">Legal Notice </a>|
-     <a href="<?php echo base_url('terms'); ?>">Terms and Conditions </a>|
-     <a href="<?php echo base_url('privacity'); ?>">Privacity </a>
+     <a href="<?php echo base_url('legal'); ?>">{legalnotice} </a>|
+     <a href="<?php echo base_url('terms'); ?>">{terms} </a>|
+     <a href="<?php echo base_url('privacity'); ?>">{privacity} </a>
      
 </div>
 
@@ -26,6 +26,7 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/flag.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
     <script>

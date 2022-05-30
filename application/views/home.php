@@ -5,7 +5,7 @@
 <div class="container my-5 z-depth-1 px-0 rounded">
 <section class="white-text p-4 rounded cards-novo">
   
-  <h3 class="text-center font-weight-bold mb-4 pb-2">Estadisticas</h3>
+  <h3 class="text-center font-weight-bold mb-4 pb-2">{statistics}</h3>
 
   <div class="row">
 
@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-6">
-          <p class="text-uppercase font-weight-normal mb-1">Tiempo Online</p>
+          <p class="text-uppercase font-weight-normal mb-1">{onlinetime}</p>
           <p class="mb-0"><i class="fas fa-clock fa-2x mb-0"></i></p>
         </div>
       </div>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="col-6">
-          <p class="text-uppercase font-weight-normal mb-1">Usuarios Online</p>
+          <p class="text-uppercase font-weight-normal mb-1">{useronline}</p>
           <p class="mb-0"><i class="fas fa-user fa-2x mb-0"></i></p>
         </div>
       </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="col-6">
-          <p class="text-uppercase font-weight-normal mb-1">Users Registrados</p>
+          <p class="text-uppercase font-weight-normal mb-1">{usersregistered}</p>
           <p class="mb-0"><i class="fas fa-user-plus fa-2x mb-0"></i></p>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
   <section class="text-center white-text">
 
-    <h2 class="font-weight-bold mb-4 pb-2 text-uppercase">Caracteristicas</h2>
+    <h2 class="font-weight-bold mb-4 pb-2 text-uppercase">{features}</h2>
     <p class="lead mx-auto mb-5"><?php echo $conf1[0]['menuheader']; ?></p>
 
     <div class="row">

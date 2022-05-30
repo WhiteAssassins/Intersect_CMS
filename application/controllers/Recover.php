@@ -18,8 +18,9 @@ class Recover extends CI_Controller {
 		$conf = $this->db->get('config');
 		$conf1 = $conf->result_array(); 
 		if($conf1['0']['mant'] == 1){
-			$this->load->view('header');
-            $this->load->view('mant');
+			$lang = $this->Langs->lang();
+			$this->parser->parse('header', $lang[0]);
+			$this->parser->parse('mant', $lang[0]);
 		}else{
 			$this->load->view('header');
 			$this->load->view('recover');

@@ -13,6 +13,7 @@ class Products extends CI_Controller {
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
+        $this->load->model('Langs');
     }
     
     public function index(){
@@ -31,10 +32,35 @@ class Products extends CI_Controller {
         
         $data['products'] = $this->product->getRows(array('url_slug'=>$url_slug));
         
-        $this->load->view('header');
-		$this->load->view('navbar');  
-        $this->load->view('products/details', $data);
-        $this->load->view('footer');
+
+        $lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('products/details', $data+ $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('navbar', $lang[1]); 
+					$this->parser->parse('products/details', $data+ $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('navbar', $lang[2]); 
+					$this->parser->parse('products/details', $data+ $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('products/detailsome', $data+ $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
     }
     
 

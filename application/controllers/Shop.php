@@ -13,6 +13,7 @@ class Shop extends CI_Controller {
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
 		$this->load->model('paypalmodel');
+		$this->load->model('Langs');
     }
 	
 	public function index()
@@ -20,13 +21,38 @@ class Shop extends CI_Controller {
 		$conf = $this->db->get('config');
 		$conf1 = $conf->result_array(); 
        if($conf1['0']['mant'] == 1 AND $this->session->userdata('login') == false){
-            $this->load->view('header');
-            $this->load->view('mant');
+		$lang = $this->Langs->lang();
+		$this->parser->parse('header', $lang[0]);
+		$this->parser->parse('mant', $lang[0]);
         }else{
-		$this->load->view('header');
-		$this->load->view('navbar');  
-		$this->load->view('shop');
-		$this->load->view('footer');
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('shop', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('navbar', $lang[1]); 
+					$this->parser->parse('shop', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('navbar', $lang[2]); 
+					$this->parser->parse('shop', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('shop', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
 		}
 	}
 	

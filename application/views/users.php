@@ -2,13 +2,13 @@
 <table id="dt-filter-select" class="table" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th class="th-sm">Nombre
+      <th class="th-sm">{name}
       </th>
-      <th class="th-sm">Tiempo Jugado
+      <th class="th-sm">{timeplayed}
       </th>
-      <th class="th-sm">Baneado
+      <th class="th-sm">{banned}
       </th>
-      <th class="th-sm">Muteado
+      <th class="th-sm">{muted}
       </th>
     </tr>
   </thead>
@@ -30,13 +30,13 @@
   </tbody>
   <tfoot>
     <tr>
-      <th>Nombre
+      <th>{name}
       </th>
-      <th>Tiempo Jugado
+      <th>{timeplayed}
       </th>
-      <th>Baneado
+      <th>{banned}
       </th>
-      <th>Muteado
+      <th>{muted}
       </th>
     </tr>
   </tfoot>
