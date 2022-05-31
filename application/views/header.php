@@ -29,7 +29,12 @@
     foreach ($conf1 as $key){
 ?>
 <body style="background: linear-gradient(90deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
-
+<?php 
+	$data = [
+        'lang'=> $conf1[0]['lang'],
+    ];
+    $this->session->set_userdata($data);
+?>
 
 <?php } ?>
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

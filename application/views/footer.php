@@ -135,5 +135,10 @@ $(document).ready(function(){
     encoding: 'UTF-8',
   });
 </script>
-      
+<script>
+  // Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+  </script>
 <html>

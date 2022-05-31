@@ -107,6 +107,25 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="media white z-depth-1 rounded cards-novo">
+                    <div class="media-body p-1">
+                        <div class="md-form "> 
+                            <h4 class="text-center font-weight-bold mb-4 pb-2">{editlang}</h4>
+                            <form method="POST"  action="<?php echo base_url('config/changelang'); ?>"  class="form-admin">
+                                <select class="mdb-select md-form" name="lang">
+                                    <option value="" disabled selected>{chooselang}</option>
+                                    <option value="es">ES</option>
+                                    <option value="en">EN</option>
+                                    <option value="tr">TR</option>
+                                    <option value="jp">JP</option>
+                                </select>
+                                <button href="<?php echo base_url('config/lang'); ?>" type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <?php } ?>

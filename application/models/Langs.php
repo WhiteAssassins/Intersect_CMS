@@ -144,6 +144,9 @@ class Langs extends CI_Model{
             'textmenu1' => 'Texto Menu 1',
             'textmenu2' => 'Texto Menu 2',
             'textmenu3' => 'Texto Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Editar Idioma',
+            'chooselang' => 'Escoja el Idioma',
 
            );
 
@@ -301,6 +304,9 @@ class Langs extends CI_Model{
             'textmenu1' => 'Text Menu 1',
             'textmenu2' => 'Text Menu 2',
             'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Edit Language',
+            'chooselang' => 'Choose Language',
         );
 
 
@@ -470,6 +476,9 @@ $tr = array(
             'textmenu1' => 'Metin Menüsü 1',
             'textmenu2' => 'Metin Menüsü 2',
             'textmenu3' => 'Metin Menüsü 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Dili Düzenle',
+            'chooselang' => 'Dil seçiniz',            
            );
    
            
@@ -641,6 +650,9 @@ $tr = array(
             'textmenu1' => 'テキストメニュー1',
             'textmenu2' => 'テキストメニュー2',
             'textmenu3' => 'テキストメニュー3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => '言語の編集',
+            'chooselang' => '言語を選択',            
            );
 
 
@@ -814,6 +826,9 @@ $tr = array(
             'textmenu1' => 'Text Menu 1',
             'textmenu2' => 'Text Menu 2',
             'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',            
         );
 
 
