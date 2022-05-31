@@ -1,4 +1,11 @@
 /*CODIGO DE MI CSS*/
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+
 .navbar-novo{
     background-color: rgb(0 0 0 / 50%) !important; 
     color: black !important;
@@ -29,7 +36,8 @@ body{
     width: 100%;
 }
 .filter-white{
-    filter: invert(96%) sepia(1%) saturate(2%) hue-rotate(190deg) brightness(111%) contrast(100%);
+    -webkit-filter: invert(96%) sepia(1%) saturate(2%) hue-rotate(190deg) brightness(111%) contrast(100%);
+            filter: invert(96%) sepia(1%) saturate(2%) hue-rotate(190deg) brightness(111%) contrast(100%);
 }
 td{
     color: white !important;
@@ -44,4 +52,4 @@ th{
 ::-moz-color-swatch {
     border-color: red;
 }
-/*fin modo oscuro*/
+
