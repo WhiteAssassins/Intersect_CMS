@@ -1,3 +1,8 @@
+<?php
+    $conf = $this->db->get('config');
+    $conf1 = $conf->result_array();
+?>
+
 <footer class="page-footer font-small navbar-novo footer-bottom">
 
 
@@ -13,22 +18,22 @@
 
 </footer>
 </body> 
-<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js" async></script>
+    <?php if($this->session->userdata('rol') == 1){ ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
-
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/flag.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
+    <?php } ?>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
+
     <script>
       $(document).ready(function() {
   // SideNav Button Initialization
@@ -129,7 +134,7 @@ $(document).ready(function(){
  <script>
   tinymce.init({
     selector: 'textarea#tiny',
-    language: 'es',
+    language: '<?php if($conf1[0]['lang'] == "jp"){ echo "ja"; }elseif($conf1[0]['lang'] == "zh"){echo "zh-CN"; }else{echo $conf1[0]['lang']; }?>',
     plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
     skin: 'oxide',
     encoding: 'UTF-8',
