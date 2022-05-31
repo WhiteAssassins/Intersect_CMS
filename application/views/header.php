@@ -28,7 +28,7 @@
 
     foreach ($conf1 as $key){
 ?>
-<body style="background: linear-gradient(135deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
+<body style="background: linear-gradient(94deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
 
 
 <?php } ?>
