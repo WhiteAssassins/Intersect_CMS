@@ -37,6 +37,14 @@ class Langs extends CI_Controller {
 		$base_url = base_url();
 		header("Location: $base_url");
 	}
+	public function jp(){
+		$data = [
+			'lang'=> 'jp',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	
 
 

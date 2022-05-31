@@ -53,6 +53,12 @@ class Products extends CI_Controller {
 					$this->parser->parse('products/details', $data+ $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
 					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('navbar', $lang[3]); 
+					$this->parser->parse('products/details', $data+ $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('navbar', $lang[0]); 

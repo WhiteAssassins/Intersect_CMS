@@ -18,6 +18,7 @@
           <a class="dropdown-item" href="<?php echo base_url();?>langs/es">ES</a>
           <a class="dropdown-item" href="<?php echo base_url();?>langs/en">EN</a>
           <a class="dropdown-item" href="<?php echo base_url();?>langs/tr">TR</a>
+          <a class="dropdown-item" href="<?php echo base_url();?>langs/jp">JP</a>
         </div>
       </li>
                  <li class="nav-item">

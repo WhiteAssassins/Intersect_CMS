@@ -34,6 +34,10 @@ class Mant extends CI_Controller {
                 $this->parser->parse('header', $lang[2]); 
                 $this->parser->parse('mant', $lang[2]); 
                 break;
+            case "jp":
+                $this->parser->parse('header', $lang[3]); 
+                $this->parser->parse('mant', $lang[3]); 
+                break;
             default:
                 $this->parser->parse('header', $lang[0]); 
                 $this->parser->parse('mant', $lang[0]); 
@@ -73,10 +77,6 @@ class Mant extends CI_Controller {
                 'login'=>true
             ];
             $this->session->set_userdata($data);
-            $this->load->view('header');
-            $this->load->view('sidebar');
-            $this->load->view('admin');
-            $this->load->view('footer');
             $base_url = base_url();
             header("Location: $base_url");
         }

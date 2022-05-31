@@ -37,6 +37,12 @@ class Config extends CI_Controller {
 					$this->parser->parse('admin/config', $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
 					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('sidebar', $lang[3]); 
+					$this->parser->parse('admin/config', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -175,6 +181,11 @@ class Config extends CI_Controller {
 					$this->parser->parse('admin/legal', $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
 					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('admin/legal', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('admin/legal', $lang[0]); 
@@ -207,6 +218,11 @@ class Config extends CI_Controller {
 					$this->parser->parse('admin/terms', $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
 					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('admin/terms', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('admin/terms', $lang[0]); 
@@ -238,6 +254,11 @@ class Config extends CI_Controller {
 					$this->parser->parse('admin/privacity', $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
 					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('admin/privacity', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('admin/privacity', $lang[0]); 
@@ -267,6 +288,11 @@ class Config extends CI_Controller {
 					$this->parser->parse('header', $lang[2]); 
 					$this->parser->parse('admin/menus', $lang[2]); 
 					$this->parser->parse('footer', $lang[2]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('admin/menus', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
 					break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
