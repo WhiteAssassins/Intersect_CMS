@@ -206,7 +206,7 @@ class Langs extends CI_Model{
             'paymentmethod' => 'Payment Method',
             ////////////////////////////////////////////News////////////////////////////////////////////////////////
             'lastnews' => 'Last News',
-            'writedby' => 'Writed By',
+            'writedby' => 'Written By',
             ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
             'maintenance' => 'Maintenance',
             'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
@@ -277,7 +277,7 @@ class Langs extends CI_Model{
             'deactivate' => 'Deactivate',
             'changelegal' => 'Change Legal',
             'changeterms' => 'Change Terms',
-            'changeprivacity' => 'Cahange Privacity',
+            'changeprivacity' => 'Change Privacity',
             'editmenus' => 'Edit Menus',
             'change' => 'Change',
             /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
@@ -353,7 +353,7 @@ $tr = array(
             'disconnect' => 'Oturumu Kapat',
             'administrativepanel' => 'Yönetici Paneli',
             'name' => 'İsim',
-            'language' => 'Deyim',
+            'language' => 'Dil',
             ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
             'class' => 'Sınıf',
             'gender' => 'Cinsiyet',
@@ -383,96 +383,112 @@ $tr = array(
             'enter' => 'Giriş',
             'user' => 'Kullanıcı',
             /////////////////////////////////////////////Recover////////////////////////////////////////////////////
-            'recoverpassword' => 'Recuperar Contraseña',
-            'recover' => 'Recuperar',
+            'recoverpassword' => 'Şifre Kurtarma',
+            'recover' => 'Geri Al',
             ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
-            'totalplayers' => 'Personajes Totales',
-            'cps' => 'CPS Server',
-            'directmessage' => 'Mensaje Directo',
-            'userorplayer' => 'Usuario o Personaje',
-            'message' => 'Mensaje',
-            'mapmessage' => 'Mensaje a Mapa',
-            'mapid' => 'ID Mapa',
-            'globalmessage' => 'Mensaje Global',
-            'consolecommand' => 'Comando Consola',
-            'command' => 'Comando',
-            'ban' => 'Banear',
-            'reason' => 'Razon',
-            'duration' => 'Duracion (Dias)',
-            'mute' => 'Mutear',
-            'unban' => 'Desbanear',
-            'unmute' => 'Desmutear',
-            'teleport' => 'Teletransportar',
-            'kickuser' => 'Kick User',
-            'Kill' => 'Asesinar',
+            'totalplayers' => 'Toplam Oyuncu',
+            'cps' => 'CPS Sunucusu',
+            'directmessage' => 'Direk Mesaj',
+            'userorplayer' => 'Kullanıcı veya Karakter',
+            'message' => 'Mesaj',
+            'mapmessage' => 'Haritaya Mesaj',
+            'mapid' => 'Harita ID',
+            'globalmessage' => 'Küresel Mesaj',
+            'consolecommand' => 'Konsol Komutu',
+            'command' => 'Komut',
+            'ban' => 'Yasaklama',
+            'reason' => 'Sebep',
+            'duration' => 'Süre (Gün)',
+            'mute' => 'Susturma',
+            'unban' => 'Yasaklama Kaldırma',
+            'unmute' => 'Susturma Kaldırma',
+            'teleport' => 'Işınlanma',
+            'kickuser' => 'Kullanıcıyı At',
+            'Kill' => 'Öldür',
             ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
-            'home' => 'Inicio',
-            'dashboard' => 'Dashboard',
-            'objects' => 'Objetos',
-            'events' => 'Eventos',
-            'quests' => 'Misiones',
-            'logs' => 'Logs',
-            'adminaccounts' => 'Cuentas Administrador',
-            'config' => 'Configuración',
-            'maps' => 'Mapas',
+            'home' => 'Başlangıç',
+            'dashboard' => 'Gösterge Paneli',
+            'objects' => 'Nesneler',
+            'events' => 'Etkinlikler',
+            'quests' => 'Görevler',
+            'logs' => 'Kayıtlar',
+            'adminaccounts' => 'Yönetici Hesapları',
+            'config' => 'Ayarlar',
+            'maps' => 'Mapler',
             ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
-            'price' => 'Precio',
-            'products' => 'Productos',
-            'description' => 'Descripción',
-            'action' => 'Acción',
-            'productpic' => 'Foto del Producto',
-            'addproduct' => 'Añadir Producto',
-            'editproduct' => 'Editar Producto',
-            'edit' => 'Editar',
+            'price' => 'Fiyat',
+            'products' => 'Ürünler',
+            'description' => 'Açıklama',
+            'action' => 'Eylem',
+            'productpic' => 'Ürün Fotoğrafı',
+            'addproduct' => 'Ürün Ekle',
+            'editproduct' => 'Ürün Düzenle',
+            'edit' => 'Düzenle',
             /////////////////////////////////////News Admin//////////////////////////////////////////////////////
-            'addnews' => 'Crear Nueva Noticia',
-            'title' => 'Titulo',
-            'textnews' => 'Texto de la Noticia',
-            'newspic' => 'Foto de la Noticia',
-            'uploadnews' => 'Subir Noticia',
-            'date' => 'Fecha',
+            'addnews' => 'Yeni Haber Oluştur',
+            'title' => 'Başlık',
+            'textnews' => 'Haber Metni',
+            'newspic' => 'Haber Fotoğrafı',
+            'uploadnews' => 'Haber Yükle',
+            'date' => 'Tarih',
             ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
-            'key' => 'Key',
+            'key' => 'Anahtar',
             ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
-            'admin' => 'Administrador',
-            'logs' => 'Logs',
+            'admin' => 'Yönetici',
+            'logs' => 'Kayıtlar',
             //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
-            'addadminaccount' => 'Crear Cuenta',
+            'addadminaccount' => 'Yönetici Hesabı Ekle',
             /////////////////////////////////////Config/////////////////////////////////////////////////////////
-            'gradient' => 'Colores Gradiente',
+            'gradient' => 'Gradyan Renkleri',
             'analytics' => 'Google Analytics',
-            'configdownloadbutton' => 'Boton de Descarga',
-            'activate' => 'Activar',
-            'deactivate' => 'Desactivar',
-            'changelegal' => 'Cambiar Legal',
-            'changeterms' => 'Cambiar Terminos',
-            'changeprivacity' => 'Cambiar Privacidad',
-            'editmenus' => 'Editar Menus',
-            'change' => 'Cambiar',
+            'configdownloadbutton' => 'İndirme Butonu',
+            'activate' => 'Etkinleştir',
+            'deactivate' => 'Devre Dışı Bırak',
+            'changelegal' => 'Yasalı Değiştir',
+            'changeterms' => 'Şartları Değiştir',
+            'changeprivacity' => 'Gizliliği Değiştir',
+            'editmenus' => 'Menüleri Düzenle',
+            'change' => 'Değiştir',
             /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
-            'editlegal' => 'Editar Legal',
-            'textlegal' => 'Texto Legal',
+            'editlegal' => 'Yasalı Düzenle',
+            'textlegal' => 'Yasal Metni',
             ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
-            'editterms' => 'Editar Terminos y Condiciones',
-            'textterms' => 'Texto Terminos y Condiciones',
+            'editterms' => 'Koşulları ve Şartları Düzenle',
+            'textterms' => 'Koşullar ve Şartlar Metni',
             ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
-            'editprivacity' => 'Editar Privacidad',
-            'textprivacity' => 'Texto Privacidad',
+            'editprivacity' => 'Gizliliği Düzenle',
+            'textprivacity' => 'Gizlilik Metni',
             ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
-            'iconlist' => 'Listado Iconos',
-            'descriptionmenu' => 'Descripcion del Menu',
-            'iconmenu1' => 'Icono Menu 1',
-            'iconmenu2' => 'Icono Menu 2',
-            'iconmenu3' => 'Icono Menu 3',
-            'titlemenu1' => 'Titulo Menu 1',
-            'titlemenu2' => 'Titulo Menu 2',
-            'titlemenu2' => 'Titulo Menu 3',
-            'textmenu1' => 'Texto Menu 1',
-            'textmenu2' => 'Texto Menu 2',
-            'textmenu3' => 'Texto Menu 3',
+            'iconlist' => 'Simge Listesi',
+            'descriptionmenu' => 'Açıklama Menüsü',
+            'iconmenu1' => 'Simge Menüsü 1',
+            'iconmenu2' => 'Simge Menüsü 2',
+            'iconmenu3' => 'Simge Menüsü 3',
+            'titlemenu1' => 'Başlık Menüsü 1',
+            'titlemenu2' => 'Başlık Menüsü 2',
+            'titlemenu2' => 'Başlık Menüsü 3',
+            'textmenu1' => 'Metin Menüsü 1',
+            'textmenu2' => 'Metin Menüsü 2',
+            'textmenu3' => 'Metin Menüsü 3',
            );
    
            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -655,6 +671,150 @@ $tr = array(
 
 
 
+           $de = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+        );
 
 
 
@@ -662,7 +822,7 @@ $tr = array(
 
 
 
-                   return array($es, $en, $tr, $jp);
+    return array($es, $en, $tr, $jp, $de, /*$ru, $zh, $fr, $pt, $hi, $ar*/);
     }
 
 
