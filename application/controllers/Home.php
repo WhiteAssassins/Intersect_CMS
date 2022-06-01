@@ -94,6 +94,14 @@ class Home extends CI_Controller {
 						  $estado = json_decode($res->getBody(), true);
 						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
 							{
+						 		$users = array(
+								'user' => $user,
+								'pass' => md5($pass),
+								'rol' => 2,
+								'email' => $email,
+								);
+								$this->db->insert('users', $users);
+
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
 							}else{
@@ -137,7 +145,7 @@ class Home extends CI_Controller {
             $rest = $resultado->result_array();
             $data = [
                 'user'=>$rest[0]['user'],
-				'rol'=> 1,
+				'rol'=> $rest[0]['rol'],
                 'login'=>true
             ];
             $this->session->set_userdata($data);

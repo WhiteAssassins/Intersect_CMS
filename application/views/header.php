@@ -19,6 +19,8 @@
 
     <title><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></title>
     <link rel="canonical" href="<?php echo base_url();?>">
+    <link rel="dns-prefetch" href="<?php echo base_url();?>">
+    <link rel="preconnect" href="<?php echo base_url();?>">
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('public/favicon'); ?>/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('public/favicon'); ?>/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('public/favicon'); ?>/apple-icon-72x72.png">
@@ -34,12 +36,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('public/favicon'); ?>/favicon-16x16.png">
     <link rel="manifest" href="<?php echo base_url('public/favicon'); ?>/manifest.json">
 	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css" async>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/iconos.css" async>
     <?php if($this->session->userdata('rol') == 1){ ?>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
     <?php } ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css" async>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css" async>
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css"> 
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">

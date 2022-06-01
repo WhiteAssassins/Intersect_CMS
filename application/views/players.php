@@ -1,5 +1,5 @@
 <div class="container my-5 p-5 z-depth-1 cards-novo">
-<table id="dt-filter-select" class="table" cellspacing="0" width="100%">
+<table id="dt-filter-select" class="table  nowrap" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th class="th-sm">{name}

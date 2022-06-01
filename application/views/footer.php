@@ -19,9 +19,9 @@
 </footer>
 </body> 
 <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.min.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js" async></script>
     <?php if($this->session->userdata('rol') == 1){ ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
@@ -32,6 +32,8 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
 
     <script>
@@ -46,11 +48,37 @@
     <script>
       $(document).ready(function () {
   $('#dt-filter-select').dataTable({
-
+    language: {
+"decimal": "",
+"emptyTable": "{emptyTable}",
+"info": "{infotable}",
+"infoEmpty": "{infoEmpty}",
+"infoFiltered": "{infoFiltered}",
+"infoPostFix": "",
+"thousands": ",",
+"lengthMenu": "{lengthMenu}",
+"loadingRecords": "{loadingRecords}",
+"processing": "{processing}",
+"search": "{search}:",
+"zeroRecords": "{zeroRecords}",
+"paginate": {
+"first": "{first}",
+"last": "{last}",
+"next": "{next}",
+"previous": "{previous}"
+}
+},
+    rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true,
+        
     initComplete: function () {
+      
       this.api().columns().every( function () {
+        
           var column = this;
-          var select = $('<select  class="browser-default custom-select form-control-sm"><option value="" selected>Search</option></select>')
+          var select = $('<select  class="browser-default custom-select form-control-sm tables-novo"><option value="" selected>{search}</option></select>')
               .appendTo( $(column.footer()).empty() )
               .on( 'change', function () {
                   var val = $.fn.dataTable.util.escapeRegex(
