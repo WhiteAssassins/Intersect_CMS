@@ -110,13 +110,14 @@ class Userpanel extends CI_Controller {
 
     public function rechargin(){
         $amount = $this->input->post('cant');
+		$user = $this->input->post('user');
         $apiip = $this->config->item('apiip');;
         $apiuser = [
-            'app_id' => "50880840-c4f0-47de-b2fe-74fbdd2d5a31",
-            'app_secret' => "UsizPK7qt1R2mQdOJzF72F9WZ4hqTY212ZyQl7EaZSgZ6ewsti",
+            'app_id' => $this->config->item('apiqvapayid'),
+            'app_secret' => $this->config->item('apiqvapaysecret'),
             'amount' => $amount,
             'description' => "Recarga de Cuenta",
-            'remote_id' => "Qvapay",
+            'remote_id' => $user,
             'signed' => 1
             
               ];

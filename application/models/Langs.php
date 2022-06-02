@@ -161,6 +161,9 @@ class Langs extends CI_Model{
             'last' => 'Ultimo',
             'next' => 'Siguiente',
             'previous' => 'Anterior',
+            /////////////////////////////////Panel User///////////////////////////////////////////////////
+            'paneluser' => 'Panel de Usuario',
+            'recharge' => 'Recargar',
            );
 
 
