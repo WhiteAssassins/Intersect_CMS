@@ -22,7 +22,8 @@
                 <div class="md-form mb-4">
                     <input type="password" id="prefixInside" class="form-control" name="confirmnewpassword" placeholder="Repetir Nueva Contraseña"  required>
                 </div>
-                <button href="<?php echo base_url('config/lang'); ?>" type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
+                <button type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
+                <button type="reset" class="btn btn-outline-warning waves-effect" style="margin-left: 65px;">{reset}</button>
             </form>
           
 
