@@ -398,6 +398,35 @@ $(function(){
     })
 
 
+    $(document.body).on("submit", "#form_buyitem", function(e) {
+        e.preventDefault();
+        var o = new FormData(document.getElementById("form_buyitem"));
+        $.ajax({
+            type: "POST",
+            url: config.base_url + "shop/shoping",
+            data: o,
+            cache: !1,
+            contentType: !1,
+            processData: !1,
+            dataType: "json",
+            success: function(e) {
+                if(e.status == 200){
+                    //exito
+                    toastr.success('Item Comprado Correctamente.');
+                }else{
+                    //error y e.sms es el error
+                    toastr.error(e.sms);
+                }
+                
+            },
+            error: function(e) {
+                toastr.error(e.sms);
+            }
+        }),
+        !1
+    })
+
+
 
 
 
