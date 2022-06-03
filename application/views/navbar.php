@@ -77,7 +77,7 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?php echo $this->session->userdata('user'); ?></a>
         <div class="dropdown-menu dropdown-info dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="<?php echo base_url('userpanel'); ?>"><i class="fa fa-cogs"></i> {paneluser}</a>
+        <a class="dropdown-item" href="<?php echo base_url('userpanel'); ?>"><i class="fa fa-cog"></i> {paneluser}</a>
           <?php if($this->session->userdata('rol') == 1){ ?>
           <a class="dropdown-item" href="<?php echo base_url('admin'); ?>"><i class="fa fa-cogs"></i> {administrativepanel}</a>
        <?php  } ?>
