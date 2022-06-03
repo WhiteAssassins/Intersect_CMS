@@ -1127,6 +1127,7 @@ class Admin extends CI_Controller {
 				'price' => strip_tags($this->input->post('price')),
                 'aatk' => strip_tags($this->input->post('aatk')),
 				'ainterac' => strip_tags($this->input->post('ainterac')),
+				'ingameid' => strip_tags($this->input->post('ingameid')),
                 'image' => ($filename),
             );
 
@@ -1222,6 +1223,7 @@ class Admin extends CI_Controller {
 		$price = $this->input->post('price');
 		$aatk = $this->input->post('aatk');
 		$ainterac = $this->input->post('ainterac');
+		$ingameid = $this->input->post('ingameid');
 		$where = [
 			'id'=>$id,
 
@@ -1234,6 +1236,7 @@ class Admin extends CI_Controller {
 			'price'=>$price,
 			'aatk'=>$aatk,
 			'ainterac'=>$ainterac,
+			'ingameid'=>$ingameid,
 
 		];
 		$this->db->where('id', $id);

@@ -39,6 +39,11 @@ $restnews = $resultadonews->result_array();
                    <input type="text" id="defaultForm-pass" class="form-control validate" name="ainterac">
                    <label for="defaultForm-pass">{interacan}</label>
                </div>
+               <div class="md-form mb-4">
+                   
+                   <input type="text" id="defaultForm-pass" class="form-control validate" name="ingameid">
+                   <label for="defaultForm-pass">{ingameid}</label>
+               </div>
                 
         </div>
         <div class="md-form mb-4">
