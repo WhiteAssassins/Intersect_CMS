@@ -24,5 +24,6 @@ class Callback extends CI_Controller {
         ];
         $this->db->insert('payments', $data);
     }
+
 	
 }
