@@ -369,6 +369,34 @@ $(function(){
         !1
     })
 
+    $(document.body).on("submit", "#form_changepassword", function(e) {
+        e.preventDefault();
+        var o = new FormData(document.getElementById("form_changepassword"));
+        $.ajax({
+            type: "POST",
+            url: config.base_url + "userpanel/changepassword",
+            data: o,
+            cache: !1,
+            contentType: !1,
+            processData: !1,
+            dataType: "json",
+            success: function(e) {
+                if(e.status == 200){
+                    //exito
+                    toastr.success('Contraseña Cambiada.');
+                }else{
+                    //error y e.sms es el error
+                    toastr.error(e.sms);
+                }
+                
+            },
+            error: function(e) {
+                toastr.error(e.sms);
+            }
+        }),
+        !1
+    })
+
 
 
 

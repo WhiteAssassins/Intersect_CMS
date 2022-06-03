@@ -132,8 +132,40 @@ class Userpanel extends CI_Controller {
     }
 
 
+	public function changepassword(){
+		$pedido['status'] = 0;
+		//get from post old password, new password, confirmnewpassword and user from session
+		$oldpassword = $this->input->post('oldpassword');
+		$newpassword = $this->input->post('newpassword');
+		$confirmnewpassword = $this->input->post('confirmnewpassword');
+		$user = $this->session->userdata('user');
+		//verify if old password is correct before encrypt in md5
+		$this->db->where('user', $user);
+		$this->db->where('pass', md5($oldpassword));
+		$query = $this->db->get('users');
+		if($query->num_rows() == 1){
+			if($newpassword == $confirmnewpassword){
+				$data = array(
+					'pass' => md5($newpassword)
+				);
+				$this->db->where('user', $user);
+				$this->db->update('users', $data);
+				$pedido['status'] = 200;
+				echo json_encode($pedido);
+			}else{
+				$pedido['sms'] = 'Las Contraseñas no Coinciden';
+				echo json_encode($pedido);
+			}
+		}else{
+			$pedido['sms'] = 'La Contraseña Actual no es Correcta';
+			echo json_encode($pedido);
+		}
 
 
+
+
+
+	}
 
 
 	
