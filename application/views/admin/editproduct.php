@@ -19,6 +19,8 @@
               <input type="text"class="form-control" placeholder="Animación de Ataque" value="<?php echo $key['aatk']; ?>" name="aatk">
               <br>
               <input type="text"class="form-control" placeholder="Animación de interacción" value="<?php echo $key['ainterac']; ?>" name="ainterac">
+              <br>
+              <input type="text"class="form-control" placeholder="Ingame ID" value="<?php echo $key['ingameid']; ?>" name="ingameid">
               <div class="text-center">
                 <button type="submit" class="btn btn-outline-orange btn-rounded my-4 waves-effect">{edit}</button>
                 <a href="<?php echo base_url('admin/shop'); ?>" type="button" class="btn btn-outline-blue btn-rounded my-4 waves-effect">{return}</a>
