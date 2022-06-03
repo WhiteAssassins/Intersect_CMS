@@ -26,20 +26,17 @@
           <p class="ml-xl-0 ml-4">
             <strong>{interacan}: </strong><?php echo $products['ainterac']; ?></p>   
           <div class="mt-5">
-            <p class="grey-text">{paymentmethod}</p>
             <div class="row text-center text-md-left">
-              <form method="POST" action="<?php echo base_url('shop/shoping'); ?>">
+              <form method="POST" action="<?php echo base_url('shop/shoping'); ?>" class="form-admin" id="form_buyitem">
               <div class="col-md-4 col-12 ">
-                <div class="form-group">
-                  <input type="hidden" value="<?php echo $products['id']; ?>" name="id">
-                  <input class="form-check-input" name="billing" type="radio" id="radio100" value="paypal">
-                  <label for="radio100" class="form-check-label dark-grey-text">Paypal</label>
+                  <input type="hidden" value="<?php echo $products['id']; ?>" name="id">    
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <input class="form-check-input" name="billing" type="radio" id="radio102" value="qvapay">
-                  <label for="radio102" class="form-check-label dark-grey-text">QvaPay</label>
+                <div class="md-form ">
+                  <input type="text" id="prefixInside" class="form-control" name="player" placeholder="{player}">
+                </div>
                 </div>
               </div>
             </div>

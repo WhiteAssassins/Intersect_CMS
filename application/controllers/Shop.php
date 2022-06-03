@@ -62,65 +62,70 @@ class Shop extends CI_Controller {
 	}
 	
 	public function shoping(){
-		 $billing = $this->input->post('billing');
-		 $id = $this->input->post('id');
-		 if($billing = "paypal"){
-			
-			$returnURL = base_url().'shop/paymentSuccess';
-			$failURL = base_url().'shop/fail';
-			$notifyURL = base_url().'shop/ipn'; 
-			$product = $this->paypalmodel->getProducts($id);
-			$userID = 1;
-			$logo = base_url().'Your_logo_url';
-			 
-			$this->paypal_lib->add_field('return', $returnURL);
-			$this->paypal_lib->add_field('fail_return', $failURL);
-			$this->paypal_lib->add_field('notify_url', $notifyURL);
-			$this->paypal_lib->add_field('item_name', $product['name']);
-			$this->paypal_lib->add_field('custom', $userID);
-			$this->paypal_lib->add_field('item_number',  $product['id']);
-			$this->paypal_lib->add_field('amount',  $product['price']);        
-			$this->paypal_lib->image($logo);
-			 
-			$this->paypal_lib->paypal_auto_form();
-		 }elseif($billing = "qvapay"){
+		$pedido['status'] = 0;
+		//get from post the player
+		$player = $this->input->post('player');
+		//get from post the id
+		$id = $this->input->post('id');
+		//get from session user
+		$user = $this->session->userdata('user');
+		//get from the db products the item with the id
+		$product = $this->db->get_where('products', array('id' => $id));
+		$product = $product->result_array();
+		//get from the db users the user with the user
+		$user = $this->db->get_where('users', array('user' => $user));
+		$user = $user->result_array();
+		//verify if the user balance is mayor than the price of the product
+		if($player == ''){
+			$pedido['sms'] = 'Complete todos los campos';
+			echo json_encode($pedido);
+		}else{
+		if($user[0]['balance'] >= $product[0]['price']){
+			//connect to the api
+			$apiip = $this->config->item('apiip');
+				$this->load->model('Apigettoken');
+				$accesstoken = $this->Apigettoken->apitoken();
+				$apiuser = [
+					'itemid' => $product[0]['ingameid'],
+					'quantity' => 1,
+					  ];
+					 
+					  $client = new Client([
+						'base_uri' => 'http://'.$apiip.'/api/v1/players/'.$player.'/items/give',
+						'timeout'  => 5.0,
+						'http_errors' => false
+						]);
+						$res = $client->request('POST','',[
+							'headers' => [
+								"authorization" => "Bearer ".$accesstoken['access_token'],
+							],
+							'form_params' => $apiuser,
+							
+						  ]);
+						  $estado = json_decode($res->getBody(), true);
+						  $estado = json_decode($res->getBody(), true);
+						  if ($res->getStatusCode() == '200') 
+							  {
+								  //reduce the balance of the user
+									$this->db->set('balance', 'balance-'.$product[0]['price'], FALSE);
+									$this->db->where('user', $user[0]['user']);
+									$this->db->update('users');
+								  	$pedido['status'] = 200;
+								  	echo json_encode($pedido);
+							  }else{
+								  $pedido['sms'] = $estado['Message'];
+								  echo json_encode($pedido);
+								  
+							  }
+		}else{
+			$pedido['sms'] = "No tiene Saldo Suficiente";
+			echo json_encode($pedido);
+		}
 
-		 }
+	}
 	}
 
-	function paymentSuccess(){
- 
-        $paypalInfo = $this->input->post();
-           
-        $data['item_number'] =  $_POST['item_number']; 
-        $data['txn_id'] = $_POST['txn_id'];
-        $data['payment_amt'] = $_POST['mc_gross'];
-        $data['currency_code'] = $_POST['mc_currency'];
-        $data['status'] = $_POST["payment_status"];
 
-        $this->load->view('shop/paymentSuccess', $data);
-     }
 
-	 function paymentFail(){
-        $this->load->view('shop/paymentFail');
-     }
 
-	function ipn(){
-        $paypalInfo    = $this->input->post();
- 
-        $data['user_id'] = $paypalInfo['custom'];
-        $data['product_id']    = $paypalInfo["item_number"];
-        $data['txn_id']    = $paypalInfo["txn_id"];
-        $data['payment_gross'] = $paypalInfo["mc_gross"];
-        $data['currency_code'] = $paypalInfo["mc_currency"];
-        $data['payer_email'] = $paypalInfo["payer_email"];
-        $data['payment_status']    = $paypalInfo["payment_status"];
- 
-        $paypalURL = $this->paypal_lib->paypal_url;        
-        $result    = $this->paypal_lib->curlPost($paypalURL,$paypalInfo);
-         
-        if(preg_match("/VERIFIED/i",$result)){
-            $this->paypalmodel->storeTransaction($data);
-        }
-    }
 }

@@ -164,6 +164,8 @@ class Langs extends CI_Model{
             /////////////////////////////////Panel User///////////////////////////////////////////////////
             'paneluser' => 'Panel de Usuario',
             'recharge' => 'Recargar',
+            'reset' => 'Resetear',
+            'player' => 'Personaje',
            );
 
 
