@@ -3,6 +3,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 <FilesMatch "\.(ico|pdf|flv|jpg|woff2|jpeg|png|gif|js|css|swf)(\.gz)?$">
-  # Así mismo, establecemos la fecha que se eliminarán los archivos de la cache
-  Header set Expires "Thu, 15 Apr 2020 20:00:00 GMT"
 </FilesMatch>
