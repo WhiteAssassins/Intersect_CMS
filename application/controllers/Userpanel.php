@@ -111,7 +111,6 @@ class Userpanel extends CI_Controller {
     public function rechargin(){
         $amount = $this->input->post('cant');
 		$user = $this->input->post('user');
-        $apiip = $this->config->item('apiip');;
         $apiuser = [
             'app_id' => $this->config->item('apiqvapayid'),
             'app_secret' => $this->config->item('apiqvapaysecret'),

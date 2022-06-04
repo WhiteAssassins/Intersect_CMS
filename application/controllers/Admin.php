@@ -1066,7 +1066,6 @@ class Admin extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('news');
 		$datos = [
 			'title'=>$title,
 			'descrip'=>$descrip,
@@ -1142,7 +1141,7 @@ class Admin extends CI_Controller {
                 $txtData['url_slug'] = $titleURL;
                 
                 //Inserta los datos del TXT a la base de datos
-                $insert = $this->shops->insert($txtData);
+                $this->shops->insert($txtData);
 
               
 
@@ -1229,7 +1228,7 @@ class Admin extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('products');
+		$this->db->get('products');
 		$datos = [
 			'name'=>$name,
 			'descrip'=>$descrip,

@@ -65,7 +65,7 @@ class Recover extends CI_Controller {
           'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/password/reset',
           'timeout'  => 5.0,
         ]);
-        $res = $client->request('GET','',[
+        $client->request('GET','',[
           'headers' => [
             "authorization" => "Bearer ".$accesstoken['access_token'],
           ]

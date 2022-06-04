@@ -68,7 +68,7 @@ class Config extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('config');
+		$this->db->get('config');
 		$datos = [
 			'color1'=>$color1,
 			'color2'=>$color2,
@@ -87,8 +87,7 @@ class Config extends CI_Controller {
 
 
 	public function mantact(){
-        $conf = $this->db->get('config');
-		$conf1 = $conf->result_array();
+
         $datos = array (
             'mant' => 1,
            );
@@ -99,8 +98,6 @@ class Config extends CI_Controller {
 
 
 	public function mantdes(){
-        $conf = $this->db->get('config');
-		$conf1 = $conf->result_array();
         $datos = array (
             'mant' => 0,
            );
