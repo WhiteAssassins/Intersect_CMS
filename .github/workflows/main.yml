@@ -34,7 +34,5 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          
-          - name: Psalm – Static Analysis for PHP
-            uses: psalm/psalm-github-actions@1.1.2
+
 
