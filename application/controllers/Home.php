@@ -1,5 +1,4 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 require FCPATH.'vendor/autoload.php';
 use GuzzleHttp\Client;
 class Home extends CI_Controller {
