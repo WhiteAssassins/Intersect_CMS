@@ -82,6 +82,7 @@
           <a class="dropdown-item" href="<?php echo base_url('admin'); ?>"><i class="fa fa-cogs"></i> {administrativepanel}</a>
        <?php  } ?>
           <a class="dropdown-item" href="<?php echo base_url('home/logout'); ?>"><i class="fa fa-sign"></i>{disconnect}</a>
+          <a class="dropdown-item" href="<?php echo base_url('userpanel/feedback'); ?>"><i class="fas fa-headset"></i>{feedback}</a>
         </div>
       </li>
                 
