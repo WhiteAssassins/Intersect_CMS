@@ -169,6 +169,8 @@ class Langs extends CI_Model{
             'createticket' => 'Crear Ticket',
             'tickettext' => 'Texto del Ticket',
             'addticket' => 'Enviar Ticket',
+            'chooseticket' => 'Elegir Tipo de Ticket',
+            'feedback' => 'Feedback',
            );
 
 
