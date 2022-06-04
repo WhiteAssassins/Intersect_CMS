@@ -166,6 +166,9 @@ class Langs extends CI_Model{
             'recharge' => 'Recargar',
             'reset' => 'Resetear',
             'player' => 'Personaje',
+            'createticket' => 'Crear Ticket',
+            'tickettext' => 'Texto del Ticket',
+            'addticket' => 'Enviar Ticket',
            );
 
 
