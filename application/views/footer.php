@@ -18,9 +18,9 @@
 
 </footer>
 </body> 
-<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.min.js" async></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js" async></script>
+<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js" async></script>
     <?php if($this->session->userdata('rol') == 1){ ?>
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
     <?php } ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js" async></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
@@ -168,10 +168,11 @@ $(document).ready(function(){
     encoding: 'UTF-8',
   });
 </script>
-<script>
+  <script>
   // Material Select Initialization
 $(document).ready(function() {
 $('.mdb-select').materialSelect();
 });
   </script>
+
 <html>
