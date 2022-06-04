@@ -1,4 +1,7 @@
 # Intesect_CMS
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c608a080db3b463984e192d8437384f6)](https://app.codacy.com/gh/WhiteAssassins/Intersect_CMS?utm_source=github.com&utm_medium=referral&utm_content=WhiteAssassins/Intersect_CMS&utm_campaign=Badge_Grade_Settings)
+
 # Español
  CMS For Intersect Engine
 # Requerimientos
