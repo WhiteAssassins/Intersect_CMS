@@ -34,6 +34,8 @@
         </li>
         <li><a href="<?php echo base_url('admin/adminaccounts');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-user-alt"></i> {adminaccounts}</a>
         </li>
+        <li><a href="<?php echo base_url('admin/tickets');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-ticket-alt"></i> {tickets}</a>
+        </li>
         <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-cog"></i> {config}</a>
         </li>
         <li><a href="<?php echo base_url('home/logout');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-sign"></i> {disconnect}</a>
