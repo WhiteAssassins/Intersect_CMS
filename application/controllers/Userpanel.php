@@ -168,5 +168,146 @@ class Userpanel extends CI_Controller {
 	}
 
 
+
+
+	public function feedback(){	
+        $conf = $this->db->get('config');
+		$conf1 = $conf->result_array(); 
+       if($conf1['0']['mant'] == 1 AND $this->session->userdata('rol') == 2){
+        $base_url = base_url();
+        header("Location: $base_url/mant");
+        }else{
+            $lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('user/feedback', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('navbar', $lang[1]); 
+					$this->parser->parse('user/feedback', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('navbar', $lang[2]); 
+					$this->parser->parse('user/feedback', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('navbar', $lang[3]); 
+					$this->parser->parse('user/feedback', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;	
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('navbar', $lang[0]); 
+					$this->parser->parse('user/feedback', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
+        } 
+       
+	}
+
+	public function addticket(){
+		//json status
+		$pedido['status'] = 0;
+		//get from post text, title, ticket and user from session
+		$text = $this->input->post('text');
+		$title = $this->input->post('title');
+		$ticket = $this->input->post('ticket');
+		$user = $this->session->userdata('user');
+		//verify if text, title and ticket are not empty
+		if($text != '' AND $title != '' AND $ticket != ''){
+			//insert ticket
+			$data = array(
+				'text' => $text,
+				'title' => $title,
+				'type' => $ticket,
+				'user' => $user,
+				'status' => "Unasigned"
+			);
+			$this->db->insert('feedback', $data);
+			//get from the user the email
+			$this->db->where('user', $user);
+			$query = $this->db->get('users');
+			$user = $query->result_array();
+			$email = $user['0']['email'];
+			$pedido['status'] = 200;
+				echo json_encode($pedido);
+			//send email to the user
+
+			//Configuracion Correo
+			$mail_message= utf8_decode(file_get_contents(base_url('public/email.html')));
+
+			//Configuracion PHPMAILER
+			date_default_timezone_set('Etc/UTC');
+			require FCPATH.'vendor/phpmailer/phpmailer/src/Exception.php';
+			require FCPATH.'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+			require FCPATH.'vendor/phpmailer/phpmailer/src/SMTP.php';
+
+			
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
+			$mail->IsSMTP(); 
+		
+			$mail->CharSet="UTF-8";
+			$mail->Host = "smtp.gmail.com";
+			$mail->SMTPDebug = 0; 
+			$mail->Port = 465 ; //465 or 587
+		
+			 $mail->SMTPSecure = 'ssl';  
+			$mail->SMTPAuth = true; 
+			$mail->IsHTML(true);
+		
+			//Authentication
+			$mail->Username = $this->config->item('supportemail');
+			$mail->Password = $this->config->item('supportemailpassword');
+		
+			//Set Params
+			$mail->SetFrom($this->config->item('supportemail'), 'Soporte');
+			$mail->addAddress($email);
+			$mail->IsHTML(true);
+			$mail->Subject = "Support Ticket";
+			$mail->Body    = $mail_message;
+			$mail->AltBody = $mail_message;
+
+
+			if (!$mail->send()) {
+				
+			}
+
+
+
+
+
+
+
+
+			
+		}else{
+			$pedido['sms'] = 'Todos los campos son obligatorios';
+			echo json_encode($pedido);
+		}
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }
