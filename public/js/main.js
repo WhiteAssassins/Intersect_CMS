@@ -19,19 +19,10 @@ $(function(){
     $(document.body).on('click','.btn_modal_addadminaccount',function(){
         $('#modal_addadminaccount').modal()
     })
-
-
-    $(document.body).on('click','.modo_btn',function(){
-        if($.cookie('modo') == 0 || !$.cookie('modo')){
-            //activa el modo oscuro
-            $.cookie('modo',1)
-            $('body').addClass('modooscuro')
-        }else{
-            //desactiva el modo oscuro
-            $.cookie('modo',0)
-            $('body').removeClass('modooscuro')
-        }
+    $(document.body).on('click','.btn_modal_newticket',function(){
+        $('#modal_newticket').modal()
     })
+
     $(document.body).on("submit", "#form_reg", function(e) {
         e.preventDefault();
         var o = new FormData(document.getElementById("form_reg"));
@@ -413,6 +404,35 @@ $(function(){
                 if(e.status == 200){
                     //exito
                     toastr.success('Item Comprado Correctamente.');
+                }else{
+                    //error y e.sms es el error
+                    toastr.error(e.sms);
+                }
+                
+            },
+            error: function(e) {
+                toastr.error(e.sms);
+            }
+        }),
+        !1
+    })
+
+
+    $(document.body).on("submit", "#form_ticket", function(e) {
+        e.preventDefault();
+        var o = new FormData(document.getElementById("form_ticket"));
+        $.ajax({
+            type: "POST",
+            url: config.base_url + "userpanel/addticket",
+            data: o,
+            cache: !1,
+            contentType: !1,
+            processData: !1,
+            dataType: "json",
+            success: function(e) {
+                if(e.status == 200){
+                    //exito
+                    toastr.success('Su Ticket se a Enviado.');
                 }else{
                     //error y e.sms es el error
                     toastr.error(e.sms);
