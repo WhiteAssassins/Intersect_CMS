@@ -81,16 +81,16 @@
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form action="<?php echo base_url('home/login'); ?>" method="post"  autocomplete="nope" >
+            <form action="<?php echo base_url('home/login'); ?>" method="post"  autocomplete="nope"  style="color:white;">
                 <div class="md-form mb-5">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text"  class="form-control" name="user"  autocomplete="new-text" >
+                    <input type="text"  class="form-control" name="user"  autocomplete="new-text"  style="color:white;">
                     <label  for="defaultForm-email">{name}</label>
                 </div>
 
                 <div class="md-form mb-4">
                     <i class="fas fa-lock prefix grey-text"></i>
-                    <input type="password"  class="form-control" name="pass"  autocomplete="new-password" >
+                    <input type="password"  class="form-control" name="pass"  autocomplete="new-password"  style="color:white;">
                     <label  for="defaultForm-pass">{password}</label>
                 </div>
                 <a href="<?php echo base_url('recover'); ?>">{forgotpassword}</a>
@@ -118,23 +118,23 @@
             <form action="<?php echo base_url('home/reg'); ?>" method="post" id="form_reg">
                 <div class="md-form mb-5">
                     <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="defaultForm-email" class="form-control validate" name="user">
+                    <input type="text" id="defaultForm-email" class="form-control validate" name="user" style="color:white;">
                     <label for="defaultForm-email">{name}</label>
                 </div>
 
                 <div class="md-form mb-4">
                     <i class="fas fa-lock prefix grey-text"></i>
-                    <input type="password" id="defaultForm-pass" class="form-control validate" name="pass"  autocomplete="new-password" >
+                    <input type="password" id="defaultForm-pass" class="form-control validate" name="pass"  autocomplete="new-password" style="color:white;">
                     <label for="defaultForm-pass">{password}</label>
                 </div>
                 <div class="md-form mb-4">
                     <i class="fas fa-lock prefix grey-text"></i>
-                    <input type="password" id="defaultForm-pass" class="form-control validate" name="pass1">
+                    <input type="password" id="defaultForm-pass" class="form-control validate" name="pass1"  style="color:white;">
                     <label  for="defaultForm-pass">{confirmpassword}</label>
                 </div>
                 <div class="md-form mb-4">
                     <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="email" id="defaultForm-pass" class="form-control validate" name="email">
+                    <input type="email" id="defaultForm-pass" class="form-control validate" name="email"  style="color:white;">
                     <label for="defaultForm-pass">{email}</label>
                 </div>
         </div>
@@ -145,6 +145,62 @@
             </div>
         </div>
     </div>
+
+
+
+
+    
+
+<div class="modal fade" id="modal_newticket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content cards-novo">
+        <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">{createticket}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mx-3">
+            <form action="<?php echo base_url('userpanel/addticket'); ?>" method="post"  enctype="multipart/form-data" id="form_ticket">
+                <div class="md-form mb-5">
+                    
+                    <input type="text" id="defaultForm-email" class="form-control validate" name="title"  style="color:white;">
+                    <label for="defaultForm-email">{title}</label>
+                </div>
+
+                <div class="md-form mb-4">
+                   
+                <textarea id="form7" class="md-textarea form-control" rows="3" name="text" style="color:white;"></textarea>
+  <label for="form7">{tickettext}</label>
+                </div>
+               
+              
+              
+               <div class="md-form mb-4">
+                   
+               <select class="mdb-select md-form" name="ticket"  style="color:white;"> 
+                                    <option value="" disabled selected>{chooseticket}</option>
+                                    <option value="ingame">Error Ingame</option>
+                                    <option value="account">Cuenta</option>
+                                    <option value="billing">Compras</option>
+                                    <option value="web">Web</option>
+                                </select>
+               </div>
+                    
+             </div>
+             
+
+          
+
+
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn purple-gradient" type="submit">{addticket}</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     
 
    
