@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://127.0.0.1/Intesect_CMS';
+$config['base_url'] = 'http://127.0.0.1/Intesect';
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'spanish';
+$config['language']	= 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -521,7 +521,10 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['apiip'] = '127.0.0.1:5400';
-
+$config['apiip'] = 'apipip';
 $config['apiuser'] = 'apiuser';
 $config['apipass'] = 'apipass';
+$config['apiqvapayid'] = 'apiqvapayid';
+$config['apiqvapaysecret'] = 'apiqvapaysecret';
+$config['supportemail'] = 'supportemail';
+$config['supportemailpassword'] = 'supportemailpassword';
