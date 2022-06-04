@@ -1,9 +1,4 @@
 $(function(){
-    if($.cookie('modo') == 0 || $.cookie('modo') == null){
-        $('body').removeClass('modooscuro')
-    }else{
-        $('body').addClass('modooscuro')
-    }
     $(document.body).on('click','.btn_modal_login',function(){
         $('#modal_login').modal()
     })
@@ -35,7 +30,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Creado.');
                 }else{
@@ -65,7 +60,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Mensaje Enviado.');
                 }else{
@@ -94,7 +89,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Mensaje Enviado Directo.');
                 }else{
@@ -123,7 +118,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Mensaje Enviado al Mapa.');
                 }else{
@@ -153,7 +148,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Baneado.');
                 }else{
@@ -183,7 +178,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Desbaneado.');
                 }else{
@@ -215,7 +210,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Muteado.');
                 }else{
@@ -249,7 +244,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Desmuteado.');
                 }else{
@@ -282,7 +277,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Expulsado.');
                 }else{
@@ -312,7 +307,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Asesinado.');
                 }else{
@@ -344,7 +339,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Usuario Teletransportado.');
                 }else{
@@ -372,7 +367,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Contraseña Cambiada.');
                 }else{
@@ -401,7 +396,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Item Comprado Correctamente.');
                 }else{
@@ -430,7 +425,7 @@ $(function(){
             processData: !1,
             dataType: "json",
             success: function(e) {
-                if(e.status == 200){
+                if(e.status === 200){
                     //exito
                     toastr.success('Su Ticket se a Enviado.');
                 }else{
