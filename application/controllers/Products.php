@@ -9,7 +9,6 @@ class Products extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('Apigettoken');
 		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiregister');
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');

@@ -7,7 +7,6 @@ class Terms extends CI_Controller {
         parent::__construct();
         $this->load->model('Apigettoken');
 		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiregister');
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');

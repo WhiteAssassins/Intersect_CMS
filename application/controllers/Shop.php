@@ -5,14 +5,11 @@ use GuzzleHttp\Client;
 class Shop extends CI_Controller {
 	function __construct() {
         parent::__construct();
-		$this->load->library('paypal_lib');
         $this->load->model('Apigettoken');
 		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiregister');
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
-		$this->load->model('paypalmodel');
 		$this->load->model('Langs');
     }
 	
