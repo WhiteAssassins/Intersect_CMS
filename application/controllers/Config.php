@@ -118,7 +118,7 @@ class Config extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('config');
+		$this->db->get('config');
 		$datos = [
 			'analytics'=>$google
 
