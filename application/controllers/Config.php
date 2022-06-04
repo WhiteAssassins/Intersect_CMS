@@ -325,7 +325,7 @@ class Config extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('config');
+		$this->db->get('config');
 		$datos = [
 			'menuheader'=>$menuheader,
 
@@ -384,7 +384,7 @@ class Config extends CI_Controller {
 
 		];
 		$this->db->where($where);
-		$resultado = $this->db->get('config');
+		$this->db->get('config');
 		$datos = [
 			'terms'=>$terms
 
@@ -431,7 +431,7 @@ class Config extends CI_Controller {
 			'id'=>$id,
 		];
 		$this->db->where($where);
-		$resultado= $this->db->get('config');
+		$this->db->get('config');
 		$datos = [
 			'lang'=>$lang,
 		];
