@@ -15,10 +15,10 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">{language}</a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="<?php echo base_url();?>langs/es">ES</a>
-          <a class="dropdown-item" href="<?php echo base_url();?>langs/en">EN</a>
-          <a class="dropdown-item" href="<?php echo base_url();?>langs/tr">TR</a>
-          <a class="dropdown-item" href="<?php echo base_url();?>langs/jp">JP</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/es">ES</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/en">EN</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/tr">TR</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/jp">JP</a>
         </div>
       </li>
                  <li class="nav-item">
