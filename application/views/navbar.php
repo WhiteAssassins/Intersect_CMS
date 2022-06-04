@@ -4,7 +4,7 @@
 ?>
 <body>
 <nav class="mb-1  navbar navbar-expand-lg navbar-dark info-color navbar-novo" style="z-index: 2;">
-  <a class="navbar-brand" href="<?php echo base_url(); ?>"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></a>
+  <a class="navbar-brand" href="<?php base_url(); ?>"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
