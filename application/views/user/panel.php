@@ -10,17 +10,17 @@
   <div class="row d-flex justify-content-center">
     <div class="col-xl-7 pb-2">
       <br>
-    <h4 class="text-center font-weight-bold mb-4 pb-2">Saldo Disponible: <?php echo $rest[0]['balance']; ?><a href="<?php echo base_url('userpanel/recharge'); ?>"><span class="badge badge-success ml-2"><i class="fas fa-plus"></i></span></a></h4>
+    <h4 class="text-center font-weight-bold mb-4 pb-2">{balanceavailable}: <?php echo $rest[0]['balance']; ?><a href="<?php echo base_url('userpanel/recharge'); ?>"><span class="badge badge-success ml-2"><i class="fas fa-plus"></i></span></a></h4>
             <form method="POST"  action="<?php echo base_url('userpanel/changepassword'); ?>"  class="form-admin" id="form_changepassword">
                 <h4 class="text-center font-weight-bold mb-4 pb-2">Cambiar Contraseña</h4>
                 <div class="md-form mb-4">
-                    <input type="password" id="prefixInside" class="form-control" name="oldpassword" placeholder="Contraseña" required>
+                    <input type="password" id="prefixInside" class="form-control" name="oldpassword" placeholder="{oldpassword}" required>
                 </div>
                 <div class="md-form mb-4">
-                    <input type="password" id="prefixInside" class="form-control" name="newpassword" placeholder="Nueva Contraseña" required>
+                    <input type="password" id="prefixInside" class="form-control" name="newpassword" placeholder="{newpassword}" required>
                 </div>
                 <div class="md-form mb-4">
-                    <input type="password" id="prefixInside" class="form-control" name="confirmnewpassword" placeholder="Repetir Nueva Contraseña"  required>
+                    <input type="password" id="prefixInside" class="form-control" name="confirmnewpassword" placeholder="{confirmnewpassword}"  required>
                 </div>
                 <button type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
                 <button type="reset" class="btn btn-outline-warning waves-effect" style="margin-left: 65px;">{reset}</button>
@@ -41,7 +41,7 @@
             echo '<br><div class="text-left">';
             echo '<p class="text-left">OS: '.$os.'</p>';
             echo '<p class="text-left">IP: '.$ip.'</p>';
-            echo '<p class="text-left">Navegador: '.$browser.'</p>';
+            echo '<p class="text-left">{browser}: '.$browser.'</p>';
             echo '</div>';
 
 
