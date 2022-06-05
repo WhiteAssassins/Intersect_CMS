@@ -331,6 +331,31 @@ class Langs extends CI_Model{
             /////////////////////////////////Edit Lang////////////////////////////////////////////////////
             'editlang' => 'Edit Language',
             'chooselang' => 'Choose Language',
+            ////////////////////////////////Data Tables/////////////////////////////////////////////////
+            'search' => 'Buscar',
+            'emptyTable' => 'No hay información',
+            'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+            'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+            'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+            'lengthMenu' => 'Mostrar _MENU_ Entradas',
+            'loadingRecords' => 'Cargando...',
+            'processing' => 'Procesando...',
+            'zeroRecords' => 'Sin resultados encontrados',
+            'first' => 'Primero',
+            'last' => 'Ultimo',
+            'next' => 'Siguiente',
+            'previous' => 'Anterior',
+            /////////////////////////////////Panel User///////////////////////////////////////////////////
+            'paneluser' => 'Panel de Usuario',
+            'recharge' => 'Recargar',
+            'reset' => 'Resetear',
+            'player' => 'Personaje',
+            'createticket' => 'Crear Ticket',
+            'tickettext' => 'Texto del Ticket',
+            'addticket' => 'Enviar Ticket',
+            'chooseticket' => 'Elegir Tipo de Ticket',
+            'feedback' => 'Feedback',
+            'tickets' => 'Tickets',
         );
 
 
