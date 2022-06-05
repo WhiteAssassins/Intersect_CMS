@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
 require FCPATH.'vendor/autoload.php';
 use GuzzleHttp\Client;
 class Apimap extends CI_Model{

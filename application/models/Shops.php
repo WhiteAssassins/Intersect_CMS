@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
 class Shops extends CI_Model{
     function getRows($params = array()){
         $this->db->select('*');

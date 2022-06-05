@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
 class Langs extends CI_Model{
     public function lang(){
         $es = array(
