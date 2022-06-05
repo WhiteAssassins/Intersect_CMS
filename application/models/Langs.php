@@ -172,6 +172,15 @@ class Langs extends CI_Model{
             'chooseticket' => 'Elegir Tipo de Ticket',
             'feedback' => 'Feedback',
             'tickets' => 'Tickets',
+            'available' => 'Disponible',
+            'updates' => 'Updates',
+            'about' => 'About',
+            'balanceavailable' => 'Saldo Disponible',
+            'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+            'newpassword' => 'Nueva Contraseña',
+            'oldpassword' => 'Contraseña Actual',
+            'browser' => 'Navegador',
+
            );
 
 
