@@ -18,3 +18,4 @@ https://www.ascensiongamedev.com/topic/6512-intersect-cms-novo/
 # Adicional
 * Discord https://discord.gg/2XcYgevUws
 * Twitter https://twitter.com/whiteassassinsr/
+* Buy Me a Coffee https://www.buymeacoffee.com/whiteassassins
