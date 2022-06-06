@@ -33,7 +33,7 @@ $restnews = $resultadonews->result_array();
         </div>
         
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">{addadminaccount}</button>
+                    <button class="btn btn-outline-info waves-effect" type="submit">{addadminaccount}</button>
                 </div>
                 </form>
             </div>

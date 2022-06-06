@@ -97,7 +97,7 @@
         </div>
         
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">{login}</button>
+                    <button class="btn btn-outline-info waves-effect" type="submit">{login}</button>
                     
                 </div>
                 </form>
@@ -139,7 +139,7 @@
                 </div>
         </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">{register}</button>
+                    <button class="btn btn-outline-info waves-effect" type="submit">{register}</button>
                 </div>
                 </form>
             </div>
@@ -194,7 +194,7 @@
 
 
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn purple-gradient" type="submit">{addticket}</button>
+                    <button class="btn btn-outline-info waves-effect" type="submit">{addticket}</button>
                 </div>
                 </form>
             </div>
