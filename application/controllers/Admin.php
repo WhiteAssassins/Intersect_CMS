@@ -55,6 +55,48 @@ class Admin extends CI_Controller {
 					$this->parser->parse('admin', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;		
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -95,7 +137,49 @@ class Admin extends CI_Controller {
 					$this->parser->parse('sidebar', $lang[3]); 
 					$this->parser->parse('admin/news', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
-					break;					
+					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/news', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/news', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/news', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/news', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/news', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/news', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/news', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;							
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -136,7 +220,49 @@ class Admin extends CI_Controller {
 					$this->parser->parse('sidebar', $lang[3]); 
 					$this->parser->parse('admin/shop', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
-					break;						
+					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/shop', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/shop', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/shop', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/shop', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/shop', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/shop', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/shop', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;					
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -177,7 +303,49 @@ class Admin extends CI_Controller {
 					$this->parser->parse('sidebar', $lang[3]); 
 					$this->parser->parse('admin/adminaccounts', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
-					break;		
+					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/adminaccounts', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/adminaccounts', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/adminaccounts', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/adminaccounts', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/adminaccounts', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/adminaccounts', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/adminaccounts', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;				
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -219,6 +387,48 @@ class Admin extends CI_Controller {
 					$this->parser->parse('admin/object', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/object', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/object', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/object', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/object', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/object', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/object', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/object', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -260,6 +470,48 @@ class Admin extends CI_Controller {
 					$this->parser->parse('admin/maps', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/maps', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/maps', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/maps', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/maps', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/maps', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/maps', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/maps', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -301,6 +553,48 @@ class Admin extends CI_Controller {
 					$this->parser->parse('admin/events', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/events', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/events', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/events', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/events', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/events', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/events', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/events', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -342,6 +636,48 @@ class Admin extends CI_Controller {
 					$this->parser->parse('admin/quests', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/quests', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/quests', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/quests', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/quests', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/quests', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/quests', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/quests', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('sidebar', $lang[0]); 
@@ -1041,6 +1377,41 @@ class Admin extends CI_Controller {
 				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[3]);
 				$this->parser->parse('footer', $lang[3]); 
 				break;	
+				case "de":
+					$this->parser->parse('header', $lang[4]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[4]); 
+					$this->parser->parse('footer', $lang[4]); 
+					break;	
+				case "ru":
+					$this->parser->parse('header', $lang[5]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[5]); 
+					$this->parser->parse('footer', $lang[5]); 
+					break;
+				case "zh":
+					$this->parser->parse('header', $lang[6]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[6]); 
+					$this->parser->parse('footer', $lang[6]); 
+					break;	
+				case "fr":
+					$this->parser->parse('header', $lang[7]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[7]); 
+					$this->parser->parse('footer', $lang[7]); 
+					break;	
+				case "pt":
+					$this->parser->parse('header', $lang[8]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[8]); 
+					$this->parser->parse('footer', $lang[8]); 
+					break;
+				case "hi":
+					$this->parser->parse('header', $lang[9]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[9]); 
+					$this->parser->parse('footer', $lang[9]); 
+					break;	
+				case "ar":
+					$this->parser->parse('header', $lang[10]); 
+					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[10]); 
+					$this->parser->parse('footer', $lang[10]); 
+					break;	
 			default:
 				$this->parser->parse('header', $lang[0]); 
 				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[0]); 
@@ -1201,6 +1572,34 @@ class Admin extends CI_Controller {
 					$this->parser->parse('header', $lang[3]); 
 					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[3]);
 					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[10]); 
+						break;	
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[0]); 

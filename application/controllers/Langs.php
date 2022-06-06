@@ -44,6 +44,62 @@ class Langs extends CI_Controller {
 		$base_url = base_url();
 		header("Location: $base_url");
 	}
+	public function de(){
+		$data = [
+			'lang'=> 'de',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function ru(){
+		$data = [
+			'lang'=> 'ru',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function zh(){
+		$data = [
+			'lang'=> 'zh',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function fr(){
+		$data = [
+			'lang'=> 'fr',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function pt(){
+		$data = [
+			'lang'=> 'pt',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function hi(){
+		$data = [
+			'lang'=> 'hi',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	public function ar(){
+		$data = [
+			'lang'=> 'ar',
+		];
+		$this->session->set_userdata($data);
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
 	
 
 

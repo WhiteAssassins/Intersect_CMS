@@ -50,6 +50,48 @@ class News extends CI_Controller {
 					$this->parser->parse('news', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('navbar', $lang[4]); 
+						$this->parser->parse('news', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('navbar', $lang[5]); 
+						$this->parser->parse('news', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('navbar', $lang[6]); 
+						$this->parser->parse('news', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('navbar', $lang[7]); 
+						$this->parser->parse('news', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('navbar', $lang[8]); 
+						$this->parser->parse('news', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('navbar', $lang[9]); 
+						$this->parser->parse('news', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('navbar', $lang[10]); 
+						$this->parser->parse('news', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('navbar', $lang[0]); 
@@ -93,6 +135,48 @@ class News extends CI_Controller {
 					$this->parser->parse('news/details',$data+ $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
 					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('navbar', $lang[4]); 
+						$this->parser->parse('news/details',$data+ $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('navbar', $lang[5]); 
+						$this->parser->parse('news/details',$data+ $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('navbar', $lang[6]); 
+						$this->parser->parse('news/details',$data+ $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('navbar', $lang[7]); 
+						$this->parser->parse('news/details',$data+ $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('navbar', $lang[8]); 
+						$this->parser->parse('news/details',$data+ $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('navbar', $lang[9]); 
+						$this->parser->parse('news/details',$data+ $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('navbar', $lang[10]); 
+						$this->parser->parse('news/details',$data+ $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('navbar', $lang[0]); 

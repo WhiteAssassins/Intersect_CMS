@@ -12,7 +12,7 @@
       <br>
     <h4 class="text-center font-weight-bold mb-4 pb-2">{balanceavailable}: <?php echo $rest[0]['balance']; ?><a href="<?php echo base_url('userpanel/recharge'); ?>"><span class="badge badge-success ml-2"><i class="fas fa-plus"></i></span></a></h4>
             <form method="POST"  action="<?php echo base_url('userpanel/changepassword'); ?>"  class="form-admin" id="form_changepassword">
-                <h4 class="text-center font-weight-bold mb-4 pb-2">Cambiar Contraseña</h4>
+                <h4 class="text-center font-weight-bold mb-4 pb-2">{changepassword}</h4>
                 <div class="md-form mb-4">
                     <input type="password" id="prefixInside" class="form-control" name="oldpassword" placeholder="{oldpassword}" required>
                 </div>

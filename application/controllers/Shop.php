@@ -46,7 +46,49 @@ class Shop extends CI_Controller {
 					$this->parser->parse('navbar', $lang[3]); 
 					$this->parser->parse('shop', $lang[3]); 
 					$this->parser->parse('footer', $lang[3]); 
-					break;	
+					break;
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('navbar', $lang[4]); 
+						$this->parser->parse('shop', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('navbar', $lang[5]); 
+						$this->parser->parse('shop', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('navbar', $lang[6]); 
+						$this->parser->parse('shop', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('navbar', $lang[7]); 
+						$this->parser->parse('shop', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('navbar', $lang[8]); 
+						$this->parser->parse('shop', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('navbar', $lang[9]); 
+						$this->parser->parse('shop', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('navbar', $lang[10]); 
+						$this->parser->parse('shop', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;		
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('navbar', $lang[0]); 

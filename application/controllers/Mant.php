@@ -37,6 +37,35 @@ class Mant extends CI_Controller {
                 $this->parser->parse('header', $lang[3]); 
                 $this->parser->parse('mant', $lang[3]); 
                 break;
+                case "de":
+                    $this->parser->parse('header', $lang[4]); 
+                    $this->parser->parse('mant', $lang[4]); 
+                    break;	
+                case "ru":
+                    $this->parser->parse('header', $lang[5]); 
+                    $this->parser->parse('mant', $lang[5]); 
+                    break;
+                case "zh":
+                    $this->parser->parse('header', $lang[6]); 
+                    $this->parser->parse('mant', $lang[6]); 
+                    break;	
+                case "fr":
+                    $this->parser->parse('header', $lang[7]); 
+                    $this->parser->parse('mant', $lang[7]); 
+                    break;	
+                case "pt":
+                    $this->parser->parse('header', $lang[8]); 
+                    $this->parser->parse('mant', $lang[8]); 
+                    break;
+                case "hi":
+                    $this->parser->parse('header', $lang[9]); 
+                    $this->parser->parse('mant', $lang[9]); 
+
+                    break;	
+                case "ar":
+                    $this->parser->parse('header', $lang[10]); 
+                    $this->parser->parse('mant', $lang[10]); 
+                    break;
             default:
                 $this->parser->parse('header', $lang[0]); 
                 $this->parser->parse('mant', $lang[0]); 

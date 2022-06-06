@@ -19,6 +19,13 @@
           <a class="dropdown-item" href="<?php base_url();?>langs/en">EN</a>
           <a class="dropdown-item" href="<?php base_url();?>langs/tr">TR</a>
           <a class="dropdown-item" href="<?php base_url();?>langs/jp">JP</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/de">DE</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/ru">RU</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/zh">ZH</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/fr">FR</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/pt">PT</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/hi">HI</a>
+          <a class="dropdown-item" href="<?php base_url();?>langs/AR">AR</a>
         </div>
       </li>
                  <li class="nav-item">
