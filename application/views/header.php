@@ -3,7 +3,7 @@
     $conf1 = $conf->result_array();
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo$conf1[0]['lang']?>" style="height:100% ;" dir="ltr">
+<html lang="<?php echo $conf1[0]['lang']?>" style="height:100% ;" dir="ltr">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
