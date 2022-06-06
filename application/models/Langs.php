@@ -180,6 +180,8 @@ class Langs extends CI_Model{
             'newpassword' => 'Nueva Contraseña',
             'oldpassword' => 'Contraseña Actual',
             'browser' => 'Navegador',
+            'changepassword' => 'Cambiar Contraseña',
+            'rechargeok' => 'Pago Completado Con Exito',
 
            );
 
@@ -341,30 +343,41 @@ class Langs extends CI_Model{
             'editlang' => 'Edit Language',
             'chooselang' => 'Choose Language',
             ////////////////////////////////Data Tables/////////////////////////////////////////////////
-            'search' => 'Buscar',
-            'emptyTable' => 'No hay información',
-            'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
-            'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
-            'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
-            'lengthMenu' => 'Mostrar _MENU_ Entradas',
-            'loadingRecords' => 'Cargando...',
-            'processing' => 'Procesando...',
-            'zeroRecords' => 'Sin resultados encontrados',
-            'first' => 'Primero',
-            'last' => 'Ultimo',
-            'next' => 'Siguiente',
-            'previous' => 'Anterior',
+            'search' => 'Search',
+            'emptyTable' => 'There is no information',
+            'infotable' => 'Showing _START_ to _END_ of _TOTAL_ Entries',
+            'infoEmpty' => 'Showing 0 to 0 of 0 Entries',
+            'infoFiltered' => '(Filtering of _MAX_ total entries)',
+            'lengthMenu' => 'Show _MENU_ Entries',
+            'loadingRecords' => 'Loading...',
+            'processing' => 'Processing...',
+            'zeroRecords' => 'No results found',
+            'first' => 'First',
+            'last' => 'Last',
+            'next' => 'Next',
+            'previous' => 'Previous',
             /////////////////////////////////Panel User///////////////////////////////////////////////////
-            'paneluser' => 'Panel de Usuario',
-            'recharge' => 'Recargar',
-            'reset' => 'Resetear',
-            'player' => 'Personaje',
-            'createticket' => 'Crear Ticket',
-            'tickettext' => 'Texto del Ticket',
-            'addticket' => 'Enviar Ticket',
-            'chooseticket' => 'Elegir Tipo de Ticket',
+            'paneluser' => 'User Panel',
+            'recharge' => 'Recharge',
+            'reset' => 'Reset',
+            'player' => 'Player',
+            'createticket' => 'Create Ticket',
+            'tickettext' => 'Ticket Text',
+            'addticket' => 'Submit Ticket',
+            'chooseticket' => 'Choose Type of Ticket',
             'feedback' => 'Feedback',
             'tickets' => 'Tickets',
+            'available' => 'Available',
+            'updates' => 'Updates',
+            'about' => 'About',
+            'balanceavailable' => 'Available Balance',
+            'confirmnewpassword' => 'Confirm New Password',
+            'newpassword' => 'New Password',
+            'oldpassword' => 'Current password',
+            'browser' => 'Browser',
+            'changepassword' => 'Change Password',
+            'rechargeok' => 'Payment Completed Successfully',
+
         );
 
 
@@ -536,7 +549,43 @@ $tr = array(
             'textmenu3' => 'Metin Menüsü 3',
             /////////////////////////////////Edit Lang////////////////////////////////////////////////////
             'editlang' => 'Dili Düzenle',
-            'chooselang' => 'Dil seçiniz',            
+            'chooselang' => 'Dil seçiniz',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Arama',
+             'emptyTable' => 'Bilgi yok',
+             'infotable' => '_TOTAL_ Girişten _START_ - _END_ Arası gösteriliyor',
+             'infoEmpty' => '0 Girişten 0 ile 0 arası gösteriliyor',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Toplam _MENU_ girişin filtrelenmesi',
+             'loadingRecords' => 'Doluyor...',
+             'processing' => 'Işleme...',
+             'zeroRecords' => 'Sonuç bulunamadı',
+             'first' => 'Öncelikle',
+             'last' => 'En sonuncu',
+             'next' => 'Takip etmek',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Kullanıcı Kontrol Paneli',
+             'recharge' => 'şarj',
+             'reset' => 'Sıfırlamak',
+             'player' => 'Karakter',
+             'createticket' => 'Bilet Oluştur',
+             'tickettext' => 'Bilet Metni',
+             'addticket' => 'Bilet Gönder',
+             'chooseticket' => 'Bilet Türünü Seçin',
+             'feedback' => 'Geri bildirim',
+             'tickets' => 'Biletler',
+             'available' => 'Mevcut',
+             'updates' => 'Güncelleme',
+             'about' => 'Hakkında',
+             'balanceavailable' => 'Kalan bakiye',
+             'confirmnewpassword' => 'Yeni şifreyi onayla',
+             'newpassword' => 'Yeni Şifre',
+             'oldpassword' => 'Eski Şifre',
+             'browser' => 'Tarayıcı',
+             'changepassword' => 'Şifreyi Değiştir',
+             'rechargeok' => 'Ödeme Başarıyla Tamamlandı',
+             
            );
    
            
@@ -710,7 +759,43 @@ $tr = array(
             'textmenu3' => 'テキストメニュー3',
             /////////////////////////////////Edit Lang////////////////////////////////////////////////////
             'editlang' => '言語の編集',
-            'chooselang' => '言語を選択',            
+            'chooselang' => '言語を選択',    
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => '検索',
+             'emptyTable' => 'データがありません',
+             'infotable' => 'エントリのうち _START_  から _END_ を表示',
+             'infoEmpty' => '0から0のエントリを表示',
+             'infoFiltered' => '(合計 _MAX_ エントリのフィルタリング)',
+             'lengthMenu' => ' _MENU_ エントリを表示',
+             'loadingRecords' => '充電...',
+             'processing' => '処理...',
+             'zeroRecords' => '結果が見つかりません',
+             'first' => '初め',
+             'last' => '最新',
+             'next' => '続く',
+             'previous' => '前',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'ユーザーダッシュボード',
+             'recharge' => '充電する',
+             'reset' => 'リセットするには',
+             'player' => 'キャラクター',
+             'createticket' => 'チケットを作成する',
+             'tickettext' => 'チケットテキスト',
+             'addticket' => 'チケットを送信する',
+             'chooseticket' => 'チケットの種類を選択してください',
+             'feedback' => 'フィードバック',
+             'tickets' => '切符売場',
+             'available' => '利用可能',
+             'updates' => 'アップデート',
+             'about' => '約',
+             'balanceavailable' => '利用可能残高',
+             'confirmnewpassword' => '新しいパスワードを確認',
+             'newpassword' => '新しいパスワード',
+             'oldpassword' => '現在のパスワード',
+             'browser' => 'ブラウザ',
+             'changepassword' => 'パスワードを変更する',
+             'rechargeok' => '支払いが正常に完了しました',
+         
            );
 
 
@@ -742,6 +827,203 @@ $tr = array(
 
 
            $de = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Klasse',
+            'gender' => 'Geschlecht',
+            'exp' => 'Erfahrung',
+            'map' => 'Karte',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Gespielte Zeit',
+            'banned' => 'Verboten',
+            'muted' => 'Stummgeschaltet',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Eben',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Produktdetails',
+            'atackan' => 'Angriffsanimation',
+            'interacan' => 'Interaktionsanimation',
+            'return' => 'Zurückkehren',
+            'buy' => 'Besorgen',
+            'paymentmethod' => 'Zahlungsmethode',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Letzte Nachrichten',
+            'writedby' => 'Geschrieben von',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Wartung',
+            'maintenancemessage' => 'Hallo, wir sind in der Wartung. Bald sind wir zurück',
+            'maintenanceenter' => 'Melden Sie sich als Administrator an',
+            'enter' => 'Anmeldung',
+            'user' => 'Benutzer',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Passwort wiederherstellen',
+            'recover' => 'Genesen',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Spieler insgesamt',
+            'cps' => 'CPS-Server',
+            'directmessage' => 'Direktnachricht',
+            'userorplayer' => 'Benutzer oder Plater',
+            'message' => 'Nachricht',
+            'mapmessage' => 'Kartennachricht',
+            'mapid' => 'Karten-ID',
+            'globalmessage' => 'Globale Botschaft',
+            'consolecommand' => 'Konsolenbefehl',
+            'command' => 'Befehl',
+            'ban' => 'Verbot',
+            'reason' => 'Grund',
+            'duration' => 'Dauer (Tage)',
+            'mute' => 'Stumm',
+            'unban' => 'Sperre aufheben',
+            'unmute' => 'Stummschaltung aufheben',
+            'teleport' => 'Teleportieren',
+            'kickuser' => 'Kick-Benutzer',
+            'Kill' => 'Töten',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Heim',
+            'dashboard' => 'Armaturenbrett',
+            'objects' => 'Objekte',
+            'events' => 'Veranstaltungen',
+            'quests' => 'Aufgaben',
+            'logs' => 'Protokolle',
+            'adminaccounts' => 'Admin-Konten',
+            'config' => 'Konfig',
+            'maps' => 'Konfig',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Preis',
+            'products' => 'Produkte',
+            'description' => 'Beschreibung',
+            'action' => 'Aktion',
+            'productpic' => 'Produktbild',
+            'addproduct' => 'Produkt hinzufügen',
+            'editproduct' => 'Produkt bearbeiten',
+            'edit' => 'Bearbeiten',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Bearbeiten',
+            'title' => 'Titel',
+            'textnews' => 'Textnachrichten',
+            'newspic' => 'Nachrichtenbild',
+            'uploadnews' => 'Nachrichten hochladen',
+            'date' => 'Datum',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Taste',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Protokolle',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Administratorkonto hinzufügen',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Verlaufsfarben',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download-Button',
+            'activate' => 'Aktivieren Sie',
+            'deactivate' => 'Deaktivieren',
+            'changelegal' => 'Rechtliches ändern',
+            'changeterms' => 'Bedingungen ändern',
+            'changeprivacity' => 'Datenschutz ändern',
+            'editmenus' => 'Menüs bearbeiten',
+            'change' => 'Veränderung',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Rechtliche Hinweise bearbeiten',
+            'textlegal' => 'Rechtstext',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'AGB bearbeiten',
+            'textterms' => 'Allgemeine Geschäftsbedingungen in Textform',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Datenschutz bearbeiten',
+            'textprivacity' => 'Text-Datenschutz',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Symbolliste',
+            'descriptionmenu' => 'Beschreibung des Menüs',
+            'iconmenu1' => 'Symbolmenü 1',
+            'iconmenu2' => 'Symbolmenü 2',
+            'iconmenu3' => 'Symbolmenü 3',
+            'titlemenu1' => 'Titelmenü 1',
+            'titlemenu2' => 'Titelmenü 2',
+            'titlemenu2' => 'Titelmenü 3',
+            'textmenu1' => 'Textmenü 1',
+            'textmenu2' => 'Textmenü 2',
+            'textmenu3' => 'Textmenü 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Suche',
+             'emptyTable' => 'Es gibt keine Informationen',
+             'infotable' => 'Es werden _START_ bis _END_ von _TOTAL_ Einträgen angezeigt',
+             'infoEmpty' => 'Es werden 0 bis 0 von 0 Einträgen angezeigt',
+             'infoFiltered' => '(Filterung von insgesamt _MAX_ Einträgen)',
+             'lengthMenu' => '_MENU_ Einträge anzeigen',
+             'loadingRecords' => 'Laden...',
+             'processing' => 'Wird bearbeitet...',
+             'zeroRecords' => 'Keine Ergebnisse gefunden',
+             'first' => 'Zuerst',
+             'last' => 'Neueste',
+             'next' => 'Folgend',
+             'previous' => 'Vorherige',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Benutzer-Dashboard',
+             'recharge' => 'Aufladen',
+             'reset' => 'Zurücksetzen',
+             'player' => 'Charakter',
+             'createticket' => 'Ticket erstellen',
+             'tickettext' => 'Tickettext',
+             'addticket' => 'Ticket übermitteln',
+             'chooseticket' => 'Wählen Sie die Art des Tickets',
+             'feedback' => 'Feedback',
+             'tickets' => 'Eintrittskarten',
+             'available' => 'Verfügbar',
+             'updates' => 'Aktualisieren',
+             'about' => 'Um',
+             'balanceavailable' => 'Verfügbares Guthaben',
+             'confirmnewpassword' => 'Bestätige neues Passwort',
+             'newpassword' => 'Neues Passwort',
+             'oldpassword' => 'Jetziges Passwort',
+             'browser' => 'Browser',
+             'changepassword' => 'Passwort ändern',
+             'rechargeok' => 'Zahlung erfolgreich abgeschlossen',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $ru = array(
             ////////////////////////////////////////////Home////////////////////////////////////////////////////////
             'downloadbutton' => 'Download',
             'onlineplayers' => 'Online-Spieler',
@@ -886,7 +1168,43 @@ $tr = array(
             'textmenu3' => 'Text Menu 3',
             /////////////////////////////////Edit Lang////////////////////////////////////////////////////
             'editlang' => 'Sprache bearbeiten',
-            'chooselang' => 'Sprache wählen',            
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
         );
 
 
@@ -895,7 +1213,997 @@ $tr = array(
 
 
 
-    return array($es, $en, $tr, $jp, $de, /*$ru, $zh, $fr, $pt, $hi, $ar*/);
+
+
+
+
+
+
+
+        $zh = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $fr = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $pt = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+        $hi = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+
+        $ar = array(
+            ////////////////////////////////////////////Home////////////////////////////////////////////////////////
+            'downloadbutton' => 'Download',
+            'onlineplayers' => 'Online-Spieler',
+            'listusers' => 'Benutzer auflisten',
+            'listplayers' => 'Spieler auflisten',
+            'shop' => 'Geschäft',
+            'news' => 'Nachrichten',
+            'register' => 'Registrieren',
+            'password' => 'Passwort',
+            'confirmpassword' => 'Passwort bestätigen',
+            'email' => 'Email',
+            'forgotpassword' => 'Sie haben Ihr Passwort vergessen?',
+            'login' => 'Anmeldung',
+            'statistics' => 'Statistiken',
+            'onlinetime' => 'Online-Zeit',
+            'useronline' => 'Benutzer online',
+            'usersregistered' => 'Benutzer registriert',
+            'features' => 'Merkmale',
+            'copyright' => 'Urheberrechte',
+            'legalnotice' => 'Impressum',
+            'terms' => 'Geschäftsbedingungen',
+            'privacity' => 'Datenschutz',
+            'disconnect' => 'Trennen',
+            'administrativepanel' => 'Verwaltungsbereich',
+            'name' => 'Name',
+            'language' => 'Sprache',
+            ////////////////////////////////////////////Players Online////////////////////////////////////////////////////////
+            'class' => 'Class',
+            'gender' => 'Gender',
+            'exp' => 'Experiencie',
+            'map' => 'Map',
+            ////////////////////////////////////////////Users////////////////////////////////////////////////////////
+            'timeplayed' => 'Time Played',
+            'banned' => 'Banned',
+            'muted' => 'Muted',
+            ////////////////////////////////////////////Players////////////////////////////////////////////////////////
+            'level' => 'Level',
+            'status' => 'Status',
+            ////////////////////////////////////////////Shop////////////////////////////////////////////////////////
+            'productdetail' => 'Product Details',
+            'atackan' => 'Attack Animation',
+            'interacan' => 'Interaction Animation',
+            'return' => 'Return',
+            'buy' => 'Buy',
+            'paymentmethod' => 'Payment Method',
+            ////////////////////////////////////////////News////////////////////////////////////////////////////////
+            'lastnews' => 'Last News',
+            'writedby' => 'Written By',
+            ////////////////////////////////////////////Mant////////////////////////////////////////////////////////
+            'maintenance' => 'Maintenance',
+            'maintenancemessage' => 'Hello, we are in Maintenance. Soon we will be back',
+            'maintenanceenter' => 'Login as Admin',
+            'enter' => 'Login',
+            'user' => 'User',
+            /////////////////////////////////////////////Recover////////////////////////////////////////////////////
+            'recoverpassword' => 'Recover Password',
+            'recover' => 'Recover',
+            ////////////////////////////////////////////Dashboard///////////////////////////////////////////////////
+            'totalplayers' => 'Total Players',
+            'cps' => 'CPS Server',
+            'directmessage' => 'Direct Message',
+            'userorplayer' => 'User or Plater',
+            'message' => 'Message',
+            'mapmessage' => 'Map Message',
+            'mapid' => 'Map ID',
+            'globalmessage' => 'Global Message',
+            'consolecommand' => 'Console Command',
+            'command' => 'Command',
+            'ban' => 'Ban',
+            'reason' => 'Reason',
+            'duration' => 'Duration (Days)',
+            'mute' => 'Mute',
+            'unban' => 'Unban',
+            'unmute' => 'Unmute',
+            'teleport' => 'Teleport',
+            'kickuser' => 'Kick User',
+            'Kill' => 'Kill',
+            ////////////////////////////////////////////Sidebar/////////////////////////////////////////////////////
+            'home' => 'Home',
+            'dashboard' => 'Dashboard',
+            'objects' => 'Objects',
+            'events' => 'Events',
+            'quests' => 'Quests',
+            'logs' => 'Logs',
+            'adminaccounts' => 'Admin Accounts',
+            'config' => 'Config',
+            'maps' => 'Maps',
+            ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
+            'price' => 'Price',
+            'products' => 'Products',
+            'description' => 'Description',
+            'action' => 'Action',
+            'productpic' => 'Product Pic',
+            'addproduct' => 'Add Product',
+            'editproduct' => 'Edit Product',
+            'edit' => 'Edit',
+            /////////////////////////////////////News Admin//////////////////////////////////////////////////////
+            'addnews' => 'Add News',
+            'title' => 'Title',
+            'textnews' => 'Text News',
+            'newspic' => 'News Pic',
+            'uploadnews' => 'Upload News',
+            'date' => 'Date',
+            ////////////////////////////////////Objects Admin////////////////////////////////////////////////////
+            'key' => 'Key',
+            ///////////////////////////////////////Logs/////////////////////////////////////////////////////////
+            'admin' => 'Administrator',
+            'logs' => 'Logs',
+            //////////////////////////////////////Admin Accounts////////////////////////////////////////////////
+            'addadminaccount' => 'Add Admin Account',
+            /////////////////////////////////////Config/////////////////////////////////////////////////////////
+            'gradient' => 'Gradient Colors',
+            'analytics' => 'Google Analytics',
+            'configdownloadbutton' => 'Download Button',
+            'activate' => 'Activate',
+            'deactivate' => 'Deactivate',
+            'changelegal' => 'Change Legal',
+            'changeterms' => 'Change Terms',
+            'changeprivacity' => 'Change Privacity',
+            'editmenus' => 'Edit Menus',
+            'change' => 'Change',
+            /////////////////////////////////////Edit Legal////////////////////////////////////////////////////
+            'editlegal' => 'Edit Legal',
+            'textlegal' => 'Text Legal',
+            ////////////////////////////////////Edit Terms////////////////////////////////////////////////////
+            'editterms' => 'Edit Terms and Conditions',
+            'textterms' => 'Text Terms and Conditions',
+            ///////////////////////////////////Edit Privacity////////////////////////////////////////////////
+            'editprivacity' => 'Edit Privacity',
+            'textprivacity' => 'Text Privacity',
+            ////////////////////////////////////Edit Menus//////////////////////////////////////////////////
+            'iconlist' => 'Icon List',
+            'descriptionmenu' => 'Description of the Menu',
+            'iconmenu1' => 'Icon Menu 1',
+            'iconmenu2' => 'Icon Menu 2',
+            'iconmenu3' => 'Icon Menu 3',
+            'titlemenu1' => 'Title Menu 1',
+            'titlemenu2' => 'Title Menu 2',
+            'titlemenu2' => 'Title Menu 3',
+            'textmenu1' => 'Text Menu 1',
+            'textmenu2' => 'Text Menu 2',
+            'textmenu3' => 'Text Menu 3',
+            /////////////////////////////////Edit Lang////////////////////////////////////////////////////
+            'editlang' => 'Sprache bearbeiten',
+            'chooselang' => 'Sprache wählen',
+             ////////////////////////////////Data Tables/////////////////////////////////////////////////
+             'search' => 'Buscar',
+             'emptyTable' => 'No hay información',
+             'infotable' => 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+             'infoEmpty' => 'Mostrando 0 to 0 of 0 Entradas',
+             'infoFiltered' => '(Filtrado de _MAX_ total entradas)',
+             'lengthMenu' => 'Mostrar _MENU_ Entradas',
+             'loadingRecords' => 'Cargando...',
+             'processing' => 'Procesando...',
+             'zeroRecords' => 'Sin resultados encontrados',
+             'first' => 'Primero',
+             'last' => 'Ultimo',
+             'next' => 'Siguiente',
+             'previous' => 'Anterior',
+             /////////////////////////////////Panel User///////////////////////////////////////////////////
+             'paneluser' => 'Panel de Usuario',
+             'recharge' => 'Recargar',
+             'reset' => 'Resetear',
+             'player' => 'Personaje',
+             'createticket' => 'Crear Ticket',
+             'tickettext' => 'Texto del Ticket',
+             'addticket' => 'Enviar Ticket',
+             'chooseticket' => 'Elegir Tipo de Ticket',
+             'feedback' => 'Feedback',
+             'tickets' => 'Tickets',
+             'available' => 'Disponible',
+             'updates' => 'Updates',
+             'about' => 'About',
+             'balanceavailable' => 'Saldo Disponible',
+             'confirmnewpassword' => 'Confirmar Nueva Contraseña',
+             'newpassword' => 'Nueva Contraseña',
+             'oldpassword' => 'Contraseña Actual',
+             'browser' => 'Navegador',
+             'changepassword' => 'Cambiar Contraseña',
+             'rechargeok' => 'Pago Completado Con Exito',
+             
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return array($es, $en, $tr, $jp, $de, $ru, $zh, $fr, $pt, $hi, $ar);
     }
 
 
