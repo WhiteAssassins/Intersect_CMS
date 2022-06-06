@@ -61,7 +61,7 @@ class Products extends CI_Controller {
 				default:
 					$this->parser->parse('header', $lang[0]); 
 					$this->parser->parse('navbar', $lang[0]); 
-					$this->parser->parse('products/detailsome', $data+ $lang[0]); 
+					$this->parser->parse('products/details', $data+ $lang[0]); 
 					$this->parser->parse('footer', $lang[0]); 
 					break;
 
