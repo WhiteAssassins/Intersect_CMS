@@ -35,8 +35,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js" ></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
-
-    <script>
+    <?php if($this->session->userdata('rol') == 1){ ?>
+      <script>
       $(document).ready(function() {
   // SideNav Button Initialization
   $(".button-collapse").sideNav();
@@ -45,6 +45,8 @@
   var ps = new PerfectScrollbar(sideNavScrollbar);
 });
 </script>
+      <?php } ?>
+
     <script>
       $(document).ready(function () {
   $('#dt-filter-select').dataTable({
@@ -98,17 +100,7 @@
   });
 });
     </script>
-    <script>
-$('#play').on('click', function (e) {
-  e.preventDefault();
-  $("#player")[0].src += "?autoplay=1";
-  $('#player').show();
-  $('#video-cover').hide();
-})
-$('#modal1').on('hidden.bs.modal', function (e) {
-  $('#modal1 iframe').attr("src", $("#modal1 iframe").attr("src"));
-});
-      </script>
+
     
     <script>
         $(document).ready(function() {
@@ -169,7 +161,6 @@ $(document).ready(function(){
   });
 </script>
   <script>
-  // Material Select Initialization
 $(document).ready(function() {
 $('.mdb-select').materialSelect();
 });
