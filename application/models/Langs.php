@@ -182,7 +182,11 @@ class Langs extends CI_Model{
             'browser' => 'Navegador',
             'changepassword' => 'Cambiar Contraseña',
             'rechargeok' => 'Pago Completado Con Exito',
-
+            ///////////////////////////////////0.7//////////////////////////////////////////////////////
+            'commands' => 'Comandos',
+            'hdd' => 'HDD',
+            'cpu' => 'CPU',
+            'ram' => 'RAM',
            );
 
 
