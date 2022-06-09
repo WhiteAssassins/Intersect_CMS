@@ -266,19 +266,22 @@ class Userpanel extends CI_Controller {
 		//verify if text, title and ticket are not empty
 		if($text != '' AND $title != '' AND $ticket != ''){
 			//insert ticket
-			$data = array(
-				'text' => $text,
-				'title' => $title,
-				'type' => $ticket,
-				'user' => $user,
-				'status' => "Unasigned"
-			);
-			$this->db->insert('feedback', $data);
-			//get from the user the email
 			$this->db->where('user', $user);
 			$query = $this->db->get('users');
 			$user = $query->result_array();
 			$email = $user['0']['email'];
+			$data = array(
+				'text' => $text,
+				'title' => $title,
+				'type' => $ticket,
+				'user' => $user['0']['user'],
+				'email' => $email,
+				'status' => "Unasigned"
+			);
+			$this->db->insert('feedback', $data);
+			//get from the user the email
+			
+		
 			$pedido['status'] = 200;
 				echo json_encode($pedido);
 			//send email to the user
@@ -316,7 +319,7 @@ class Userpanel extends CI_Controller {
 			$mail->Subject = "Support Ticket";
 			$mail->Body    = $mail_message;
 			$mail->AltBody = $mail_message;
-
+			
 
 			if (!$mail->send()) {
 				
