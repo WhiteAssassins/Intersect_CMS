@@ -383,6 +383,13 @@ class Langs extends CI_Model{
             'browser' => 'Browser',
             'changepassword' => 'Change Password',
             'rechargeok' => 'Payment Completed Successfully',
+            ///////////////////////////////////0.7//////////////////////////////////////////////////////
+            'commands' => 'Commands',
+            'hdd' => 'HDD',
+            'cpu' => 'CPU',
+            'ram' => 'RAM',
+            'version' => 'Local Version',
+            'id' => 'ID',
 
         );
 
@@ -591,6 +598,13 @@ $tr = array(
              'browser' => 'Tarayıcı',
              'changepassword' => 'Şifreyi Değiştir',
              'rechargeok' => 'Ödeme Başarıyla Tamamlandı',
+            ///////////////////////////////////0.7//////////////////////////////////////////////////////
+            'commands' => 'Komutlar',
+            'hdd' => 'HDD',
+            'cpu' => 'İşlemci',
+            'ram' => 'RAM',
+            'version' => 'Yerel Sürüm',
+            'id' => 'İD',
              
            );
    
@@ -801,6 +815,13 @@ $tr = array(
              'browser' => 'ブラウザ',
              'changepassword' => 'パスワードを変更する',
              'rechargeok' => '支払いが正常に完了しました',
+            ///////////////////////////////////0.7//////////////////////////////////////////////////////
+            'commands' => 'コマンド',
+            'hdd' => 'HDD',
+            'cpu' => 'CPU',
+            'ram' => 'RAM',
+            'version' => 'ローカルバージョン',
+            'id' => 'ID',
          
            );
 
@@ -1013,6 +1034,13 @@ $tr = array(
              'browser' => 'Browser',
              'changepassword' => 'Passwort ändern',
              'rechargeok' => 'Zahlung erfolgreich abgeschlossen',
+            ///////////////////////////////////0.7//////////////////////////////////////////////////////
+            'commands' => 'Kommandanten',
+            'hdd' => 'Festplatte',
+            'cpu' => 'Zentralprozessor',
+            'ram' => 'RAM',
+            'version' => 'Lokale Version',
+            'id' => 'ID',
              
         );
 
