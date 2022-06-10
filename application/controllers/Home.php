@@ -171,18 +171,8 @@ class Home extends CI_Controller {
         $this->db->where($where);
         $resultado = $this->db->get('users');
         $num = $resultado->num_rows();
-        if($num == 0){
-            $this->load->view('header');
-            $data = [
-                'sms'=>'Usted no es Administrador',
-                'tipo'=>'error'
-            ];
-            $this->load->view('navbar',$data);
-            
-            $this->load->view('mant');
-            $this->load->view('footer');
-        }else{
-            $rest = $resultado->result_array();
+        if($num == 1){
+			$rest = $resultado->result_array();
             $data = [
                 'user'=>$rest[0]['user'],
 				'rol'=> $rest[0]['rol'],
@@ -191,8 +181,97 @@ class Home extends CI_Controller {
             $this->session->set_userdata($data);
             $base_url = base_url();
             header("Location: $base_url");
+        }else{
+			$apiip = $this->config->item('apiip');
+				$this->load->model('Apigettoken');
+				$accesstoken = $this->Apigettoken->apitoken();
+					 
+					  $client = new Client([
+						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user,
+						'timeout'  => 5.0,
+						'http_errors' => false
+						]);
+						$res = $client->request('GET','',[
+							'headers' => [
+								"authorization" => "Bearer ".$accesstoken['access_token'],
+							],						
+						  ]);
+						  $estado = json_decode($res->getBody(), true);
+						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
+							{
+								
+								$apiip = $this->config->item('apiip');
+				$this->load->model('Apigettoken');
+				$accesstoken = $this->Apigettoken->apitoken();
+				$apiuser = [
+					'password' => hash('sha256', $pass),
+					  ];	 
+					  $client = new Client([
+						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/password/validate',
+						'timeout'  => 5.0,
+						'http_errors' => false
+						]);
+						$res = $client->request('POST','',[
+							'headers' => [
+								"authorization" => "Bearer ".$accesstoken['access_token'],
+							],						
+							'form_params' => $apiuser,
+						  ]);
+						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
+						  {
+							if($estado['Power']['Editor'] == true){
+								$rol = 1;
+							}else{
+									 $rol = 2;
+									}
+							$rest = $resultado->result_array();
+							$data = [
+								'user'=>$estado['Name'],
+								'rol'=> $rol,
+								'login'=>true
+							];
+							$users = array(
+								'user' => $estado['Name'],
+								'pass' => md5($pass),
+								'rol' => $rol,
+								'email' => $estado['Email'],
+								);
+								$this->db->insert('users', $users);
+							$this->session->set_userdata($data);
+							$base_url = base_url();
+							header("Location: $base_url");
+						  }else{
+							$base_url = base_url();
+							header("Location: $base_url");
+						  }
+
+
+
+
+
+							}else{
+								$base_url = base_url();
+							header("Location: $base_url");
+							}
+
+
+
+
+
+			
         }
+
 	}
+
+
+
+
+
+
+
+
+
+
 	public function logout(){
         $this->session->sess_destroy();
         $base_url = base_url();
