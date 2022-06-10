@@ -187,6 +187,7 @@ class Langs extends CI_Model{
             'hdd' => 'HDD',
             'cpu' => 'CPU',
             'ram' => 'RAM',
+            'version' => 'Versión Local',
            );
 
 
