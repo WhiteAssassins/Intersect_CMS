@@ -1,5 +1,6 @@
 # Intesect_CMS
  CMS For Intersect Engine [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f865cc165e8413fa39d57bf1c4e3c66)](https://www.codacy.com/gh/WhiteAssassins/Intersect_CMS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WhiteAssassins/Intersect_CMS&amp;utm_campaign=Badge_Grade)
+ [![CodeFactor](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms/badge)](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms)
 # Requerimientos
 * Mysql Server
 * Apache Server 
