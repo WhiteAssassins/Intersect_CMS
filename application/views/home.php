@@ -2,17 +2,17 @@
     $conf = $this->db->get('config');
     $conf1 = $conf->result_array();
 ?>
-<div class="container my-5 z-depth-1 px-0 rounded">
-<section class="white-text p-4 rounded cards-novo">
+<div class="container my-5 z-depth-1 px-0 rounded" >
+<section class="white-text p-4 rounded cards-novo" >
   
   <h3 class="text-center font-weight-bold mb-4 pb-2">{statistics}</h3>
 
-  <div class="row">
+  <div class="row" >
 
     <div class="col-md-4 mb-4 ">
       <div class="row">
         <div class="col-6 pr-0">
-        <h4 class="display-4 text-right"><span class="d-flex justify-content-end"><span class="count2" data-from="0" data-to="<?php 
+        <h4 class="display-4 text-right"><span class="d-flex justify-content-end"><span  class="count2" data-from="0" data-to="<?php 
         $serverstats = $this->Apiserverstats->serverinfo();
           $uptime = $serverstats['uptime']/1000/60/60 ;
            echo $uptime; 
@@ -28,7 +28,7 @@
 
     <div class="col-md-4 mb-4">
       <div class="row">
-        <div class="col-6 pr-0">
+        <div class="col-6 pr-0" >
           <h4 class="display-4 text-right mb-0 count1" data-from="0" data-to="<?php $serverstats = $this->Apiserverstats->serverinfo();  echo $serverstats['onlineCount']; ?>" data-time="1000">1</h4>
         </div>
 
@@ -39,9 +39,9 @@
       </div>
     </div>
 
-    <div class="col-md-4 mb-4">
-      <div class="row">
-        <div class="col-6 pr-0">
+    <div class="col-md-4 mb-4" >
+      <div class="row" >
+        <div class="col-6 pr-0" >
           <h4 class="display-4 text-right"><span class="d-flex justify-content-end"><span class="count-up" data-from="0" data-to="<?php 
         $user = $this->Apiusers->user();
            echo $user['Total']; 
