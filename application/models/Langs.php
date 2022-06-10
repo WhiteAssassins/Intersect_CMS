@@ -86,7 +86,7 @@ class Langs extends CI_Model{
             'events' => 'Eventos',
             'quests' => 'Misiones',
             'logs' => 'Logs',
-            'adminaccounts' => 'Cuentas Administrador',
+            'adminaccounts' => 'Cuentas',
             'config' => 'Configuración',
             'maps' => 'Mapas',
             ///////////////////////////////////////Shop Admin/////////////////////////////////////////////////////
@@ -188,6 +188,7 @@ class Langs extends CI_Model{
             'cpu' => 'CPU',
             'ram' => 'RAM',
             'version' => 'Versión Local',
+            'id' => 'ID',
            );
 
 
