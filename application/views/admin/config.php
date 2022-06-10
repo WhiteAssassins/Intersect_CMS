@@ -119,6 +119,7 @@
                                     <option value="en">EN</option>
                                     <option value="tr">TR</option>
                                     <option value="jp">JP</option>
+                                    <option value="de">DE</option>
                                 </select>
                                 <button href="<?php echo base_url('config/lang'); ?>" type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
                             </form>
