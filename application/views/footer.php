@@ -37,6 +37,20 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
     <?php if($this->session->userdata('rol') == 1){ ?>
       <script>
+$(document).ready(function() {
+var pageRefresh = 5000; //5 s
+setInterval(function() {
+refresh();
+}, pageRefresh);
+});
+
+// Functions
+
+function refresh() {
+$('#admin').load(location.href + " #admin");
+}
+ </script>
+      <script>
       $(document).ready(function() {
   // SideNav Button Initialization
   $(".button-collapse").sideNav();
@@ -154,7 +168,7 @@ $(document).ready(function(){
  <script>
   tinymce.init({
     selector: 'textarea#tiny',
-    language: '<?php if($conf1[0]['lang'] == "jp"){ echo "ja"; }elseif($conf1[0]['lang'] == "zh"){echo "zh-CN"; }else{echo $conf1[0]['lang']; }?>',
+    language: '<?php if($this->session->userdata('lang') == "jp"){ echo "ja"; }elseif($this->session->userdata('lang') == "zh"){echo "zh-Hans"; }elseif($this->session->userdata('lang') == "fr"){echo "fr_FR"; }elseif($this->session->userdata('lang') == "pt"){echo "pt_BR"; }else{echo $this->session->userdata('lang'); }?>',
     plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
     skin: 'oxide',
     encoding: 'UTF-8',
