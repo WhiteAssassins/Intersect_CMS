@@ -89,16 +89,12 @@ class Mant extends CI_Controller {
         $this->db->where($where);
         $resultado = $this->db->get('users');
         $num = $resultado->num_rows();
+        $rest = $resultado->result_array();
         if($num == 0){
-            $this->load->view('header');
-            $data = [
-                'sms'=>'Usted no es Administrador',
-                'tipo'=>'error'
-            ];
+            $base_url = base_url();
+            header("Location: $base_url/mant");
             
-            $this->load->view('mant',$data);
-        }else{
-            $rest = $resultado->result_array();
+        }elseif($rest[0]['rol'] == 1){
             $data = [
                 'user'=>$rest[0]['user'],
 				'rol'=> 1,
