@@ -31,6 +31,7 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
     <?php } ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown-searchable.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
@@ -38,6 +39,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
     <?php if($this->session->userdata('rol') == 1){ ?>
+
       <script>
             var ctxL = document.getElementById("lineChart").getContext('2d');
     var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
