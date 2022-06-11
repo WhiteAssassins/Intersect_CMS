@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2022 a las 07:50:48
+-- Tiempo de generación: 11-06-2022 a las 09:21:54
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -56,7 +56,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `color1`, `color2`, `mant`, `analytics`, `download`, `legal`, `terms`, `privacity`, `menu1icon`, `menu1header`, `menu1text`, `menuheader`, `menu2icon`, `menu2header`, `menu2text`, `menu3icon`, `menu3header`, `menu3text`, `lang`) VALUES
-(1, '#2d5474', '#521212', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+(1, '#2d5474', '#107e72', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'es');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,8 @@ CREATE TABLE `feedback` (
   `admin` text NOT NULL,
   `status` text NOT NULL,
   `url_slug` text NOT NULL,
-  `title` text NOT NULL
+  `title` text NOT NULL,
+  `email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -103,7 +104,8 @@ CREATE TABLE `news` (
   `txt` text NOT NULL,
   `img` text NOT NULL,
   `admin` text NOT NULL,
-  `date` text NOT NULL
+  `date` text NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -174,6 +176,35 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user`, `pass`, `email`, `rol`, `balance`) VALUES
 (1, 'Admin', 'e3afed0047b08059d0fada10f400c1e5', 'admin@admin.admin', 1, 0.00);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `visits`
+--
+
+CREATE TABLE `visits` (
+  `id` int(11) NOT NULL,
+  `january` text NOT NULL,
+  `february` text NOT NULL,
+  `march` text NOT NULL,
+  `april` text NOT NULL,
+  `may` text NOT NULL,
+  `june` text NOT NULL,
+  `july` text NOT NULL,
+  `august` text NOT NULL,
+  `september` text NOT NULL,
+  `october` text NOT NULL,
+  `november` text NOT NULL,
+  `december` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `visits`
+--
+
+INSERT INTO `visits` (`id`, `january`, `february`, `march`, `april`, `may`, `june`, `july`, `august`, `september`, `october`, `november`, `december`) VALUES
+(1, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+
 --
 -- Índices para tablas volcadas
 --
@@ -227,6 +258,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `visits`
+--
+ALTER TABLE `visits`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -240,19 +277,19 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT de la tabla `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `payments`
@@ -270,13 +307,19 @@ ALTER TABLE `paymentstatus`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=573;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=574;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `visits`
+--
+ALTER TABLE `visits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
