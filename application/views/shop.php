@@ -11,9 +11,9 @@
         <?php 
             $resultado = $this->db->get('products');
             $rest = $resultado->result_array();     
-            foreach ($rest as $key) {              
+            foreach ($rest as $key) {         
+              if($key['status'] == 1){     
         ?>
-
           <div class="col-md-4 mb-4">
             <div class="card card-ecommerce cards-novo">
               <div class="view overlay">
@@ -44,7 +44,9 @@
               </div>
             </div>
           </div>
-          <?php } ?>        
+          <?php 
+              }
+        } ?>        
       </div>
     </div>
   </section>

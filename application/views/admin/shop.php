@@ -147,6 +147,29 @@ $restnews = $resultadonews->result_array();
                 </label>
                 </form>
 
+                <?php if($key['status'] == 1){ ?>
+                  <form method="POST" action="<?php echo base_url('admin/statusproduct'); ?>" style="padding-left: 10px;">
+                <label class="badge badge-danger">
+                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <button style=" background-color: transparent;  border: 1px;" type="submit">
+                    <span class="fas fa-eye">
+                </button>
+                </label>
+                </form>
+
+                  <?php }else{?>
+
+                    <form method="POST" action="<?php echo base_url('admin/statusproduct'); ?>" style="padding-left: 10px;">
+                <label class="badge badge-success">
+                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <button style=" background-color: transparent;  border: 1px;" type="submit">
+                    <span class="fas fa-eye">
+                </button>
+                </label>
+                </form>
+
+                    <?php }?>
+
                 </div>
             </td>
           </tr>

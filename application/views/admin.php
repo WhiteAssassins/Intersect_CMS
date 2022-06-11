@@ -310,6 +310,68 @@
 
 
 
+<div class="container my-5 py-5">
+
+
+  <!--Section: Block Content-->
+  <section>
+
+    <div class="card" style="background-color: #181C30;">
+      <div class="card-body">
+
+        <canvas id="lineChart" class="mb-4" height="100"></canvas>
+
+        <!--Grid row-->
+        <div class="row text-center text-white">
+
+          <!--Grid column-->
+         
+          <!--Grid column-->
+
+          <!--Grid column-->
+          
+          <!--Grid column-->
+
+          <!--Grid column-->
+         
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+    </div>
+
+
+  </section>
+  <!--Section: Block Content-->
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

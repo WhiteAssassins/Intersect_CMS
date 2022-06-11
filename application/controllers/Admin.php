@@ -1369,6 +1369,7 @@ class Admin extends CI_Controller {
                 'txt' => strip_tags($this->input->post('txt')),
                 'img' => ($filename),
                 'date' => ($date),
+				'status' => 1,
                 'admin' => ($user)
             );
 
@@ -1538,6 +1539,39 @@ class Admin extends CI_Controller {
 	}
 
 
+	public function statusnews(){
+		
+		$id = $this->input->post('id');
+		$where = [
+			'id'=>$id,
+
+		];
+		$this->db->where($where);
+		$resultado = $this->db->get('news');
+		$rest = $resultado->result_array();
+		if($rest[0]['status'] == 1){
+			$datos = [
+				'status'=>0,
+	
+			];
+			$this->db->where('id', $id);
+			$this->db->update('news', $datos); 
+			$base_url = base_url();
+			header("Location: $base_url/admin/news");
+		}else{
+			$datos = [
+				'status'=>1,
+	
+			];
+			$this->db->where('id', $id);
+			$this->db->update('news', $datos); 
+			$base_url = base_url();
+			header("Location: $base_url/admin/news");
+		}
+		
+	}
+
+
 	/*
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////End News//////////////////////////////////////////////////////////////////////////////////////////
@@ -1582,6 +1616,7 @@ class Admin extends CI_Controller {
                 'aatk' => strip_tags($this->input->post('aatk')),
 				'ainterac' => strip_tags($this->input->post('ainterac')),
 				'ingameid' => strip_tags($this->input->post('ingameid')),
+				'status' => 1,
                 'image' => ($filename),
             );
 
@@ -1731,6 +1766,39 @@ class Admin extends CI_Controller {
 	}
 	}
 
+
+
+	public function statusproduct(){
+		
+		$id = $this->input->post('id');
+		$where = [
+			'id'=>$id,
+
+		];
+		$this->db->where($where);
+		$resultado = $this->db->get('products');
+		$rest = $resultado->result_array();
+		if($rest[0]['status'] == 1){
+			$datos = [
+				'status'=>0,
+	
+			];
+			$this->db->where('id', $id);
+			$this->db->update('products', $datos); 
+			$base_url = base_url();
+			header("Location: $base_url/admin/shop");
+		}else{
+			$datos = [
+				'status'=>1,
+	
+			];
+			$this->db->where('id', $id);
+			$this->db->update('products', $datos); 
+			$base_url = base_url();
+			header("Location: $base_url/admin/shop");
+		}
+		
+	}
 
 	/*
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
