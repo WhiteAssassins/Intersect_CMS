@@ -20,6 +20,7 @@
                                     <div class="row">
                                         <input name="color1" type="color" value="<?php echo $key['color1']; ?>" style="height: 2em;width: 2em;padding: 0.5em;border-radius: 0.15em;cursor: pointer;background-color:<?php echo $key['color1']; ?>;border-color: transparent;margin-left: 30px;">
                                         <input name="color2" type="color" value="<?php echo $key['color2']; ?>" style="height: 2em;width: 2em;padding: 0.5em;border-radius: 0.15em;cursor: pointer;background-color:<?php echo $key['color2']; ?>;border-color: transparent;margin-left: 130px;">
+
                                     </div>
                                 <button type="submit" class="btn btn-outline-info waves-effect" style="margin-left: 65px;">{change}</button>
                             </form>
