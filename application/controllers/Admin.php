@@ -14,6 +14,7 @@ class Admin extends CI_Controller {
 		$this->load->model('Apimap');
 		$this->load->model('Apievent');
 		$this->load->model('Apiquest');
+		$this->load->model('Apiplayersonline');
 		$this->load->model('newss');
 		$this->load->model('shops');
         $this->load->helper('common');
@@ -800,12 +801,12 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 				$global = [
-					'Message' => $txt,
+					'Message' => 'Server: '.$txt,
 					"Color" => [
-						"A"=> 100,
+						"A"=> 255,
 						"R"=> 255,
-						"G"=> 53,
-						"B"=> 71
+						"G"=> 0,
+						"B"=> 0
 					],
 					  ];
 					  $apiip = $this->config->item('apiip');
@@ -861,12 +862,12 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 				$global = [
-					'Message' => $txt,
+					'Message' => 'Server: '.$txt,
 					"Color" => [
-						"A"=> 100,
+						"A"=> 255,
 						"R"=> 255,
-						"G"=> 53,
-						"B"=> 71
+						"G"=> 0,
+						"B"=> 0
 					],
 					];
 					$apiip = $this->config->item('apiip');
@@ -921,12 +922,12 @@ class Admin extends CI_Controller {
 		$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
 				$global = [
-					'Message' => $txt,
+					'Message' => 'Server: '.$txt,
 					"Color" => [
-						"A"=> 100,
+						"A"=> 255,
 						"R"=> 255,
-						"G"=> 53,
-						"B"=> 71
+						"G"=> 0,
+						"B"=> 0
 					],
 					];
 					$apiip = $this->config->item('apiip');
