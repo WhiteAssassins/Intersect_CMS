@@ -1,6 +1,128 @@
 <?php
     $conf = $this->db->get('config');
     $conf1 = $conf->result_array();
+    $months = $this->db->get('visits');
+    $months1 = $months->result_array();
+    $month = date('M');
+    if($month == 'Jan' || $conf1[0]['december'] < 0){
+        $datas = [
+            'january' => 0,
+            'february' => 0,
+            'march' => 0,
+            'april' => 0,
+            'may' => 0,
+            'june' => 0,
+            'july' => 0,
+            'august' => 0,
+            'september' => 0,
+            'october' => 0,
+            'november' => 0,
+            'december' => 0
+        ];
+        $this->db->where('id', 1);
+        $this->db->update('visits', $datas); 
+        }
+    if($this->session->userdata('rol') == 2 OR $this->session->userdata('login') == false){
+    switch ($month) {
+        case 'Jan':
+            $monthdata = [
+                'january'=>$months1[0]['january'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata); 
+            break;
+        case 'Feb':
+            $monthdata = [
+                'february'=>$months1[0]['february'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Mar':
+            $monthdata = [
+                'march'=>$months1[0]['march'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Apr':
+            $monthdata = [
+                'april'=>$months1[0]['april'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'May':
+            $monthdata = [
+                'may'=>$months1[0]['may'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Jun':
+            $monthdata = [
+                'june'=>$months1[0]['june'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Jul':
+            $monthdata = [
+                'july'=>$months1[0]['july'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Aug':
+            $monthdata = [
+                'august'=>$months1[0]['august'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Sep':
+            $monthdata = [
+                'september'=>$months1[0]['september'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Oct':
+            $monthdata = [
+                'october'=>$months1[0]['october'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Nov':
+            $monthdata = [
+                'november'=>$months1[0]['november'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+        case 'Dec':
+            $monthdata = [
+                'december'=>$months1[0]['december'] + 1,
+    
+            ];
+            $this->db->where('id', 1);
+            $this->db->update('visits', $monthdata);
+            break;
+
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $conf1[0]['lang']?>" style="height:100% ;" dir="ltr">

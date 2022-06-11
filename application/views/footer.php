@@ -1,6 +1,8 @@
 <?php
     $conf = $this->db->get('config');
     $conf1 = $conf->result_array();
+    $visits = $this->db->get('visits');
+    $visits1 = $visits->result_array();
 ?>
 
 <footer class="page-footer font-small navbar-novo footer-bottom">
@@ -36,6 +38,34 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
     <?php if($this->session->userdata('rol') == 1){ ?>
+      <script>
+            var ctxL = document.getElementById("lineChart").getContext('2d');
+    var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
+    gradientFill.addColorStop(0, "rgba(0, 125, 250, 1)");
+    gradientFill.addColorStop(1, "rgba(0, 125, 250, 0.1)");
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        labels: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+        datasets: [
+          {
+            label: "Visitas Mensuales",
+            data: [<?php echo $visits1[0]['january'];?>, <?php echo $visits1[0]['february'];?>, <?php echo $visits1[0]['march'];?>, <?php echo $visits1[0]['april'];?>, <?php echo $visits1[0]['may'];?>, <?php echo $visits1[0]['june'];?>, <?php echo $visits1[0]['july'];?>, <?php echo $visits1[0]['august'];?>, <?php echo $visits1[0]['september'];?>, <?php echo $visits1[0]['october'];?>, <?php echo $visits1[0]['november'];?>, <?php echo $visits1[0]['december'];?>],
+            backgroundColor: gradientFill,
+            borderColor: [
+              '#007DFA',
+            ],
+            borderWidth: 2,
+            pointBorderColor: "#007DFA",
+            pointBackgroundColor: "rgba(0, 125, 250, 1)",
+          }
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    });
+        </script>
       <script>
 $(document).ready(function() {
 var pageRefresh = 5000; //5 s
