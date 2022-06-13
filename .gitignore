@@ -21,3 +21,4 @@ application/config/paypallib_config.php
 /img
 robots.txt
 application/controllers/Api.php
+sitemap.xml
