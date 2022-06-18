@@ -41,6 +41,8 @@ use GuzzleHttp\Client;
         </li>
         <li><a href="<?php echo base_url('admin/tickets');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-ticket-alt"></i> {tickets}</a>
         </li>
+        <li><a href="<?php echo base_url('admin/changelog');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-clock"></i> {changelog}</a>
+        </li>
         <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-cog"></i> {config}</a>
         </li>
         <li><a href="https://github.com/WhiteAssassins/Intersect_CMS" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-code-branch"></i> {updates}<span class="badge badge-danger ml-2"><?php $version = '0.7.5'; try{$client = new Client();  $response = $client->request('GET', 'http://novo.aewhitedevs.com/api/cms'); $body = json_decode($response->getBody(), true); if($body['version'] > $version){ echo $body['version'].' {available}'; } }catch(\GuzzleHttp\Exception\ServerException $se){return $se->getMessage(); }catch(Exception $e){}?></span></a>
