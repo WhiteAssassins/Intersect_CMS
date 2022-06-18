@@ -776,6 +776,99 @@ class Admin extends CI_Controller {
 		header("Location: $base_url");
 	}
 	}
+
+
+
+
+
+
+	public function changelog(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+			$lang = $this->Langs->lang();
+			switch($this->session->userdata('lang')){
+				case "es":
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/changelog', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+				case "en":
+					$this->parser->parse('header', $lang[1]); 
+					$this->parser->parse('sidebar', $lang[1]); 
+					$this->parser->parse('admin/changelog', $lang[1]); 
+					$this->parser->parse('footer', $lang[1]); 
+					break;
+				case "tr":
+					$this->parser->parse('header', $lang[2]); 
+					$this->parser->parse('sidebar', $lang[2]); 
+					$this->parser->parse('admin/changelog', $lang[2]); 
+					$this->parser->parse('footer', $lang[2]); 
+					break;
+				case "jp":
+					$this->parser->parse('header', $lang[3]); 
+					$this->parser->parse('sidebar', $lang[3]); 
+					$this->parser->parse('admin/changelog', $lang[3]); 
+					$this->parser->parse('footer', $lang[3]); 
+					break;	
+					case "de":
+						$this->parser->parse('header', $lang[4]); 
+						$this->parser->parse('sidebar', $lang[4]); 
+						$this->parser->parse('admin/changelog', $lang[4]); 
+						$this->parser->parse('footer', $lang[4]); 
+						break;	
+					case "ru":
+						$this->parser->parse('header', $lang[5]); 
+						$this->parser->parse('sidebar', $lang[5]); 
+						$this->parser->parse('admin/changelog', $lang[5]); 
+						$this->parser->parse('footer', $lang[5]); 
+						break;
+					case "zh":
+						$this->parser->parse('header', $lang[6]); 
+						$this->parser->parse('sidebar', $lang[6]); 
+						$this->parser->parse('admin/changelog', $lang[6]); 
+						$this->parser->parse('footer', $lang[6]); 
+						break;	
+					case "fr":
+						$this->parser->parse('header', $lang[7]); 
+						$this->parser->parse('sidebar', $lang[7]); 
+						$this->parser->parse('admin/changelog', $lang[7]); 
+						$this->parser->parse('footer', $lang[7]); 
+						break;	
+					case "pt":
+						$this->parser->parse('header', $lang[8]); 
+						$this->parser->parse('sidebar', $lang[8]); 
+						$this->parser->parse('admin/changelog', $lang[8]); 
+						$this->parser->parse('footer', $lang[8]); 
+						break;
+					case "hi":
+						$this->parser->parse('header', $lang[9]); 
+						$this->parser->parse('sidebar', $lang[9]); 
+						$this->parser->parse('admin/changelog', $lang[9]); 
+						$this->parser->parse('footer', $lang[9]); 
+						break;	
+					case "ar":
+						$this->parser->parse('header', $lang[10]); 
+						$this->parser->parse('sidebar', $lang[10]); 
+						$this->parser->parse('admin/changelog', $lang[10]); 
+						$this->parser->parse('footer', $lang[10]); 
+						break;	
+				default:
+					$this->parser->parse('header', $lang[0]); 
+					$this->parser->parse('sidebar', $lang[0]); 
+					$this->parser->parse('admin/changelog', $lang[0]); 
+					$this->parser->parse('footer', $lang[0]); 
+					break;
+
+			}
+	}else{
+		$base_url = base_url();
+		header("Location: $base_url");
+	}
+	}
+
+
+
+
 	/*
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////End Load Views///////////////////////////////////////////////////////////////////////////////////
@@ -1850,6 +1943,65 @@ class Admin extends CI_Controller {
 	/*
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////End Admin Accounts/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
+
+
+	/*
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////Start Changelog/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	*/
+
+	public function delchangelog(){
+		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
+			$id = $this->input->post('id');
+			$this->db->delete('changelog', array ('id' => $id)); 
+			$base_url = base_url();
+			header("Location: $base_url/admin/changelog");
+		}else{
+			$base_url = base_url();
+			header("Location: $base_url");
+		}
+	}
+
+
+	public function addchangelog(){
+		$title = $this->input->post('title');
+		$txt = $this->input->post('text');
+		$cantidad = $this->db->get('changelog');
+		$array = $cantidad->result_array();
+		$cant = $cantidad->num_rows();
+		switch($array[$cant-1]['type']){
+			case 0:
+				$data = [
+					'title'=>$title,
+					'txt'=>$txt,
+					'type'=>1,
+				];
+				$this->db->insert('changelog', $data);
+				$base_url = base_url();
+				header("Location: $base_url/admin/changelog");
+				break;
+			case 1:
+				$data = [
+					'title'=>$title,
+					'txt'=>$txt,
+					'type'=>0,
+				];
+				$this->db->insert('changelog', $data);
+				$base_url = base_url();
+				header("Location: $base_url/admin/changelog");
+				break;
+
+		} 
+
+	}
+
+	
+	/*
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////End Changelog/////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	*/
 

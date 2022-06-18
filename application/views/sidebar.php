@@ -45,7 +45,7 @@ use GuzzleHttp\Client;
         </li>
         <li><a href="<?php echo base_url('config');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-cog"></i> {config}</a>
         </li>
-        <li><a href="https://github.com/WhiteAssassins/Intersect_CMS" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-code-branch"></i> {updates}<span class="badge badge-danger ml-2"><?php $version = '0.7.5'; try{$client = new Client();  $response = $client->request('GET', 'http://novo.aewhitedevs.com/api/cms'); $body = json_decode($response->getBody(), true); if($body['version'] > $version){ echo $body['version'].' {available}'; } }catch(\GuzzleHttp\Exception\ServerException $se){return $se->getMessage(); }catch(Exception $e){}?></span></a>
+        <li><a href="https://github.com/WhiteAssassins/Intersect_CMS" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-code-branch"></i> {updates}<span class="badge badge-danger ml-2"><?php $version = '0.8'; try{$client = new Client();  $response = $client->request('GET', 'http://novo.aewhitedevs.com/api/cms'); $body = json_decode($response->getBody(), true); if($body['version'] > $version){ echo $body['version'].' {available}'; } }catch(\GuzzleHttp\Exception\ServerException $se){return $se->getMessage(); }catch(Exception $e){}?></span></a>
         </li>
         <li><a href="<?php echo base_url('home/logout');?>" class="collapsible-header waves-effect" tabindex="0"><i class="fas fa-sign"></i> {disconnect}</a>
         </li>

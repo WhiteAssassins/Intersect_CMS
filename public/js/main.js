@@ -17,6 +17,9 @@ $(function(){
     $(document.body).on('click','.btn_modal_newticket',function(){
         $('#modal_newticket').modal()
     })
+    $(document.body).on('click','.btn_modal_newchangelog',function(){
+        $('#modal_newchangelog').modal()
+    })
 
     $(document.body).on("submit", "#form_reg", function(e) {
         e.preventDefault();

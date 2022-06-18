@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2022 a las 09:21:54
+-- Tiempo de generación: 18-06-2022 a las 06:17:36
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `intersec`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `changelog`
+--
+
+CREATE TABLE `changelog` (
+  `id` int(11) NOT NULL,
+  `type` text NOT NULL,
+  `title` text NOT NULL,
+  `txt` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -210,6 +223,12 @@ INSERT INTO `visits` (`id`, `january`, `february`, `march`, `april`, `may`, `jun
 --
 
 --
+-- Indices de la tabla `changelog`
+--
+ALTER TABLE `changelog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `config`
 --
 ALTER TABLE `config`
@@ -268,6 +287,12 @@ ALTER TABLE `visits`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `changelog`
+--
+ALTER TABLE `changelog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de la tabla `config`
 --
 ALTER TABLE `config`
@@ -283,7 +308,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `news`
