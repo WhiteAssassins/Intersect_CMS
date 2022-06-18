@@ -61,6 +61,11 @@
                    {news}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light animate__animated animate__swing" href="<?php echo base_url('changelog'); ?>">
+                   {changelog}
+                    </a>
+                </li>
     <?php
                 if($this->session->userdata('login') == false){
             ?>
