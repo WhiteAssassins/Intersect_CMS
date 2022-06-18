@@ -158,9 +158,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('public/favicon'); ?>/favicon-16x16.png">
     <link rel="manifest" href="<?php echo base_url('public/favicon'); ?>/manifest.json">
 	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css" async>
-    <?php if($this->session->userdata('rol') == 1){ ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.css">
-    <?php } ?>
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css" async>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css" async>
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
