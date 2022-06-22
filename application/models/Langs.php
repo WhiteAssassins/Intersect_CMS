@@ -189,7 +189,11 @@ class Langs extends CI_Model{
             'ram' => 'RAM',
             'version' => 'Versión Local',
             'id' => 'ID',
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+           'changelog' => 'Changelog',
+           'addchangelog' => 'Crear Changelog',
            );
+
 
 
 
@@ -390,7 +394,9 @@ class Langs extends CI_Model{
             'ram' => 'RAM',
             'version' => 'Local Version',
             'id' => 'ID',
-
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+            'changelog' => 'Changelog',
+            'addchangelog' => 'Create Changelog',
         );
 
 
@@ -605,7 +611,11 @@ $tr = array(
             'ram' => 'RAM',
             'version' => 'Yerel Sürüm',
             'id' => 'İD',
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+           'changelog' => 'Değişiklik günlüğü',
+           'addchangelog' => 'Değişiklik Günlüğü Oluştur',
              
+
            );
    
            
@@ -822,6 +832,9 @@ $tr = array(
             'ram' => 'RAM',
             'version' => 'ローカルバージョン',
             'id' => 'ID',
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+           'changelog' => '変更ログ',
+           'addchangelog' => '変更ログを作成する',
          
            );
 
@@ -1041,6 +1054,9 @@ $tr = array(
             'ram' => 'RAM',
             'version' => 'Lokale Version',
             'id' => 'ID',
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+           'changelog' => 'Änderungsprotokoll',
+           'addchangelog' => 'Änderungsprotokoll erstellen',
              
         );
 
@@ -1245,6 +1261,9 @@ $tr = array(
             'ram' => 'БАРАН',
             'version' => 'Локальная версия',
             'id' => 'Я БЫ',
+            ////////////////////////////////////0.8////////////////////////////////////////////////////
+           'changelog' => 'Список изменений',
+           'addchangelog' => 'Создать журнал изменений',
 
              
         );
@@ -1443,6 +1462,7 @@ $tr = array(
              'browser' => 'Navegador',
              'changepassword' => 'Cambiar Contraseña',
              'rechargeok' => 'Pago Completado Con Exito',
+             
              
         );
 
