@@ -35,6 +35,7 @@
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
+    
     <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js" ></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
