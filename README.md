@@ -1,44 +1,54 @@
-# Intersect_CMS
-CMS for Intersect Engine [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f865cc165e8413fa39d57bf1c4e3c66)](https://www.codacy.com/gh/WhiteAssassins/Intersect_CMS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WhiteAssassins/Intersect_CMS&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms/badge)](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms)
+# Intersect_CMS (CodeIgniter 4 Edition)
 
-Intersect_CMS es un gestor de contenido construido con **CodeIgniter 3** para servidores que usan el motor de juegos Intersect. Dentro del repositorio encontrarás el núcleo del framework, los archivos de la aplicación y dependencias instaladas mediante Composer.
+A modern CMS for Intersect Engine built with **CodeIgniter 4**  
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9f865cc165e8413fa39d57bf1c4e3c66)](https://www.codacy.com/gh/WhiteAssassins/Intersect_CMS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WhiteAssassins/Intersect_CMS&amp;utm_campaign=Badge_Grade)  
+[![CodeFactor](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms/badge)](https://www.codefactor.io/repository/github/whiteassassins/intersect_cms)
 
-## Estructura general
-- `index.php` – punto de entrada que carga el framework.
-- `application/` – controladores, modelos, vistas y archivos de configuración.
-- `system/` – carpeta del sistema de CodeIgniter 3.
-- `public/` – recursos estáticos (CSS, JS, fuentes, etc.).
-- `vendor/` – dependencias de PHP instaladas con Composer.
+> 🚧 This branch is under active development. Expect updates and improvements.
 
-## Requerimientos
-- PHP 7.4 o superior
-- MySQL Server
-- Apache Server
-- Intersect Server
+## Features
 
-## Instalación rápida
-1. Clona el repositorio y ejecuta `composer install` para obtener las dependencias.
-2. Crea una base de datos y ajusta `application/config/database.php` con tus credenciales.
-3. Configura `base_url` y otros parámetros en `application/config/config.php`.
-4. Sirve el proyecto a través de Apache apuntando a `index.php`.
+- Built using **CodeIgniter 4**
+- Updated folder structure and improved modularity
+- Multilanguage support with session-based language switching
+- REST API integration with Intersect Server
+- Clean and responsive frontend design
 
-Encontrarás una guía detallada en [Ascension Game Dev](https://www.ascensiongamedev.com/topic/6512-intersect-cms-novo/).
+## Structure
 
-## Migración a CodeIgniter 4
-El proyecto planea actualizarse a CodeIgniter 4. Se recomienda crear una rama aparte para experimentar con la migración:
+- `app/` – Controllers, Models, Views, Config
+- `public/` – Public web root (index.php, assets)
+- `vendor/` – Composer dependencies
+- `writable/` – Cache, logs, uploads, sessions
+- `.env` – Environment variables and database config
+
+## Requirements
+
+- PHP 8.1 or higher
+- MySQL 5.7+ or MariaDB
+- Apache with mod_rewrite or Nginx
+- Intersect Game Server
+
+## Quick Setup
 
 ```bash
-git checkout -b ci4-upgrade
+git clone https://github.com/WhiteAssassins/Intersect_CMS.git
+cd Intersect_CMS
+composer install
+cp env .env
+php spark key:generate
 ```
 
-En esa rama podrás instalar CodeIgniter 4 como base y portar gradualmente los controladores y vistas.
+1. Configure `.env` with your database and base URL.
+2. Run `php spark migrate` if migrations are included.
+3. Serve the app using Apache/Nginx pointing to `/public`.
 
-## Fotos
-![N|Solid](https://i.postimg.cc/65v014v3/1.png)
-![N|Solid](https://i.postimg.cc/h4wsr1h6/2.png)
-![N|Solid](https://i.postimg.cc/qvHLfBsG/3.png)
+## Screenshots
 
-## Adicional
-- Discord: <https://discord.gg/2XcYgevUws>
-- Twitter: <https://twitter.com/whiteassassinsr/>
-- Buy Me a Coffee: <https://www.buymeacoffee.com/whiteassassins>
+Coming soon with the CI4 release!
+
+## Stay Connected
+
+- Discord: [https://discord.gg/2XcYgevUws](https://discord.gg/2XcYgevUws)
+- Twitter: [@whiteassassinsr](https://twitter.com/whiteassassinsr)
+- Support us: [Buy Me a Coffee ☕](https://www.buymeacoffee.com/whiteassassins)
