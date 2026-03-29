@@ -109,9 +109,14 @@
    
     
    
-    $memusagepc = $memUsage["total"] - $memUsage["free"];
-    $memusagepc = $memusagepc / 1024 / 1024 / 1024;
-    $memtotal = $memUsage["total"] / 1024 / 1024 / 1024;
+    if (is_array($memUsage)) {
+      $memusagepc = $memUsage["total"] - $memUsage["free"];
+      $memusagepc = $memusagepc / 1024 / 1024 / 1024;
+      $memtotal = $memUsage["total"] / 1024 / 1024 / 1024;
+    } else {
+      $memusagepc = 0;
+      $memtotal = 0;
+    }
    
    //Uso CPU
     
@@ -122,7 +127,7 @@
    
      $operating_system = PHP_OS_FAMILY;
    
-     if ($operating_system === 'Windows') {
+     if ($operating_system === 'Windows' && class_exists('COM')) {
        // Win CPU
        $wmi = new COM('WinMgmts:\\\\.');
        $cpus = $wmi->InstancesOf('Win32_Processor');
@@ -141,6 +146,20 @@
        // WIN CONNECTIONS
        $connections = shell_exec('netstat -nt | findstr :80 | findstr ESTABLISHED | find /C /V ""'); 
        $totalconnections = shell_exec('netstat -nt | findstr :80 | find /C /V ""'); 
+     } elseif ($operating_system === 'Windows') {
+       // Fallback for local/dev setups where COM isn't enabled in PHP.
+       $cpuload = 0;
+       if (is_array($memUsage)) {
+         $memtotal = round($memUsage["total"] / 1000000000, 2);
+         $memavailable = round($memUsage["free"] / 1000000000, 2);
+         $memused = round($memtotal - $memavailable, 2);
+       } else {
+         $memtotal = 0;
+         $memavailable = 0;
+         $memused = 0;
+       }
+       $connections = 0;
+       $totalconnections = 0;
      } else {
        // Linux CPU
        $load = sys_getloadavg();
@@ -163,7 +182,7 @@
        $totalconnections = `netstat -ntu | grep :80 | grep -v LISTEN | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -rn | grep -v 127.0.0.1 | wc -l`; 
      }
    
-     $memusage = round(($memavailable/$memtotal)*100);
+    $memusage = $memtotal > 0 ? round(($memavailable / $memtotal) * 100) : 0;
    
    
    
@@ -173,7 +192,7 @@
      $disktotal = round(disk_total_space(".") / 1000000000);
      $diskused = round($disktotal - $diskfree);
    
-     $diskusage = round($diskused/$disktotal*100);
+    $diskusage = $disktotal > 0 ? round($diskused / $disktotal * 100) : 0;
    
      if ($memusage > 85 || $cpuload > 85 || $diskusage > 85) {
        $trafficlight = 'red';

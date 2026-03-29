@@ -3,10 +3,18 @@ require FCPATH.'vendor/autoload.php';
 use GuzzleHttp\Client;
 class Apiserverstats extends CI_Model{
   public function serverinfo(){
+    $fallback = array(
+      'uptime' => 0,
+      'onlineCount' => 0,
+      'cps' => 0,
+    );
     try{ 
     $apiip = $this->config->item('apiip');;
   $this->load->model('Apigettoken');
   $accesstoken = $this->Apigettoken->apitoken();
+  if (empty($accesstoken['access_token'])) {
+    return $fallback;
+  }
   $client = new Client([
     'base_uri' => 'http://'.$apiip.'/api/v1/info/stats',
     'timeout'  => 10.0,
@@ -20,11 +28,16 @@ class Apiserverstats extends CI_Model{
     
   
   $serverstats = json_decode($res->getBody(), true); 
- return $serverstats; 
+ if ($res->getStatusCode() !== 200 || ! is_array($serverstats)) {
+  return $fallback;
+ }
+ return array_merge($fallback, $serverstats); 
 }catch(\GuzzleHttp\Exception\ServerException $se){
-  return $se->getMessage();
+  return $fallback;
 }catch(Exception $e){
 }
+
+return $fallback;
 
 
   }

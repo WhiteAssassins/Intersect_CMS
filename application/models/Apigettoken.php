@@ -5,10 +5,17 @@ class Apigettoken extends CI_Model{
     public function apitoken(){
     try{ 
     $apiip = $this->config->item('apiip');
-    $apiuser = [
+    $apiuser = $this->config->item('apiuser');
+    $apipass = $this->config->item('apipass');
+
+    if (empty($apiip) || $apiip === 'apipip' || empty($apiuser) || $apiuser === 'apiuser' || empty($apipass) || $apipass === 'apipass') {
+      return array('access_token' => null);
+    }
+
+    $credentials = [
         'grant_type' => "password",
-       'username' => $this->config->item('apiuser'),
-        'password' => $this->config->item('apipass'),
+       'username' => $apiuser,
+        'password' => $apipass,
           ];
         $client = new Client([
       'base_uri' => 'http://'.$apiip.'/api/oauth/token',
@@ -16,15 +23,19 @@ class Apigettoken extends CI_Model{
       'http_errors' => false,
 
       ]);
-      $res = $client->request('POST', '', ['form_params' => $apiuser]);
+      $res = $client->request('POST', '', ['form_params' => $credentials]);
       $accesstoken = json_decode($res->getBody(), true);
+      if ($res->getStatusCode() !== 200 || ! is_array($accesstoken) || empty($accesstoken['access_token'])) {
+        return array('access_token' => null);
+      }
       return $accesstoken;
 
 
     }catch(\GuzzleHttp\Exception\ServerException $se){
-      return $se->getMessage();
+      return array('access_token' => null);
    }catch(Exception $e){
    }
 
+   return array('access_token' => null);
     }
 }

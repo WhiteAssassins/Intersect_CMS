@@ -22,7 +22,17 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://127.0.0.1/Intesect';
+if (ENVIRONMENT !== 'production' && isset($_SERVER['HTTP_HOST']))
+{
+	$scheme = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+	$script_path = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
+	$script_path = trim($script_path, '/');
+	$config['base_url'] = $scheme.'://'.$_SERVER['HTTP_HOST'].($script_path !== '' ? '/'.$script_path : '').'/';
+}
+else
+{
+	$config['base_url'] = 'http://127.0.0.1/Intersect/';
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -379,7 +389,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'intersect_session_novo';
 $config['sess_expiration'] = 500200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = APPPATH.'cache/sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
