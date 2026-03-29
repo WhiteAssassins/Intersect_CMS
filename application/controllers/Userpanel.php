@@ -179,14 +179,13 @@ class Userpanel extends CI_Controller {
 		$newpassword = $this->input->post('newpassword');
 		$confirmnewpassword = $this->input->post('confirmnewpassword');
 		$user = $this->session->userdata('user');
-		//verify if old password is correct before encrypt in md5
-		$this->db->where('user', $user);
-		$this->db->where('pass', md5($oldpassword));
-		$query = $this->db->get('users');
-		if($query->num_rows() == 1){
+		//verify if old password is correct before updating the stored hash
+		$query = $this->db->get_where('users', array('user' => $user));
+		$userData = $query->row_array();
+		if($userData && cms_password_verify($oldpassword, $userData['pass'])){
 			if($newpassword == $confirmnewpassword){
 				$data = array(
-					'pass' => md5($newpassword)
+					'pass' => cms_hash_password($newpassword)
 				);
 				$this->db->where('user', $user);
 				$this->db->update('users', $data);

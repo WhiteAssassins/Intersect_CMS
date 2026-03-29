@@ -20,6 +20,14 @@ class Admin extends CI_Controller {
         $this->load->helper('common');
         $this->load->library('form_validation');
 		$this->load->model('Langs');
+        $this->requireAdmin();
+    }
+
+    private function requireAdmin() {
+        if ($this->session->userdata('login') != true || (int) $this->session->userdata('rol') !== 1) {
+            redirect(base_url());
+            exit;
+        }
     }
 	
 
@@ -1453,14 +1461,37 @@ class Admin extends CI_Controller {
         setlocale(LC_TIME, "spanish");
         $date = strftime("%A, %d de %B de %Y");
         $user = $this->session->userdata('user');
-            $filename=$_FILES['archivo']['name'];
+            if (empty($_FILES['archivo']['name'])) {
+                $data['uploadError'] = 'Debe seleccionar una imagen.';
+                echo $data['uploadError'];
+                return;
+            }
 
+                $archivo = "archivo";
+                $config['upload_path'] = "img/news";
+                $config['allowed_types'] = "gif|jpg|jpeg|png|webp";
+                $config['max_size'] = "5120";
+                $config['max_width'] = "2000";
+                $config['max_height'] = "2000";
+                $config['encrypt_name'] = TRUE;
+        
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload($archivo)) {
+                    //*** ocurrio un error
+                    $data['uploadError'] = $this->upload->display_errors();
+                    echo $this->upload->display_errors();
+                    return;
+                }
+        
+                $data['uploadSuccess'] = $this->upload->data();
+                $filename = $data['uploadSuccess']['file_name'];
 
             $txtData = array(
                 'title' => strip_tags($this->input->post('title')),
 				'descrip' => strip_tags($this->input->post('descrip')),
                 'txt' => strip_tags($this->input->post('txt')),
-                'img' => ($filename),
+                'img' => $filename,
                 'date' => ($date),
 				'status' => 1,
                 'admin' => ($user)
@@ -1477,28 +1508,7 @@ class Admin extends CI_Controller {
                 $txtData['url_slug'] = $titleURL;
                 
                 //Inserta los datos del TXT a la base de datos
-                $insert = $this->newss->insert($txtData);
-
-              
-
-                $archivo = "archivo";
-                $config['upload_path'] = "img/news";
-                $config['file_name'] = $filename;
-                $config['allowed_types'] = "*";
-                $config['max_size'] = "50000";
-                $config['max_width'] = "2000";
-                $config['max_height'] = "2000";
-        
-                $this->load->library('upload', $config);
-
-                if (!$this->upload->do_upload($archivo)) {
-                    //*** ocurrio un error
-                    $data['uploadError'] = $this->upload->display_errors();
-                    echo $this->upload->display_errors();
-                    return;
-                }
-        
-                $data['uploadSuccess'] = $this->upload->data();
+                $this->newss->insert($txtData);
 
             
         
@@ -1699,8 +1709,31 @@ class Admin extends CI_Controller {
 		$data = array();
         $txtData = array();         
         $user = $this->session->userdata('user');
-            $filename=$_FILES['archivo']['name'];
+            if (empty($_FILES['archivo']['name'])) {
+                $data['uploadError'] = 'Debe seleccionar una imagen.';
+                echo $data['uploadError'];
+                return;
+            }
 
+                $archivo = "archivo";
+                $config['upload_path'] = "img/products";
+                $config['allowed_types'] = "gif|jpg|jpeg|png|webp";
+                $config['max_size'] = "5120";
+                $config['max_width'] = "2000";
+                $config['max_height'] = "2000";
+                $config['encrypt_name'] = TRUE;
+        
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload($archivo)) {
+                    //*** ocurrio un error
+                    $data['uploadError'] = $this->upload->display_errors();
+                    echo $this->upload->display_errors();
+                    return;
+                }
+        
+                $data['uploadSuccess'] = $this->upload->data();
+                $filename = $data['uploadSuccess']['file_name'];
 
             $txtData = array(
                 'name' => strip_tags($this->input->post('name')),
@@ -1710,7 +1743,7 @@ class Admin extends CI_Controller {
 				'ainterac' => strip_tags($this->input->post('ainterac')),
 				'ingameid' => strip_tags($this->input->post('ingameid')),
 				'status' => 1,
-                'image' => ($filename),
+                'image' => $filename,
             );
 
                 /*
@@ -1725,27 +1758,6 @@ class Admin extends CI_Controller {
                 
                 //Inserta los datos del TXT a la base de datos
                 $this->shops->insert($txtData);
-
-              
-
-                $archivo = "archivo";
-                $config['upload_path'] = "img/products";
-                $config['file_name'] = $filename;
-                $config['allowed_types'] = "*";
-                $config['max_size'] = "50000";
-                $config['max_width'] = "2000";
-                $config['max_height'] = "2000";
-        
-                $this->load->library('upload', $config);
-
-                if (!$this->upload->do_upload($archivo)) {
-                    //*** ocurrio un error
-                    $data['uploadError'] = $this->upload->display_errors();
-                    echo $this->upload->display_errors();
-                    return;
-                }
-        
-                $data['uploadSuccess'] = $this->upload->data();
 
             
         
@@ -1914,7 +1926,7 @@ class Admin extends CI_Controller {
         if ($pass==$pass1) {
             $users = array(
                 'user' => $user,
-                'pass' => md5($pass),
+                'pass' => cms_hash_password($pass),
 				'email' => $email,
 			);
 

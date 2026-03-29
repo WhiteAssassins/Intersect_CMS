@@ -136,11 +136,17 @@ class Home extends CI_Controller {
 							{
 						 		$users = array(
 								'user' => $user,
-								'pass' => md5($pass),
+								'pass' => cms_hash_password($pass),
 								'rol' => 2,
 								'email' => $email,
 								);
-								$this->db->insert('users', $users);
+								$existing = $this->db->get_where('users', array('user' => $user))->row_array();
+								if ($existing) {
+									$this->db->where('id', $existing['id']);
+									$this->db->update('users', $users);
+								} else {
+									$this->db->insert('users', $users);
+								}
 
 								$pedido['status'] = 200;
 								echo json_encode($pedido);
@@ -164,18 +170,16 @@ class Home extends CI_Controller {
 	public function login(){
 		$user = $this->input->post('user');
         $pass = $this->input->post('pass');
-        $where = [
-            'user'=>$user,
-            'pass'=>md5($pass)
-        ];
-        $this->db->where($where);
-        $resultado = $this->db->get('users');
-        $num = $resultado->num_rows();
-        if($num == 1){
-			$rest = $resultado->result_array();
+        $resultado = $this->db->get_where('users', array('user' => $user));
+        $rest = $resultado->row_array();
+        if($rest && cms_password_verify($pass, $rest['pass'])){
+            if (cms_password_needs_rehash($rest['pass'])) {
+                $this->db->where('id', $rest['id']);
+                $this->db->update('users', array('pass' => cms_hash_password($pass)));
+            }
             $data = [
-                'user'=>$rest[0]['user'],
-				'rol'=> $rest[0]['rol'],
+                'user'=>$rest['user'],
+				'rol'=> $rest['rol'],
                 'login'=>true
             ];
             $this->session->set_userdata($data);
@@ -232,11 +236,17 @@ class Home extends CI_Controller {
 							];
 							$users = array(
 								'user' => $estado['Name'],
-								'pass' => md5($pass),
+								'pass' => cms_hash_password($pass),
 								'rol' => $rol,
 								'email' => $estado['Email'],
 								);
-								$this->db->insert('users', $users);
+								$existing = $this->db->get_where('users', array('user' => $estado['Name']))->row_array();
+								if ($existing) {
+									$this->db->where('id', $existing['id']);
+									$this->db->update('users', $users);
+								} else {
+									$this->db->insert('users', $users);
+								}
 							$this->session->set_userdata($data);
 							$base_url = base_url();
 							header("Location: $base_url");

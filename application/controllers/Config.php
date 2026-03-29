@@ -11,6 +11,14 @@ class Config extends CI_Controller {
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
 		$this->load->model('Langs');
+        $this->requireAdmin();
+    }
+
+    private function requireAdmin() {
+        if ($this->session->userdata('login') != true || (int) $this->session->userdata('rol') !== 1) {
+            redirect(base_url());
+            exit;
+        }
     }
 	
 	public function index()

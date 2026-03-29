@@ -82,21 +82,19 @@ class Mant extends CI_Controller {
     public function login(){
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
-        $where = [
-            'user'=>$user,
-            'pass'=>md5($pass)
-        ];
-        $this->db->where($where);
-        $resultado = $this->db->get('users');
-        $num = $resultado->num_rows();
-        $rest = $resultado->result_array();
-        if($num == 0){
+        $resultado = $this->db->get_where('users', array('user' => $user));
+        $rest = $resultado->row_array();
+        if(!$rest || !cms_password_verify($pass, $rest['pass'])){
             $base_url = base_url();
             header("Location: $base_url/mant");
-            
-        }elseif($rest[0]['rol'] == 1){
+             
+        }elseif($rest['rol'] == 1){
+            if (cms_password_needs_rehash($rest['pass'])) {
+                $this->db->where('id', $rest['id']);
+                $this->db->update('users', array('pass' => cms_hash_password($pass)));
+            }
             $data = [
-                'user'=>$rest[0]['user'],
+                'user'=>$rest['user'],
 				'rol'=> 1,
                 'login'=>true
             ];
