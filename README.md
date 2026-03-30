@@ -24,11 +24,11 @@ Este repositorio ya no usa `main_ci4` como base principal. Si en algun momento h
 
 ## Capturas del proyecto
 
-> Referencias visuales del proyecto. La interfaz sigue en proceso de rebranding, asi que algunas pantallas pueden verse ligeramente distintas en la rama actual.
+Capturas actuales de la rama `codeigniter3`.
 
-![Intersect CMS - Home](https://i.postimg.cc/65v014v3/1.png)
-![Intersect CMS - Dashboard](https://i.postimg.cc/h4wsr1h6/2.png)
-![Intersect CMS - Admin](https://i.postimg.cc/qvHLfBsG/3.png)
+![Intersect CMS - Home](public/img/readme/home-hero.png)
+![Intersect CMS - Features](public/img/readme/home-features.png)
+![Intersect CMS - Admin Dashboard](public/img/readme/admin-dashboard.png)
 
 ## Requisitos
 
