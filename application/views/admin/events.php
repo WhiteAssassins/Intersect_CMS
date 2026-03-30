@@ -10,16 +10,10 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
-            $events = $this->Apievent->event();
-            $datos = json_encode($events['entries'], True);
-            $datos2 = json_decode($datos, True);
-            foreach ($datos2 as $key) {              
-        ?>
-
+  <?php foreach ($admin_event_rows as $eventRow) { ?>
     <tr>
-      <td><?php echo $key['Key']; ?></td>
-      <td><?php echo $key['Value']['Name'] ?></td>
+      <td><?php echo $eventRow['key']; ?></td>
+      <td><?php echo $eventRow['name']; ?></td>
     </tr>
     <?php } ?>
   </tbody>

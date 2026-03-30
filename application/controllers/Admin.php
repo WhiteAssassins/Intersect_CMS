@@ -83,6 +83,15 @@ class Admin extends CI_Controller {
         $this->parser->parse('footer', $viewData);
     }
 
+    private function renderAdminEditorView($view, array $data = array())
+    {
+        $viewData = array_merge($this->getLanguageData(), $data);
+
+        $this->parser->parse('header', $viewData);
+        $this->parser->parse($view, $viewData);
+        $this->parser->parse('footer', $viewData);
+    }
+
     private function buildAdminNewsRows()
     {
         $rows = $this->db->order_by('id', 'DESC')->get('news')->result_array();
@@ -155,6 +164,108 @@ class Admin extends CI_Controller {
 
         return $items;
     }
+
+    private function buildEditableNewsData($id)
+    {
+        $row = (array) $this->db->get_where('news', array('id' => $id))->row_array();
+
+        return array(
+            'news_id' => $row['id'] ?? $id,
+            'news_title_value' => $row['title'] ?? '',
+            'news_description_value' => $row['descrip'] ?? '',
+            'news_text_value' => $row['txt'] ?? '',
+        );
+    }
+
+    private function buildEditableProductData($id)
+    {
+        $row = (array) $this->db->get_where('products', array('id' => $id))->row_array();
+
+        return array(
+            'product_id' => $row['id'] ?? $id,
+            'product_name_value' => $row['name'] ?? '',
+            'product_description_value' => $row['descrip'] ?? '',
+            'product_price_value' => $row['price'] ?? '',
+            'product_attack_animation_value' => $row['aatk'] ?? '',
+            'product_interaction_animation_value' => $row['ainterac'] ?? '',
+            'product_ingame_id_value' => $row['ingameid'] ?? '',
+        );
+    }
+
+    private function buildCommandViewData()
+    {
+        $onlinePlayers = (array) $this->Apiplayersonline->playeronline();
+        $maps = (array) $this->Apimap->map();
+        $playerValues = isset($onlinePlayers['Values']) && is_array($onlinePlayers['Values']) ? $onlinePlayers['Values'] : array();
+        $mapEntries = isset($maps['entries']) && is_array($maps['entries']) ? $maps['entries'] : array();
+        $playerOptions = array();
+        $mapOptions = array();
+
+        foreach ($playerValues as $player) {
+            $playerOptions[] = array(
+                'value' => $player['Name'] ?? '',
+                'label' => $player['Name'] ?? '',
+            );
+        }
+
+        foreach ($mapEntries as $entry) {
+            $mapOptions[] = array(
+                'value' => $entry['Key'] ?? '',
+                'label' => $entry['Value']['Name'] ?? '',
+            );
+        }
+
+        return array(
+            'command_player_options' => $playerOptions,
+            'command_map_options' => $mapOptions,
+        );
+    }
+
+    private function buildAdminApiRows(array $entries)
+    {
+        $items = array();
+
+        foreach ($entries as $entry) {
+            $items[] = array(
+                'key' => $entry['Key'] ?? '',
+                'name' => $entry['Value']['Name'] ?? '',
+            );
+        }
+
+        return $items;
+    }
+
+    private function buildAdminObjectRows()
+    {
+        $objects = (array) $this->Apiobjects->object();
+        $entries = isset($objects['entries']) && is_array($objects['entries']) ? $objects['entries'] : array();
+
+        return $this->buildAdminApiRows($entries);
+    }
+
+    private function buildAdminMapRows()
+    {
+        $maps = (array) $this->Apimap->map();
+        $entries = isset($maps['entries']) && is_array($maps['entries']) ? $maps['entries'] : array();
+
+        return $this->buildAdminApiRows($entries);
+    }
+
+    private function buildAdminEventRows()
+    {
+        $events = (array) $this->Apievent->event();
+        $entries = isset($events['entries']) && is_array($events['entries']) ? $events['entries'] : array();
+
+        return $this->buildAdminApiRows($entries);
+    }
+
+    private function buildAdminQuestRows()
+    {
+        $quests = (array) $this->Apiquest->quest();
+        $entries = isset($quests['entries']) && is_array($quests['entries']) ? $quests['entries'] : array();
+
+        return $this->buildAdminApiRows($entries);
+    }
 	
 
 	/*
@@ -203,420 +314,28 @@ class Admin extends CI_Controller {
         ));
 	}
 	public function objects(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/objects', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/objects', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/objects', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/object', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;	
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/object', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/object', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/object', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/object', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/object', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/object', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/object', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/objects', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$this->renderAdminView('admin/objects', array(
+            'admin_object_rows' => $this->buildAdminObjectRows(),
+        ));
 	}
 	public function maps(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/maps', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/maps', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/maps', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/maps', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;	
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/maps', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/maps', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/maps', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/maps', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/maps', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/maps', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/maps', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/maps', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$this->renderAdminView('admin/maps', array(
+            'admin_map_rows' => $this->buildAdminMapRows(),
+        ));
 	}
 	public function events(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/events', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/events', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/events', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/events', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/events', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/events', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/events', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/events', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/events', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/events', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/events', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/events', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$this->renderAdminView('admin/events', array(
+            'admin_event_rows' => $this->buildAdminEventRows(),
+        ));
 	}
 	public function quests(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/quests', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/quests', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/quests', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/quests', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;	
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/quests', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/quests', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/quests', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/quests', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/quests', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/quests', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/quests', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/quests', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$this->renderAdminView('admin/quests', array(
+            'admin_quest_rows' => $this->buildAdminQuestRows(),
+        ));
 	}
 
 	public function commands(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/commands', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/commands', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/commands', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/commands', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;	
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/commands', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/commands', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/commands', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/commands', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/commands', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/commands', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/commands', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/commands', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$this->renderAdminView('admin/commands', $this->buildCommandViewData());
 	}
 
 
@@ -1298,76 +1017,8 @@ class Admin extends CI_Controller {
     }
 
 	public function editnews(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = $this->input->post('id');
-		$lang = $this->Langs->lang();
-		switch($this->session->userdata('lang')){
-			case "es":
-				$this->parser->parse('header', $lang[0]); 
-				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[0]); 
-				$this->parser->parse('footer', $lang[0]); 
-				break;
-			case "en":
-				$this->parser->parse('header', $lang[1]); 
-				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[1]); 
-				$this->parser->parse('footer', $lang[1]); 
-				break;
-			case "tr":
-				$this->parser->parse('header', $lang[2]); 
-				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[2]);
-				$this->parser->parse('footer', $lang[2]);  
-				break;
-			case "jp":
-				$this->parser->parse('header', $lang[3]); 
-				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[3]);
-				$this->parser->parse('footer', $lang[3]); 
-				break;	
-				case "de":
-					$this->parser->parse('header', $lang[4]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[4]); 
-					$this->parser->parse('footer', $lang[4]); 
-					break;	
-				case "ru":
-					$this->parser->parse('header', $lang[5]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[5]); 
-					$this->parser->parse('footer', $lang[5]); 
-					break;
-				case "zh":
-					$this->parser->parse('header', $lang[6]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[6]); 
-					$this->parser->parse('footer', $lang[6]); 
-					break;	
-				case "fr":
-					$this->parser->parse('header', $lang[7]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[7]); 
-					$this->parser->parse('footer', $lang[7]); 
-					break;	
-				case "pt":
-					$this->parser->parse('header', $lang[8]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[8]); 
-					$this->parser->parse('footer', $lang[8]); 
-					break;
-				case "hi":
-					$this->parser->parse('header', $lang[9]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[9]); 
-					$this->parser->parse('footer', $lang[9]); 
-					break;	
-				case "ar":
-					$this->parser->parse('header', $lang[10]); 
-					$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[10]); 
-					$this->parser->parse('footer', $lang[10]); 
-					break;	
-			default:
-				$this->parser->parse('header', $lang[0]); 
-				$this->parser->parse('admin/editnews', array('id' => $id)+ $lang[0]); 
-				$this->parser->parse('footer', $lang[0]); 
-				break;
-
-		}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$id = (int) $this->input->post('id');
+        $this->renderAdminEditorView('admin/editnews', $this->buildEditableNewsData($id));
 	}
 	
 	public function editnewss(){
@@ -1533,64 +1184,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function editproduct(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = $this->input->post('id');
-		$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[3]);
-					break;	
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/editproduct', array('id' => $id)+ $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+		$id = (int) $this->input->post('id');
+        $this->renderAdminEditorView('admin/editproduct', $this->buildEditableProductData($id));
 	}
 
 	public function editproducts(){

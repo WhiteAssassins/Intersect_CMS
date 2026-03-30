@@ -10,21 +10,10 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
-            $objects = $this->Apiobjects->object();
-            $datos = json_encode($objects['entries'], True);
-            $datos2 = json_decode($datos, True);
-            foreach ($datos2 as $key) {              
-        ?>
-
+  <?php foreach ($admin_object_rows as $objectRow) { ?>
     <tr>
-      <td>
-        <?php 
-        echo $key['Key']; 
-       // print_r($datos);
-        ?>
-      </td>
-      <td><?php echo $key['Value']['Name'] ?></td>
+      <td><?php echo $objectRow['key']; ?></td>
+      <td><?php echo $objectRow['name']; ?></td>
     </tr>
     <?php } ?>
   </tbody>

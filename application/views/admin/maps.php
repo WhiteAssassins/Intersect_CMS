@@ -10,16 +10,10 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
-            $maps = $this->Apimap->map();
-            $datos = json_encode($maps['entries'], True);
-            $datos2 = json_decode($datos, True);
-            foreach ($datos2 as $key) {              
-        ?>
-
+  <?php foreach ($admin_map_rows as $mapRow) { ?>
     <tr>
-      <td><?php echo $key['Key']; ?></td>
-      <td><?php echo $key['Value']['Name'] ?></td>
+      <td><?php echo $mapRow['key']; ?></td>
+      <td><?php echo $mapRow['name']; ?></td>
     </tr>
     <?php } ?>
   </tbody>

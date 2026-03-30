@@ -10,16 +10,10 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
-            $quests = $this->Apiquest->quest();
-            $datos = json_encode($quests['entries'], True);
-            $datos2 = json_decode($datos, True);
-            foreach ($datos2 as $key) {              
-        ?>
-
+  <?php foreach ($admin_quest_rows as $questRow) { ?>
     <tr>
-      <td><?php echo $key['Key']; ?></td>
-      <td><?php echo $key['Value']['Name'] ?></td>
+      <td><?php echo $questRow['key']; ?></td>
+      <td><?php echo $questRow['name']; ?></td>
     </tr>
     <?php } ?>
   </tbody>

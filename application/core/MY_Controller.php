@@ -3,6 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+    protected function getConfigRow()
+    {
+        return (array) $this->db->get('config')->row_array();
+    }
+
+    protected function isMaintenanceEnabled()
+    {
+        $configRow = $this->getConfigRow();
+
+        return (int) ($configRow['mant'] ?? 0) === 1;
+    }
+
     protected function redirectTo($path)
     {
         header('Location: ' . base_url($path));
@@ -17,9 +29,7 @@ class MY_Controller extends CI_Controller
 
     protected function redirectToMaintenanceIfNeeded()
     {
-        $configRow = (array) $this->db->get('config')->row_array();
-
-        if ((int) ($configRow['mant'] ?? 0) === 1 && !$this->session->userdata('login')) {
+        if ($this->isMaintenanceEnabled() && !$this->session->userdata('login')) {
             header('Location: ' . base_url('mant'));
             return true;
         }
@@ -33,6 +43,15 @@ class MY_Controller extends CI_Controller
 
         $this->parser->parse('header', $viewData);
         $this->parser->parse('navbar', $viewData);
+        $this->parser->parse($view, $viewData);
+        $this->parser->parse('footer', $viewData);
+    }
+
+    protected function renderMinimalPage($view, array $data = array())
+    {
+        $viewData = array_merge($this->getLanguageData(), $data);
+
+        $this->parser->parse('header', $viewData);
         $this->parser->parse($view, $viewData);
         $this->parser->parse('footer', $viewData);
     }
