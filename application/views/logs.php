@@ -1,7 +1,3 @@
-<?php 
-$resultadolog = $this->db->get('logs');
-$restlog = $resultadolog->result_array();
-?>
 <div class="container my-5 py-5">
 
 <div class="card card-cascade narrower cards-novo">
@@ -10,11 +6,7 @@ $restlog = $resultadolog->result_array();
   <div
     class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 justify-content-between align-items-center ">
 
-    
-
    <center> <a href="#"  class="white-text mx-3">{logs}</a></center>
-
-    
   </div>
 
   <div class="px-4 ">
@@ -24,7 +16,6 @@ $restlog = $resultadolog->result_array();
 
         <thead>
           <tr>
-          
             <th class="th-lg">
               <a>{admin}
                 <i class="fas fa-sort ml-1"></i>
@@ -48,21 +39,14 @@ $restlog = $resultadolog->result_array();
           </tr>
         </thead>
         <tbody>
-        <?php 
-                                     
-                                      foreach (array_reverse($restlog) as $key) { 
-                                        
-                                  ?>
+        <?php foreach ($log_rows as $row) { ?>
           <tr>
-            <td><?php echo $key['admin']; ?></td>
-            <td><?php echo $key['user']; ?></td>
-            <td><?php echo $key['action']; ?></td>
-            <td><?php echo $key['time']; ?></td>
+            <td><?php echo $row['admin']; ?></td>
+            <td><?php echo $row['user']; ?></td>
+            <td><?php echo $row['action']; ?></td>
+            <td><?php echo $row['date']; ?></td>
           </tr>
-        
-          <?php
-                            }
-                        ?>  
+        <?php } ?>
         </tbody>
       </table>
     </div>

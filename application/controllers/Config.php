@@ -20,91 +20,73 @@ class Config extends CI_Controller {
             exit;
         }
     }
+
+    private function getLanguageData()
+    {
+        return $this->Langs->current();
+    }
+
+    private function getConfigRow()
+    {
+        return (array) $this->db->get('config')->row_array();
+    }
+
+    private function renderConfigPage($view, array $data = array(), $withSidebar = true)
+    {
+        $viewData = array_merge($this->getLanguageData(), $data);
+
+        $this->parser->parse('header', $viewData);
+        if ($withSidebar) {
+            $this->parser->parse('sidebar', $viewData);
+        }
+        $this->parser->parse($view, $viewData);
+        $this->parser->parse('footer', $viewData);
+    }
+
+    private function buildConfigDashboardViewData()
+    {
+        $configRow = $this->getConfigRow();
+
+        return array(
+            'config_color1' => $configRow['color1'] ?? '#000000',
+            'config_color2' => $configRow['color2'] ?? '#000000',
+            'config_analytics' => $configRow['analytics'] ?? '',
+            'config_download' => $configRow['download'] ?? '',
+            'config_maintenance_enabled' => (int) ($configRow['mant'] ?? 0) === 1,
+        );
+    }
+
+    private function buildConfigMenuViewData()
+    {
+        $configRow = $this->getConfigRow();
+
+        return array(
+            'config_menu_header' => $configRow['menuheader'] ?? '',
+            'config_menu1_icon' => $configRow['menu1icon'] ?? '',
+            'config_menu1_header' => $configRow['menu1header'] ?? '',
+            'config_menu1_text' => $configRow['menu1text'] ?? '',
+            'config_menu2_icon' => $configRow['menu2icon'] ?? '',
+            'config_menu2_header' => $configRow['menu2header'] ?? '',
+            'config_menu2_text' => $configRow['menu2text'] ?? '',
+            'config_menu3_icon' => $configRow['menu3icon'] ?? '',
+            'config_menu3_header' => $configRow['menu3header'] ?? '',
+            'config_menu3_text' => $configRow['menu3text'] ?? '',
+        );
+    }
+
+    private function buildConfigContentViewData($field)
+    {
+        $configRow = $this->getConfigRow();
+
+        return array(
+            'config_id' => $configRow['id'] ?? 1,
+            'config_content' => $configRow[$field] ?? '',
+        );
+    }
 	
 	public function index()
-	{	
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/config', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin/config', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin/config', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin/config', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin/config', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin/config', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin/config', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin/config', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin/config', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin/config', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin/config', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin/config', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-		}else{
-			$base_url = base_url();
-			header("Location: $base_url");
-		}
-
+	{
+        $this->renderConfigPage('admin/config', $this->buildConfigDashboardViewData());
 	}
 
 	public function editcolors(){
@@ -209,287 +191,17 @@ class Config extends CI_Controller {
 
 
 	public function legal(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/legal', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('admin/legal', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('admin/legal', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('admin/legal', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('admin/legal', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('admin/legal', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('admin/legal', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('admin/legal', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('admin/legal', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('admin/legal', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('admin/legal', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/legal', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+        $this->renderConfigPage('admin/legal', $this->buildConfigContentViewData('legal'), false);
 	}
 
 	public function terms(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/terms', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('admin/terms', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('admin/terms', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('admin/terms', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('admin/terms', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('admin/terms', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('admin/terms', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('admin/terms', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('admin/terms', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('admin/terms', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('admin/terms', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/terms', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+        $this->renderConfigPage('admin/terms', $this->buildConfigContentViewData('terms'), false);
 	}
 	public function privacity(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/privacity', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('admin/privacity', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('admin/privacity', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('admin/privacity', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('admin/privacity', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('admin/privacity', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('admin/privacity', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('admin/privacity', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('admin/privacity', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('admin/privacity', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('admin/privacity', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/privacity', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+        $this->renderConfigPage('admin/privacity', $this->buildConfigContentViewData('privacity'), false);
 	}
 	public function menus(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/menus', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('admin/menus', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('admin/menus', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('admin/menus', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('admin/menus', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('admin/menus', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('admin/menus', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('admin/menus', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('admin/menus', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('admin/menus', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('admin/menus', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;	
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('admin/menus', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				}
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
+        $this->renderConfigPage('admin/menus', $this->buildConfigMenuViewData(), false);
 	}
 
 

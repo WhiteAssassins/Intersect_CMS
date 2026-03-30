@@ -1,5 +1,42 @@
 <?php 
 class Langs extends CI_Model{
+    public function currentIndex()
+    {
+        switch ($this->session->userdata('lang')) {
+            case 'en':
+                return 1;
+            case 'tr':
+                return 2;
+            case 'jp':
+                return 3;
+            case 'de':
+                return 4;
+            case 'ru':
+                return 5;
+            case 'zh':
+                return 6;
+            case 'fr':
+                return 7;
+            case 'pt':
+                return 8;
+            case 'hi':
+                return 9;
+            case 'ar':
+                return 10;
+            case 'es':
+            default:
+                return 0;
+        }
+    }
+
+    public function current()
+    {
+        $languages = $this->lang();
+        $index = $this->currentIndex();
+
+        return isset($languages[$index]) ? $languages[$index] : $languages[0];
+    }
+
     private function getConfigRow()
     {
         return (array) $this->db->get('config')->row_array();

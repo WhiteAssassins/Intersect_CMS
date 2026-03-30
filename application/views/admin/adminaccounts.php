@@ -1,7 +1,3 @@
-<?php 
-$resultadonews = $this->db->get('users');
-$restnews = $resultadonews->result_array();
-?>
 <div class="modal fade" id="modal_addadminaccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
@@ -79,19 +75,17 @@ $restnews = $resultadonews->result_array();
         </thead>
         <tbody>
 
-        <?php                              
-          foreach (array_reverse($restnews) as $key) {                                        
-        ?>
+        <?php foreach ($admin_account_rows as $row) { ?>
 
           <tr>
-            <td><?php echo $key['id']; ?></td>
-            <td><?php echo $key['user']; ?></td>
-            <td><?php echo $key['email']; ?></td>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['user']; ?></td>
+            <td><?php echo $row['email']; ?></td>
             <td>
                 <div class="row">
                 <form method="POST" action="<?php echo base_url('admin/deladminaccount'); ?>">
                 <label class="badge badge-danger">
-                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button style=" background-color: transparent;  border: 1px;" type="submit">
                     <span class="fa fa-trash">
                 </button>
@@ -99,15 +93,12 @@ $restnews = $resultadonews->result_array();
                 </form>
 
 
-               
+
 
                 </div>
             </td>
           </tr>
-        
-          <?php
-                            }
-                        ?>  
+        <?php } ?>  
         </tbody>
       </table>
     </div>

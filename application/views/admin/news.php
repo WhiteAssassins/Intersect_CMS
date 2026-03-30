@@ -1,7 +1,3 @@
-<?php 
-$resultadonews = $this->db->get('news');
-$restnews = $resultadonews->result_array();
-?>
 <div class="modal fade" id="modal_addnews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
@@ -83,19 +79,17 @@ $restnews = $resultadonews->result_array();
         </thead>
         <tbody>
 
-        <?php                              
-          foreach (array_reverse($restnews) as $key) {                                        
-        ?>
+        <?php foreach ($admin_news_rows as $row) { ?>
 
           <tr>
-            <td><?php echo $key['title']; ?></td>
-            <td><?php echo $key['descrip']; ?></td>
-            <td><?php echo $key['date']; ?></td>
+            <td><?php echo $row['title']; ?></td>
+            <td><?php echo $row['description']; ?></td>
+            <td><?php echo $row['date']; ?></td>
             <td>
                 <div class="row">
                 <form method="POST" action="<?php echo base_url('admin/delnews'); ?>">
                 <label class="badge badge-danger">
-                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button style=" background-color: transparent;  border: 1px;" type="submit">
                     <span class="fa fa-trash">
                 </button>
@@ -105,17 +99,17 @@ $restnews = $resultadonews->result_array();
 
                 <form method="POST" action="<?php echo base_url('admin/editnews'); ?>" style="padding-left: 10px;">
                 <label class="badge badge-warning">
-                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button style=" background-color: transparent;  border: 1px;" type="submit">
                     <span class="fas fa-pen">
                 </button>
                 </label>
                 </form>
 
-                <?php if($key['status'] == 1){ ?>
+                <?php if ($row['is_visible']) { ?>
                   <form method="POST" action="<?php echo base_url('admin/statusnews'); ?>" style="padding-left: 10px;">
                 <label class="badge badge-danger">
-                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button style=" background-color: transparent;  border: 1px;" type="submit">
                     <span class="fas fa-eye">
                 </button>
@@ -126,7 +120,7 @@ $restnews = $resultadonews->result_array();
 
                     <form method="POST" action="<?php echo base_url('admin/statusnews'); ?>" style="padding-left: 10px;">
                 <label class="badge badge-success">
-                    <input type="hidden" name="id" value="<?php echo $key['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <button style=" background-color: transparent;  border: 1px;" type="submit">
                     <span class="fas fa-eye">
                 </button>
@@ -136,10 +130,7 @@ $restnews = $resultadonews->result_array();
                 </div>
             </td>
           </tr>
-        
-          <?php
-                            }
-                        ?>  
+        <?php } ?>  
         </tbody>
       </table>
     </div>

@@ -1,8 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require FCPATH.'vendor/autoload.php';
+
 use GuzzleHttp\Client;
-class Shop extends CI_Controller {
+
+class Shop extends MY_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model('Apigettoken');
@@ -10,117 +12,60 @@ class Shop extends CI_Controller {
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
+        $this->load->model('product');
 		$this->load->model('Langs');
+    }
+
+    private function buildShopProducts()
+    {
+        $products = $this->product->getRows();
+        $rows = array();
+
+        if (!is_array($products)) {
+            return $rows;
+        }
+
+        foreach ($products as $product) {
+            if ((int) ($product['status'] ?? 0) !== 1) {
+                continue;
+            }
+
+            $rows[] = array(
+                'name' => $product['name'] ?? '',
+                'price' => $product['price'] ?? 0,
+                'image_url' => base_url('img/products/' . ($product['image'] ?? '')),
+                'details_url' => base_url('products/' . ($product['url_slug'] ?? '')),
+            );
+        }
+
+        return $rows;
     }
 	
 	public function index()
-	{	
-		$conf = $this->db->get('config');
-		$conf1 = $conf->result_array(); 
-       if($conf1['0']['mant'] == 1 AND $this->session->userdata('login') == false){
-		$base_url = base_url();
-		header("Location: $base_url/mant");
-        }else{
-			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('navbar', $lang[0]); 
-					$this->parser->parse('shop', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('navbar', $lang[1]); 
-					$this->parser->parse('shop', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('navbar', $lang[2]); 
-					$this->parser->parse('shop', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('navbar', $lang[3]); 
-					$this->parser->parse('shop', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('navbar', $lang[4]); 
-						$this->parser->parse('shop', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('navbar', $lang[5]); 
-						$this->parser->parse('shop', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('navbar', $lang[6]); 
-						$this->parser->parse('shop', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('navbar', $lang[7]); 
-						$this->parser->parse('shop', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('navbar', $lang[8]); 
-						$this->parser->parse('shop', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('navbar', $lang[9]); 
-						$this->parser->parse('shop', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('navbar', $lang[10]); 
-						$this->parser->parse('shop', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;		
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('navbar', $lang[0]); 
-					$this->parser->parse('shop', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
+	{
+        if ($this->redirectToMaintenanceIfNeeded()) {
+            return;
+        }
 
-			}
-		}
+        $this->renderPublicPage('shop', array(
+            'shop_products' => $this->buildShopProducts(),
+        ));
 	}
 	
 	public function shoping(){
 		$pedido['status'] = 0;
-		//get from post the player
 		$player = $this->input->post('player');
-		//get from post the id
 		$id = $this->input->post('id');
-		//get from session user
 		$user = $this->session->userdata('user');
-		//get from the db products the item with the id
 		$product = $this->db->get_where('products', array('id' => $id));
 		$product = $product->result_array();
-		//get from the db users the user with the user
 		$user = $this->db->get_where('users', array('user' => $user));
 		$user = $user->result_array();
-		//verify if the user balance is mayor than the price of the product
 		if($player == ''){
 			$pedido['sms'] = 'Complete todos los campos';
 			echo json_encode($pedido);
 		}else{
 		if($user[0]['balance'] >= $product[0]['price']){
-			//connect to the api
 			$apiip = $this->config->item('apiip');
 				$this->load->model('Apigettoken');
 				$accesstoken = $this->Apigettoken->apitoken();
@@ -145,7 +90,6 @@ class Shop extends CI_Controller {
 						  $estado = json_decode($res->getBody(), true);
 						  if ($res->getStatusCode() == '200') 
 							  {
-								  //reduce the balance of the user
 									$this->db->set('balance', 'balance-'.$product[0]['price'], FALSE);
 									$this->db->where('user', $user[0]['user']);
 									$this->db->update('users');
@@ -163,8 +107,4 @@ class Shop extends CI_Controller {
 
 	}
 	}
-
-
-
-
 }

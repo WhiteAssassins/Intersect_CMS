@@ -8,16 +8,11 @@
       
       <div class="carousel-inner" role="listbox">
         <div class="carousel-item pt-3 active">
-        <?php 
-            $resultado = $this->db->get('products');
-            $rest = $resultado->result_array();     
-            foreach ($rest as $key) {         
-              if($key['status'] == 1){     
-        ?>
+        <?php foreach ($shop_products as $product) { ?>
           <div class="col-md-4 mb-4">
             <div class="card card-ecommerce cards-novo">
               <div class="view overlay">
-                <img src="<?php echo base_url('img/products/');echo $key['image']; ?>" class="img-fluid"
+                <img src="<?php echo $product['image_url']; ?>" class="img-fluid"
                   alt="">
                 <a>
                   <div class="mask rgba-white-slight"></div>
@@ -26,13 +21,13 @@
               <div class="card-body">
                 <h5 class="card-title mb-1">
                   <strong>
-                    <a href="<?php echo base_url('products/'); echo $key['url_slug']; ?>" class="white-text"><?php echo $key['name']; ?></a>
+                    <a href="<?php echo $product['details_url']; ?>" class="white-text"><?php echo $product['name']; ?></a>
                   </strong>
                 </h5>
                 <div class="card-footer pb-0">
                   <div class="row mb-0">
                     <span class="float-left">
-                      <strong><?php echo $key['price']; ?>$</strong>
+                      <strong><?php echo $product['price']; ?>$</strong>
                     </span>
                     <span class="float-right">
                       <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
@@ -44,9 +39,7 @@
               </div>
             </div>
           </div>
-          <?php 
-              }
-        } ?>        
+          <?php } ?>        
       </div>
     </div>
   </section>

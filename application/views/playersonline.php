@@ -15,19 +15,13 @@
     </tr>
   </thead>
   <tbody>
-  <?php 
-            $playersonline = $this->Apiplayersonline->playeronline();
-            $datos = json_encode($playersonline['Values'], True);
-            $datos2 = json_decode($datos, True);
-            foreach ($datos2 as $key) {              
-        ?>
-
+  <?php foreach ($online_player_rows as $row) { ?>
     <tr>
-      <td><?php  echo $key['Name']; ?></td>
-      <td><?php  echo $key['ClassName']; ?></td>
-      <td><?php if($key['Gender'] == 0){ echo "Hombre";}else{ echo "Mujer"; } ?></td>
-      <td><?php  echo $key['Exp']; ?></td>
-      <td><?php  echo $key['MapName']; ?></td>
+      <td><?php echo $row['name']; ?></td>
+      <td><?php echo $row['class_name']; ?></td>
+      <td><?php echo $row['gender_label']; ?></td>
+      <td><?php echo $row['exp']; ?></td>
+      <td><?php echo $row['map_name']; ?></td>
     </tr>
     <?php } ?>
   </tbody>
