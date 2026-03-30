@@ -75,6 +75,8 @@ Valores por defecto del repo:
 
 5. Configura las variables de entorno que necesites.
 
+Puedes partir de `.env.example` y ajustar los valores a tu entorno.
+
 6. Levanta el proyecto en local:
 
 ```bash
@@ -154,6 +156,12 @@ Si solo quieres probar el proyecto rapido:
 ```bash
 composer install
 php -S 127.0.0.1:8080 router.php
+```
+
+Tambien puedes lanzar una comprobacion rapida de rutas y login admin con:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke.ps1 -BaseUrl http://127.0.0.1:8082/
 ```
 
 Si quieres usar toda la funcionalidad:

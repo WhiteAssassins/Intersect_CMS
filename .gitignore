@@ -25,3 +25,7 @@ sitemap.xml
 af45d82dc9269e0567e09abb5d6d8faa.html
 sitemap.xml
 sitemap.xml
+
+# local Codex / smoke artifacts
+.codex_*
+.codex*

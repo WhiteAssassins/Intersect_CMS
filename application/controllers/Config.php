@@ -1,46 +1,114 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-use GuzzleHttp\Client;
-class Config extends CI_Controller {
-	function __construct() {
+
+class Config extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiserverstats');
-		$this->load->model('Apiusers');
-		$this->load->model('Apiplayers');
-		$this->load->model('Langs');
+        $this->load->model('Langs');
         $this->requireAdmin();
     }
 
-    private function requireAdmin() {
-        if ($this->session->userdata('login') != true || (int) $this->session->userdata('rol') !== 1) {
-            redirect(base_url());
-            exit;
-        }
+    public function index()
+    {
+        $this->renderAdminPage('admin/config', $this->buildConfigDashboardViewData());
     }
 
-    private function getLanguageData()
+    public function legal()
     {
-        return $this->Langs->current();
+        $this->renderAdminPage('admin/legal', $this->buildConfigContentViewData('legal'));
     }
 
-    private function getConfigRow()
+    public function terms()
     {
-        return (array) $this->db->get('config')->row_array();
+        $this->renderAdminPage('admin/terms', $this->buildConfigContentViewData('terms'));
     }
 
-    private function renderConfigPage($view, array $data = array(), $withSidebar = true)
+    public function privacity()
     {
-        $viewData = array_merge($this->getLanguageData(), $data);
+        $this->renderAdminPage('admin/privacity', $this->buildConfigContentViewData('privacity'));
+    }
 
-        $this->parser->parse('header', $viewData);
-        if ($withSidebar) {
-            $this->parser->parse('sidebar', $viewData);
-        }
-        $this->parser->parse($view, $viewData);
-        $this->parser->parse('footer', $viewData);
+    public function menus()
+    {
+        $this->renderAdminPage('admin/menus', $this->buildConfigMenuViewData());
+    }
+
+    public function editcolors()
+    {
+        $this->updateConfigAndRedirect(array(
+            'color1' => $this->getPostString('color1'),
+            'color2' => $this->getPostString('color2'),
+        ));
+    }
+
+    public function mantact()
+    {
+        $this->updateConfigAndRedirect(array('mant' => 1));
+    }
+
+    public function mantdes()
+    {
+        $this->updateConfigAndRedirect(array('mant' => 0));
+    }
+
+    public function analitycs()
+    {
+        $this->updateConfigAndRedirect(array(
+            'analytics' => $this->getPostString('google'),
+        ));
+    }
+
+    public function download()
+    {
+        $this->updateConfigAndRedirect(array(
+            'download' => $this->getPostString('link'),
+        ));
+    }
+
+    public function editmenus()
+    {
+        $this->updateConfigAndRedirect(array(
+            'menuheader' => $this->getPostString('menuheader'),
+            'menu1icon' => $this->getPostString('menu1icon'),
+            'menu1header' => $this->getPostString('menu1header'),
+            'menu1text' => $this->getPostString('menu1text'),
+            'menu2icon' => $this->getPostString('menu2icon'),
+            'menu2header' => $this->getPostString('menu2header'),
+            'menu2text' => $this->getPostString('menu2text'),
+            'menu3icon' => $this->getPostString('menu3icon'),
+            'menu3header' => $this->getPostString('menu3header'),
+            'menu3text' => $this->getPostString('menu3text'),
+        ));
+    }
+
+    public function changeprivacity()
+    {
+        $this->updateConfigAndRedirect(array(
+            'privacity' => $this->input->post('privacity'),
+        ));
+    }
+
+    public function changeterms()
+    {
+        $this->updateConfigAndRedirect(array(
+            'terms' => $this->input->post('terms'),
+        ));
+    }
+
+    public function changelegal()
+    {
+        $this->updateConfigAndRedirect(array(
+            'legal' => $this->input->post('legal'),
+        ));
+    }
+
+    public function changelang()
+    {
+        $this->updateConfigAndRedirect(array(
+            'lang' => $this->getPostString('lang'),
+        ));
     }
 
     private function buildConfigDashboardViewData()
@@ -83,273 +151,10 @@ class Config extends CI_Controller {
             'config_content' => $configRow[$field] ?? '',
         );
     }
-	
-	public function index()
-	{
-        $this->renderConfigPage('admin/config', $this->buildConfigDashboardViewData());
-	}
 
-	public function editcolors(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$color1 = $this->input->post('color1');
-		$color2 = $this->input->post('color2');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'color1'=>$color1,
-			'color2'=>$color2,
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-	
-
-
-	public function mantact(){
-
-        $datos = array (
-            'mant' => 1,
-           );
-          $this->db->update('config', $datos);
-          $base_url = base_url();
-        header("Location: $base_url/config");
+    private function updateConfigAndRedirect(array $data)
+    {
+        $this->updateConfigRow($data);
+        $this->redirectTo('config');
     }
-
-
-	public function mantdes(){
-        $datos = array (
-            'mant' => 0,
-           );
-          $this->db->update('config', $datos);
-          $base_url = base_url();
-        header("Location: $base_url/config");
-    }
-
-
-
-
-	public function analitycs(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$google = $this->input->post('google');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'analytics'=>$google
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-	public function download(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$link = $this->input->post('link');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'download'=>$link
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-
-
-	public function legal(){
-        $this->renderConfigPage('admin/legal', $this->buildConfigContentViewData('legal'));
-	}
-
-	public function terms(){
-        $this->renderConfigPage('admin/terms', $this->buildConfigContentViewData('terms'));
-	}
-	public function privacity(){
-        $this->renderConfigPage('admin/privacity', $this->buildConfigContentViewData('privacity'));
-	}
-	public function menus(){
-        $this->renderConfigPage('admin/menus', $this->buildConfigMenuViewData());
-	}
-
-
-	public function editmenus(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$menuheader = $this->input->post('menuheader');
-
-		$menu1icon = $this->input->post('menu1icon');
-		$menu1header = $this->input->post('menu1header');
-		$menu1text = $this->input->post('menu1text');
-
-		$menu2icon = $this->input->post('menu2icon');
-		$menu2header = $this->input->post('menu2header');
-		$menu2text = $this->input->post('menu2text');
-
-		$menu3icon = $this->input->post('menu3icon');
-		$menu3header = $this->input->post('menu3header');
-		$menu3text = $this->input->post('menu3text');
-
-		$id = 1;
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'menuheader'=>$menuheader,
-
-			'menu1icon'=>$menu1icon,
-			'menu1header'=>$menu1header,
-			'menu1text'=>$menu1text,
-
-			'menu2icon'=>$menu2icon,
-			'menu2header'=>$menu2header,
-			'menu2text'=>$menu2text,
-
-			'menu3icon'=>$menu3icon,
-			'menu3header'=>$menu3header,
-			'menu3text'=>$menu3text,
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-	public function changeprivacity(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$privacity = $this->input->post('privacity');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'privacity'=>$privacity
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-	public function changeterms(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$terms = $this->input->post('terms');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'terms'=>$terms
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-	public function changelegal(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$id = 1;
-		$legal = $this->input->post('legal');
-		$where = [
-			'id'=>$id,
-
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'legal'=>$legal
-
-		];
-		$this->db->where('id', $id);
-        $this->db->update('config', $datos); 
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-	public function changelang(){
-		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
-		$lang = $this->input->post('lang');
-		$id = 1;
-		$where = [
-			'id'=>$id,
-		];
-		$this->db->where($where);
-		$this->db->get('config');
-		$datos = [
-			'lang'=>$lang,
-		];
-		$this->db->where('id', $id);
-		$this->db->update('config', $datos);
-		$base_url = base_url();
-		header("Location: $base_url/config");
-	}else{
-		$base_url = base_url();
-		header("Location: $base_url");
-	}
-	}
-
-
-
-
-
-
 }

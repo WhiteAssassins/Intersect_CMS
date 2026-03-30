@@ -3,9 +3,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+    protected function respondJson(array $payload, $statusCode = 200)
+    {
+        $this->output
+            ->set_status_header($statusCode)
+            ->set_content_type('application/json')
+            ->set_output(json_encode($payload));
+    }
+
     protected function getConfigRow()
     {
-        return (array) $this->db->get('config')->row_array();
+        $this->load->model('Sitecontext');
+        return $this->Sitecontext->getConfigRow();
+    }
+
+    protected function updateConfigRow(array $data)
+    {
+        $this->db->where('id', 1);
+        return $this->db->update('config', $data);
     }
 
     protected function isMaintenanceEnabled()
@@ -85,5 +100,20 @@ class MY_Controller extends CI_Controller
 
         $this->redirectTo($redirectPath);
         return false;
+    }
+
+    protected function getPostString($key)
+    {
+        return trim((string) $this->input->post($key));
+    }
+
+    protected function logAdminAction($action, $user = 'N/A')
+    {
+        return $this->db->insert('logs', array(
+            'admin' => $this->session->userdata('user'),
+            'user' => $user,
+            'action' => $action,
+            'time' => date('F j, Y, g:i a'),
+        ));
     }
 }

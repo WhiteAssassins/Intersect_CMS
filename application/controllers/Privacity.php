@@ -2,15 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Privacity extends MY_Controller {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Sitecontext');
+    }
+
 	public function index()
 	{
         if ($this->redirectToMaintenanceIfNeeded()) {
             return;
         }
 
-        $configRow = (array) $this->db->get('config')->row_array();
         $this->renderPublicPage('privacity', array(
-            'privacity_content' => $configRow['privacity'] ?? '',
+            'privacity_content' => $this->Sitecontext->getConfigContent('privacity'),
         ));
 	}
 }

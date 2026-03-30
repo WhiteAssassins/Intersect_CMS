@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <main class="admin-shell admin-shell--page">
   <section class="admin-section admin-section--tight">

@@ -8,6 +8,23 @@
       <p class="admin-section__text">{admin_metrics_text}</p>
     </div>
 
+    <div class="admin-overview-grid">
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{gradient}</span>
+        <strong class="admin-overview-stat__value">
+          <span class="admin-color-chip" style="background: linear-gradient(135deg, <?php echo $config_color1; ?>, <?php echo $config_color2; ?>);"></span>
+        </strong>
+      </article>
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{configdownloadbutton}</span>
+        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $config_download !== '' ? 'ON' : 'OFF'; ?></strong>
+      </article>
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{maintenance}</span>
+        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $config_maintenance_enabled ? 'ON' : 'OFF'; ?></strong>
+      </article>
+    </div>
+
     <div class="admin-config-grid">
       <article class="admin-config-card">
         <div class="admin-config-card__header">
@@ -49,7 +66,7 @@
         </div>
         <form method="POST" action="<?php echo base_url('config/download'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
-          <input type="text" class="form-control" name="link" placeholder="Link Descarga" value="<?php echo $config_download; ?>">
+          <input type="text" class="form-control" name="link" placeholder="Link" value="<?php echo $config_download; ?>">
           <button type="submit" class="admin-button admin-button--primary">{change}</button>
         </form>
       </article>
@@ -73,28 +90,10 @@
           <span class="admin-config-card__icon"><i class="fas fa-balance-scale"></i></span>
           <h3>{changelegal}</h3>
         </div>
-        <div class="form-admin">
+        <div class="admin-editor__actions">
           <a href="<?php echo base_url('config/legal'); ?>" class="admin-button admin-button--primary">{change}</a>
-        </div>
-      </article>
-
-      <article class="admin-config-card">
-        <div class="admin-config-card__header">
-          <span class="admin-config-card__icon"><i class="fas fa-file-contract"></i></span>
-          <h3>{changeterms}</h3>
-        </div>
-        <div class="form-admin">
-          <a href="<?php echo base_url('config/terms'); ?>" class="admin-button admin-button--primary">{change}</a>
-        </div>
-      </article>
-
-      <article class="admin-config-card">
-        <div class="admin-config-card__header">
-          <span class="admin-config-card__icon"><i class="fas fa-user-secret"></i></span>
-          <h3>{changeprivacity}</h3>
-        </div>
-        <div class="form-admin">
-          <a href="<?php echo base_url('config/privacity'); ?>" class="admin-button admin-button--primary">{change}</a>
+          <a href="<?php echo base_url('config/terms'); ?>" class="admin-button admin-button--ghost">{changeterms}</a>
+          <a href="<?php echo base_url('config/privacity'); ?>" class="admin-button admin-button--ghost">{changeprivacity}</a>
         </div>
       </article>
 
@@ -103,8 +102,8 @@
           <span class="admin-config-card__icon"><i class="fas fa-th-large"></i></span>
           <h3>{editmenus}</h3>
         </div>
-        <div class="form-admin">
-          <a href="<?php echo base_url('config/menus'); ?>" class="admin-button admin-button--primary">{change}</a>
+        <div class="admin-editor__actions">
+          <a href="<?php echo base_url('config/menus'); ?>" class="admin-button admin-button--primary">{editmenus}</a>
         </div>
       </article>
 
@@ -115,7 +114,7 @@
         </div>
         <form method="POST" action="<?php echo base_url('config/changelang'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
-          <select class="mdb-select md-form" name="lang">
+          <select class="form-control" name="lang">
             <option value="" disabled selected>{chooselang}</option>
             <option value="es">ES</option>
             <option value="en">EN</option>

@@ -16,7 +16,7 @@
           <input type="text" class="form-control" placeholder="{price}" value="<?php echo $product_price_value; ?>" name="price">
           <input type="text" class="form-control" placeholder="{atackan}" value="<?php echo $product_attack_animation_value; ?>" name="aatk">
           <input type="text" class="form-control" placeholder="{interacan}" value="<?php echo $product_interaction_animation_value; ?>" name="ainterac">
-          <input type="text" class="form-control" placeholder="Ingame ID" value="<?php echo $product_ingame_id_value; ?>" name="ingameid">
+          <input type="text" class="form-control" placeholder="{ingameid}" value="<?php echo $product_ingame_id_value; ?>" name="ingameid">
         </div>
         <div class="admin-editor__actions">
           <button type="submit" class="admin-button admin-button--primary">{edit}</button>

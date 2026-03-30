@@ -1,80 +1,76 @@
-<div class="modal fade" id="modal_newchangelog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modal_newchangelog" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
-        <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">{addchangelog}</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body mx-3">
-              <form action="<?php echo base_url('admin/addchangelog'); ?>" method="post"  enctype="multipart/form-data">
-                  <?php echo cms_csrf_field(); ?>
-                <div class="md-form mb-5">
-                    
-                    <input type="text" id="defaultForm-email" class="form-control validate" name="title">
-                    <label for="defaultForm-email">{title}</label>
-                </div>
-                <div class="md-form mb-5">
-                    <textarea id="form7" class="md-textarea form-control" rows="3" name="text"></textarea>
-                    <label for="form7">{description}</label>
-                </div>
-
-              
-                
-        </div>
-        
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-info waves-effect" type="submit">{addchangelog}</button>
-                </div>
+            <div class="modal-header text-center modal-shell__header">
+                <span class="modal-shell__badge"><i class="fas fa-stream"></i></span>
+                <h4 class="modal-title w-100 font-weight-bold">{addchangelog}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3 modal-shell__body">
+                <form action="<?php echo base_url('admin/addchangelog'); ?>" method="post" class="modal-shell__form">
+                    <?php echo cms_csrf_field(); ?>
+                    <div class="md-form mb-5">
+                        <input type="text" class="form-control validate" name="title">
+                        <label>{title}</label>
+                    </div>
+                    <div class="md-form mb-4 pink-textarea active-pink-textarea">
+                        <textarea class="md-textarea form-control" rows="5" name="text" placeholder="{description}"></textarea>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center modal-shell__footer">
+                        <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addchangelog}</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
+<?php $changelogCount = is_array($admin_changelog_rows) ? count($admin_changelog_rows) : 0; ?>
 
 <main class="admin-shell admin-shell--page">
-<section class="admin-section admin-section--tight">
-  <div class="admin-panel">
-    <div class="admin-panel__header admin-panel__header--with-action">
+  <section class="admin-section">
+    <div class="admin-section__heading">
       <div>
         <span class="admin-section__eyebrow">{admin_sidebar_content}</span>
-        <h2 class="admin-panel__title">{changelog}</h2>
+        <h2 class="admin-section__title">{changelog}</h2>
       </div>
       <button type="button" class="admin-button admin-button--primary btn_modal_newchangelog">
         <i class="fas fa-plus"></i>
         <span>{addchangelog}</span>
       </button>
     </div>
-    <div class="timeline-main">
-      <!-- Timeline Wrapper -->
-      <ul class="stepper stepper-vertical timeline timeline-basic pl-0">
+
+    <div class="admin-overview-grid">
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{changelog}</span>
+        <strong class="admin-overview-stat__value"><?php echo $changelogCount; ?></strong>
+      </article>
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{title}</span>
+        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $changelogCount > 0 ? html_escape($admin_changelog_rows[0]['title']) : '--'; ?></strong>
+      </article>
+      <article class="admin-overview-stat">
+        <span class="admin-overview-stat__label">{status}</span>
+        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $changelogCount > 0 ? 'LIVE' : 'EMPTY'; ?></strong>
+      </article>
+    </div>
+
+    <div class="admin-feed">
       <?php if (empty($admin_changelog_rows)) { ?>
-        <li>
-          <div class="step-content z-depth-1 p-4 cards-novo admin-empty-block">
-            <p class="mb-0">{emptyTable}</p>
-          </div>
-        </li>
+        <div class="admin-panel admin-empty-block">
+          <p class="mb-0">{emptyTable}</p>
+        </div>
       <?php } else { ?>
-        <?php foreach ($admin_changelog_rows as $row) { ?>  
-          <li<?php echo $row['timeline_item_class'] !== '' ? ' class="' . $row['timeline_item_class'] . '"' : ''; ?>>
-            <a href="#!">
-              <span class="circle info-color z-depth-1-half"><i class="far fa-check" aria-hidden="true"></i></span>
-            </a>
-            <div class="step-content z-depth-1 <?php echo $row['content_alignment_class']; ?> p-4 cards-novo">
-              <h4 class="font-weight-bold"><?php echo $row['title']; ?></h4>
-              <p class="mt-4"><?php echo $row['text']; ?></p>
+        <?php foreach ($admin_changelog_rows as $row) { ?>
+          <article class="admin-feed__item">
+            <div class="admin-feed__marker"></div>
+            <div class="admin-feed__card">
+              <div class="admin-feed__content">
+                <h3><?php echo $row['title']; ?></h3>
+                <p><?php echo $row['text']; ?></p>
+              </div>
               <form method="POST" action="<?php echo base_url('admin/delchangelog'); ?>">
                 <?php echo cms_csrf_field(); ?>
                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
@@ -83,11 +79,9 @@
                 </button>
               </form>
             </div>
-          </li>
+          </article>
         <?php } ?>
       <?php } ?>
-      </ul>
     </div>
-  </div>
-</section>
+  </section>
 </main>
