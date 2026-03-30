@@ -1,16 +1,48 @@
-<footer class="page-footer font-small navbar-novo footer-bottom">
+<footer class="page-footer footer-bottom site-footer">
+  <div class="site-footer__shell">
+    <div class="site-footer__brand">
+      <a class="site-footer__brand-link" href="<?php echo base_url(); ?>">
+        <span class="site-footer__brand-mark">
+          <img src="<?php echo base_url('public/favicon/favicon.svg'); ?>" alt="{site_title}">
+        </span>
+        <span class="site-footer__brand-copy">
+          <span class="site-footer__brand-title">{site_title}</span>
+          <span class="site-footer__brand-subtitle">{site_nav_subtitle}</span>
+        </span>
+      </a>
+      <p class="site-footer__tagline">{site_footer_tagline}</p>
+      <p class="site-footer__description">{site_footer_description}</p>
+    </div>
 
+    <div class="site-footer__links">
+      <div class="site-footer__group">
+        <span class="site-footer__heading">{site_footer_explore}</span>
+        <a href="<?php echo base_url('news'); ?>">{news}</a>
+        <a href="<?php echo base_url('shop'); ?>">{shop}</a>
+        <a href="<?php echo base_url('changelog'); ?>">{changelog}</a>
+      </div>
+      <div class="site-footer__group">
+        <span class="site-footer__heading">{site_footer_project}</span>
+        <a href="<?php echo base_url('playersonline'); ?>">{onlineplayers}</a>
+        <a href="<?php echo base_url('users'); ?>">{listusers}</a>
+        <a href="<?php echo base_url('players'); ?>">{listplayers}</a>
+      </div>
+      <div class="site-footer__group">
+        <span class="site-footer__heading">{site_footer_legal}</span>
+        <a href="<?php echo base_url('legal'); ?>">{legalnotice}</a>
+        <a href="<?php echo base_url('terms'); ?>">{terms}</a>
+        <a href="<?php echo base_url('privacity'); ?>">{privacity}</a>
+      </div>
+    </div>
+  </div>
 
-<div class="footer-copyright text-center py-3">{site_title} &copy; {current_year} {copyright}:
-  <a href="#">AEWhite Devs </a>|
-     <a href="<?php echo base_url('legal'); ?>">{legalnotice} </a>|
-     <a href="<?php echo base_url('terms'); ?>">{terms} </a>|
-     <a href="<?php echo base_url('privacity'); ?>">{privacity} </a>
-     
-</div>
-
-
-
+  <div class="site-footer__bottom">
+    <div class="site-footer__bottom-shell">
+      <span>{site_title} &copy; {current_year} {copyright}</span>
+      <span class="site-footer__divider"></span>
+      <span>AEWhite Devs</span>
+    </div>
+  </div>
 </footer>
 </body> 
 <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.js"></script>

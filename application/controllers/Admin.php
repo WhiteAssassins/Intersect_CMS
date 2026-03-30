@@ -165,6 +165,27 @@ class Admin extends CI_Controller {
         return $items;
     }
 
+    private function buildAdminFeedbackRows()
+    {
+        $rows = $this->db->order_by('id', 'DESC')->get('feedback')->result_array();
+        $items = array();
+
+        foreach ($rows as $row) {
+            $items[] = array(
+                'id' => $row['id'] ?? 0,
+                'title' => $row['title'] ?? '',
+                'type' => $row['type'] ?? '',
+                'user' => $row['user'] ?? '',
+                'email' => $row['email'] ?? '',
+                'status' => $row['status'] ?? '',
+                'admin' => $row['admin'] ?? '',
+                'text' => $row['text'] ?? '',
+            );
+        }
+
+        return $items;
+    }
+
     private function buildEditableNewsData($id)
     {
         $row = (array) $this->db->get_where('news', array('id' => $id))->row_array();
@@ -311,6 +332,11 @@ class Admin extends CI_Controller {
 	public function adminaccounts(){
 		$this->renderAdminView('admin/adminaccounts', array(
             'admin_account_rows' => $this->buildAdminAccountRows(),
+        ));
+	}
+	public function tickets(){
+		$this->renderAdminView('admin/tickets', array(
+            'admin_feedback_rows' => $this->buildAdminFeedbackRows(),
         ));
 	}
 	public function objects(){

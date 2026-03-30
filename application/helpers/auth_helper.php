@@ -35,3 +35,15 @@ if (!function_exists('cms_password_needs_rehash')) {
         return password_needs_rehash($storedHash, PASSWORD_DEFAULT);
     }
 }
+
+if (!function_exists('cms_csrf_field')) {
+    function cms_csrf_field() {
+        $ci = & get_instance();
+
+        if (!$ci->config->item('csrf_protection')) {
+            return '';
+        }
+
+        return '<input type="hidden" name="' . html_escape($ci->security->get_csrf_token_name()) . '" value="' . html_escape($ci->security->get_csrf_hash()) . '">';
+    }
+}

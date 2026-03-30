@@ -5,7 +5,8 @@
     <div class="col-xl-7 pb-2">
       <br>
     <h4 class="text-center font-weight-bold mb-4 pb-2">{balanceavailable}: <?php echo $panel_balance; ?><a href="<?php echo base_url('userpanel/recharge'); ?>"><span class="badge badge-success ml-2"><i class="fas fa-plus"></i></span></a></h4>
-            <form method="POST"  action="<?php echo base_url('userpanel/changepassword'); ?>"  class="form-admin" id="form_changepassword">
+                <form method="POST"  action="<?php echo base_url('userpanel/changepassword'); ?>"  class="form-admin" id="form_changepassword">
+                  <?php echo cms_csrf_field(); ?>
                 <h4 class="text-center font-weight-bold mb-4 pb-2">{changepassword}</h4>
                 <div class="md-form mb-4">
                     <input type="password" id="prefixInside" class="form-control" name="oldpassword" placeholder="{oldpassword}" required>

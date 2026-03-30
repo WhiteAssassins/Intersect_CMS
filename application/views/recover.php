@@ -4,6 +4,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-xl-7 pb-2">
     <form method="POST" action="<?php echo base_url('recover/rec'); ?>" class="form-admin">
+                        <?php echo cms_csrf_field(); ?>
                         <div class="md-form mb-4">
                         <input type="text" id="prefixInside" class="form-control" name="user" placeholder="{user}">
                         </div>

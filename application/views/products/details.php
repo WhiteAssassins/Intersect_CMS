@@ -28,6 +28,7 @@
           <div class="mt-5">
             <div class="row text-center text-md-left">
               <form method="POST" action="<?php echo base_url('shop/shoping'); ?>" class="form-admin" id="form_buyitem">
+              <?php echo cms_csrf_field(); ?>
               <div class="col-md-4 col-12 ">
                   <input type="hidden" value="<?php echo $products['id']; ?>" name="id">    
                 </div>

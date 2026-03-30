@@ -18,6 +18,7 @@ class MY_Controller extends CI_Controller
     protected function redirectTo($path)
     {
         header('Location: ' . base_url($path));
+        exit;
     }
 
     protected function getLanguageData()

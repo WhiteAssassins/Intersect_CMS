@@ -8,7 +8,8 @@
             </button>
         </div>
         <div class="modal-body mx-3">
-            <form action="<?php echo base_url('admin/addchangelog'); ?>" method="post"  enctype="multipart/form-data">
+              <form action="<?php echo base_url('admin/addchangelog'); ?>" method="post"  enctype="multipart/form-data">
+                  <?php echo cms_csrf_field(); ?>
                 <div class="md-form mb-5">
                     
                     <input type="text" id="defaultForm-email" class="form-control validate" name="title">
@@ -43,53 +44,50 @@
 
 
 
-    <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light btn_modal_newchangelog " >
-            <i class="fas fa-plus mt-0"></i>
-          </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-<div class="row">
-  <div class="col-md-12">
+<main class="admin-shell admin-shell--page">
+<section class="admin-section admin-section--tight">
+  <div class="admin-panel">
+    <div class="admin-panel__header admin-panel__header--with-action">
+      <div>
+        <span class="admin-section__eyebrow">{admin_sidebar_content}</span>
+        <h2 class="admin-panel__title">{changelog}</h2>
+      </div>
+      <button type="button" class="admin-button admin-button--primary btn_modal_newchangelog">
+        <i class="fas fa-plus"></i>
+        <span>{addchangelog}</span>
+      </button>
+    </div>
     <div class="timeline-main">
       <!-- Timeline Wrapper -->
       <ul class="stepper stepper-vertical timeline timeline-basic pl-0">
-      <?php foreach ($admin_changelog_rows as $row) { ?>  
-                                     
-        <li<?php echo $row['timeline_item_class'] !== '' ? ' class="' . $row['timeline_item_class'] . '"' : ''; ?>>
-        
-          <a href="#!">
-            <span class="circle info-color z-depth-1-half"><i class="far fa-check" aria-hidden="true"></i></span>
-            
-          </a>
-          <div class="step-content z-depth-1 <?php echo $row['content_alignment_class']; ?> p-4 cards-novo">
-          
-            <h4 class="font-weight-bold"> <?php echo $row['title']; ?></h4>
-            <p class="mt-4"><?php echo $row['text']; ?></p>
-            <form method="POST" action="<?php echo base_url('admin/delchangelog'); ?>">
-                <label class="badge badge-danger">
-                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                    <button style=" background-color: transparent;  border: 1px;" type="submit">
-                    <span class="fa fa-trash">
-                </button>
-                </label>
-                </form>
+      <?php if (empty($admin_changelog_rows)) { ?>
+        <li>
+          <div class="step-content z-depth-1 p-4 cards-novo admin-empty-block">
+            <p class="mb-0">{emptyTable}</p>
           </div>
         </li>
+      <?php } else { ?>
+        <?php foreach ($admin_changelog_rows as $row) { ?>  
+          <li<?php echo $row['timeline_item_class'] !== '' ? ' class="' . $row['timeline_item_class'] . '"' : ''; ?>>
+            <a href="#!">
+              <span class="circle info-color z-depth-1-half"><i class="far fa-check" aria-hidden="true"></i></span>
+            </a>
+            <div class="step-content z-depth-1 <?php echo $row['content_alignment_class']; ?> p-4 cards-novo">
+              <h4 class="font-weight-bold"><?php echo $row['title']; ?></h4>
+              <p class="mt-4"><?php echo $row['text']; ?></p>
+              <form method="POST" action="<?php echo base_url('admin/delchangelog'); ?>">
+                <?php echo cms_csrf_field(); ?>
+                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                <button class="admin-icon-btn admin-icon-btn--danger" type="submit" aria-label="{action}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </div>
+          </li>
         <?php } ?>
+      <?php } ?>
       </ul>
     </div>
   </div>
-</div>
-</div>
+</section>
+</main>

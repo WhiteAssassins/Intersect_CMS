@@ -191,17 +191,17 @@ class Config extends CI_Controller {
 
 
 	public function legal(){
-        $this->renderConfigPage('admin/legal', $this->buildConfigContentViewData('legal'), false);
+        $this->renderConfigPage('admin/legal', $this->buildConfigContentViewData('legal'));
 	}
 
 	public function terms(){
-        $this->renderConfigPage('admin/terms', $this->buildConfigContentViewData('terms'), false);
+        $this->renderConfigPage('admin/terms', $this->buildConfigContentViewData('terms'));
 	}
 	public function privacity(){
-        $this->renderConfigPage('admin/privacity', $this->buildConfigContentViewData('privacity'), false);
+        $this->renderConfigPage('admin/privacity', $this->buildConfigContentViewData('privacity'));
 	}
 	public function menus(){
-        $this->renderConfigPage('admin/menus', $this->buildConfigMenuViewData(), false);
+        $this->renderConfigPage('admin/menus', $this->buildConfigMenuViewData());
 	}
 
 

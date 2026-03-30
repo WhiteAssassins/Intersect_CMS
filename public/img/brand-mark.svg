@@ -1,0 +1,34 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="112" y1="104" x2="592" y2="632" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4B860"/>
+      <stop offset="0.42" stop-color="#DE6B42"/>
+      <stop offset="1" stop-color="#7A262B"/>
+    </linearGradient>
+    <linearGradient id="crystal" x1="360" y1="116" x2="360" y2="605" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF0C7"/>
+      <stop offset="0.34" stop-color="#F4B860"/>
+      <stop offset="1" stop-color="#8C2D2F"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="162" y1="150" x2="559" y2="595" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8E4" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#F4B860" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="glow" x="126" y="80" width="468" height="560" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="18" result="effect1_foregroundBlur"/>
+    </filter>
+  </defs>
+  <rect width="720" height="720" rx="168" fill="#120D13"/>
+  <rect x="48" y="48" width="624" height="624" rx="136" fill="url(#bg)"/>
+  <circle cx="360" cy="360" r="210" stroke="url(#stroke)" stroke-width="3" stroke-dasharray="8 16" opacity="0.48"/>
+  <circle cx="360" cy="360" r="148" stroke="url(#stroke)" stroke-width="2" opacity="0.32"/>
+  <g filter="url(#glow)">
+    <path d="M360 116L470 252L420 540L360 605L300 540L250 252L360 116Z" fill="url(#crystal)"/>
+    <path d="M360 116L420 540M360 116L300 540M250 252H470M300 540H420" stroke="#FFF7E0" stroke-opacity="0.7" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M360 198L397 250L379 468L360 498L341 468L323 250L360 198Z" fill="#1E1117" fill-opacity="0.92"/>
+  </g>
+  <path d="M219 547L501 547" stroke="#FFF4D6" stroke-opacity="0.55" stroke-width="12" stroke-linecap="round"/>
+  <path d="M248 585L472 585" stroke="#FFF4D6" stroke-opacity="0.28" stroke-width="8" stroke-linecap="round"/>
+</svg>

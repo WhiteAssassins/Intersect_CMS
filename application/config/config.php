@@ -22,9 +22,19 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-if (ENVIRONMENT !== 'production' && isset($_SERVER['HTTP_HOST']))
+$is_https_request = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+	|| (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443)
+	|| filter_var(getenv('CMS_FORCE_HTTPS'), FILTER_VALIDATE_BOOLEAN);
+
+$configured_base_url = getenv('CMS_BASE_URL');
+
+if ($configured_base_url !== FALSE && $configured_base_url !== '')
 {
-	$scheme = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+	$config['base_url'] = rtrim($configured_base_url, '/').'/';
+}
+elseif (ENVIRONMENT !== 'production' && isset($_SERVER['HTTP_HOST']))
+{
+	$scheme = $is_https_request ? 'https' : 'http';
 	$script_path = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
 	$script_path = trim($script_path, '/');
 	$config['base_url'] = $scheme.'://'.$_SERVER['HTTP_HOST'].($script_path !== '' ? '/'.$script_path : '').'/';
@@ -333,7 +343,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = getenv('CMS_ENCRYPTION_KEY') ?: '';
 
 /*
 |--------------------------------------------------------------------------
@@ -389,7 +399,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'intersect_session_novo';
 $config['sess_expiration'] = 500200;
-$config['sess_save_path'] = (ENVIRONMENT !== 'production' ? sys_get_temp_dir() : APPPATH.'cache/sessions');
+$config['sess_save_path'] = getenv('CMS_SESSION_PATH') ?: (ENVIRONMENT !== 'production' ? sys_get_temp_dir() : APPPATH.'cache/sessions');
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -412,8 +422,8 @@ $config['sess_regenerate_destroy'] = FALSE;
 $config['cookie_prefix']	= 'intersectcmsnovo';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_secure']	= $is_https_request;
+$config['cookie_httponly'] 	= TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -457,12 +467,13 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
+$config['csrf_protection'] = filter_var(getenv('CMS_CSRF_PROTECTION'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+$config['csrf_protection'] = $config['csrf_protection'] === NULL ? (ENVIRONMENT === 'production') : $config['csrf_protection'];
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_regenerate'] = FALSE;
+$config['csrf_exclude_uris'] = array('callback');
 
 /*
 |--------------------------------------------------------------------------
@@ -530,10 +541,10 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['apiip'] = 'apipip';
-$config['apiuser'] = 'apiuser';
-$config['apipass'] = 'apipass';
-$config['apiqvapayid'] = 'apiqvapayid';
-$config['apiqvapaysecret'] = 'apiqvapaysecret';
-$config['supportemail'] = 'supportemail';
-$config['supportemailpassword'] = 'supportemailpassword';
+$config['apiip'] = getenv('CMS_API_IP') ?: 'apipip';
+$config['apiuser'] = getenv('CMS_API_USER') ?: 'apiuser';
+$config['apipass'] = getenv('CMS_API_PASS') ?: 'apipass';
+$config['apiqvapayid'] = getenv('CMS_QVAPAY_ID') ?: 'apiqvapayid';
+$config['apiqvapaysecret'] = getenv('CMS_QVAPAY_SECRET') ?: 'apiqvapaysecret';
+$config['supportemail'] = getenv('CMS_SUPPORT_EMAIL') ?: 'supportemail';
+$config['supportemailpassword'] = getenv('CMS_SUPPORT_EMAIL_PASSWORD') ?: 'supportemailpassword';

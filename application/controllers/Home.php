@@ -1,260 +1,301 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 require FCPATH.'vendor/autoload.php';
+
 use GuzzleHttp\Client;
-class Home extends CI_Controller {
+use GuzzleHttp\Exception\GuzzleException;
+
+class Home extends MY_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
-		$this->load->model('Apiplayers');
-		$this->load->model('Langs');
-    }
-
-    private function getLanguageIndex()
-    {
-        switch ($this->session->userdata('lang')) {
-            case 'en': return 1;
-            case 'tr': return 2;
-            case 'jp': return 3;
-            case 'de': return 4;
-            case 'ru': return 5;
-            case 'zh': return 6;
-            case 'fr': return 7;
-            case 'pt': return 8;
-            case 'hi': return 9;
-            case 'ar': return 10;
-            case 'es':
-            default:
-                return 0;
-        }
+        $this->load->model('Langs');
     }
 
     private function buildHomeViewData(array $configRow)
     {
         $serverStats = (array) $this->Apiserverstats->serverinfo();
         $users = (array) $this->Apiusers->user();
+        $onlineCount = (int) ($serverStats['onlineCount'] ?? 0);
+        $totalUsers = (int) ($users['Total'] ?? 0);
+        $uptimeHours = round(((float) ($serverStats['uptime'] ?? 0)) / 1000 / 60 / 60, 2);
+        $languageData = $this->Langs->rebrandText($this->session->userdata('lang') ?: 'es');
+
+        $menuHeader = trim((string) ($configRow['menuheader'] ?? ''));
+        $featureOneHeader = trim((string) ($configRow['menu1header'] ?? ''));
+        $featureTwoHeader = trim((string) ($configRow['menu2header'] ?? ''));
+        $featureThreeHeader = trim((string) ($configRow['menu3header'] ?? ''));
+        $featureOneText = trim((string) ($configRow['menu1text'] ?? ''));
+        $featureTwoText = trim((string) ($configRow['menu2text'] ?? ''));
+        $featureThreeText = trim((string) ($configRow['menu3text'] ?? ''));
+        $featureOneIcon = trim((string) ($configRow['menu1icon'] ?? '')) ?: 'fas fa-satellite-dish';
+        $featureTwoIcon = trim((string) ($configRow['menu2icon'] ?? '')) ?: 'fas fa-shield-alt';
+        $featureThreeIcon = trim((string) ($configRow['menu3icon'] ?? '')) ?: 'fas fa-crown';
 
         return array(
-            'home_uptime_hours' => round(((float) ($serverStats['uptime'] ?? 0)) / 1000 / 60 / 60, 2),
-            'home_online_count' => (int) ($serverStats['onlineCount'] ?? 0),
-            'home_total_users' => (int) ($users['Total'] ?? 0),
-            'home_menu_header' => $configRow['menuheader'] ?? '',
-            'home_menu1_icon' => $configRow['menu1icon'] ?? '',
-            'home_menu1_header' => $configRow['menu1header'] ?? '',
-            'home_menu1_text' => $configRow['menu1text'] ?? '',
-            'home_menu2_icon' => $configRow['menu2icon'] ?? '',
-            'home_menu2_header' => $configRow['menu2header'] ?? '',
-            'home_menu2_text' => $configRow['menu2text'] ?? '',
-            'home_menu3_icon' => $configRow['menu3icon'] ?? '',
-            'home_menu3_header' => $configRow['menu3header'] ?? '',
-            'home_menu3_text' => $configRow['menu3text'] ?? '',
+            'home_uptime_hours' => $uptimeHours,
+            'home_online_count' => $onlineCount,
+            'home_total_users' => $totalUsers,
+            'home_hero_kicker' => $languageData['home_hero_kicker'] ?? '',
+            'home_menu_header' => $menuHeader !== '' ? $menuHeader : ($languageData['home_default_lead'] ?? ''),
+            'home_menu1_icon' => $featureOneIcon,
+            'home_menu1_header' => $featureOneHeader !== '' ? $featureOneHeader : ($languageData['home_default_feature_one_title'] ?? ''),
+            'home_menu1_text' => $featureOneText !== '' ? $featureOneText : ($languageData['home_default_feature_one_text'] ?? ''),
+            'home_menu2_icon' => $featureTwoIcon,
+            'home_menu2_header' => $featureTwoHeader !== '' ? $featureTwoHeader : ($languageData['home_default_feature_two_title'] ?? ''),
+            'home_menu2_text' => $featureTwoText !== '' ? $featureTwoText : ($languageData['home_default_feature_two_text'] ?? ''),
+            'home_menu3_icon' => $featureThreeIcon,
+            'home_menu3_header' => $featureThreeHeader !== '' ? $featureThreeHeader : ($languageData['home_default_feature_three_title'] ?? ''),
+            'home_menu3_text' => $featureThreeText !== '' ? $featureThreeText : ($languageData['home_default_feature_three_text'] ?? ''),
+            'home_support_title' => $languageData['home_support_title'] ?? '',
+            'home_support_text' => $languageData['home_support_text'] ?? '',
+            'home_story_title' => $languageData['home_story_title'] ?? '',
+            'home_story_text' => $languageData['home_story_text'] ?? '',
+            'home_story_card_one_eyebrow' => $languageData['home_story_card_one_eyebrow'] ?? '',
+            'home_story_card_two_eyebrow' => $languageData['home_story_card_two_eyebrow'] ?? '',
+            'home_story_card_three_eyebrow' => $languageData['home_story_card_three_eyebrow'] ?? '',
+            'home_final_title' => $languageData['home_final_title'] ?? '',
+            'home_final_text' => $languageData['home_final_text'] ?? '',
+            'home_feature_rows' => array(
+                array(
+                    'icon' => $featureOneIcon,
+                    'title' => $featureOneHeader !== '' ? $featureOneHeader : ($languageData['home_default_feature_one_title'] ?? ''),
+                    'text' => $featureOneText !== '' ? $featureOneText : ($languageData['home_default_feature_one_text'] ?? ''),
+                ),
+                array(
+                    'icon' => $featureTwoIcon,
+                    'title' => $featureTwoHeader !== '' ? $featureTwoHeader : ($languageData['home_default_feature_two_title'] ?? ''),
+                    'text' => $featureTwoText !== '' ? $featureTwoText : ($languageData['home_default_feature_two_text'] ?? ''),
+                ),
+                array(
+                    'icon' => $featureThreeIcon,
+                    'title' => $featureThreeHeader !== '' ? $featureThreeHeader : ($languageData['home_default_feature_three_title'] ?? ''),
+                    'text' => $featureThreeText !== '' ? $featureThreeText : ($languageData['home_default_feature_three_text'] ?? ''),
+                ),
+            ),
+            'home_metric_rows' => array(
+                array(
+                    'value' => $onlineCount,
+                    'suffix' => '',
+                    'label' => '{useronline}',
+                    'icon' => 'fas fa-signal',
+                    'counter_class' => 'count1',
+                    'time' => 1000,
+                ),
+                array(
+                    'value' => $totalUsers,
+                    'suffix' => '',
+                    'label' => '{usersregistered}',
+                    'icon' => 'fas fa-users',
+                    'counter_class' => 'count-up',
+                    'time' => 500,
+                ),
+                array(
+                    'value' => $uptimeHours,
+                    'suffix' => 'H',
+                    'label' => '{onlinetime}',
+                    'icon' => 'fas fa-clock',
+                    'counter_class' => 'count2',
+                    'time' => 1000,
+                ),
+            ),
         );
     }
-	
-	public function index()
-	{	
-		$configRow = (array) $this->db->get('config')->row_array();
-       if(($configRow['mant'] ?? 0) == 1 AND $this->session->userdata('login') == false){
-			$base_url = base_url();
-            header("Location: $base_url/mant");
-        }else{
-			$lang = $this->Langs->lang();
-            $viewData = array_merge($lang[$this->getLanguageIndex()], $this->buildHomeViewData($configRow));
-			$this->parser->parse('header', $viewData); 
-			$this->parser->parse('navbar', $viewData); 
-			$this->parser->parse('home', $viewData); 
-			$this->parser->parse('footer', $viewData);
-		
-		}
-	}
-	public function reg(){
-		$pedido['status'] = 0;
-		$user = $this->input->post('user');
-		$pass = $this->input->post('pass');
-		$pass1 = $this->input->post('pass1');
-		$email = $this->input->post('email');
-		if($user == '' || $pass == '' || $pass1 == ''|| $email == ''){
-			$pedido['sms'] = 'Complete todos los campos';
-			echo json_encode($pedido);
-		}else{
-			if($pass == $pass1){
-				$apiip = $this->config->item('apiip');
-				$this->load->model('Apigettoken');
-				$accesstoken = $this->Apigettoken->apitoken();
-				$apiuser = [
-					'username' => $user,
-					'password' => hash('sha256', $pass),
-					'email' => $email,
-					  ];
-					 
-					  $client = new Client([
-						'base_uri' => 'http://'.$apiip.'/api/v1/users/register',
-						'timeout'  => 5.0,
-						'http_errors' => false
-						]);
-						$res = $client->request('POST','',[
-							'headers' => [
-								"authorization" => "Bearer ".$accesstoken['access_token'],
-							],
-							'form_params' => $apiuser,
-							
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
-							{
-						 		$users = array(
-								'user' => $user,
-								'pass' => cms_hash_password($pass),
-								'rol' => 2,
-								'email' => $email,
-								);
-								$existing = $this->db->get_where('users', array('user' => $user))->row_array();
-								if ($existing) {
-									$this->db->where('id', $existing['id']);
-									$this->db->update('users', $users);
-								} else {
-									$this->db->insert('users', $users);
-								}
 
-								$pedido['status'] = 200;
-								echo json_encode($pedido);
-							}else{
-								$pedido['sms'] = $estado['Message'];
-								echo json_encode($pedido);
-								
-							}
-						  
-						
-			}else{
-				$pedido['sms'] = 'Sus contraseñas deben coincidir';
-				echo json_encode($pedido);
-				
-			}
-			
-		}
-		
+    private function respondJson(array $payload)
+    {
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($payload));
+    }
+
+    private function getApiBaseUri($path)
+    {
+        return 'http://' . $this->config->item('apiip') . '/api/v1/' . ltrim($path, '/');
+    }
+
+    private function getApiAccessToken()
+    {
+        return (array) $this->Apigettoken->apitoken();
+    }
+
+    private function requestApi($method, $path, array $options = array())
+    {
+        $token = $this->getApiAccessToken();
+
+        if (empty($token['access_token'])) {
+            return null;
+        }
+
+        $client = new Client(array(
+            'base_uri' => $this->getApiBaseUri($path),
+            'timeout' => 5.0,
+            'http_errors' => false,
+        ));
+
+        $requestOptions = $options;
+        $requestOptions['headers']['authorization'] = 'Bearer ' . $token['access_token'];
+
+        try {
+            return $client->request($method, '', $requestOptions);
+        } catch (GuzzleException $exception) {
+            log_message('error', 'Home API request failed: ' . $exception->getMessage());
+            return null;
+        }
+    }
+
+    private function getLocalUser($user)
+    {
+        return (array) $this->db->get_where('users', array('user' => $user))->row_array();
+    }
+
+    private function upsertLocalUser(array $userData)
+    {
+        $existing = $this->getLocalUser($userData['user'] ?? '');
+
+        if (!empty($existing['id'])) {
+            $this->db->where('id', $existing['id']);
+            $this->db->update('users', $userData);
+            return $existing['id'];
+        }
+
+        $this->db->insert('users', $userData);
+        return $this->db->insert_id();
+    }
+
+    private function loginUserSession(array $userData)
+    {
+        $this->session->set_userdata(array(
+            'user' => $userData['user'] ?? '',
+            'rol' => (int) ($userData['rol'] ?? 2),
+            'login' => true,
+        ));
+    }
+
+    private function fetchRemoteUser($user)
+    {
+        $response = $this->requestApi('GET', 'users/' . rawurlencode($user));
+
+        if ($response === null || $response->getStatusCode() !== 200) {
+            return null;
+        }
+
+        $remoteUser = json_decode((string) $response->getBody(), true);
+
+        return is_array($remoteUser) ? $remoteUser : null;
+    }
+
+    private function validateRemotePassword($user, $password)
+    {
+        $response = $this->requestApi('POST', 'users/' . rawurlencode($user) . '/password/validate', array(
+            'form_params' => array(
+                'password' => hash('sha256', $password),
+            ),
+        ));
+
+        return $response !== null && $response->getStatusCode() === 200;
+    }
+
+    private function syncRemoteUserLocally(array $remoteUser, $password)
+    {
+        $role = !empty($remoteUser['Power']['Editor']) ? 1 : 2;
+        $localUser = array(
+            'user' => $remoteUser['Name'] ?? '',
+            'pass' => cms_hash_password($password),
+            'rol' => $role,
+            'email' => $remoteUser['Email'] ?? '',
+        );
+
+        $this->upsertLocalUser($localUser);
+
+        return $localUser;
+    }
+
+    public function index()
+	{
+        if ($this->redirectToMaintenanceIfNeeded()) {
+            return;
+        }
+
+        $this->renderPublicPage('home', $this->buildHomeViewData($this->getConfigRow()));
+	}
+
+	public function reg(){
+        $payload = array('status' => 0);
+        $user = trim((string) $this->input->post('user'));
+        $pass = (string) $this->input->post('pass');
+        $pass1 = (string) $this->input->post('pass1');
+        $email = trim((string) $this->input->post('email'));
+
+        if ($user === '' || $pass === '' || $pass1 === '' || $email === '') {
+            $payload['sms'] = 'Complete todos los campos';
+            return $this->respondJson($payload);
+        }
+
+        if ($pass !== $pass1) {
+            $payload['sms'] = 'Sus contraseñas deben coincidir';
+            return $this->respondJson($payload);
+        }
+
+        $response = $this->requestApi('POST', 'users/register', array(
+            'form_params' => array(
+                'username' => $user,
+                'password' => hash('sha256', $pass),
+                'email' => $email,
+            ),
+        ));
+
+        if ($response === null) {
+            $payload['sms'] = 'No se pudo conectar con la API del juego';
+            return $this->respondJson($payload);
+        }
+
+        $responseData = json_decode((string) $response->getBody(), true);
+
+        if ($response->getStatusCode() !== 200) {
+            $payload['sms'] = $responseData['Message'] ?? 'No se pudo completar el registro';
+            return $this->respondJson($payload);
+        }
+
+        $this->upsertLocalUser(array(
+            'user' => $user,
+            'pass' => cms_hash_password($pass),
+            'rol' => 2,
+            'email' => $email,
+        ));
+
+        $payload['status'] = 200;
+        return $this->respondJson($payload);
 	}
 
 	public function login(){
-		$user = $this->input->post('user');
-        $pass = $this->input->post('pass');
-        $resultado = $this->db->get_where('users', array('user' => $user));
-        $rest = $resultado->row_array();
-        if($rest && cms_password_verify($pass, $rest['pass'])){
-            if (cms_password_needs_rehash($rest['pass'])) {
-                $this->db->where('id', $rest['id']);
-                $this->db->update('users', array('pass' => cms_hash_password($pass)));
+		$user = trim((string) $this->input->post('user'));
+        $pass = (string) $this->input->post('pass');
+        $localUser = $this->getLocalUser($user);
+
+        if (!empty($localUser) && cms_password_verify($pass, $localUser['pass'] ?? '')) {
+            if (cms_password_needs_rehash($localUser['pass'])) {
+                $localUser['pass'] = cms_hash_password($pass);
+                $this->upsertLocalUser($localUser);
             }
-            $data = [
-                'user'=>$rest['user'],
-				'rol'=> $rest['rol'],
-                'login'=>true
-            ];
-            $this->session->set_userdata($data);
-            $base_url = base_url();
-            header("Location: $base_url");
-        }else{
-			$apiip = $this->config->item('apiip');
-				$this->load->model('Apigettoken');
-				$accesstoken = $this->Apigettoken->apitoken();
-					 
-					  $client = new Client([
-						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user,
-						'timeout'  => 5.0,
-						'http_errors' => false
-						]);
-						$res = $client->request('GET','',[
-							'headers' => [
-								"authorization" => "Bearer ".$accesstoken['access_token'],
-							],						
-						  ]);
-						  $estado = json_decode($res->getBody(), true);
-						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
-							{
-								
-								$apiip = $this->config->item('apiip');
-				$this->load->model('Apigettoken');
-				$accesstoken = $this->Apigettoken->apitoken();
-				$apiuser = [
-					'password' => hash('sha256', $pass),
-					  ];	 
-					  $client = new Client([
-						'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/password/validate',
-						'timeout'  => 5.0,
-						'http_errors' => false
-						]);
-						$res = $client->request('POST','',[
-							'headers' => [
-								"authorization" => "Bearer ".$accesstoken['access_token'],
-							],						
-							'form_params' => $apiuser,
-						  ]);
-						  if ($res->getStatusCode() == '200') //Verifico que me retorne 200 = OK
-						  {
-							if($estado['Power']['Editor'] == true){
-								$rol = 1;
-							}else{
-									 $rol = 2;
-									}
-							$rest = $resultado->result_array();
-							$data = [
-								'user'=>$estado['Name'],
-								'rol'=> $rol,
-								'login'=>true
-							];
-							$users = array(
-								'user' => $estado['Name'],
-								'pass' => cms_hash_password($pass),
-								'rol' => $rol,
-								'email' => $estado['Email'],
-								);
-								$existing = $this->db->get_where('users', array('user' => $estado['Name']))->row_array();
-								if ($existing) {
-									$this->db->where('id', $existing['id']);
-									$this->db->update('users', $users);
-								} else {
-									$this->db->insert('users', $users);
-								}
-							$this->session->set_userdata($data);
-							$base_url = base_url();
-							header("Location: $base_url");
-						  }else{
-							$base_url = base_url();
-							header("Location: $base_url");
-						  }
 
-
-
-
-
-							}else{
-								$base_url = base_url();
-							header("Location: $base_url");
-							}
-
-
-
-
-
-			
+            $this->loginUserSession($localUser);
+            $this->redirectTo('');
         }
 
+        $remoteUser = $this->fetchRemoteUser($user);
+        if ($remoteUser === null || !$this->validateRemotePassword($user, $pass)) {
+            $this->redirectTo('');
+        }
+
+        $this->loginUserSession($this->syncRemoteUserLocally($remoteUser, $pass));
+        $this->redirectTo('');
 	}
-
-
-
-
-
-
-
-
-
 
 	public function logout(){
         $this->session->sess_destroy();
-        $base_url = base_url();
-        header("Location: $base_url");
+        $this->redirectTo('');
     }
 }

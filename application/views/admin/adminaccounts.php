@@ -1,107 +1,91 @@
 <div class="modal fade" id="modal_addadminaccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content cards-novo">
-        <div class="modal-header text-center">
+        <div class="modal-header text-center modal-shell__header">
+            <span class="modal-shell__badge"><i class="fas fa-user-shield"></i></span>
             <h4 class="modal-title w-100 font-weight-bold">{addadminaccount}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3">
-            <form action="<?php echo base_url('admin/adminadd'); ?>" method="post"  enctype="multipart/form-data">
-                <div class="md-form mb-5">                    
-                    <input type="text" id="defaultForm-email" class="form-control validate" name="user">
-                    <label for="defaultForm-email">{user}</label>
+        <div class="modal-body mx-3 modal-shell__body">
+              <form action="<?php echo base_url('admin/adminadd'); ?>" method="post" enctype="multipart/form-data" class="modal-shell__form">
+                  <?php echo cms_csrf_field(); ?>
+                <div class="md-form mb-5">
+                    <input type="text" class="form-control validate" name="user">
+                    <label>{user}</label>
                 </div>
-                <div class="md-form mb-4">                  
-                    <input type="text" id="defaultForm-pass" class="form-control validate" name="pass">
-                    <label for="defaultForm-pass">{password}</label>
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="pass">
+                    <label>{password}</label>
                 </div>
-                <div class="md-form mb-4">                  
-                    <input type="text" id="defaultForm-pass" class="form-control validate" name="pass1">
-                    <label for="defaultForm-pass">{confirmpassword}</label>
+                <div class="md-form mb-4">
+                    <input type="text" class="form-control validate" name="pass1">
+                    <label>{confirmpassword}</label>
                 </div>
-                <div class="md-form mb-4">                  
-                    <input type="email" id="defaultForm-pass" class="form-control validate" name="email">
-                    <label for="defaultForm-pass">{email}</label>
+                <div class="md-form mb-4">
+                    <input type="email" class="form-control validate" name="email">
+                    <label>{email}</label>
                 </div>
-                  
-        </div>
-        
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-info waves-effect" type="submit">{addadminaccount}</button>
+                <div class="modal-footer d-flex justify-content-center modal-shell__footer">
+                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addadminaccount}</button>
                 </div>
                 </form>
             </div>
         </div>
     </div>
-<div class="container my-5 py-5">
-<div class="card card-cascade narrower cards-novo">
-  <div
-    class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
-    <div>
-          <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light btn_modal_addadminaccount " >
-            <i class="fas fa-plus mt-0"></i>
-          </button>
-          <a href="#" style="padding-left: 400px;"  class="white-text mx-3">{adminaccounts}</a>
+
+<main class="admin-shell admin-shell--page">
+  <section class="admin-section admin-section--tight">
+    <div class="admin-panel">
+      <div class="admin-panel__header admin-panel__header--with-action">
+        <div>
+          <span class="admin-section__eyebrow">{admin_sidebar_community}</span>
+          <h2 class="admin-panel__title">{adminaccounts}</h2>
         </div>
-  </div>
-  <div class="px-4 ">
-    <div class="table-wrapper">
-      <table class="table table-hover mb-0">
-        <thead>
-          <tr>
-            <th class="th-lg">
-              <a>{id}
-                <i class="fas fa-sort ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a>{name}
-                <i class="fas fa-sort ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a>{email}
-                <i class="fas fa-sort ml-1"></i>
-              </a>
-            </th>
-            <th class="th-lg">
-              <a>{action}
-                <i class="fas fa-sort ml-1"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-
-        <?php foreach ($admin_account_rows as $row) { ?>
-
-          <tr>
-            <td><?php echo $row['id']; ?></td>
-            <td><?php echo $row['user']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td>
-                <div class="row">
-                <form method="POST" action="<?php echo base_url('admin/deladminaccount'); ?>">
-                <label class="badge badge-danger">
-                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                    <button style=" background-color: transparent;  border: 1px;" type="submit">
-                    <span class="fa fa-trash">
-                </button>
-                </label>
-                </form>
-
-
-
-
-                </div>
-            </td>
-          </tr>
-        <?php } ?>  
-        </tbody>
-      </table>
+        <button type="button" class="admin-button admin-button--primary btn_modal_addadminaccount">
+          <i class="fas fa-plus"></i>
+          <span>{addadminaccount}</span>
+        </button>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="table table-hover mb-0 admin-table">
+          <thead>
+            <tr>
+              <th>{id}</th>
+              <th>{name}</th>
+              <th>{email}</th>
+              <th>{action}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (empty($admin_account_rows)) { ?>
+              <tr>
+                <td colspan="4" class="admin-empty">{emptyTable}</td>
+              </tr>
+            <?php } else { ?>
+              <?php foreach ($admin_account_rows as $row) { ?>
+                <tr>
+                  <td><?php echo $row['id']; ?></td>
+                  <td><?php echo $row['user']; ?></td>
+                  <td><?php echo $row['email']; ?></td>
+                  <td>
+                    <div class="admin-actions">
+                      <form method="POST" action="<?php echo base_url('admin/deladminaccount'); ?>">
+                        <?php echo cms_csrf_field(); ?>
+                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <button class="admin-icon-btn admin-icon-btn--danger" type="submit" aria-label="{action}">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <?php } ?>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</div>
-</div>
+  </section>
+</main>

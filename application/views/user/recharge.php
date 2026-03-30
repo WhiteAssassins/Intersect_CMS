@@ -5,6 +5,7 @@
       <h4 class="text-center font-weight-bold mb-4 pb-2">{balanceavailable}: <?php echo $panel_balance; ?></h4>
       <div class="mt-5">
         <form method="POST" action="<?php echo base_url('userpanel/rechargin'); ?>">
+          <?php echo cms_csrf_field(); ?>
           <div class="md-form mb-4">
                     <i class="fas fa-dollar-sign"></i>
                     <input type="number" step="0.01" min="0.01" id="prefixInside" class="form-control" name="cant" placeholder="0.01" required>

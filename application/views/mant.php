@@ -5,6 +5,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-xl-7 pb-2">
     <form method="POST" action="<?php echo base_url('mant/login'); ?>" id="form_ban" class="form-admin" >
+                        <?php echo cms_csrf_field(); ?>
                         <h4 class="text-center font-weight-bold mb-4 pb-2">{maintenanceenter}</h4>
                         <div class="md-form mb-4">
                         <input type="text" id="prefixInside" class="form-control" name="user" placeholder="{user}" autocomplete="new-text" >

@@ -4,9 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
 <meta name="description" content="Intersect Engine CMS">
-<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileColor" content="#120d13">
 <meta name="msapplication-TileImage" content="<?php echo base_url('public/favicon'); ?>/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#120d13">
 
 
 
@@ -17,6 +17,9 @@
     <link rel="canonical" href="<?php echo base_url();?>">
     <link rel="dns-prefetch" href="<?php echo base_url();?>">
     <link rel="preconnect" href="<?php echo base_url();?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('public/favicon'); ?>/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('public/favicon'); ?>/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('public/favicon'); ?>/apple-icon-72x72.png">
@@ -26,6 +29,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="<?php echo base_url('public/favicon'); ?>/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="<?php echo base_url('public/favicon'); ?>/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('public/favicon'); ?>/apple-icon-180x180.png">
+    <link rel="icon" type="image/svg+xml" href="<?php echo base_url('public/favicon'); ?>/favicon.svg">
     <link rel="icon" type="image/png" sizes="192x192"  href="<?php echo base_url('public/favicon'); ?>/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('public/favicon'); ?>/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('public/favicon'); ?>/favicon-96x96.png">
@@ -50,18 +54,22 @@
   gtag('config', '{analytics_id}');
 </script> 
 </head>
-<body style="background: linear-gradient(90deg, {theme_color1} 23%, {theme_color2} 100%) !important;">
+<body class="site-shell">
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog o" role="document">
         <div class="modal-content cards-novo">
-        <div class="modal-header text-center">
+        <div class="modal-header text-center modal-shell__header">
+            <span class="modal-shell__badge"><i class="fas fa-lock"></i></span>
+            <span class="modal-shell__eyebrow">{site_nav_subtitle}</span>
             <h4 class="modal-title w-100 font-weight-bold">{login}</h4>
+            <p class="modal-shell__text">{modal_login_text}</p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3">
-            <form action="<?php echo base_url('home/login'); ?>" method="post"  autocomplete="nope"  style="color:white;">
+        <div class="modal-body mx-3 modal-shell__body">
+            <form action="<?php echo base_url('home/login'); ?>" method="post"  autocomplete="nope" class="modal-shell__form">
+                <?php echo cms_csrf_field(); ?>
                 <div class="md-form mb-5">
                     <i class="fas fa-user prefix grey-text"></i>
                     <input type="text"  class="form-control" name="user"  autocomplete="new-text"  style="color:white;">
@@ -73,11 +81,11 @@
                     <input type="password"  class="form-control" name="pass"  autocomplete="new-password"  style="color:white;">
                     <label  for="defaultForm-pass">{password}</label>
                 </div>
-                <a href="<?php echo base_url('recover'); ?>">{forgotpassword}</a>
+                <a href="<?php echo base_url('recover'); ?>" class="modal-shell__link">{forgotpassword}</a>
         </div>
         
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-info waves-effect" type="submit">{login}</button>
+                <div class="modal-footer d-flex justify-content-center modal-shell__footer">
+                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{login}</button>
                     
                 </div>
                 </form>
@@ -88,14 +96,18 @@
     <div class="modal fade" id="modal_reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content cards-novo">
-        <div class="modal-header text-center">
+        <div class="modal-header text-center modal-shell__header">
+            <span class="modal-shell__badge"><i class="fas fa-user-plus"></i></span>
+            <span class="modal-shell__eyebrow">{site_nav_subtitle}</span>
             <h4 class="modal-title w-100 font-weight-bold">{register}</h4>
+            <p class="modal-shell__text">{modal_register_text}</p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3">
-            <form action="<?php echo base_url('home/reg'); ?>" method="post" id="form_reg">
+        <div class="modal-body mx-3 modal-shell__body">
+            <form action="<?php echo base_url('home/reg'); ?>" method="post" id="form_reg" class="modal-shell__form">
+                <?php echo cms_csrf_field(); ?>
                 <div class="md-form mb-5">
                     <i class="fas fa-user prefix grey-text"></i>
                     <input type="text" id="defaultForm-email" class="form-control validate" name="user" style="color:white;">
@@ -118,8 +130,8 @@
                     <label for="defaultForm-pass">{email}</label>
                 </div>
         </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-info waves-effect" type="submit">{register}</button>
+                <div class="modal-footer d-flex justify-content-center modal-shell__footer">
+                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{register}</button>
                 </div>
                 </form>
             </div>
@@ -134,14 +146,18 @@
 <div class="modal fade" id="modal_newticket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content cards-novo">
-        <div class="modal-header text-center">
+        <div class="modal-header text-center modal-shell__header">
+            <span class="modal-shell__badge"><i class="fas fa-headset"></i></span>
+            <span class="modal-shell__eyebrow">{site_nav_subtitle}</span>
             <h4 class="modal-title w-100 font-weight-bold">{createticket}</h4>
+            <p class="modal-shell__text">{modal_ticket_text}</p>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3">
-            <form action="<?php echo base_url('userpanel/addticket'); ?>" method="post"  enctype="multipart/form-data" id="form_ticket">
+        <div class="modal-body mx-3 modal-shell__body">
+            <form action="<?php echo base_url('userpanel/addticket'); ?>" method="post"  enctype="multipart/form-data" id="form_ticket" class="modal-shell__form">
+                <?php echo cms_csrf_field(); ?>
                 <div class="md-form mb-5">
                     
                     <input type="text" id="defaultForm-email" class="form-control validate" name="title"  style="color:white;">
@@ -158,12 +174,12 @@
               
                <div class="md-form mb-4">
                    
-               <select class="mdb-select md-form" name="ticket"  style="color:white;"> 
+               <select class="mdb-select md-form modal-shell__select" name="ticket"  style="color:white;"> 
                                     <option value="" disabled selected>{chooseticket}</option>
-                                    <option value="ingame">Error Ingame</option>
-                                    <option value="account">Cuenta</option>
-                                    <option value="billing">Compras</option>
-                                    <option value="web">Web</option>
+                                    <option value="ingame">{ticket_type_ingame}</option>
+                                    <option value="account">{ticket_type_account}</option>
+                                    <option value="billing">{ticket_type_billing}</option>
+                                    <option value="web">{ticket_type_web}</option>
                                 </select>
                </div>
                     
@@ -173,8 +189,8 @@
           
 
 
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-outline-info waves-effect" type="submit">{addticket}</button>
+                <div class="modal-footer d-flex justify-content-center modal-shell__footer">
+                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addticket}</button>
                 </div>
                 </form>
             </div>

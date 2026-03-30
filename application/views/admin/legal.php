@@ -1,20 +1,21 @@
-    <div class="row">
-      <div class="col-md-6 mx-auto ">
-        <div class="card  cards-novo">
-          <div class="card-body">
-            <form class="text-center" style="color: #757575;" action="<?php echo base_url('config/changelegal'); ?>" method="POST">
-              <h3 class="font-weight-bold my-4 pb-2 text-center ">{editlegal}</h3>
-                <input type="hidden" name="id" value="<?php echo $config_id; ?>">
-              <textarea id="tiny" name="legal" placeholder="{textlegal}"><?php echo $config_content; ?></textarea>
-              <div class="text-center">
-                <button type="submit" class="btn btn-outline-orange btn-rounded my-4 waves-effect">{edit}</button>
-                <a href="<?php echo base_url('config'); ?>" type="button" class="btn btn-outline-blue btn-rounded my-4 waves-effect">{return}</a>
-              </div>
-            </form>
-          </div>
+<main class="admin-shell admin-shell--page">
+  <section class="admin-section admin-section--tight">
+    <div class="admin-editor admin-editor--wide">
+      <div class="admin-editor__header">
+        <div>
+          <span class="admin-section__eyebrow">{admin_sidebar_system}</span>
+          <h2 class="admin-panel__title">{editlegal}</h2>
         </div>
       </div>
+      <form class="admin-editor__form" action="<?php echo base_url('config/changelegal'); ?>" method="POST">
+        <?php echo cms_csrf_field(); ?>
+        <input type="hidden" name="id" value="<?php echo $config_id; ?>">
+        <textarea id="tiny" name="legal" placeholder="{textlegal}"><?php echo $config_content; ?></textarea>
+        <div class="admin-editor__actions">
+          <button type="submit" class="admin-button admin-button--primary">{edit}</button>
+          <a href="<?php echo base_url('config'); ?>" class="admin-button admin-button--ghost">{return}</a>
+        </div>
+      </form>
     </div>
-
-
-
+  </section>
+</main>

@@ -1,193 +1,129 @@
 <?php
-    if(isset($sms) && $tipo == 'error'){
-        echo '<div class="alert alert-info text-center">'.$sms.'</div>';
-    };
-    if(isset($error)){
-        echo '<div class="alert alert-info text-center">'.$error.'</div>';
-    };
+if (isset($sms) && $tipo == 'error') {
+    echo '<div class="alert alert-info text-center">' . $sms . '</div>';
+}
+if (isset($error)) {
+    echo '<div class="alert alert-info text-center">' . $error . '</div>';
+}
+
+$primaryMetrics = array(
+    array(
+        'icon' => 'fas fa-users',
+        'label' => '{usersregistered}',
+        'value' => $dashboard_total_users,
+        'tone' => 'gold',
+    ),
+    array(
+        'icon' => 'fas fa-signal',
+        'label' => '{useronline}',
+        'value' => $dashboard_online_count,
+        'tone' => 'ember',
+    ),
+    array(
+        'icon' => 'fas fa-id-badge',
+        'label' => '{totalplayers}',
+        'value' => $dashboard_total_players,
+        'tone' => 'copper',
+    ),
+    array(
+        'icon' => 'fas fa-server',
+        'label' => '{cps}',
+        'value' => $dashboard_cps,
+        'tone' => 'rose',
+    ),
+);
+
+$systemMetrics = array(
+    array(
+        'icon' => 'fas fa-memory',
+        'label' => '{ram}',
+        'value' => $ram_used_gb . '/' . $ram_total_gb . 'GB',
+        'tone' => 'gold',
+    ),
+    array(
+        'icon' => 'fas fa-hdd',
+        'label' => '{hdd}',
+        'value' => $disk_used_gb . '/' . $disk_total_gb . 'GB',
+        'tone' => 'ember',
+    ),
+    array(
+        'icon' => 'fas fa-microchip',
+        'label' => '{cpu}',
+        'value' => $cpu_load_percent . '%',
+        'tone' => 'copper',
+    ),
+    array(
+        'icon' => 'fas fa-code-branch',
+        'label' => '{version}',
+        'value' => $dashboard_version,
+        'tone' => 'rose',
+    ),
+);
 ?>
-<div class="container my-1" id="admin">
-  <section>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mb-4 ">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-user fa-lg blue z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{usersregistered}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $dashboard_total_users; ?></h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-user-plus fa-lg deep-purple z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{useronline}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $dashboard_online_count; ?></h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-id-badge fa-lg teal z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{totalplayers}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $dashboard_total_players; ?></h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
 
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-server fa-lg pink z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{cps}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $dashboard_cps; ?></h5>
+<main class="admin-shell">
+  <section class="admin-header">
+    <div class="admin-header__copy">
+      <span class="admin-header__eyebrow">{admin_dashboard_eyebrow}</span>
+      <h1 class="admin-header__title">{admin_dashboard_title}</h1>
+      <p class="admin-header__text">{admin_dashboard_text}</p>
+    </div>
+
+    <div class="admin-header__status cards-novo">
+      <span class="admin-header__status-label">{site_title}</span>
+      <strong class="admin-header__status-value"><?php echo $dashboard_version; ?></strong>
+      <span class="admin-header__status-meta">{version}</span>
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <div class="admin-section__heading">
+      <div>
+        <span class="admin-section__eyebrow">{statistics}</span>
+        <h2 class="admin-section__title">{admin_metrics_title}</h2>
+      </div>
+      <p class="admin-section__text">{admin_metrics_text}</p>
+    </div>
+
+    <div class="admin-kpi-grid">
+      <?php foreach ($primaryMetrics as $metric) { ?>
+        <article class="admin-kpi admin-kpi--<?php echo $metric['tone']; ?>">
+          <span class="admin-kpi__icon"><i class="<?php echo $metric['icon']; ?>"></i></span>
+          <div class="admin-kpi__body">
+            <span class="admin-kpi__label"><?php echo $metric['label']; ?></span>
+            <strong class="admin-kpi__value"><?php echo $metric['value']; ?></strong>
           </div>
+        </article>
+      <?php } ?>
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <div class="admin-panel admin-panel--chart">
+      <div class="admin-panel__header">
+        <div>
+          <span class="admin-section__eyebrow">{statistics}</span>
+          <h2 class="admin-panel__title">{admin_chart_title}</h2>
         </div>
+        <p class="admin-panel__text">{admin_chart_text}</p>
+      </div>
+      <div class="admin-panel__body">
+        <canvas id="lineChart" class="admin-panel__chart" height="96"></canvas>
       </div>
     </div>
   </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <section>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mb-4 ">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-microchip fa-lg blue z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{ram}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $ram_used_gb; ?>/<?php echo $ram_total_gb; ?>GB</h5>
+  <section class="admin-section admin-section--tight">
+    <div class="admin-kpi-grid admin-kpi-grid--system">
+      <?php foreach ($systemMetrics as $metric) { ?>
+        <article class="admin-kpi admin-kpi--system admin-kpi--<?php echo $metric['tone']; ?>">
+          <span class="admin-kpi__icon"><i class="<?php echo $metric['icon']; ?>"></i></span>
+          <div class="admin-kpi__body">
+            <span class="admin-kpi__label"><?php echo $metric['label']; ?></span>
+            <strong class="admin-kpi__value"><?php echo $metric['value']; ?></strong>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-hdd fa-lg deep-purple z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{hdd}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $disk_used_gb; ?>/<?php echo $disk_total_gb; ?>GB</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-server fa-lg teal z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{cpu}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $cpu_load_percent; ?>%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-
-        <div class="media white z-depth-1 rounded cards-novo">
-          <i class="fas fa-code-branch fa-lg pink z-depth-1 p-4 rounded-left text-white mr-3"></i>
-          <div class="media-body p-1">
-            <p class="text-uppercase text-muted mb-1"><small>{version}</small></p>
-            <h5 class="font-weight-bold mb-0"><?php echo $dashboard_version; ?></h5>
-          </div>
-        </div>
-      </div>
+        </article>
+      <?php } ?>
     </div>
   </section>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container my-5 py-5">
-
-
-  <!--Section: Block Content-->
-  <section>
-
-    <div class="card" style="background-color: #181C30;">
-      <div class="card-body">
-
-        <canvas id="lineChart" class="mb-4" height="100"></canvas>
-
-        <!--Grid row-->
-        <div class="row text-center text-white">
-
-          <!--Grid column-->
-         
-          <!--Grid column-->
-
-          <!--Grid column-->
-          
-          <!--Grid column-->
-
-          <!--Grid column-->
-         
-          <!--Grid column-->
-
-        </div>
-        <!--Grid row-->
-
-      </div>
-    </div>
-
-
-  </section>
-  <!--Section: Block Content-->
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
+</main>
