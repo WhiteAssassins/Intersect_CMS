@@ -12,7 +12,6 @@
    
     <div class="mt-5">
         <form method="POST" action="<?php echo base_url('userpanel/rechargin'); ?>">
-         <input type="hidden" name="user" value="<?php echo $nombre; ?>">
           <div class="md-form mb-4">
                     <i class="fas fa-dollar-sign"></i>
                     <input type="number" step="0.01" id="prefixInside" class="form-control" name="cant" placeholder="0.01">

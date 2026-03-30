@@ -150,11 +150,17 @@ class Userpanel extends CI_Controller {
 
 
     public function rechargin(){
-        $amount = $this->input->post('cant');
-		$user = $this->input->post('user');
+        $amount = (float) $this->input->post('cant');
+		$user = $this->session->userdata('user');
+        $appId = $this->config->item('apiqvapayid');
+        $appSecret = $this->config->item('apiqvapaysecret');
+        if (!$user || $amount <= 0 || empty($appId) || $appId === 'apiqvapayid' || empty($appSecret) || $appSecret === 'apiqvapaysecret') {
+            redirect(base_url('userpanel/recharge'));
+            return;
+        }
         $apiuser = [
-            'app_id' => $this->config->item('apiqvapayid'),
-            'app_secret' => $this->config->item('apiqvapaysecret'),
+            'app_id' => $appId,
+            'app_secret' => $appSecret,
             'amount' => $amount,
             'description' => "Recarga de Cuenta",
             'remote_id' => $user,
@@ -167,6 +173,10 @@ class Userpanel extends CI_Controller {
           ]);
           $res = $client->request('POST', '', ['form_params' => $apiuser]);
           $accesstoken = json_decode($res->getBody(), true);
+           if (!isset($accesstoken['signedUrl'])) {
+            redirect(base_url('userpanel/recharge'));
+            return;
+           }
            $url = $accesstoken['signedUrl'];
            header("Location: $url");
     }

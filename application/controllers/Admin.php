@@ -17,8 +17,9 @@ class Admin extends CI_Controller {
 		$this->load->model('Apiplayersonline');
 		$this->load->model('newss');
 		$this->load->model('shops');
-        $this->load->helper('common');
+		$this->load->helper('common');
         $this->load->library('form_validation');
+		$this->load->library('systemmetrics');
 		$this->load->model('Langs');
         $this->requireAdmin();
     }
@@ -28,6 +29,41 @@ class Admin extends CI_Controller {
             redirect(base_url());
             exit;
         }
+    }
+
+    private function getLanguageIndex()
+    {
+        switch ($this->session->userdata('lang')) {
+            case 'en': return 1;
+            case 'tr': return 2;
+            case 'jp': return 3;
+            case 'de': return 4;
+            case 'ru': return 5;
+            case 'zh': return 6;
+            case 'fr': return 7;
+            case 'pt': return 8;
+            case 'hi': return 9;
+            case 'ar': return 10;
+            case 'es':
+            default:
+                return 0;
+        }
+    }
+
+    private function buildDashboardViewData()
+    {
+        $serverStats = (array) $this->Apiserverstats->serverinfo();
+        $users = (array) $this->Apiusers->user();
+        $players = (array) $this->Apiplayers->player();
+        $metrics = $this->systemmetrics->collect();
+
+        return array_merge($metrics, array(
+            'dashboard_total_users' => (int) ($users['Total'] ?? 0),
+            'dashboard_online_count' => (int) ($serverStats['onlineCount'] ?? 0),
+            'dashboard_total_players' => (int) ($players['Total'] ?? 0),
+            'dashboard_cps' => (int) ($serverStats['cps'] ?? 0),
+            'dashboard_version' => '0.7',
+        ));
     }
 	
 
@@ -39,81 +75,23 @@ class Admin extends CI_Controller {
 	public function index(){	
 		if($this->session->userdata('login') == true AND $this->session->userdata('rol') == 1){
 			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('sidebar', $lang[1]); 
-					$this->parser->parse('admin', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('sidebar', $lang[2]); 
-					$this->parser->parse('admin', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('sidebar', $lang[3]); 
-					$this->parser->parse('admin', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-					case "de":
-						$this->parser->parse('header', $lang[4]); 
-						$this->parser->parse('sidebar', $lang[4]); 
-						$this->parser->parse('admin', $lang[4]); 
-						$this->parser->parse('footer', $lang[4]); 
-						break;	
-					case "ru":
-						$this->parser->parse('header', $lang[5]); 
-						$this->parser->parse('sidebar', $lang[5]); 
-						$this->parser->parse('admin', $lang[5]); 
-						$this->parser->parse('footer', $lang[5]); 
-						break;
-					case "zh":
-						$this->parser->parse('header', $lang[6]); 
-						$this->parser->parse('sidebar', $lang[6]); 
-						$this->parser->parse('admin', $lang[6]); 
-						$this->parser->parse('footer', $lang[6]); 
-						break;	
-					case "fr":
-						$this->parser->parse('header', $lang[7]); 
-						$this->parser->parse('sidebar', $lang[7]); 
-						$this->parser->parse('admin', $lang[7]); 
-						$this->parser->parse('footer', $lang[7]); 
-						break;	
-					case "pt":
-						$this->parser->parse('header', $lang[8]); 
-						$this->parser->parse('sidebar', $lang[8]); 
-						$this->parser->parse('admin', $lang[8]); 
-						$this->parser->parse('footer', $lang[8]); 
-						break;
-					case "hi":
-						$this->parser->parse('header', $lang[9]); 
-						$this->parser->parse('sidebar', $lang[9]); 
-						$this->parser->parse('admin', $lang[9]); 
-						$this->parser->parse('footer', $lang[9]); 
-						break;	
-					case "ar":
-						$this->parser->parse('header', $lang[10]); 
-						$this->parser->parse('sidebar', $lang[10]); 
-						$this->parser->parse('admin', $lang[10]); 
-						$this->parser->parse('footer', $lang[10]); 
-						break;		
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('sidebar', $lang[0]); 
-					$this->parser->parse('admin', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
+            $dashboardData = $this->buildDashboardViewData();
+            if ($this->input->get('json')) {
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode(array(
+                        'ram' => $dashboardData['ram_usage_percent'],
+                        'cpu' => $dashboardData['cpu_load_percent'],
+                        'disk' => $dashboardData['disk_usage_percent'],
+                        'connections' => $dashboardData['total_connections'],
+                    )));
+                return;
+            }
+            $viewData = array_merge($lang[$this->getLanguageIndex()], $dashboardData);
+			$this->parser->parse('header', $viewData); 
+			$this->parser->parse('sidebar', $viewData); 
+			$this->parser->parse('admin', $viewData); 
+			$this->parser->parse('footer', $viewData);
 	}else{
 		$base_url = base_url();
 		header("Location: $base_url");

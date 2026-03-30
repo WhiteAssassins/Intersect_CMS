@@ -11,91 +11,61 @@ class Home extends CI_Controller {
 		$this->load->model('Apiplayers');
 		$this->load->model('Langs');
     }
+
+    private function getLanguageIndex()
+    {
+        switch ($this->session->userdata('lang')) {
+            case 'en': return 1;
+            case 'tr': return 2;
+            case 'jp': return 3;
+            case 'de': return 4;
+            case 'ru': return 5;
+            case 'zh': return 6;
+            case 'fr': return 7;
+            case 'pt': return 8;
+            case 'hi': return 9;
+            case 'ar': return 10;
+            case 'es':
+            default:
+                return 0;
+        }
+    }
+
+    private function buildHomeViewData(array $configRow)
+    {
+        $serverStats = (array) $this->Apiserverstats->serverinfo();
+        $users = (array) $this->Apiusers->user();
+
+        return array(
+            'home_uptime_hours' => round(((float) ($serverStats['uptime'] ?? 0)) / 1000 / 60 / 60, 2),
+            'home_online_count' => (int) ($serverStats['onlineCount'] ?? 0),
+            'home_total_users' => (int) ($users['Total'] ?? 0),
+            'home_menu_header' => $configRow['menuheader'] ?? '',
+            'home_menu1_icon' => $configRow['menu1icon'] ?? '',
+            'home_menu1_header' => $configRow['menu1header'] ?? '',
+            'home_menu1_text' => $configRow['menu1text'] ?? '',
+            'home_menu2_icon' => $configRow['menu2icon'] ?? '',
+            'home_menu2_header' => $configRow['menu2header'] ?? '',
+            'home_menu2_text' => $configRow['menu2text'] ?? '',
+            'home_menu3_icon' => $configRow['menu3icon'] ?? '',
+            'home_menu3_header' => $configRow['menu3header'] ?? '',
+            'home_menu3_text' => $configRow['menu3text'] ?? '',
+        );
+    }
 	
 	public function index()
 	{	
-		$conf = $this->db->get('config');
-		$conf1 = $conf->result_array(); 
-       if($conf1['0']['mant'] == 1 AND $this->session->userdata('login') == false){
+		$configRow = (array) $this->db->get('config')->row_array();
+       if(($configRow['mant'] ?? 0) == 1 AND $this->session->userdata('login') == false){
 			$base_url = base_url();
             header("Location: $base_url/mant");
         }else{
 			$lang = $this->Langs->lang();
-			switch($this->session->userdata('lang')){
-				case "es":
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('navbar', $lang[0]); 
-					$this->parser->parse('home', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-				case "en":
-					$this->parser->parse('header', $lang[1]); 
-					$this->parser->parse('navbar', $lang[1]); 
-					$this->parser->parse('home', $lang[1]); 
-					$this->parser->parse('footer', $lang[1]); 
-					break;
-				case "tr":
-					$this->parser->parse('header', $lang[2]); 
-					$this->parser->parse('navbar', $lang[2]); 
-					$this->parser->parse('home', $lang[2]); 
-					$this->parser->parse('footer', $lang[2]); 
-					break;
-				case "jp":
-					$this->parser->parse('header', $lang[3]); 
-					$this->parser->parse('navbar', $lang[3]); 
-					$this->parser->parse('home', $lang[3]); 
-					$this->parser->parse('footer', $lang[3]); 
-					break;
-				case "de":
-					$this->parser->parse('header', $lang[4]); 
-					$this->parser->parse('navbar', $lang[4]); 
-					$this->parser->parse('home', $lang[4]); 
-					$this->parser->parse('footer', $lang[4]); 
-					break;	
-				case "ru":
-					$this->parser->parse('header', $lang[5]); 
-					$this->parser->parse('navbar', $lang[5]); 
-					$this->parser->parse('home', $lang[5]); 
-					$this->parser->parse('footer', $lang[5]); 
-					break;
-				case "zh":
-					$this->parser->parse('header', $lang[6]); 
-					$this->parser->parse('navbar', $lang[6]); 
-					$this->parser->parse('home', $lang[6]); 
-					$this->parser->parse('footer', $lang[6]); 
-					break;	
-				case "fr":
-					$this->parser->parse('header', $lang[7]); 
-					$this->parser->parse('navbar', $lang[7]); 
-					$this->parser->parse('home', $lang[7]); 
-					$this->parser->parse('footer', $lang[7]); 
-					break;	
-				case "pt":
-					$this->parser->parse('header', $lang[8]); 
-					$this->parser->parse('navbar', $lang[8]); 
-					$this->parser->parse('home', $lang[8]); 
-					$this->parser->parse('footer', $lang[8]); 
-					break;
-				case "hi":
-					$this->parser->parse('header', $lang[9]); 
-					$this->parser->parse('navbar', $lang[9]); 
-					$this->parser->parse('home', $lang[9]); 
-					$this->parser->parse('footer', $lang[9]); 
-					break;	
-				case "ar":
-					$this->parser->parse('header', $lang[10]); 
-					$this->parser->parse('navbar', $lang[10]); 
-					$this->parser->parse('home', $lang[10]); 
-					$this->parser->parse('footer', $lang[10]); 
-					break;					
-				default:
-					$this->parser->parse('header', $lang[0]); 
-					$this->parser->parse('navbar', $lang[0]); 
-					$this->parser->parse('home', $lang[0]); 
-					$this->parser->parse('footer', $lang[0]); 
-					break;
-
-			}
+            $viewData = array_merge($lang[$this->getLanguageIndex()], $this->buildHomeViewData($configRow));
+			$this->parser->parse('header', $viewData); 
+			$this->parser->parse('navbar', $viewData); 
+			$this->parser->parse('home', $viewData); 
+			$this->parser->parse('footer', $viewData);
 		
 		}
 	}

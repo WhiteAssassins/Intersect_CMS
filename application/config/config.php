@@ -389,7 +389,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'intersect_session_novo';
 $config['sess_expiration'] = 500200;
-$config['sess_save_path'] = APPPATH.'cache/sessions';
+$config['sess_save_path'] = (ENVIRONMENT !== 'production' ? sys_get_temp_dir() : APPPATH.'cache/sessions');
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

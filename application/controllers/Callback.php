@@ -10,15 +10,26 @@ class Callback extends CI_Controller {
 		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
-    }
+	}
 	
 	public function index(){
-        $method = $_GET['remote_id'];
-        $paymentid = $_GET['id'];
-        $uuid = $_GET['uuid'];
+        $remoteId = trim((string) $this->input->get('remote_id', TRUE));
+        $paymentid = trim((string) $this->input->get('id', TRUE));
+        $uuid = trim((string) $this->input->get('uuid', TRUE));
+
+        if ($remoteId === '' || $paymentid === '' || $uuid === '') {
+            show_error('Invalid payment callback.', 400);
+            return;
+        }
+
+        $exists = $this->db->get_where('payments', array('payment_id' => $paymentid, 'transid' => $uuid))->row_array();
+        if ($exists) {
+            return;
+        }
+
         $data = [
             'payment_id' => $paymentid,
-            'method' => $method,
+            'method' => $remoteId,
             'transid' => $uuid
         ];
         $this->db->insert('payments', $data);
