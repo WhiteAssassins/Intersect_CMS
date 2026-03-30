@@ -1,5 +1,126 @@
 <?php 
 class Langs extends CI_Model{
+    private function getConfigRow()
+    {
+        return (array) $this->db->get('config')->row_array();
+    }
+
+    private function getVisitsRow()
+    {
+        return (array) $this->db->get('visits')->row_array();
+    }
+
+    private function getTinymceLanguage($lang)
+    {
+        switch ($lang) {
+            case 'jp':
+                return 'ja';
+            case 'zh':
+                return 'zh-Hans';
+            case 'fr':
+                return 'fr_FR';
+            case 'pt':
+                return 'pt_BR';
+            default:
+                return $lang ?: 'es';
+        }
+    }
+
+    private function refreshVisits(array $configRow, array $visitsRow)
+    {
+        $month = date('M');
+
+        if ($month === 'Jan' || (isset($visitsRow['december']) && (int) $visitsRow['december'] < 0)) {
+            $resetData = array(
+                'january' => 0,
+                'february' => 0,
+                'march' => 0,
+                'april' => 0,
+                'may' => 0,
+                'june' => 0,
+                'july' => 0,
+                'august' => 0,
+                'september' => 0,
+                'october' => 0,
+                'november' => 0,
+                'december' => 0,
+            );
+            $this->db->where('id', 1);
+            $this->db->update('visits', $resetData);
+            $visitsRow = array_merge($visitsRow, $resetData);
+        }
+
+        if ($this->session->userdata('rol') == 2 || $this->session->userdata('login') == false) {
+            $monthMap = array(
+                'Jan' => 'january',
+                'Feb' => 'february',
+                'Mar' => 'march',
+                'Apr' => 'april',
+                'May' => 'may',
+                'Jun' => 'june',
+                'Jul' => 'july',
+                'Aug' => 'august',
+                'Sep' => 'september',
+                'Oct' => 'october',
+                'Nov' => 'november',
+                'Dec' => 'december',
+            );
+
+            if (isset($monthMap[$month])) {
+                $column = $monthMap[$month];
+                $currentValue = isset($visitsRow[$column]) ? (int) $visitsRow[$column] : 0;
+                $visitsRow[$column] = $currentValue + 1;
+                $this->db->where('id', 1);
+                $this->db->update('visits', array($column => $visitsRow[$column]));
+            }
+        }
+
+        return $visitsRow;
+    }
+
+    private function getSharedData()
+    {
+        $configRow = $this->getConfigRow();
+
+        if ($this->session->userdata('lang') == '') {
+            $this->session->set_userdata(array(
+                'lang' => $configRow['lang'] ?? 'es',
+            ));
+        }
+
+        $visitsRow = $this->refreshVisits($configRow, $this->getVisitsRow());
+
+        $this->load->model('Apiserverinfo');
+        $serverInfo = (array) $this->Apiserverinfo->serverinfo();
+        $sessionLang = $this->session->userdata('lang') ?: ($configRow['lang'] ?? 'es');
+
+        return array(
+            'site_lang' => $sessionLang,
+            'site_title' => $serverInfo['GameName'] ?? 'Intersect CMS',
+            'analytics_id' => $configRow['analytics'] ?? '',
+            'theme_color1' => $configRow['color1'] ?? '#2d5474',
+            'theme_color2' => $configRow['color2'] ?? '#107e72',
+            'download_url' => $configRow['download'] ?? '',
+            'current_user' => $this->session->userdata('user') ?: '',
+            'is_logged_in' => $this->session->userdata('login') ? 1 : 0,
+            'is_admin' => ((int) $this->session->userdata('rol') === 1) ? 1 : 0,
+            'current_year' => date('Y'),
+            'tinymce_language' => $this->getTinymceLanguage($sessionLang),
+            'visits_january' => (int) ($visitsRow['january'] ?? 0),
+            'visits_february' => (int) ($visitsRow['february'] ?? 0),
+            'visits_march' => (int) ($visitsRow['march'] ?? 0),
+            'visits_april' => (int) ($visitsRow['april'] ?? 0),
+            'visits_may' => (int) ($visitsRow['may'] ?? 0),
+            'visits_june' => (int) ($visitsRow['june'] ?? 0),
+            'visits_july' => (int) ($visitsRow['july'] ?? 0),
+            'visits_august' => (int) ($visitsRow['august'] ?? 0),
+            'visits_september' => (int) ($visitsRow['september'] ?? 0),
+            'visits_october' => (int) ($visitsRow['october'] ?? 0),
+            'visits_november' => (int) ($visitsRow['november'] ?? 0),
+            'visits_december' => (int) ($visitsRow['december'] ?? 0),
+        );
+    }
+
     public function lang(){
         $es = array(
             ////////////////////////////////////////////Home////////////////////////////////////////////////////////
@@ -2249,23 +2370,21 @@ $tr = array(
 
 
 
+    $sharedData = $this->getSharedData();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    return array($es, $en, $tr, $jp, $de, $ru, $zh, $fr, $pt, $hi, $ar);
+    return array(
+        array_merge($es, $sharedData),
+        array_merge($en, $sharedData),
+        array_merge($tr, $sharedData),
+        array_merge($jp, $sharedData),
+        array_merge($de, $sharedData),
+        array_merge($ru, $sharedData),
+        array_merge($zh, $sharedData),
+        array_merge($fr, $sharedData),
+        array_merge($pt, $sharedData),
+        array_merge($hi, $sharedData),
+        array_merge($ar, $sharedData),
+    );
     }
 
 

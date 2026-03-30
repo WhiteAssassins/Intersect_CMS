@@ -1,14 +1,7 @@
-<?php
-    $conf = $this->db->get('config');
-    $conf1 = $conf->result_array();
-    $visits = $this->db->get('visits');
-    $visits1 = $visits->result_array();
-?>
-
 <footer class="page-footer font-small navbar-novo footer-bottom">
 
 
-<div class="footer-copyright text-center py-3"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?>  © <?php echo date('Y')?> {copyright}:
+<div class="footer-copyright text-center py-3">{site_title} &copy; {current_year} {copyright}:
   <a href="#">AEWhite Devs </a>|
      <a href="<?php echo base_url('legal'); ?>">{legalnotice} </a>|
      <a href="<?php echo base_url('terms'); ?>">{terms} </a>|
@@ -42,7 +35,9 @@
     <?php if($this->session->userdata('rol') == 1){ ?>
 
       <script>
-            var ctxL = document.getElementById("lineChart").getContext('2d');
+    var lineChartElement = document.getElementById("lineChart");
+    if (lineChartElement) {
+            var ctxL = lineChartElement.getContext('2d');
     var gradientFill = ctxL.createLinearGradient(0, 0, 0, 290);
     gradientFill.addColorStop(0, "rgba(0, 125, 250, 1)");
     gradientFill.addColorStop(1, "rgba(0, 125, 250, 0.1)");
@@ -53,7 +48,7 @@
         datasets: [
           {
             label: "Visitas Mensuales",
-            data: [<?php echo $visits1[0]['january'];?>, <?php echo $visits1[0]['february'];?>, <?php echo $visits1[0]['march'];?>, <?php echo $visits1[0]['april'];?>, <?php echo $visits1[0]['may'];?>, <?php echo $visits1[0]['june'];?>, <?php echo $visits1[0]['july'];?>, <?php echo $visits1[0]['august'];?>, <?php echo $visits1[0]['september'];?>, <?php echo $visits1[0]['october'];?>, <?php echo $visits1[0]['november'];?>, <?php echo $visits1[0]['december'];?>],
+            data: [{visits_january}, {visits_february}, {visits_march}, {visits_april}, {visits_may}, {visits_june}, {visits_july}, {visits_august}, {visits_september}, {visits_october}, {visits_november}, {visits_december}],
             backgroundColor: gradientFill,
             borderColor: [
               '#007DFA',
@@ -68,6 +63,7 @@
         responsive: true
       }
     });
+    }
         </script>
       <script>
 $(document).ready(function() {
@@ -198,19 +194,21 @@ $(document).ready(function(){
             loading_touch_device: 1,
         }
     </script>
+ <?php if($this->session->userdata('rol') == 1){ ?>
  <script>
   tinymce.init({
     selector: 'textarea#tiny',
-    language: '<?php if($this->session->userdata('lang') == "jp"){ echo "ja"; }elseif($this->session->userdata('lang') == "zh"){echo "zh-Hans"; }elseif($this->session->userdata('lang') == "fr"){echo "fr_FR"; }elseif($this->session->userdata('lang') == "pt"){echo "pt_BR"; }else{echo $this->session->userdata('lang'); }?>',
+    language: '{tinymce_language}',
     plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
     skin: 'oxide',
     encoding: 'UTF-8',
   });
 </script>
+<?php } ?>
   <script>
 $(document).ready(function() {
 $('.mdb-select').materialSelect();
 });
   </script>
 
-<html>
+</html>

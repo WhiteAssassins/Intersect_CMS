@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
       <div class="logo-wrapper waves-light waves-effect waves-light">
         <a class="white-text" href="<?php echo base_url('home');?>">
         <h2 style="    padding-left: 40px;
-    padding-top: 20px;"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></h2>
+    padding-top: 20px;">{site_title}</h2>
     </a>
       </div>
     </li>

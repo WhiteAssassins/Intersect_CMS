@@ -1,10 +1,5 @@
-<?php
-    $conf = $this->db->get('config');
-    $conf1 = $conf->result_array();
-?>
-<body>
 <nav class="mb-1  navbar navbar-expand-lg navbar-dark info-color navbar-novo" style="z-index: 2;">
-  <a class="navbar-brand" href="<?php echo base_url(); ?>"><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></a>
+  <a class="navbar-brand" href="<?php echo base_url(); ?>">{site_title}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,21 +10,21 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">{language}</a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="<?php base_url();?>langs/es">ES</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/en">EN</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/tr">TR</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/jp">JP</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/de">DE</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/ru">RU</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/zh">ZH</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/fr">FR</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/pt">PT</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/hi">HI</a>
-          <a class="dropdown-item" href="<?php base_url();?>langs/AR">AR</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/es'); ?>">ES</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/en'); ?>">EN</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/tr'); ?>">TR</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/jp'); ?>">JP</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/de'); ?>">DE</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/ru'); ?>">RU</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/zh'); ?>">ZH</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/fr'); ?>">FR</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/pt'); ?>">PT</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/hi'); ?>">HI</a>
+          <a class="dropdown-item" href="<?php echo base_url('langs/ar'); ?>">AR</a>
         </div>
       </li>
                  <li class="nav-item">
-                  <a href="<?php echo $conf1['0']['download'] ?>"
+                  <a href="{download_url}"
                     class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
                     <i class="fas fa-download mr-1"></i>{downloadbutton}
                   </a>
@@ -87,7 +82,7 @@
                 </li>
                 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?php echo $this->session->userdata('user'); ?></a>
+          aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {current_user}</a>
         <div class="dropdown-menu dropdown-info dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
         <a class="dropdown-item" href="<?php echo base_url('userpanel'); ?>"><i class="fa fa-cog"></i> {paneluser}</a>
           <?php if($this->session->userdata('rol') == 1){ ?>

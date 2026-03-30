@@ -1,131 +1,5 @@
-<?php
-    $conf = $this->db->get('config');
-    $conf1 = $conf->result_array();
-    $months = $this->db->get('visits');
-    $months1 = $months->result_array();
-    $month = date('M');
-    if($month == 'Jan' || $conf1[0]['december'] < 0){
-        $datas = [
-            'january' => 0,
-            'february' => 0,
-            'march' => 0,
-            'april' => 0,
-            'may' => 0,
-            'june' => 0,
-            'july' => 0,
-            'august' => 0,
-            'september' => 0,
-            'october' => 0,
-            'november' => 0,
-            'december' => 0
-        ];
-        $this->db->where('id', 1);
-        $this->db->update('visits', $datas); 
-        }
-    if($this->session->userdata('rol') == 2 OR $this->session->userdata('login') == false){
-    switch ($month) {
-        case 'Jan':
-            $monthdata = [
-                'january'=>$months1[0]['january'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata); 
-            break;
-        case 'Feb':
-            $monthdata = [
-                'february'=>$months1[0]['february'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Mar':
-            $monthdata = [
-                'march'=>$months1[0]['march'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Apr':
-            $monthdata = [
-                'april'=>$months1[0]['april'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'May':
-            $monthdata = [
-                'may'=>$months1[0]['may'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Jun':
-            $monthdata = [
-                'june'=>$months1[0]['june'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Jul':
-            $monthdata = [
-                'july'=>$months1[0]['july'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Aug':
-            $monthdata = [
-                'august'=>$months1[0]['august'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Sep':
-            $monthdata = [
-                'september'=>$months1[0]['september'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Oct':
-            $monthdata = [
-                'october'=>$months1[0]['october'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Nov':
-            $monthdata = [
-                'november'=>$months1[0]['november'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-        case 'Dec':
-            $monthdata = [
-                'december'=>$months1[0]['december'] + 1,
-    
-            ];
-            $this->db->where('id', 1);
-            $this->db->update('visits', $monthdata);
-            break;
-
-        }
-    }
-?>
 <!DOCTYPE html>
-<html lang="<?php echo $conf1[0]['lang']?>" style="height:100% ;" dir="ltr">
+<html lang="{site_lang}" style="height:100% ;" dir="ltr">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
@@ -139,7 +13,7 @@
 
 
 
-    <title><?php $serverinfo = $this->Apiserverinfo->serverinfo();  echo $serverinfo['GameName']; ?></title>
+    <title>{site_title}</title>
     <link rel="canonical" href="<?php echo base_url();?>">
     <link rel="dns-prefetch" href="<?php echo base_url();?>">
     <link rel="preconnect" href="<?php echo base_url();?>">
@@ -167,31 +41,16 @@
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css"> 
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $conf1['0']['analytics'] ?>"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={analytics_id}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', '<?php echo $conf1['0']['analytics'] ?>');
+  gtag('config', '{analytics_id}');
 </script> 
 </head>
-<?php 
-
-    foreach ($conf1 as $key){
-?>
-<body style="background: linear-gradient(90deg, <?php echo $key['color1']; ?> 23%, <?php echo $key['color2']; ?> 100%) !important;">
-<?php 
- if($this->session->userdata('lang') == ""){
-    $data = [
-        'lang'=> $conf1[0]['lang'],
-    ];
-    $this->session->set_userdata($data);
- }
-
-?>
-
-<?php } ?>
+<body style="background: linear-gradient(90deg, {theme_color1} 23%, {theme_color2} 100%) !important;">
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog o" role="document">
         <div class="modal-content cards-novo">
