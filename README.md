@@ -22,6 +22,14 @@ Este repositorio ya no usa `main_ci4` como base principal. Si en algun momento h
 - Sistema de traducciones para varios idiomas
 - Base de datos inicial incluida en `intersec.sql`
 
+## Capturas del proyecto
+
+> Referencias visuales del proyecto. La interfaz sigue en proceso de rebranding, asi que algunas pantallas pueden verse ligeramente distintas en la rama actual.
+
+![Intersect CMS - Home](https://i.postimg.cc/65v014v3/1.png)
+![Intersect CMS - Dashboard](https://i.postimg.cc/h4wsr1h6/2.png)
+![Intersect CMS - Admin](https://i.postimg.cc/qvHLfBsG/3.png)
+
 ## Requisitos
 
 - PHP 8.1 o superior
