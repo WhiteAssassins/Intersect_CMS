@@ -1,69 +1,90 @@
-<div class="container" style="padding-top: 50px;">
-<div class="classic-tabs mx-2">
+<main class="userpanel-shell">
+  <section class="userpanel-workspace">
+    <div class="container">
+      <div class="userpanel-section-heading">
+        <div>
+          <span class="userpanel-card__eyebrow">{feedback}</span>
+          <h1 class="userpanel-card__title">{createticket}</h1>
+        </div>
+        <button class="admin-button admin-button--primary btn_modal_newticket" type="button">{createticket}</button>
+      </div>
 
-  <ul class="nav tabs-cyan" id="myClassicTabShadow" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link waves-light active show" id="profile-tab-classic-shadow" data-toggle="tab" href="#profile-classic-shadow"
-        role="tab" aria-controls="profile-classic-shadow" aria-selected="true">Open (<?php echo $open_ticket_count; ?>)</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link waves-light" id="follow-tab-classic-shadow" data-toggle="tab" href="#follow-classic-shadow"
-        role="tab" aria-controls="follow-classic-shadow" aria-selected="false">Closed (<?php echo $closed_ticket_count; ?>)</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link waves-light btn_modal_newticket"
-        role="tab" aria-controls="contact-classic-shadow" aria-selected="false">{createticket}</a>
-    </li>
-  </ul>
+      <div class="userpanel-overview-grid">
+        <article class="userpanel-stat">
+          <span class="userpanel-stat__label">{userpanel_open_label}</span>
+          <strong class="userpanel-stat__value"><?php echo (int) $open_ticket_count; ?></strong>
+        </article>
+        <article class="userpanel-stat">
+          <span class="userpanel-stat__label">{userpanel_closed_label}</span>
+          <strong class="userpanel-stat__value"><?php echo (int) $closed_ticket_count; ?></strong>
+        </article>
+        <article class="userpanel-stat">
+          <span class="userpanel-stat__label">{email}</span>
+          <strong class="userpanel-stat__value userpanel-stat__value--compact"><?php echo html_escape($feedback_email !== '' ? $feedback_email : '--'); ?></strong>
+        </article>
+      </div>
 
-  <div class="tab-content card cards-novo" id="myClassicTabContentShadow">
-    <div class="tab-pane fade active show p-4" id="profile-classic-shadow" role="tabpanel" aria-labelledby="profile-tab-classic-shadow">
-      <?php if (empty($open_tickets)) { ?>
-        <p class="mb-0">No open tickets.</p>
-      <?php } else { ?>
-        <?php foreach ($open_tickets as $ticket) { ?>
-          <div class="card cards-novo mb-3">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="card-title mb-0"><?php echo $ticket['title']; ?></h5>
-                <span class="badge badge-info"><?php echo $ticket['status']; ?></span>
-              </div>
-              <p class="mb-2"><strong>{admin}:</strong> <?php echo $ticket['admin'] !== '' ? $ticket['admin'] : 'Pending'; ?></p>
-              <p class="mb-2"><strong>{email}:</strong> <?php echo $ticket['email']; ?></p>
-              <p class="mb-2"><strong>Type:</strong> <?php echo $ticket['type']; ?></p>
-              <p class="mb-0"><?php echo nl2br(htmlspecialchars($ticket['text'], ENT_QUOTES, 'UTF-8')); ?></p>
+      <div class="userpanel-grid">
+        <article class="userpanel-card">
+          <div class="userpanel-card__header">
+            <span class="userpanel-card__icon"><i class="fas fa-life-ring"></i></span>
+            <div>
+              <span class="userpanel-card__eyebrow">{userpanel_open_label}</span>
+              <h2 class="userpanel-card__title">{feedback}</h2>
             </div>
           </div>
-        <?php } ?>
-      <?php } ?>
-    </div>
-    <div class="tab-pane fade p-4" id="follow-classic-shadow" role="tabpanel" aria-labelledby="follow-tab-classic-shadow">
-      <?php if (empty($closed_tickets)) { ?>
-        <p class="mb-0">No closed tickets.</p>
-      <?php } else { ?>
-        <?php foreach ($closed_tickets as $ticket) { ?>
-          <div class="card cards-novo mb-3">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h5 class="card-title mb-0"><?php echo $ticket['title']; ?></h5>
-                <span class="badge badge-secondary"><?php echo $ticket['status']; ?></span>
-              </div>
-              <p class="mb-2"><strong>{admin}:</strong> <?php echo $ticket['admin'] !== '' ? $ticket['admin'] : 'Pending'; ?></p>
-              <p class="mb-2"><strong>{email}:</strong> <?php echo $ticket['email']; ?></p>
-              <p class="mb-2"><strong>Type:</strong> <?php echo $ticket['type']; ?></p>
-              <p class="mb-0"><?php echo nl2br(htmlspecialchars($ticket['text'], ENT_QUOTES, 'UTF-8')); ?></p>
+
+          <div class="userpanel-ticket-list">
+            <?php if (empty($open_tickets)) { ?>
+              <div class="userpanel-ticket userpanel-ticket--empty">{emptyTable}</div>
+            <?php } else { ?>
+              <?php foreach ($open_tickets as $ticket) { ?>
+                <article class="userpanel-ticket">
+                  <div class="userpanel-ticket__top">
+                    <strong><?php echo html_escape($ticket['title']); ?></strong>
+                    <span class="userpanel-ticket__status"><?php echo html_escape($ticket['status']); ?></span>
+                  </div>
+                  <div class="userpanel-ticket__meta">
+                    <span><?php echo html_escape($ticket['type']); ?></span>
+                    <span>{admin}: <?php echo html_escape($ticket['admin'] !== '' ? $ticket['admin'] : '--'); ?></span>
+                  </div>
+                  <p><?php echo nl2br(htmlspecialchars($ticket['text'], ENT_QUOTES, 'UTF-8')); ?></p>
+                </article>
+              <?php } ?>
+            <?php } ?>
+          </div>
+        </article>
+
+        <article class="userpanel-card">
+          <div class="userpanel-card__header">
+            <span class="userpanel-card__icon"><i class="fas fa-check-circle"></i></span>
+            <div>
+              <span class="userpanel-card__eyebrow">{userpanel_closed_label}</span>
+              <h2 class="userpanel-card__title">{feedback}</h2>
             </div>
           </div>
-        <?php } ?>
-      <?php } ?>
+
+          <div class="userpanel-ticket-list">
+            <?php if (empty($closed_tickets)) { ?>
+              <div class="userpanel-ticket userpanel-ticket--empty">{emptyTable}</div>
+            <?php } else { ?>
+              <?php foreach ($closed_tickets as $ticket) { ?>
+                <article class="userpanel-ticket">
+                  <div class="userpanel-ticket__top">
+                    <strong><?php echo html_escape($ticket['title']); ?></strong>
+                    <span class="userpanel-ticket__status userpanel-ticket__status--closed"><?php echo html_escape($ticket['status']); ?></span>
+                  </div>
+                  <div class="userpanel-ticket__meta">
+                    <span><?php echo html_escape($ticket['type']); ?></span>
+                    <span>{admin}: <?php echo html_escape($ticket['admin'] !== '' ? $ticket['admin'] : '--'); ?></span>
+                  </div>
+                  <p><?php echo nl2br(htmlspecialchars($ticket['text'], ENT_QUOTES, 'UTF-8')); ?></p>
+                </article>
+              <?php } ?>
+            <?php } ?>
+          </div>
+        </article>
+      </div>
     </div>
-  </div>
-
-</div>
-</div>
-
-<script>
-$(document).ready(function() {
-$('.mdb-select').materialSelect();
-});
-</script>
+  </section>
+</main>

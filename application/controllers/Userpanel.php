@@ -161,13 +161,30 @@ class Userpanel extends MY_Controller
     private function buildPanelViewData()
     {
         $userRow = $this->getCurrentUserRow();
+        $tickets = $this->Userpaneldata->getFeedbackTickets((string) $this->session->userdata('user'));
+        $openTickets = 0;
+        $closedTickets = 0;
+
+        foreach ($tickets as $ticket) {
+            $status = strtolower(trim((string) ($ticket['status'] ?? '')));
+            if (in_array($status, array('closed', 'resolved', 'done'), true)) {
+                $closedTickets++;
+            } else {
+                $openTickets++;
+            }
+        }
 
         return array(
             'panel_username' => $userRow['user'] ?? $this->session->userdata('user') ?? '',
             'panel_balance' => $userRow['balance'] ?? 0,
+            'panel_email' => $userRow['email'] ?? '',
             'panel_os' => $this->agent->platform(),
             'panel_ip' => $this->input->ip_address(),
             'panel_browser' => $this->agent->browser() . ' ' . $this->agent->version(),
+            'panel_open_tickets' => $openTickets,
+            'panel_closed_tickets' => $closedTickets,
+            'panel_total_tickets' => count($tickets),
+            'panel_is_admin' => (int) $this->session->userdata('rol') === 1,
         );
     }
 

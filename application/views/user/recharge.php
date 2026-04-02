@@ -1,35 +1,37 @@
-<div class="container" style="padding-top: 100px;">
-<div class="jumbotron text-center cards-novo">
-  <div class="row d-flex justify-content-center">
-    <div class="col-xl-7 pb-2">
-      <h4 class="text-center font-weight-bold mb-4 pb-2">{balanceavailable}: <?php echo $panel_balance; ?></h4>
-      <div class="mt-5">
-        <form method="POST" action="<?php echo base_url('userpanel/rechargin'); ?>">
-          <?php echo cms_csrf_field(); ?>
-          <div class="md-form mb-4">
-                    <i class="fas fa-dollar-sign"></i>
-                    <input type="number" step="0.01" min="0.01" id="prefixInside" class="form-control" name="cant" placeholder="0.01" required>
-                </div>
-            <p class="grey-text">{paymentmethod}</p>
-            <div class="row text-center text-md-left">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <input class="form-check-input" name="billing" type="radio" id="radio102" value="qvapay" checked>
-                  <label for="radio102" class="form-check-label dark-grey-text">QvaPay</label>
-                </div>
-              </div>
+<main class="userpanel-shell">
+  <section class="userpanel-workspace userpanel-workspace--single">
+    <div class="container">
+      <div class="userpanel-single">
+        <article class="userpanel-card userpanel-card--security">
+          <div class="userpanel-card__header">
+            <span class="userpanel-card__icon"><i class="fas fa-wallet"></i></span>
+            <div>
+              <span class="userpanel-card__eyebrow">{recharge}</span>
+              <h1 class="userpanel-card__title">{balanceavailable}: $<?php echo number_format((float) $panel_balance, 2, '.', ''); ?></h1>
             </div>
-            <div class="row mt-3 mb-4">
-              <div class="col-md-12 text-center text-md-left text-md-right">
-              <a href="<?php echo base_url('userpanel'); ?>" type="button" class="btn btn-primary btn-rounded">{return}</a>
-                <button type="submit" class="btn btn-primary btn-rounded"> {recharge}</button>
-              </div>
-            </div>
-            </form>
           </div>
+
+          <form method="POST" action="<?php echo base_url('userpanel/rechargin'); ?>" class="userpanel-form">
+            <?php echo cms_csrf_field(); ?>
+            <div class="userpanel-form__grid">
+              <input type="number" step="0.01" min="0.01" class="form-control userpanel-form__input" name="cant" placeholder="0.01" required>
+            </div>
+
+            <div class="userpanel-radio">
+              <span class="userpanel-radio__label">{paymentmethod}</span>
+              <label class="userpanel-radio__option">
+                <input name="billing" type="radio" value="qvapay" checked>
+                <span>QvaPay</span>
+              </label>
+            </div>
+
+            <div class="userpanel-form__actions">
+              <a href="<?php echo base_url('userpanel'); ?>" class="admin-button admin-button--ghost">{return}</a>
+              <button type="submit" class="admin-button admin-button--primary">{recharge}</button>
+            </div>
+          </form>
+        </article>
+      </div>
     </div>
-  </div>
-  <div class="pt-2">
-  </div>
-  </div>
-</div>
+  </section>
+</main>
