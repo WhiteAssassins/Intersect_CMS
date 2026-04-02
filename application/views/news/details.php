@@ -1,25 +1,16 @@
-<div class="container mt-5  cards-novo">
-  <section class="mx-md-5 dark-grey-text">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-cascade wider reverse">
-          <div class="view view-cascade overlay " style="margin-top: 40px;">
-            <img class="card-img-top" src="<?php echo base_url('img/news/'); echo $newss['img']; ?>" alt="Sample image" >
-            <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body card-body-cascade text-center  cards-novo" style="margin-top: 4px;">
-            <h3 class="font-weight-bold"><a><?php echo $newss['title']; ?></a></h3>
-            <p>{writedby} <a><strong><?php echo $newss['admin']; ?></strong></a>, <?php echo $newss['date']; ?></p>
-          </div>
-        </div>
-        <div class="mt-5 white-text">
-        <?php echo $newss['txt']; ?>
-        </div>
-        <a href="<?php echo base_url('news'); ?>" class="btn btn-outline-primary btn-rounded waves-effect">{return}</a>
-      </div>
+<main class="public-page public-page--stack">
+  <article class="article-page">
+    <div class="article-page__media">
+      <img src="<?php echo base_url('img/news/'); echo $newss['img']; ?>" alt="<?php echo html_escape($newss['title']); ?>">
     </div>
-    <hr class="mb-5 mt-4">
-  </section>
-</div>
+    <div class="article-page__content">
+      <span class="public-page__eyebrow">{news}</span>
+      <h1 class="article-page__title"><?php echo $newss['title']; ?></h1>
+      <p class="article-page__meta">{writedby} <strong><?php echo $newss['admin']; ?></strong>, <?php echo $newss['date']; ?></p>
+      <div class="article-page__body">
+        <?php echo $newss['txt']; ?>
+      </div>
+      <a href="<?php echo base_url('news'); ?>" class="admin-button admin-button--ghost">{return}</a>
+    </div>
+  </article>
+</main>

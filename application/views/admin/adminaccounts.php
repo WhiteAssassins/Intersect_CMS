@@ -1,34 +1,50 @@
 <div class="modal fade" id="modal_addadminaccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center modal-shell__header">
             <span class="modal-shell__badge"><i class="fas fa-user-shield"></i></span>
+            <span class="modal-shell__eyebrow">{admin_sidebar_community}</span>
             <h4 class="modal-title w-100 font-weight-bold">{addadminaccount}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3 modal-shell__body">
               <form action="<?php echo base_url('admin/adminadd'); ?>" method="post" enctype="multipart/form-data" class="modal-shell__form">
                   <?php echo cms_csrf_field(); ?>
-                <div class="md-form mb-5">
-                    <input type="text" class="form-control validate" name="user">
-                    <label>{user}</label>
+        <div class="modal-body modal-shell__body">
+                <div class="modal-shell__grid">
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="adminaccount_user">{user}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-user-shield"></i></span>
+                            <input id="adminaccount_user" type="text" class="modal-shell__input" name="user">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="adminaccount_email">{email}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-envelope"></i></span>
+                            <input id="adminaccount_email" type="email" class="modal-shell__input" name="email">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="adminaccount_pass">{password}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-lock"></i></span>
+                            <input id="adminaccount_pass" type="password" class="modal-shell__input" name="pass">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="adminaccount_pass_confirm">{confirmpassword}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-shield-alt"></i></span>
+                            <input id="adminaccount_pass_confirm" type="password" class="modal-shell__input" name="pass1">
+                        </div>
+                    </div>
                 </div>
-                <div class="md-form mb-4">
-                    <input type="text" class="form-control validate" name="pass">
-                    <label>{password}</label>
-                </div>
-                <div class="md-form mb-4">
-                    <input type="text" class="form-control validate" name="pass1">
-                    <label>{confirmpassword}</label>
-                </div>
-                <div class="md-form mb-4">
-                    <input type="email" class="form-control validate" name="email">
-                    <label>{email}</label>
-                </div>
+        </div>
                 <div class="modal-footer d-flex justify-content-center modal-shell__footer">
-                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addadminaccount}</button>
+                    <button class="admin-button admin-button--primary modal-shell__submit" type="submit">{addadminaccount}</button>
                 </div>
                 </form>
             </div>

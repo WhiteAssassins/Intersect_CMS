@@ -1,53 +1,68 @@
 <div class="modal fade" id="modal_addproduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center modal-shell__header">
             <span class="modal-shell__badge"><i class="fas fa-shopping-bag"></i></span>
+            <span class="modal-shell__eyebrow">{admin_sidebar_content}</span>
             <h4 class="modal-title w-100 font-weight-bold">{addproduct}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3 modal-shell__body">
             <form action="<?php echo base_url('admin/addproduct'); ?>" method="post" enctype="multipart/form-data" class="modal-shell__form">
                 <?php echo cms_csrf_field(); ?>
-                <div class="md-form mb-5">
-                    <input type="text" class="form-control validate" name="name">
-                    <label>{name}</label>
-                </div>
-                <div class="md-form mb-4">
-                    <input type="text" class="form-control validate" name="descrip">
-                    <label>{description}</label>
-                </div>
-                <div class="md-form mb-4">
-                   <input type="text" class="form-control validate" name="price">
-                   <label>{price}</label>
-               </div>
-               <div class="md-form mb-4">
-                   <input type="text" class="form-control validate" name="aatk">
-                   <label>{atackan}</label>
-               </div>
-               <div class="md-form mb-4">
-                   <input type="text" class="form-control validate" name="ainterac">
-                   <label>{interacan}</label>
-               </div>
-               <div class="md-form mb-4">
-                   <input type="text" class="form-control validate" name="ingameid">
-                   <label>{ingameid}</label>
-               </div>
-               <div class="md-form mb-4">
-                    <div class="file-field admin-upload">
-                        <a class="btn-file-c btn-floating mt-0 float-left">
-                            <i class="fas fa-paperclip" aria-hidden="true"></i>
-                            <input type="file" name="archivo">
-                        </a>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="{productpic}">
+        <div class="modal-body modal-shell__body">
+                <div class="modal-shell__grid">
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_name">{name}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-box"></i></span>
+                            <input id="product_name" type="text" class="modal-shell__input" name="name">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_description">{description}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-align-left"></i></span>
+                            <input id="product_description" type="text" class="modal-shell__input" name="descrip">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_price">{price}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-dollar-sign"></i></span>
+                            <input id="product_price" type="number" step="0.01" class="modal-shell__input" name="price">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_ingameid">{ingameid}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-hashtag"></i></span>
+                            <input id="product_ingameid" type="text" class="modal-shell__input" name="ingameid">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_attack">{atackan}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-bolt"></i></span>
+                            <input id="product_attack" type="text" class="modal-shell__input" name="aatk">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="product_interaction">{interacan}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-hand-paper"></i></span>
+                            <input id="product_interaction" type="text" class="modal-shell__input" name="ainterac">
                         </div>
                     </div>
                 </div>
+                <div class="modal-shell__field modal-shell__field--full">
+                    <label class="modal-shell__label" for="product_image">{productpic}</label>
+                    <input id="product_image" type="file" class="modal-shell__file" name="archivo" accept="image/*">
+                </div>
+        </div>
                 <div class="modal-footer d-flex justify-content-center modal-shell__footer">
-                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addproduct}</button>
+                    <button class="admin-button admin-button--primary modal-shell__submit" type="submit">{addproduct}</button>
                 </div>
             </form>
             </div>

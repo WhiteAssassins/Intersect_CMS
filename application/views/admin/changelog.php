@@ -1,25 +1,31 @@
 <div class="modal fade" id="modal_newchangelog" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content cards-novo">
             <div class="modal-header text-center modal-shell__header">
                 <span class="modal-shell__badge"><i class="fas fa-stream"></i></span>
+                <span class="modal-shell__eyebrow">{admin_sidebar_content}</span>
                 <h4 class="modal-title w-100 font-weight-bold">{addchangelog}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body mx-3 modal-shell__body">
                 <form action="<?php echo base_url('admin/addchangelog'); ?>" method="post" class="modal-shell__form">
                     <?php echo cms_csrf_field(); ?>
-                    <div class="md-form mb-5">
-                        <input type="text" class="form-control validate" name="title">
-                        <label>{title}</label>
+            <div class="modal-body modal-shell__body">
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="changelog_title">{title}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-heading"></i></span>
+                            <input id="changelog_title" type="text" class="modal-shell__input" name="title">
+                        </div>
                     </div>
-                    <div class="md-form mb-4 pink-textarea active-pink-textarea">
-                        <textarea class="md-textarea form-control" rows="5" name="text" placeholder="{description}"></textarea>
+                    <div class="modal-shell__field modal-shell__field--full">
+                        <label class="modal-shell__label" for="changelog_text">{description}</label>
+                        <textarea id="changelog_text" class="modal-shell__textarea" rows="6" name="text"></textarea>
                     </div>
+            </div>
                     <div class="modal-footer d-flex justify-content-center modal-shell__footer">
-                        <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{addchangelog}</button>
+                        <button class="admin-button admin-button--primary modal-shell__submit" type="submit">{addchangelog}</button>
                     </div>
                 </form>
             </div>

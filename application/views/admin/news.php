@@ -1,40 +1,44 @@
 <div class="modal fade" id="modal_addnews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content cards-novo">
         <div class="modal-header text-center modal-shell__header">
             <span class="modal-shell__badge"><i class="fas fa-newspaper"></i></span>
+            <span class="modal-shell__eyebrow">{admin_sidebar_content}</span>
             <h4 class="modal-title w-100 font-weight-bold">{addnews}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body mx-3 modal-shell__body">
             <form action="<?php echo base_url('admin/addnews'); ?>" method="post" enctype="multipart/form-data" class="modal-shell__form">
                 <?php echo cms_csrf_field(); ?>
-                <div class="md-form mb-5">
-                    <input type="text" class="form-control validate" name="title">
-                    <label>{title}</label>
-                </div>
-                <div class="md-form mb-4">
-                    <input type="text" class="form-control validate" name="descrip">
-                    <label>{description}</label>
-                </div>
-                <div class="md-form mb-4 pink-textarea active-pink-textarea">
-                    <textarea id="tiny" name="txt" placeholder="{textnews}"></textarea>
-                </div>
-                <div class="md-form mb-4">
-                    <div class="file-field admin-upload">
-                        <a class="btn-file-c btn-floating mt-0 float-left">
-                            <i class="fas fa-paperclip" aria-hidden="true"></i>
-                            <input type="file" name="archivo">
-                        </a>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="{newspic}">
+        <div class="modal-body modal-shell__body">
+                <div class="modal-shell__grid">
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="news_title">{title}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-heading"></i></span>
+                            <input id="news_title" type="text" class="modal-shell__input" name="title">
+                        </div>
+                    </div>
+                    <div class="modal-shell__field">
+                        <label class="modal-shell__label" for="news_description">{description}</label>
+                        <div class="modal-shell__input-wrap">
+                            <span class="modal-shell__input-icon"><i class="fas fa-align-left"></i></span>
+                            <input id="news_description" type="text" class="modal-shell__input" name="descrip">
                         </div>
                     </div>
                 </div>
+                <div class="modal-shell__field modal-shell__field--full">
+                    <label class="modal-shell__label" for="tiny">{textnews}</label>
+                    <textarea id="tiny" name="txt" class="modal-shell__textarea" rows="7"></textarea>
+                </div>
+                <div class="modal-shell__field modal-shell__field--full">
+                    <label class="modal-shell__label" for="news_image">{newspic}</label>
+                    <input id="news_image" type="file" class="modal-shell__file" name="archivo" accept="image/*">
+                </div>
+        </div>
                 <div class="modal-footer d-flex justify-content-center modal-shell__footer">
-                    <button class="btn btn-outline-info waves-effect modal-shell__submit" type="submit">{uploadnews}</button>
+                    <button class="admin-button admin-button--primary modal-shell__submit" type="submit">{uploadnews}</button>
                 </div>
             </form>
             </div>
