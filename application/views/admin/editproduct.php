@@ -5,18 +5,51 @@
         <div>
           <span class="admin-section__eyebrow">{admin_sidebar_content}</span>
           <h2 class="admin-panel__title">{editproduct}</h2>
+          <p class="admin-section__text">Ajusta la presentacion del item, su precio y los identificadores necesarios para entregarlo dentro del juego.</p>
         </div>
       </div>
       <form class="admin-editor__form" action="<?php echo base_url('admin/editproducts'); ?>" method="POST">
         <?php echo cms_csrf_field(); ?>
         <input type="hidden" name="id" value="<?php echo $product_id; ?>">
-        <div class="admin-editor__grid">
-          <input type="text" class="form-control" placeholder="{name}" value="<?php echo $product_name_value; ?>" name="name">
-          <input type="text" class="form-control" placeholder="{description}" value="<?php echo $product_description_value; ?>" name="descrip">
-          <input type="text" class="form-control" placeholder="{price}" value="<?php echo $product_price_value; ?>" name="price">
-          <input type="text" class="form-control" placeholder="{atackan}" value="<?php echo $product_attack_animation_value; ?>" name="aatk">
-          <input type="text" class="form-control" placeholder="{interacan}" value="<?php echo $product_interaction_animation_value; ?>" name="ainterac">
-          <input type="text" class="form-control" placeholder="{ingameid}" value="<?php echo $product_ingame_id_value; ?>" name="ingameid">
+        <div class="admin-form-section">
+          <div class="admin-form-section__heading">
+            <h3>Basico</h3>
+            <p>Informacion visible para el usuario dentro de la tienda del sitio.</p>
+          </div>
+          <div class="admin-editor__grid">
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{name}</span>
+              <input type="text" class="form-control" placeholder="{name}" value="<?php echo $product_name_value; ?>" name="name">
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{description}</span>
+              <input type="text" class="form-control" placeholder="{description}" value="<?php echo $product_description_value; ?>" name="descrip">
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{price}</span>
+              <input type="text" class="form-control" placeholder="{price}" value="<?php echo $product_price_value; ?>" name="price">
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{ingameid}</span>
+              <input type="text" class="form-control" placeholder="{ingameid}" value="<?php echo $product_ingame_id_value; ?>" name="ingameid">
+            </label>
+          </div>
+        </div>
+        <div class="admin-form-section">
+          <div class="admin-form-section__heading">
+            <h3>Animaciones</h3>
+            <p>Campos de referencia para los efectos visuales asociados a este item.</p>
+          </div>
+          <div class="admin-editor__grid">
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{atackan}</span>
+              <input type="text" class="form-control" placeholder="{atackan}" value="<?php echo $product_attack_animation_value; ?>" name="aatk">
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label">{interacan}</span>
+              <input type="text" class="form-control" placeholder="{interacan}" value="<?php echo $product_interaction_animation_value; ?>" name="ainterac">
+            </label>
+          </div>
         </div>
         <div class="admin-editor__actions">
           <button type="submit" class="admin-button admin-button--primary">{edit}</button>

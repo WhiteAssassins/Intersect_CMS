@@ -29,7 +29,10 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-fill-drip"></i></span>
-          <h3>{gradient}</h3>
+          <div>
+            <h3>{gradient}</h3>
+            <p class="admin-form-card__text">Actualiza el color base del sitio y del panel admin desde un solo bloque.</p>
+          </div>
         </div>
         <form method="POST" action="<?php echo base_url('config/editcolors'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
@@ -50,11 +53,17 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-chart-line"></i></span>
-          <h3>{analytics}</h3>
+          <div>
+            <h3>{analytics}</h3>
+            <p class="admin-form-card__text">Configura el identificador de medicion usado por Google Analytics.</p>
+          </div>
         </div>
         <form method="POST" action="<?php echo base_url('config/analitycs'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
-          <input type="text" class="form-control" name="google" placeholder="G-TAG" value="<?php echo $config_analytics; ?>">
+          <label class="admin-form-group">
+            <span class="admin-form-group__label">Analytics ID</span>
+            <input type="text" class="form-control" name="google" placeholder="G-XXXXXXXXXX" value="<?php echo $config_analytics; ?>">
+          </label>
           <button type="submit" class="admin-button admin-button--primary">{change}</button>
         </form>
       </article>
@@ -62,11 +71,17 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-download"></i></span>
-          <h3>{configdownloadbutton}</h3>
+          <div>
+            <h3>{configdownloadbutton}</h3>
+            <p class="admin-form-card__text">Define la URL publica del cliente, launcher o build que quieras destacar.</p>
+          </div>
         </div>
         <form method="POST" action="<?php echo base_url('config/download'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
-          <input type="text" class="form-control" name="link" placeholder="Link" value="<?php echo $config_download; ?>">
+          <label class="admin-form-group">
+            <span class="admin-form-group__label">Download URL</span>
+            <input type="text" class="form-control" name="link" placeholder="https://..." value="<?php echo $config_download; ?>">
+          </label>
           <button type="submit" class="admin-button admin-button--primary">{change}</button>
         </form>
       </article>
@@ -74,7 +89,10 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-tools"></i></span>
-          <h3>{maintenance}</h3>
+          <div>
+            <h3>{maintenance}</h3>
+            <p class="admin-form-card__text">Activa o desactiva el acceso publico para hacer cambios o desplegar nuevas versiones.</p>
+          </div>
         </div>
         <div class="form-admin">
           <?php if (!$config_maintenance_enabled) { ?>
@@ -88,7 +106,10 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-balance-scale"></i></span>
-          <h3>{changelegal}</h3>
+          <div>
+            <h3>{changelegal}</h3>
+            <p class="admin-form-card__text">Edita los textos legales que se muestran en el sitio y en el footer publico.</p>
+          </div>
         </div>
         <div class="admin-editor__actions">
           <a href="<?php echo base_url('config/legal'); ?>" class="admin-button admin-button--primary">{change}</a>
@@ -100,7 +121,10 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-th-large"></i></span>
-          <h3>{editmenus}</h3>
+          <div>
+            <h3>{editmenus}</h3>
+            <p class="admin-form-card__text">Ajusta los bloques destacados del home sin tocar codigo ni plantillas.</p>
+          </div>
         </div>
         <div class="admin-editor__actions">
           <a href="<?php echo base_url('config/menus'); ?>" class="admin-button admin-button--primary">{editmenus}</a>
@@ -110,19 +134,30 @@
       <article class="admin-config-card">
         <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-language"></i></span>
-          <h3>{editlang}</h3>
+          <div>
+            <h3>{editlang}</h3>
+            <p class="admin-form-card__text">Selecciona el idioma activo por defecto del frontend y de la navegacion.</p>
+          </div>
         </div>
         <form method="POST" action="<?php echo base_url('config/changelang'); ?>" class="form-admin">
           <?php echo cms_csrf_field(); ?>
-          <select class="form-control" name="lang">
-            <option value="" disabled selected>{chooselang}</option>
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-            <option value="tr">TR</option>
-            <option value="jp">JP</option>
-            <option value="de">DE</option>
-            <option value="ru">RU</option>
-          </select>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label">{chooselang}</span>
+            <select class="form-control" name="lang">
+              <option value="" disabled selected>{chooselang}</option>
+              <option value="es">ES</option>
+              <option value="en">EN</option>
+              <option value="tr">TR</option>
+              <option value="jp">JP</option>
+              <option value="de">DE</option>
+              <option value="ru">RU</option>
+              <option value="zh">ZH</option>
+              <option value="fr">FR</option>
+              <option value="pt">PT</option>
+              <option value="hi">HI</option>
+              <option value="ar">AR</option>
+            </select>
+          </label>
           <button type="submit" class="admin-button admin-button--primary">{change}</button>
         </form>
       </article>
