@@ -15,7 +15,10 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 application/config/config.php
+application/config/installer.json
 application/config/paypallib_config.php
+application/cache/sessions/*
+!application/cache/sessions/index.html
 
 /updates
 /img

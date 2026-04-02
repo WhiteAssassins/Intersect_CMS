@@ -7,6 +7,7 @@ class Userpanel extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Userpaneldata');
+        $this->load->library('intersectauthservice');
         $this->load->library('qvapayservice');
         $this->load->library('supportmailer');
     }
@@ -37,6 +38,11 @@ class Userpanel extends MY_Controller
 
         $amount = (float) $this->input->post('cant');
         $username = (string) $this->session->userdata('user');
+        if ($amount <= 0) {
+            $this->redirectTo('userpanel/recharge');
+            return;
+        }
+
         $signedUrl = $this->qvapayservice->createInvoice($username, $amount);
 
         if ($signedUrl === null) {
@@ -78,6 +84,34 @@ class Userpanel extends MY_Controller
                 'sms' => 'Las contrasenas no coinciden',
             ));
             return;
+        }
+
+        if (strlen($newPassword) < 6) {
+            $this->respondJson(array(
+                'status' => 0,
+                'sms' => 'La nueva contrasena debe tener al menos 6 caracteres',
+            ));
+            return;
+        }
+
+        if ($oldPassword === $newPassword) {
+            $this->respondJson(array(
+                'status' => 0,
+                'sms' => 'La nueva contrasena debe ser distinta a la actual',
+            ));
+            return;
+        }
+
+        $remoteUser = $this->intersectauthservice->fetchRemoteUser($username);
+        if ($remoteUser !== null) {
+            $remotePasswordChange = $this->intersectauthservice->changeRemotePassword($username, $oldPassword, $newPassword);
+            if (empty($remotePasswordChange['ok'])) {
+                $this->respondJson(array(
+                    'status' => 0,
+                    'sms' => $remotePasswordChange['message'] ?? 'No fue posible actualizar la contrasena en Intersect',
+                ));
+                return;
+            }
         }
 
         $this->Userpaneldata->updatePassword($username, cms_hash_password($newPassword));
@@ -123,7 +157,7 @@ class Userpanel extends MY_Controller
             'type' => $ticketType,
             'user' => $userRow['user'] ?? $username,
             'email' => $userRow['email'] ?? '',
-            'status' => 'Unasigned',
+            'status' => 'Unassigned',
         ));
 
         $this->supportmailer->sendTicketConfirmation($userRow['email'] ?? '');
@@ -201,6 +235,7 @@ class Userpanel extends MY_Controller
     {
         $userRow = $this->getCurrentUserRow();
         $tickets = $this->Userpaneldata->getFeedbackTickets((string) $this->session->userdata('user'));
+        $languageData = $this->getLanguageData();
 
         $openTickets = array();
         $closedTickets = array();
@@ -208,7 +243,7 @@ class Userpanel extends MY_Controller
         foreach ($tickets as $ticket) {
             $formatted = array(
                 'title' => $ticket['title'] ?? '',
-                'type' => $ticket['type'] ?? '',
+                'type' => $this->formatTicketType($ticket['type'] ?? '', $languageData),
                 'status' => $ticket['status'] ?? '',
                 'admin' => $ticket['admin'] ?? '',
                 'email' => $ticket['email'] ?? ($userRow['email'] ?? ''),
@@ -230,5 +265,21 @@ class Userpanel extends MY_Controller
             'closed_ticket_count' => count($closedTickets),
             'feedback_email' => $userRow['email'] ?? '',
         );
+    }
+
+    private function formatTicketType($type, array $languageData)
+    {
+        switch (strtolower(trim((string) $type))) {
+            case 'ingame':
+                return $languageData['ticket_type_ingame'] ?? 'In-game';
+            case 'account':
+                return $languageData['ticket_type_account'] ?? 'Account';
+            case 'billing':
+                return $languageData['ticket_type_billing'] ?? 'Billing';
+            case 'web':
+                return $languageData['ticket_type_web'] ?? 'Website';
+            default:
+                return (string) $type;
+        }
     }
 }

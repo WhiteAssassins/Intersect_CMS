@@ -1,4 +1,5 @@
 <?php
+require_once APPPATH . 'config/installer_bootstrap.php';
 
 /*
 | -------------------------------------------------------------------------
@@ -51,6 +52,15 @@
 $route['default_controller'] = 'home';
 $route['404_override'] = 'notfound';
 $route['translate_uri_dashes'] = FALSE;
+$route['install'] = 'installer/index';
+$route['install/success'] = 'installer/success';
+
+if (!cms_installer_is_installed()) {
+    $route['default_controller'] = 'installer';
+    $route['404_override'] = 'installer/index';
+    $route['(.+)'] = 'installer/index';
+    return;
+}
 $route['admin/global'] = 'admincommands/global';
 $route['admin/direct'] = 'admincommands/direct';
 $route['admin/proximity'] = 'admincommands/proximity';

@@ -15,6 +15,7 @@ class Admin extends MY_Controller
         $this->load->model('Apiquest');
         $this->load->model('Apiplayersonline');
         $this->load->library('systemmetrics');
+        $this->load->library('intersectapiclient');
         $this->requireAdmin();
     }
 
@@ -108,13 +109,20 @@ class Admin extends MY_Controller
         $users = (array) $this->Apiusers->user();
         $players = (array) $this->Apiplayers->player();
         $metrics = $this->systemmetrics->collect();
+        $apiHealth = $this->intersectapiclient->getHealthSummary();
 
         return array_merge($metrics, array(
             'dashboard_total_users' => (int) ($users['Total'] ?? 0),
             'dashboard_online_count' => (int) ($serverStats['onlineCount'] ?? 0),
             'dashboard_total_players' => (int) ($players['Total'] ?? 0),
             'dashboard_cps' => (int) ($serverStats['cps'] ?? 0),
-            'dashboard_version' => '0.7',
+            'dashboard_version' => 'API v1',
+            'dashboard_api_configured' => !empty($apiHealth['configured']) ? 1 : 0,
+            'dashboard_api_online' => !empty($apiHealth['online']) ? 1 : 0,
+            'dashboard_api_cached' => !empty($apiHealth['using_cache']) ? 1 : 0,
+            'dashboard_api_stale' => !empty($apiHealth['using_stale_cache']) ? 1 : 0,
+            'dashboard_api_last_sync' => $apiHealth['last_sync_label'] ?? 'N/A',
+            'dashboard_api_message' => $apiHealth['message'] ?? '',
         ));
     }
 

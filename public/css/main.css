@@ -2524,7 +2524,43 @@ body.admin-layout--desktop .site-footer::before{
 }
 
 .wow {
-    visibility:hidden;
+    visibility:visible;
+}
+
+.z-depth-1,
+.z-depth-1-half {
+    box-shadow:0 20px 50px rgba(0,0,0,.22);
+}
+
+.info-color {
+    background:linear-gradient(135deg, var(--brand-accent), var(--brand-accent-strong));
+    color:#fff8ee;
+}
+
+.md-form {
+    width:100%;
+    margin-bottom:1rem;
+}
+
+.md-form .form-control {
+    width:100%;
+}
+
+.waves-effect {
+    position:relative;
+    overflow:hidden;
+}
+
+.btn-outline-blue {
+    color:var(--brand-accent);
+    border-color:rgba(244,184,96,.4);
+}
+
+.btn-outline-blue:hover,
+.btn-outline-blue:focus {
+    color:#120d13;
+    background:var(--brand-accent);
+    border-color:var(--brand-accent);
 }
 
 .footer-bottom{

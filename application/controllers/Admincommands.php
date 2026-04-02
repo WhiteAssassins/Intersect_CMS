@@ -60,8 +60,8 @@ class Admincommands extends MY_Controller
     {
         $reason = $this->getPostString('reason');
         $user = $this->getPostString('user');
-        $duration = $this->getPostString('time');
-        if ($reason === '' || $user === '' || $duration === '') {
+        $duration = (int) $this->getPostString('time');
+        if ($reason === '' || $user === '' || $duration <= 0) {
             $this->respondJson($this->errorPayload());
             return;
         }
@@ -71,6 +71,7 @@ class Admincommands extends MY_Controller
                 'duration' => $duration,
                 'reason' => $reason,
                 'moderator' => $this->session->userdata('user'),
+                'ip' => false,
             )),
             'Ban',
             $user
@@ -96,8 +97,8 @@ class Admincommands extends MY_Controller
     {
         $reason = $this->getPostString('reason');
         $user = $this->getPostString('user');
-        $duration = $this->getPostString('time');
-        if ($reason === '' || $user === '' || $duration === '') {
+        $duration = (int) $this->getPostString('time');
+        if ($reason === '' || $user === '' || $duration <= 0) {
             $this->respondJson($this->errorPayload());
             return;
         }
@@ -107,6 +108,7 @@ class Admincommands extends MY_Controller
                 'duration' => $duration,
                 'reason' => $reason,
                 'moderator' => $this->session->userdata('user'),
+                'ip' => false,
             )),
             'Muteado',
             $user

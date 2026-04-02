@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html lang="{site_lang}" style="height:100% ;" dir="ltr">
+<?php
+$currentController = strtolower((string) $this->uri->segment(1));
+$currentMethod = strtolower((string) $this->uri->segment(2));
+if ($currentController === '') {
+    $currentController = 'home';
+}
+
+if ($currentMethod === '') {
+    $currentMethod = $currentController === 'admin' ? 'index' : '';
+}
+
+$usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
+    || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
+$usesTimeline = $currentController === 'changelog' || ($currentController === 'admin' && $currentMethod === 'changelog');
+$usesMdbCss = $currentController === 'admin' || $currentController === 'config' || $currentController === 'logs' || $currentController === 'installer';
+$analyticsId = trim((string) ('{analytics_id}'));
+$hasAnalyticsId = $analyticsId !== '' && preg_match('/^\{.+\}$/', $analyticsId) !== 1;
+$isLoggedIn = !empty($this->session->userdata('login'));
+?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
@@ -13,7 +32,9 @@
     <link rel="preconnect" href="<?php echo base_url();?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('public/favicon'); ?>/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('public/favicon'); ?>/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('public/favicon'); ?>/apple-icon-72x72.png">
@@ -29,26 +50,33 @@
     <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('public/favicon'); ?>/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('public/favicon'); ?>/favicon-16x16.png">
     <link rel="manifest" href="<?php echo base_url('public/favicon'); ?>/manifest.json">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css" async>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css">
+    <?php if ($usesTimeline) { ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css" async>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css" async>
-    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+    <?php } ?>
+    <?php if ($usesDataTables) { ?>
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+    <?php } ?>
+    <?php if ($usesMdbCss) { ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css">
+    <?php } ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id={analytics_id}"></script>
+<?php if ($hasAnalyticsId) { ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode($analyticsId); ?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', '{analytics_id}');
+  gtag('config', '<?php echo addslashes($analyticsId); ?>');
 </script>
+<?php } ?>
 </head>
 <body class="site-shell">
+<?php if (!$isLoggedIn) { ?>
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content cards-novo">
@@ -68,7 +96,7 @@
                         <label class="modal-shell__label" for="login_user">{name}</label>
                         <div class="modal-shell__input-wrap">
                             <span class="modal-shell__input-icon"><i class="fas fa-user"></i></span>
-                            <input id="login_user" type="text" class="modal-shell__input" name="user" autocomplete="username">
+                            <input id="login_user" type="text" class="modal-shell__input" name="user" autocomplete="username" required>
                         </div>
                     </div>
 
@@ -76,7 +104,7 @@
                         <label class="modal-shell__label" for="login_pass">{password}</label>
                         <div class="modal-shell__input-wrap">
                             <span class="modal-shell__input-icon"><i class="fas fa-lock"></i></span>
-                            <input id="login_pass" type="password" class="modal-shell__input" name="pass" autocomplete="current-password">
+                            <input id="login_pass" type="password" class="modal-shell__input" name="pass" autocomplete="current-password" required>
                         </div>
                     </div>
 
@@ -110,14 +138,14 @@
                             <label class="modal-shell__label" for="register_user">{name}</label>
                             <div class="modal-shell__input-wrap">
                                 <span class="modal-shell__input-icon"><i class="fas fa-user"></i></span>
-                                <input id="register_user" type="text" class="modal-shell__input" name="user" autocomplete="username">
+                                <input id="register_user" type="text" class="modal-shell__input" name="user" autocomplete="username" required>
                             </div>
                         </div>
                         <div class="modal-shell__field">
                             <label class="modal-shell__label" for="register_email">{email}</label>
                             <div class="modal-shell__input-wrap">
                                 <span class="modal-shell__input-icon"><i class="fas fa-envelope"></i></span>
-                                <input id="register_email" type="email" class="modal-shell__input" name="email" autocomplete="email">
+                                <input id="register_email" type="email" class="modal-shell__input" name="email" autocomplete="email" required>
                             </div>
                         </div>
                     </div>
@@ -127,14 +155,14 @@
                             <label class="modal-shell__label" for="register_pass">{password}</label>
                             <div class="modal-shell__input-wrap">
                                 <span class="modal-shell__input-icon"><i class="fas fa-lock"></i></span>
-                                <input id="register_pass" type="password" class="modal-shell__input" name="pass" autocomplete="new-password">
+                                <input id="register_pass" type="password" class="modal-shell__input" name="pass" autocomplete="new-password" minlength="6" required>
                             </div>
                         </div>
                         <div class="modal-shell__field">
                             <label class="modal-shell__label" for="register_pass_confirm">{confirmpassword}</label>
                             <div class="modal-shell__input-wrap">
                                 <span class="modal-shell__input-icon"><i class="fas fa-shield-alt"></i></span>
-                                <input id="register_pass_confirm" type="password" class="modal-shell__input" name="pass1" autocomplete="new-password">
+                                <input id="register_pass_confirm" type="password" class="modal-shell__input" name="pass1" autocomplete="new-password" minlength="6" required>
                             </div>
                         </div>
                     </div>
@@ -146,7 +174,9 @@
         </div>
     </div>
 </div>
+<?php } ?>
 
+<?php if ($isLoggedIn) { ?>
 <div class="modal fade" id="modal_newticket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content cards-novo">
@@ -166,14 +196,14 @@
                         <label class="modal-shell__label" for="ticket_title">{title}</label>
                         <div class="modal-shell__input-wrap">
                             <span class="modal-shell__input-icon"><i class="fas fa-heading"></i></span>
-                            <input id="ticket_title" type="text" class="modal-shell__input" name="title">
+                            <input id="ticket_title" type="text" class="modal-shell__input" name="title" required>
                         </div>
                     </div>
 
                     <div class="modal-shell__field">
                         <label class="modal-shell__label" for="ticket_type">{chooseticket}</label>
                         <div class="modal-shell__select-wrap">
-                            <select id="ticket_type" class="modal-shell__select" name="ticket">
+                            <select id="ticket_type" class="modal-shell__select" name="ticket" required>
                                 <option value="" disabled selected>{chooseticket}</option>
                                 <option value="ingame">{ticket_type_ingame}</option>
                                 <option value="account">{ticket_type_account}</option>
@@ -185,7 +215,7 @@
 
                     <div class="modal-shell__field modal-shell__field--full">
                         <label class="modal-shell__label" for="ticket_body">{tickettext}</label>
-                        <textarea id="ticket_body" class="modal-shell__textarea" rows="5" name="text"></textarea>
+                        <textarea id="ticket_body" class="modal-shell__textarea" rows="5" name="text" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center modal-shell__footer">
@@ -195,3 +225,4 @@
         </div>
     </div>
 </div>
+<?php } ?>

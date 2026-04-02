@@ -1,8 +1,19 @@
 ﻿<?php 
 class Langs extends CI_Model{
+    private $cacheDirectory;
+    private static $memoryCache = array();
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->cacheDirectory = APPPATH . 'cache/langs/';
+        if (!is_dir($this->cacheDirectory)) {
+            @mkdir($this->cacheDirectory, 0775, true);
+        }
+    }
     public function currentIndex()
     {
-        switch ($this->session->userdata('lang')) {
+        switch ($this->getCurrentLangCode()) {
             case 'en':
                 return 1;
             case 'tr':
@@ -31,15 +42,135 @@ class Langs extends CI_Model{
 
     public function current()
     {
+        $langCode = $this->getCurrentLangCode();
+        $cacheKey = 'current_' . $langCode;
+        $cached = $this->readCache($cacheKey);
+        if ($cached !== null) {
+            return $cached;
+        }
+
         $languages = $this->lang();
         $index = $this->currentIndex();
+        $payload = isset($languages[$index]) ? $languages[$index] : $languages[0];
+        $payload = $this->repairEncodingArtifacts($payload);
+        $this->writeCache($cacheKey, $payload);
 
-        return isset($languages[$index]) ? $languages[$index] : $languages[0];
+        return $payload;
     }
 
     public function rebrandText($lang = null)
     {
-        return $this->getRebrandTextData($lang ?: ($this->session->userdata('lang') ?: 'es'));
+        $langCode = $lang ?: $this->getCurrentLangCode();
+        $cacheKey = 'rebrand_' . $langCode;
+        $cached = $this->readCache($cacheKey);
+        if ($cached !== null) {
+            return $cached;
+        }
+
+        $payload = $this->repairEncodingArtifacts($this->getRebrandTextData($langCode));
+        $this->writeCache($cacheKey, $payload);
+
+        return $payload;
+    }
+
+    private function getCurrentLangCode()
+    {
+        $lang = (string) ($this->session->userdata('lang') ?: 'es');
+        $supported = array('es', 'en', 'tr', 'jp', 'de', 'ru', 'zh', 'fr', 'pt', 'hi', 'ar');
+
+        return in_array($lang, $supported, true) ? $lang : 'es';
+    }
+
+    private function getCacheFile($cacheKey)
+    {
+        return $this->cacheDirectory . $cacheKey . '_' . md5_file(__FILE__) . '.json';
+    }
+
+    private function readCache($cacheKey)
+    {
+        if (isset(self::$memoryCache[$cacheKey])) {
+            return self::$memoryCache[$cacheKey];
+        }
+
+        $path = $this->getCacheFile($cacheKey);
+        if (!is_file($path)) {
+            return null;
+        }
+
+        $contents = @file_get_contents($path);
+        if ($contents === false || $contents === '') {
+            return null;
+        }
+
+        $decoded = json_decode($contents, true);
+        if (!is_array($decoded)) {
+            return null;
+        }
+
+        self::$memoryCache[$cacheKey] = $decoded;
+        return $decoded;
+    }
+
+    private function writeCache($cacheKey, array $payload)
+    {
+        self::$memoryCache[$cacheKey] = $payload;
+        @file_put_contents($this->getCacheFile($cacheKey), json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    private function repairEncodingArtifacts($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->repairEncodingArtifacts($item);
+            }
+
+            return $value;
+        }
+
+        if (!is_string($value) || !$this->containsEncodingArtifacts($value)) {
+            return $value;
+        }
+
+        $candidates = array();
+        if (function_exists('iconv')) {
+            $decoded = @iconv('Windows-1252', 'UTF-8//IGNORE', $value);
+            if (is_string($decoded) && $decoded !== '') {
+                $candidates[] = $decoded;
+            }
+        }
+
+        if (function_exists('mb_convert_encoding')) {
+            $decoded = @mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
+            if (is_string($decoded) && $decoded !== '') {
+                $candidates[] = $decoded;
+            }
+        }
+
+        $best = $value;
+        $bestScore = $this->encodingArtifactScore($value);
+        foreach ($candidates as $candidate) {
+            $score = $this->encodingArtifactScore($candidate);
+            if ($score < $bestScore) {
+                $best = $candidate;
+                $bestScore = $score;
+            }
+        }
+
+        return $best;
+    }
+
+    private function containsEncodingArtifacts($value)
+    {
+        return $this->encodingArtifactScore($value) > 0;
+    }
+
+    private function encodingArtifactScore($value)
+    {
+        if (!is_string($value) || $value === '') {
+            return 0;
+        }
+
+        return preg_match_all('/Ã.|Â.|Ð.|Ñ.|à¤.|å.|ç.|â.|ï./u', $value, $matches);
     }
 
     private function getRebrandTextData($lang)

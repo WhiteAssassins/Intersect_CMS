@@ -16,11 +16,14 @@ class Admincommunity extends MY_Controller
         $passConfirm = (string) $this->input->post('pass1');
         $email = $this->getPostString('email');
 
-        if ($user !== '' && $email !== '' && $pass !== '' && $pass === $passConfirm) {
+        $userExists = !empty($user) ? (array) $this->db->get_where('users', array('user' => $user))->row_array() : array();
+
+        if ($user !== '' && $email !== '' && $pass !== '' && $pass === $passConfirm && filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($pass) >= 6 && empty($userExists)) {
             $this->db->insert('users', array(
                 'user' => $user,
                 'pass' => cms_hash_password($pass),
                 'email' => $email,
+                'rol' => 1,
             ));
             $this->logAdminAction('Cuenta administrativa creada', $user);
         }
@@ -31,7 +34,11 @@ class Admincommunity extends MY_Controller
     public function deladminaccount()
     {
         $id = (int) $this->input->post('id');
-        if ($id > 0) {
+        $currentAdmin = (string) $this->session->userdata('user');
+        $targetRow = $id > 0 ? (array) $this->db->get_where('users', array('id' => $id))->row_array() : array();
+        $adminCount = (int) $this->db->where('rol', 1)->count_all_results('users');
+
+        if ($id > 0 && !empty($targetRow) && ($targetRow['user'] ?? '') !== $currentAdmin && $adminCount > 1) {
             $this->db->delete('users', array('id' => $id));
             $this->logAdminAction('Cuenta administrativa eliminada');
         }

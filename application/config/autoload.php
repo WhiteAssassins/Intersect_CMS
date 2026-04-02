@@ -1,4 +1,5 @@
 <?php
+require_once APPPATH . 'config/installer_bootstrap.php';
 
 /*
 | -------------------------------------------------------------------
@@ -57,7 +58,11 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','session', 'parser','user_agent','email');
+$autoload['libraries'] = array('session', 'parser', 'user_agent', 'email');
+
+if (cms_installer_is_installed()) {
+	$autoload['libraries'][] = 'database';
+}
 
 /*
 | -------------------------------------------------------------------
@@ -88,7 +93,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','email','auth');
+$autoload['helper'] = array('url','email','auth','common');
 
 /*
 | -------------------------------------------------------------------

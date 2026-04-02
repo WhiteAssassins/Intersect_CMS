@@ -1,4 +1,5 @@
 <div class="container my-5 p-5 z-depth-1 cards-novo">
+<p class="mb-4 text-muted"><?php echo (int) ($online_player_count ?? count($online_player_rows)); ?> jugadores conectados ahora.</p>
 <table id="dt-filter-select" class="table nowrap" cellspacing="0" width="100%">
   <thead>
     <tr>

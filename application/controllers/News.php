@@ -1,8 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-
-use GuzzleHttp\Client;
 
 class News extends MY_Controller {
 	function __construct() {
@@ -10,11 +7,6 @@ class News extends MY_Controller {
 		$this->load->model('newss');
         $this->load->helper('common');
         $this->load->library('form_validation');
-        $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiserverstats');
-		$this->load->model('Apiusers');
-		$this->load->model('Apiplayers');
 		$this->load->model('Langs');
     }
 

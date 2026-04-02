@@ -1,4 +1,15 @@
 <?php
+require_once APPPATH . 'config/installer_bootstrap.php';
+$installerState = cms_installer_load_state();
+$installerSecurity = isset($installerState['security']) && is_array($installerState['security']) ? $installerState['security'] : array();
+$installerIntegrations = isset($installerState['integrations']) && is_array($installerState['integrations']) ? $installerState['integrations'] : array();
+$installerBaseUrl = $installerState['base_url'] ?? '';
+$defaultSessionPath = ENVIRONMENT !== 'production' ? sys_get_temp_dir() : APPPATH.'cache/sessions';
+$configuredSessionPath = getenv('CMS_SESSION_PATH') ?: ($installerSecurity['session_path'] ?? $defaultSessionPath);
+
+if ($configuredSessionPath === '' || (!is_dir($configuredSessionPath) && !@mkdir($configuredSessionPath, 0775, true)) || !is_writable($configuredSessionPath)) {
+	$configuredSessionPath = $defaultSessionPath;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +38,10 @@ $is_https_request = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
 	|| filter_var(getenv('CMS_FORCE_HTTPS'), FILTER_VALIDATE_BOOLEAN);
 
 $configured_base_url = getenv('CMS_BASE_URL');
+
+if (($configured_base_url === FALSE || $configured_base_url === '') && $installerBaseUrl !== '') {
+	$configured_base_url = $installerBaseUrl;
+}
 
 if ($configured_base_url !== FALSE && $configured_base_url !== '')
 {
@@ -343,7 +358,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = getenv('CMS_ENCRYPTION_KEY') ?: '';
+$config['encryption_key'] = getenv('CMS_ENCRYPTION_KEY') ?: ($installerSecurity['encryption_key'] ?? '');
 
 /*
 |--------------------------------------------------------------------------
@@ -399,7 +414,7 @@ $config['encryption_key'] = getenv('CMS_ENCRYPTION_KEY') ?: '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'intersect_session_novo';
 $config['sess_expiration'] = 500200;
-$config['sess_save_path'] = getenv('CMS_SESSION_PATH') ?: (ENVIRONMENT !== 'production' ? sys_get_temp_dir() : APPPATH.'cache/sessions');
+$config['sess_save_path'] = $configuredSessionPath;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -468,7 +483,11 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
 $config['csrf_protection'] = filter_var(getenv('CMS_CSRF_PROTECTION'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-$config['csrf_protection'] = $config['csrf_protection'] === NULL ? (ENVIRONMENT === 'production') : $config['csrf_protection'];
+if ($config['csrf_protection'] === NULL) {
+	$config['csrf_protection'] = array_key_exists('csrf_protection', $installerSecurity)
+		? (bool) $installerSecurity['csrf_protection']
+		: (ENVIRONMENT === 'production');
+}
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
@@ -541,10 +560,18 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['apiip'] = getenv('CMS_API_IP') ?: 'apipip';
-$config['apiuser'] = getenv('CMS_API_USER') ?: 'apiuser';
-$config['apipass'] = getenv('CMS_API_PASS') ?: 'apipass';
-$config['apiqvapayid'] = getenv('CMS_QVAPAY_ID') ?: 'apiqvapayid';
-$config['apiqvapaysecret'] = getenv('CMS_QVAPAY_SECRET') ?: 'apiqvapaysecret';
-$config['supportemail'] = getenv('CMS_SUPPORT_EMAIL') ?: 'supportemail';
-$config['supportemailpassword'] = getenv('CMS_SUPPORT_EMAIL_PASSWORD') ?: 'supportemailpassword';
+$config['apiip'] = getenv('CMS_API_IP') ?: ($installerIntegrations['api_ip'] ?? 'apipip');
+$config['api_base_url'] = getenv('CMS_API_BASE_URL') ?: ($installerIntegrations['api_base_url'] ?? '');
+$config['api_scheme'] = getenv('CMS_API_SCHEME') ?: ($installerIntegrations['api_scheme'] ?? 'http');
+$config['apiuser'] = getenv('CMS_API_USER') ?: ($installerIntegrations['api_user'] ?? 'apiuser');
+$config['apipass'] = getenv('CMS_API_PASS') ?: ($installerIntegrations['api_pass'] ?? 'apipass');
+$config['api_timeout'] = getenv('CMS_API_TIMEOUT') ?: ($installerIntegrations['api_timeout'] ?? 0.6);
+$config['api_connect_timeout'] = getenv('CMS_API_CONNECT_TIMEOUT') ?: ($installerIntegrations['api_connect_timeout'] ?? 0.2);
+$config['api_cache_ttl'] = getenv('CMS_API_CACHE_TTL') ?: ($installerIntegrations['api_cache_ttl'] ?? 120);
+$config['api_token_cache_ttl'] = getenv('CMS_API_TOKEN_CACHE_TTL') ?: ($installerIntegrations['api_token_cache_ttl'] ?? 300);
+$config['api_verify_ssl'] = getenv('CMS_API_VERIFY_SSL');
+$config['api_verify_ssl'] = ($config['api_verify_ssl'] === false || $config['api_verify_ssl'] === null || $config['api_verify_ssl'] === '') ? ($installerIntegrations['api_verify_ssl'] ?? true) : filter_var($config['api_verify_ssl'], FILTER_VALIDATE_BOOLEAN);
+$config['apiqvapayid'] = getenv('CMS_QVAPAY_ID') ?: ($installerIntegrations['qvapay_id'] ?? 'apiqvapayid');
+$config['apiqvapaysecret'] = getenv('CMS_QVAPAY_SECRET') ?: ($installerIntegrations['qvapay_secret'] ?? 'apiqvapaysecret');
+$config['supportemail'] = getenv('CMS_SUPPORT_EMAIL') ?: ($installerIntegrations['support_email'] ?? 'supportemail');
+$config['supportemailpassword'] = getenv('CMS_SUPPORT_EMAIL_PASSWORD') ?: ($installerIntegrations['support_email_password'] ?? 'supportemailpassword');

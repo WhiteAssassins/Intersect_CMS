@@ -1,17 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-
-use GuzzleHttp\Client;
 
 class Users extends MY_Controller {
 	function __construct() {
         parent::__construct();
-        $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiserverstats');
 		$this->load->model('Apiusers');
-		$this->load->model('Apiplayers');
 		$this->load->model('Langs');
     }
 

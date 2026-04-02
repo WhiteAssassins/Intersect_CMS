@@ -13,14 +13,14 @@
       <?php foreach ($shop_products as $product) { ?>
         <article class="shop-item">
           <a href="<?php echo $product['details_url']; ?>" class="shop-item__media">
-            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo html_escape($product['name']); ?>">
+            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo html_escape($product['name']); ?>" loading="lazy">
           </a>
           <div class="shop-item__body">
             <h2 class="shop-item__title">
-              <a href="<?php echo $product['details_url']; ?>"><?php echo $product['name']; ?></a>
+              <a href="<?php echo $product['details_url']; ?>"><?php echo html_escape($product['name']); ?></a>
             </h2>
             <div class="shop-item__footer">
-              <strong class="shop-item__price">$<?php echo $product['price']; ?></strong>
+              <strong class="shop-item__price">$<?php echo number_format((float) $product['price'], 2, '.', ''); ?></strong>
               <a href="<?php echo $product['details_url']; ?>" class="admin-button admin-button--primary shop-item__button">{productdetail}</a>
             </div>
           </div>

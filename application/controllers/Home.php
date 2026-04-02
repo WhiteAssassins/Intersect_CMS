@@ -34,22 +34,34 @@ class Home extends MY_Controller
             return;
         }
 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $payload['sms'] = 'Debe indicar un correo valido';
+            $this->respondJson($payload);
+            return;
+        }
+
+        if (strlen($pass) < 6) {
+            $payload['sms'] = 'La contrasena debe tener al menos 6 caracteres';
+            $this->respondJson($payload);
+            return;
+        }
+
         if ($pass !== $pass1) {
-            $payload['sms'] = 'Sus contraseñas deben coincidir';
+            $payload['sms'] = 'Sus contrasenas deben coincidir';
             $this->respondJson($payload);
             return;
         }
 
         $response = $this->intersectauthservice->registerRemoteUser($user, $pass, $email);
-        if ($response === null) {
+        if (empty($response)) {
             $payload['sms'] = 'No se pudo conectar con la API del juego';
             $this->respondJson($payload);
             return;
         }
 
-        $responseData = json_decode((string) $response->getBody(), true);
-        if ($response->getStatusCode() !== 200) {
-            $payload['sms'] = $responseData['Message'] ?? 'No se pudo completar el registro';
+        if (empty($response['ok'])) {
+            $responseData = (array) ($response['body'] ?? array());
+            $payload['sms'] = $responseData['Message'] ?? ($response['message'] ?? 'No se pudo completar el registro');
             $this->respondJson($payload);
             return;
         }
@@ -103,7 +115,7 @@ class Home extends MY_Controller
         $this->output
             ->set_status_header($statusCode)
             ->set_content_type('application/json')
-            ->set_output(json_encode($payload));
+            ->set_output(json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     private function getLocalUser($user)

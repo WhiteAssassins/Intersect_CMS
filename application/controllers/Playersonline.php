@@ -1,17 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-
-use GuzzleHttp\Client;
 
 class Playersonline extends MY_Controller {
 	function __construct() {
         parent::__construct();
-        $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiserverstats');
-		$this->load->model('Apiusers');
-		$this->load->model('Apiplayers');
         $this->load->model('Apiplayersonline');
 		$this->load->model('Langs');
     }
@@ -35,14 +27,16 @@ class Playersonline extends MY_Controller {
         return $rows;
     }
 	
-	public function index()
+    public function index()
 	{
         if ($this->redirectToMaintenanceIfNeeded()) {
             return;
         }
 
+        $onlineCount = (array) $this->Apiplayersonline->onlinecount();
         $this->renderPublicPage('playersonline', array(
             'online_player_rows' => $this->buildOnlinePlayerRows(),
+            'online_player_count' => (int) ($onlineCount['onlineCount'] ?? 0),
         ));
 	}
 }

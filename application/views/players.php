@@ -2,6 +2,8 @@
 <table id="dt-filter-select" class="table  nowrap" cellspacing="0" width="100%">
   <thead>
     <tr>
+      <th class="th-sm">#
+      </th>
       <th class="th-sm">{name}
       </th>
       <th class="th-sm">{gender}
@@ -17,6 +19,7 @@
   <tbody>
   <?php foreach ($player_rows as $row) { ?>
     <tr>
+      <td><?php echo $row['rank']; ?></td>
       <td><?php echo $row['name']; ?></td>
       <td><?php echo $row['gender_label']; ?></td>
       <td><?php echo $row['level']; ?></td>
@@ -27,6 +30,8 @@
   </tbody>
   <tfoot>
     <tr>
+      <th>#
+      </th>
       <th>{name}
       </th>
       <th>{gender}

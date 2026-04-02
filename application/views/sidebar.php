@@ -1,8 +1,4 @@
 <?php
-require FCPATH.'vendor/autoload.php';
-
-use GuzzleHttp\Client;
-
 $currentController = strtolower((string) $this->uri->segment(1));
 $currentMethod = strtolower((string) $this->uri->segment(2));
 
@@ -14,21 +10,8 @@ if ($currentMethod === '') {
     $currentMethod = $currentController === 'admin' ? 'index' : '';
 }
 
-$hasUpdateAvailable = false;
-$availableVersion = '';
-$version = '0.8';
-
-try {
-    $client = new Client(array('timeout' => 2.5));
-    $response = $client->request('GET', 'http://novo.aewhitedevs.com/api/cms');
-    $body = json_decode((string) $response->getBody(), true);
-    if (!empty($body['version']) && version_compare((string) $body['version'], $version, '>')) {
-        $hasUpdateAvailable = true;
-        $availableVersion = (string) $body['version'];
-    }
-} catch (Exception $exception) {
-    $hasUpdateAvailable = false;
-}
+$hasUpdateAvailable = !empty($has_update_available);
+$availableVersionText = trim((string) ($available_version ?? ''));
 
 $isRoute = function ($controller, $method = '') use ($currentController, $currentMethod) {
     if ($currentController !== $controller) {
@@ -148,11 +131,11 @@ $isRoute = function ($controller, $method = '') use ($currentController, $curren
           <i class="fab fa-github"></i>
           <span>{admin_sidebar_source_code}</span>
         </a>
-        <a href="https://github.com/WhiteAssassins/Intersect_CMS" target="_blank" rel="noopener noreferrer" class="admin-sidebar__link<?php echo $hasUpdateAvailable ? ' admin-sidebar__link--highlight' : ''; ?>">
+        <a href="https://github.com/WhiteAssassins/Intersect_CMS/releases" target="_blank" rel="noopener noreferrer" class="admin-sidebar__link<?php echo $hasUpdateAvailable ? ' admin-sidebar__link--highlight' : ''; ?>">
           <i class="fas fa-code-branch"></i>
           <span>{updates}</span>
-          <?php if ($hasUpdateAvailable) { ?>
-            <span class="admin-sidebar__pill"><?php echo $availableVersion; ?> {available}</span>
+          <?php if ($hasUpdateAvailable && $availableVersionText !== '') { ?>
+            <span class="admin-sidebar__pill"><?php echo $availableVersionText; ?> {available}</span>
           <?php } ?>
         </a>
         <a href="<?php echo base_url('home/logout'); ?>" class="admin-sidebar__link admin-sidebar__link--danger">

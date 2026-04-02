@@ -1,12 +1,12 @@
-<div class="container" style="padding-top: 100px;">
-<div class="jumbotron text-center cards-novo">
-  <h2 class="card-title h2">{legalnotice}</h2>
-  <?php echo $legal_content; ?>
-  <div class="row d-flex justify-content-center">
-    <div class="col-xl-7 pb-2">
+<main class="public-page public-page--stack">
+  <section class="public-page__header">
+    <span class="public-page__eyebrow">{legalnotice}</span>
+    <h1 class="public-page__title">{legalnotice}</h1>
+  </section>
+
+  <article class="article-page__content">
+    <div class="article-page__body">
+      <?php echo cms_render_rich_text($legal_content); ?>
     </div>
-  </div>
-  <div class="pt-2">
-  </div>
-  </div>
-</div>
+  </article>
+</main>

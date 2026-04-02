@@ -65,8 +65,8 @@
             <?php echo cms_csrf_field(); ?>
             <div class="userpanel-form__grid">
               <input type="password" class="form-control userpanel-form__input" name="oldpassword" placeholder="{oldpassword}" required>
-              <input type="password" class="form-control userpanel-form__input" name="newpassword" placeholder="{newpassword}" required>
-              <input type="password" class="form-control userpanel-form__input" name="confirmnewpassword" placeholder="{confirmnewpassword}" required>
+              <input type="password" class="form-control userpanel-form__input" name="newpassword" placeholder="{newpassword}" minlength="6" required>
+              <input type="password" class="form-control userpanel-form__input" name="confirmnewpassword" placeholder="{confirmnewpassword}" minlength="6" required>
             </div>
             <div class="userpanel-form__actions">
               <button type="submit" class="admin-button admin-button--primary">{change}</button>

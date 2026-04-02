@@ -1,12 +1,12 @@
-<div class="container" style="padding-top: 100px;">
-<div class="jumbotron text-center cards-novo">
-  <h2 class="card-title h2">{privacity}</h2>
-  <p class=" my-4 font-weight-bold"><?php echo $privacity_content; ?></p>
-  <div class="row d-flex justify-content-center">
-    <div class="col-xl-7 pb-2">
+<main class="public-page public-page--stack">
+  <section class="public-page__header">
+    <span class="public-page__eyebrow">{privacity}</span>
+    <h1 class="public-page__title">{privacity}</h1>
+  </section>
+
+  <article class="article-page__content">
+    <div class="article-page__body">
+      <?php echo cms_render_rich_text($privacity_content); ?>
     </div>
-  </div>
-  <div class="pt-2">
-  </div>
-  </div>
-</div>
+  </article>
+</main>

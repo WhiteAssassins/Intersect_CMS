@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-use GuzzleHttp\Client;
+
 class Recover extends MY_Controller {
 	function __construct() {
         parent::__construct();
-        $this->load->model('Apigettoken');
+        $this->load->library('intersectapiclient');
     }
 	
 	public function index()
@@ -15,24 +14,31 @@ class Recover extends MY_Controller {
             return;
         }
 
-        $this->renderMinimalPage('recover');
+        $this->renderMinimalPage('recover', array(
+            'recover_message' => (string) $this->session->flashdata('recover_message'),
+            'recover_message_type' => (string) $this->session->flashdata('recover_message_type'),
+        ));
 	}
 	
 
 	public function rec(){
-		$user = $this->input->post('user');
-		$this->load->model('Apigettoken');
-        $accesstoken = $this->Apigettoken->apitoken();
-        $apiip = $this->config->item('apiip');;
-        $client = new Client([
-          'base_uri' => 'http://'.$apiip.'/api/v1/users/'.$user.'/password/reset',
-          'timeout'  => 5.0,
-        ]);
-        $client->request('GET','',[
-          'headers' => [
-            "authorization" => "Bearer ".$accesstoken['access_token'],
-          ]
-        ]);
+		$user = $this->getPostString('user');
+        if ($user === '') {
+            $this->session->set_flashdata('recover_message', 'Debe indicar un usuario.');
+            $this->session->set_flashdata('recover_message_type', 'error');
+            $this->redirectTo('recover');
+        }
+
+        $result = $this->intersectapiclient->requestPasswordReset($user);
+        if (empty($result['ok'])) {
+            $this->session->set_flashdata('recover_message', $result['message'] ?: 'No se pudo iniciar la recuperacion de contrasena.');
+            $this->session->set_flashdata('recover_message_type', 'error');
+            $this->redirectTo('recover');
+        }
+
+        $this->session->set_flashdata('recover_message', 'Si el usuario existe y el servidor SMTP esta configurado, se ha enviado el correo de recuperacion.');
+        $this->session->set_flashdata('recover_message_type', 'success');
+        $this->redirectTo('recover');
 	}
 
 

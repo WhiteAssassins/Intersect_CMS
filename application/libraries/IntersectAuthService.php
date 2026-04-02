@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require FCPATH . 'vendor/autoload.php';
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
 class IntersectAuthService
 {
     protected $CI;
@@ -13,64 +8,54 @@ class IntersectAuthService
     public function __construct()
     {
         $this->CI =& get_instance();
-        $this->CI->load->model('Apigettoken');
+        $this->CI->load->library('intersectapiclient');
     }
 
     public function registerRemoteUser($username, $password, $email)
     {
-        return $this->request('POST', 'users/register', array(
-            'form_params' => array(
+        return $this->CI->intersectapiclient->requestJson('POST', 'users/register', array(
+            'json' => array(
                 'username' => $username,
-                'password' => hash('sha256', $password),
+                'password' => $this->CI->intersectapiclient->hashPassword($password),
                 'email' => $email,
             ),
+            'timeout' => 2.5,
+            'connect_timeout' => 0.7,
         ));
     }
 
     public function fetchRemoteUser($username)
     {
-        $response = $this->request('GET', 'users/' . rawurlencode($username));
-        if ($response === null || $response->getStatusCode() !== 200) {
-            return null;
-        }
+        $response = $this->CI->intersectapiclient->requestJson('GET', 'users/' . rawurlencode($username), array(
+            'timeout' => 2.0,
+            'connect_timeout' => 0.7,
+        ));
 
-        $payload = json_decode((string) $response->getBody(), true);
-        return is_array($payload) ? $payload : null;
+        return !empty($response['ok']) && is_array($response['body']) ? $response['body'] : null;
     }
 
     public function validateRemotePassword($username, $password)
     {
-        $response = $this->request('POST', 'users/' . rawurlencode($username) . '/password/validate', array(
-            'form_params' => array(
-                'password' => hash('sha256', $password),
+        $response = $this->CI->intersectapiclient->requestJson('POST', 'users/' . rawurlencode($username) . '/password/validate', array(
+            'json' => array(
+                'password' => $this->CI->intersectapiclient->hashPassword($password),
             ),
+            'timeout' => 2.5,
+            'connect_timeout' => 0.7,
         ));
 
-        return $response !== null && $response->getStatusCode() === 200;
+        return !empty($response['ok']);
     }
 
-    private function request($method, $path, array $options = array())
+    public function changeRemotePassword($username, $currentPassword, $newPassword)
     {
-        $token = (array) $this->CI->Apigettoken->apitoken();
-        if (empty($token['access_token'])) {
-            return null;
-        }
-
-        $baseUri = 'http://' . $this->CI->config->item('apiip') . '/api/v1/' . ltrim($path, '/');
-        $requestOptions = $options;
-        $requestOptions['headers']['authorization'] = 'Bearer ' . $token['access_token'];
-
-        try {
-            $client = new Client(array(
-                'base_uri' => $baseUri,
-                'timeout' => 5.0,
-                'http_errors' => false,
-            ));
-
-            return $client->request($method, '', $requestOptions);
-        } catch (GuzzleException $exception) {
-            log_message('error', 'IntersectAuthService request failed: ' . $exception->getMessage());
-            return null;
-        }
+        return $this->CI->intersectapiclient->requestJson('POST', 'users/' . rawurlencode($username) . '/password/change', array(
+            'json' => array(
+                'new' => $this->CI->intersectapiclient->hashPassword($newPassword),
+                'authorization' => $this->CI->intersectapiclient->hashPassword($currentPassword),
+            ),
+            'timeout' => 2.5,
+            'connect_timeout' => 0.7,
+        ));
     }
 }

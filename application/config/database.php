@@ -1,4 +1,20 @@
 <?php
+require_once APPPATH . 'config/installer_bootstrap.php';
+$installerState = cms_installer_load_state();
+$installerDatabase = isset($installerState['database']) && is_array($installerState['database']) ? $installerState['database'] : array();
+$databaseHost = getenv('CMS_DB_HOST') ?: ($installerDatabase['hostname'] ?? 'localhost');
+$databasePort = getenv('CMS_DB_PORT') ?: ($installerDatabase['port'] ?? '');
+$databaseName = getenv('CMS_DB_NAME') ?: ($installerDatabase['database'] ?? 'intersec');
+$databaseUser = getenv('CMS_DB_USER') ?: ($installerDatabase['username'] ?? 'root');
+$databasePass = getenv('CMS_DB_PASS');
+
+if ($databasePass === FALSE) {
+	$databasePass = $installerDatabase['password'] ?? '';
+}
+
+if ($databasePort !== '' && strpos((string) $databaseHost, ':') === FALSE) {
+	$databaseHost .= ':' . $databasePort;
+}
 
 /*
 | -------------------------------------------------------------------
@@ -74,10 +90,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'intersec',
+	'hostname' => $databaseHost,
+	'username' => $databaseUser,
+	'password' => $databasePass,
+	'database' => $databaseName,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

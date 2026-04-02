@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class HomePageBuilder
 {
     protected $CI;
+    protected $cacheDirectory;
 
     public function __construct()
     {
@@ -12,17 +13,28 @@ class HomePageBuilder
         $this->CI->load->model('Apiusers');
         $this->CI->load->model('Langs');
         $this->CI->load->model('Sitecontext');
+        $this->cacheDirectory = APPPATH . 'cache/pages/';
+        if (!is_dir($this->cacheDirectory)) {
+            @mkdir($this->cacheDirectory, 0775, true);
+        }
     }
 
     public function build()
     {
+        $lang = $this->CI->session->userdata('lang') ?: 'es';
+        $cacheKey = 'homepage_' . $lang . '.json';
+        $cached = $this->readCache($cacheKey, 120);
+        if ($cached !== null) {
+            return $cached;
+        }
+
         $configRow = $this->CI->Sitecontext->getConfigRow();
         $serverStats = (array) $this->CI->Apiserverstats->serverinfo();
         $users = (array) $this->CI->Apiusers->user();
         $onlineCount = (int) ($serverStats['onlineCount'] ?? 0);
         $totalUsers = (int) ($users['Total'] ?? 0);
         $uptimeHours = round(((float) ($serverStats['uptime'] ?? 0)) / 1000 / 60 / 60, 2);
-        $languageData = $this->CI->Langs->rebrandText($this->CI->session->userdata('lang') ?: 'es');
+        $languageData = $this->CI->Langs->rebrandText($lang);
 
         $menuHeader = trim((string) ($configRow['menuheader'] ?? ''));
         $featureOneHeader = trim((string) ($configRow['menu1header'] ?? ''));
@@ -35,7 +47,7 @@ class HomePageBuilder
         $featureTwoIcon = trim((string) ($configRow['menu2icon'] ?? '')) ?: 'fas fa-shield-alt';
         $featureThreeIcon = trim((string) ($configRow['menu3icon'] ?? '')) ?: 'fas fa-crown';
 
-        return array(
+        $payload = array(
             'home_uptime_hours' => $uptimeHours,
             'home_online_count' => $onlineCount,
             'home_total_users' => $totalUsers,
@@ -103,5 +115,34 @@ class HomePageBuilder
                 ),
             ),
         );
+
+        $this->writeCache($cacheKey, $payload);
+
+        return $payload;
+    }
+
+    private function readCache($cacheKey, $ttl)
+    {
+        $path = $this->cacheDirectory . $cacheKey;
+        if (!is_file($path)) {
+            return null;
+        }
+
+        if ((time() - filemtime($path)) > (int) $ttl) {
+            return null;
+        }
+
+        $contents = @file_get_contents($path);
+        if ($contents === false || $contents === '') {
+            return null;
+        }
+
+        $decoded = json_decode($contents, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    private function writeCache($cacheKey, array $payload)
+    {
+        @file_put_contents($this->cacheDirectory . $cacheKey, json_encode($payload, JSON_UNESCAPED_SLASHES));
     }
 }

@@ -19,6 +19,7 @@ Este repositorio ya no usa `main_ci4` como base principal. Si en algun momento h
 - Login, registro, recuperacion y panel de usuario
 - Panel administrativo con dashboard, configuracion, noticias, tienda y utilidades
 - Integracion con API de Intersect Engine
+- Cache y degradacion segura cuando la API de Intersect no responde
 - Sistema de traducciones para varios idiomas
 - Base de datos inicial incluida en `intersec.sql`
 
@@ -40,9 +41,61 @@ Capturas actuales de la rama `codeigniter3`.
 Notas:
 
 - El CMS puede arrancar en local sin tener la API de Intersect completamente configurada, pero varias pantallas dependen de ella para mostrar datos reales.
+- La capa de API ahora usa cache local, timeouts cortos y fallback a cache vieja para que el sitio siga siendo funcional aunque Intersect este temporalmente caido.
 - Para desarrollo local se puede usar el servidor embebido de PHP con `router.php`.
 
-## Instalacion local
+## Easy install
+
+La forma recomendada ahora es usar el asistente web.
+
+1. Clona el repositorio y entra en la rama activa:
+
+```bash
+git clone https://github.com/WhiteAssassins/Intersect_CMS.git
+cd Intersect_CMS
+git checkout codeigniter3
+```
+
+2. Instala dependencias:
+
+```bash
+composer install
+```
+
+3. Levanta el proyecto:
+
+```bash
+php -S 127.0.0.1:8080 router.php
+```
+
+4. Abre el instalador:
+
+```text
+http://127.0.0.1:8080/install
+```
+
+5. Completa el wizard:
+
+- URL base del proyecto
+- datos de MySQL o MariaDB
+- usuario admin inicial
+- idioma por defecto
+- integraciones opcionales como API de Intersect, QvaPay o correo
+
+El instalador hace automaticamente:
+
+- prueba de requisitos del servidor
+- creacion o seleccion de la base de datos
+- importacion de `intersec.sql`
+- creacion del primer admin
+- escritura de configuracion local en `application/config/installer.json`
+- activacion de valores seguros por defecto como `csrf`
+
+Si la app aun no esta instalada, `/` redirige automaticamente al wizard. Cuando la instalacion termina, el CMS vuelve a arrancar normal.
+
+## Instalacion manual
+
+Si prefieres configurarlo todo a mano, todavia puedes hacerlo.
 
 1. Clona el repositorio y asegurate de estar en la rama correcta:
 
@@ -73,7 +126,7 @@ Valores por defecto del repo:
 - password: vacio
 - database: `intersec`
 
-5. Configura las variables de entorno que necesites.
+5. Configura las variables de entorno que necesites o crea tu propio `application/config/installer.json`.
 
 Puedes partir de `.env.example` y ajustar los valores a tu entorno.
 
@@ -95,16 +148,34 @@ Estas son las variables mas importantes soportadas hoy por la configuracion:
 
 - `CMS_BASE_URL`
 - `CMS_FORCE_HTTPS`
+- `CMS_DB_HOST`
+- `CMS_DB_PORT`
+- `CMS_DB_NAME`
+- `CMS_DB_USER`
+- `CMS_DB_PASS`
 - `CMS_ENCRYPTION_KEY`
 - `CMS_SESSION_PATH`
 - `CMS_CSRF_PROTECTION`
 - `CMS_API_IP`
+- `CMS_API_BASE_URL`
+- `CMS_API_SCHEME`
 - `CMS_API_USER`
 - `CMS_API_PASS`
+- `CMS_API_TIMEOUT`
+- `CMS_API_CONNECT_TIMEOUT`
+- `CMS_API_CACHE_TTL`
+- `CMS_API_TOKEN_CACHE_TTL`
+- `CMS_API_VERIFY_SSL`
 - `CMS_QVAPAY_ID`
 - `CMS_QVAPAY_SECRET`
 - `CMS_SUPPORT_EMAIL`
 - `CMS_SUPPORT_EMAIL_PASSWORD`
+
+Notas sobre la API de Intersect:
+
+- El CMS habla con la API actual en `/api/v1/` y usa JSON en los endpoints que lo requieren.
+- `CMS_API_PASS` puede definirse como la contrasena real del usuario API o como su hash SHA-256 de 64 caracteres. Si envias la contrasena en texto plano, el CMS la transforma automaticamente al formato esperado por Intersect antes de pedir el token OAuth.
+- Las vistas de personajes online, game objects y acciones administrativas ya se apoyan en los endpoints vigentes documentados para Intersect API v1.
 
 Ejemplo rapido en PowerShell:
 
@@ -145,7 +216,9 @@ En esta etapa ya se hicieron varias mejoras importantes sobre la base legacy:
 - refactor de muchas vistas para sacar logica de base de datos y API
 - mejoras de sesion, login y arranque local
 - endurecimiento inicial de seguridad y flujo de pagos
+- cache resiliente para la API de Intersect con fallback si el servidor no responde
 - rebranding visual progresivo del home y del panel admin
+- asistente de instalacion web con importacion automatica de base de datos
 
 Queda trabajo por delante, sobre todo en modularizar controladores grandes y seguir afinando formularios, configuracion y UX, pero el proyecto ya esta en un estado mucho mas recuperable y mantenible.
 

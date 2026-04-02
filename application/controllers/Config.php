@@ -7,6 +7,7 @@ class Config extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Langs');
+        $this->load->library('intersectapiclient');
         $this->requireAdmin();
     }
 
@@ -86,21 +87,21 @@ class Config extends MY_Controller
     public function changeprivacity()
     {
         $this->updateConfigAndRedirect(array(
-            'privacity' => $this->input->post('privacity'),
+            'privacity' => cms_sanitize_rich_text($this->input->post('privacity')),
         ));
     }
 
     public function changeterms()
     {
         $this->updateConfigAndRedirect(array(
-            'terms' => $this->input->post('terms'),
+            'terms' => cms_sanitize_rich_text($this->input->post('terms')),
         ));
     }
 
     public function changelegal()
     {
         $this->updateConfigAndRedirect(array(
-            'legal' => $this->input->post('legal'),
+            'legal' => cms_sanitize_rich_text($this->input->post('legal')),
         ));
     }
 
@@ -114,6 +115,7 @@ class Config extends MY_Controller
     private function buildConfigDashboardViewData()
     {
         $configRow = $this->getConfigRow();
+        $apiHealth = $this->intersectapiclient->getHealthSummary();
 
         return array(
             'config_color1' => $configRow['color1'] ?? '#000000',
@@ -121,6 +123,13 @@ class Config extends MY_Controller
             'config_analytics' => $configRow['analytics'] ?? '',
             'config_download' => $configRow['download'] ?? '',
             'config_maintenance_enabled' => (int) ($configRow['mant'] ?? 0) === 1,
+            'config_current_lang' => $configRow['lang'] ?? 'es',
+            'config_api_configured' => !empty($apiHealth['configured']) ? 1 : 0,
+            'config_api_online' => !empty($apiHealth['online']) ? 1 : 0,
+            'config_api_cached' => !empty($apiHealth['using_cache']) ? 1 : 0,
+            'config_api_stale' => !empty($apiHealth['using_stale_cache']) ? 1 : 0,
+            'config_api_last_sync' => $apiHealth['last_sync_label'] ?? 'N/A',
+            'config_api_message' => $apiHealth['message'] ?? '',
         );
     }
 

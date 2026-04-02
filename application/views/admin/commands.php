@@ -1,9 +1,9 @@
 <?php
 if (isset($sms) && $tipo == 'error') {
-    echo '<div class="alert alert-info text-center">' . $sms . '</div>';
+    echo '<div class="alert alert-info text-center">' . html_escape($sms) . '</div>';
 }
 if (isset($error)) {
-    echo '<div class="alert alert-info text-center">' . $error . '</div>';
+    echo '<div class="alert alert-info text-center">' . html_escape($error) . '</div>';
 }
 
 function renderCommandSelectOptions($options, $placeholder)

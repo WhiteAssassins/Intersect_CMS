@@ -13,14 +13,14 @@
       <?php foreach ($news_items as $item) { ?>
         <article class="news-tile">
           <a href="<?php echo $item['url']; ?>" class="news-tile__media">
-            <img src="<?php echo $item['image_url']; ?>" alt="<?php echo html_escape($item['title']); ?>">
+            <img src="<?php echo $item['image_url']; ?>" alt="<?php echo html_escape($item['title']); ?>" loading="lazy">
           </a>
           <div class="news-tile__body">
             <span class="news-tile__eyebrow">{news}</span>
             <h2 class="news-tile__title">
-              <a href="<?php echo $item['url']; ?>"><?php echo $item['title']; ?></a>
+              <a href="<?php echo $item['url']; ?>"><?php echo html_escape($item['title']); ?></a>
             </h2>
-            <p class="news-tile__text"><?php echo $item['description']; ?></p>
+            <p class="news-tile__text"><?php echo html_escape($item['description']); ?></p>
           </div>
         </article>
       <?php } ?>

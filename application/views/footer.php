@@ -44,27 +44,46 @@
     </div>
   </div>
 </footer>
-</body> 
-<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js" async></script>
+<?php
+$currentController = strtolower((string) $this->uri->segment(1));
+$currentMethod = strtolower((string) $this->uri->segment(2));
+if ($currentController === '') {
+    $currentController = 'home';
+}
+
+if ($currentMethod === '') {
+    $currentMethod = $currentController === 'admin' ? 'index' : '';
+}
+
+$isAdminUser = (int) $this->session->userdata('rol') === 1;
+$usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
+    || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
+$usesTimeline = $currentController === 'changelog' || ($currentController === 'admin' && $currentMethod === 'changelog');
+$usesTinyMce = $isAdminUser && (
+    ($currentController === 'admin' && in_array($currentMethod, array('news', 'editnews'), true))
+    || ($currentController === 'config' && in_array($currentMethod, array('legal', 'terms', 'privacity'), true))
+);
+$usesChart = $isAdminUser && $currentController === 'admin' && $currentMethod === 'index';
+$usesMdbJavascript = $isAdminUser;
+?>
+<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js"></script>
+    <?php if ($usesMdbJavascript) { ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/cards.js" async></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js" async></script>
-    <?php if($this->session->userdata('rol') == 1){ ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/sidenav.js"></script>
     <?php } ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/dropdown-searchable.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/buttons.js" async></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js" ></script>
-    
-    <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js" ></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js" ></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
-    <?php if($this->session->userdata('rol') == 1){ ?>
+    <?php if ($usesTimeline) { ?>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
+    <?php } ?>
+    <?php if ($usesDataTables) { ?>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <?php } ?>
+    <?php if ($usesTinyMce) { ?>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
+    <?php } ?>
+    <?php if($usesChart){ ?>
 
       <script>
     var lineChartElement = document.getElementById("lineChart");
@@ -97,31 +116,9 @@
     });
     }
         </script>
-      <script>
-$(document).ready(function() {
-var pageRefresh = 5000; //5 s
-setInterval(function() {
-refresh();
-}, pageRefresh);
-});
-
-// Functions
-
-function refresh() {
-$('#admin').load(location.href + " #admin");
-}
- </script>
-      <script>
-      $(document).ready(function() {
-  // SideNav Button Initialization
-  $(".button-collapse").sideNav();
-  // SideNav Scrollbar Initialization
-  var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-  var ps = new PerfectScrollbar(sideNavScrollbar);
-});
-</script>
       <?php } ?>
 
+    <?php if ($usesDataTables) { ?>
     <script>
       $(document).ready(function () {
   $('#dt-filter-select').dataTable({
@@ -145,10 +142,7 @@ $('#admin').load(location.href + " #admin");
 "previous": "{previous}"
 }
 },
-    rowReorder: {
-            selector: 'td:nth-child(2)'
-        },
-        responsive: true,
+    responsive: true,
         
     initComplete: function () {
       
@@ -162,24 +156,34 @@ $('#admin').load(location.href + " #admin");
                       $(this).val()
                   );
 
-                  column
+          column
                       .search( val ? '^'+val+'$' : '', true, false )
                       .draw();
               } );
 
           column.data().unique().sort().each( function ( d, j ) {
-              select.append( '<option value="'+d+'">'+d+'</option>' )
+              if (d === null || d === undefined || d === '') {
+                  return;
+              }
+
+              $('<option/>', {
+                  value: d,
+                  text: d
+              }).appendTo(select);
           } );
       } );
   }
   });
 });
     </script>
+    <?php } ?>
 
     
     <script>
         $(document).ready(function() {
-  new WOW().init();
+  if (typeof WOW !== 'undefined') {
+    new WOW().init();
+  }
 });
     </script>
     <script>
@@ -213,7 +217,9 @@ $(document).ready(function(){
   $('.count1').counter();
   $('.count2').counter();
   
-  new WOW().init();
+  if (typeof WOW !== 'undefined') {
+    new WOW().init();
+  }
   
   setTimeout(function () {
     $('.count5').counter();
@@ -221,12 +227,12 @@ $(document).ready(function(){
 });
 </script>
     <script>
-        var config = {
-            base_url: '<?php echo base_url();?>',
-            loading_touch_device: 1,
-        }
+        var config = <?php echo json_encode(array(
+            'base_url' => base_url(),
+            'loading_touch_device' => 1,
+        ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>;
     </script>
- <?php if($this->session->userdata('rol') == 1){ ?>
+ <?php if($usesTinyMce){ ?>
  <script>
   tinymce.init({
     selector: 'textarea#tiny',
@@ -237,10 +243,6 @@ $(document).ready(function(){
   });
 </script>
 <?php } ?>
-  <script>
-$(document).ready(function() {
-$('.mdb-select').materialSelect();
-});
-  </script>
 
+ </body>
 </html>

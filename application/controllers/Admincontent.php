@@ -24,7 +24,7 @@ class Admincontent extends MY_Controller
         $record = array(
             'title' => $title,
             'descrip' => strip_tags($this->input->post('descrip')),
-            'txt' => strip_tags($this->input->post('txt')),
+            'txt' => cms_sanitize_rich_text($this->input->post('txt')),
             'img' => $filename,
             'date' => strftime('%A, %d de %B de %Y'),
             'status' => 1,
@@ -68,7 +68,7 @@ class Admincontent extends MY_Controller
         $this->db->update('news', array(
             'title' => $this->getPostString('title'),
             'descrip' => $this->getPostString('descrip'),
-            'txt' => $this->getPostString('txt'),
+            'txt' => cms_sanitize_rich_text($this->input->post('txt')),
         ));
 
         $this->logAdminAction('Noticia actualizada');
@@ -93,7 +93,7 @@ class Admincontent extends MY_Controller
         $record = array(
             'name' => $name,
             'descrip' => strip_tags($this->input->post('descrip')),
-            'price' => strip_tags($this->input->post('price')),
+            'price' => number_format((float) $this->input->post('price'), 2, '.', ''),
             'aatk' => strip_tags($this->input->post('aatk')),
             'ainterac' => strip_tags($this->input->post('ainterac')),
             'ingameid' => strip_tags($this->input->post('ingameid')),
@@ -141,7 +141,7 @@ class Admincontent extends MY_Controller
         $this->db->update('products', array(
             'name' => $this->getPostString('name'),
             'descrip' => $this->getPostString('descrip'),
-            'price' => $this->getPostString('price'),
+            'price' => number_format((float) $this->input->post('price'), 2, '.', ''),
             'aatk' => $this->getPostString('aatk'),
             'ainterac' => $this->getPostString('ainterac'),
             'ingameid' => $this->getPostString('ingameid'),
@@ -165,8 +165,13 @@ class Admincontent extends MY_Controller
             return null;
         }
 
+        $targetDirectory = rtrim(FCPATH . str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR);
+        if (!is_dir($targetDirectory)) {
+            @mkdir($targetDirectory, 0775, true);
+        }
+
         $config = array(
-            'upload_path' => $path,
+            'upload_path' => $targetDirectory,
             'allowed_types' => 'gif|jpg|jpeg|png|webp',
             'max_size' => '5120',
             'max_width' => '2000',
@@ -187,6 +192,10 @@ class Admincontent extends MY_Controller
     private function buildUniqueSlug($table, $title)
     {
         $slug = strtolower(url_title($title));
+        if ($slug === '') {
+            $slug = $table . '-' . time();
+        }
+
         if (isUrlExists($table, $slug)) {
             $slug .= '-' . time();
         }

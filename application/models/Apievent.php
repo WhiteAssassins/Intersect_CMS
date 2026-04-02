@@ -1,29 +1,48 @@
-<?php 
-require FCPATH.'vendor/autoload.php';
-use GuzzleHttp\Client;
-class Apievent extends CI_Model{
-    public function event(){
-      try{
-        $this->load->model('Apigettoken');
-        $accesstoken = $this->Apigettoken->apitoken();
-        $apiip = $this->config->item('apiip');;
-        $client = new Client([
-          'base_uri' => 'http://'.$apiip.'/api/v1/gameobjects/event?pageSize=5000',
-          'timeout'  => 10.0,
-          'http_errors' => false,
-        ]);
-        $res = $client->request('POST','',[
-          'headers' => [
-            "authorization" => "Bearer ".$accesstoken['access_token'],
-          ]
-        ]);
-          
-        
-        $events = json_decode($res->getBody(), true); 
-       return $events; 
-      }catch(\GuzzleHttp\Exception\ServerException $se){
-        return $se->getMessage();
-      }catch(Exception $e){
-      }
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Apievent extends CI_Model
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('intersectapiclient');
+    }
+
+    public function event()
+    {
+        $response = $this->intersectapiclient->requestCachedJson('POST', 'gameobjects/event', array(
+            'total' => 0,
+            'count' => 0,
+            'Page' => 0,
+            'entries' => array(),
+        ), array(
+            'cache_key' => 'events_index',
+            'ttl' => 300,
+            'json' => array(
+                'page' => 0,
+                'count' => 5000,
+            ),
+        ));
+
+        return $this->normalizeEntries($response);
+    }
+
+    private function normalizeEntries(array $response)
+    {
+        $entries = isset($response['entries']) && is_array($response['entries']) ? $response['entries'] : array();
+        $total = isset($response['Total']) ? (int) $response['Total'] : (int) ($response['total'] ?? count($entries));
+        $count = isset($response['Count']) ? (int) $response['Count'] : (int) ($response['count'] ?? count($entries));
+
+        return array(
+            'Total' => $total,
+            'Count' => $count,
+            'Page' => (int) ($response['Page'] ?? 0),
+            'entries' => $entries,
+            'Entries' => $entries,
+            'Values' => $entries,
+            'total' => $total,
+            'count' => $count,
+        );
     }
 }

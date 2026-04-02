@@ -1,28 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
-
-use GuzzleHttp\Client;
 
 class Players extends MY_Controller {
 	function __construct() {
         parent::__construct();
-        $this->load->model('Apigettoken');
-		$this->load->model('Apiserverinfo');
-		$this->load->model('Apiserverstats');
-		$this->load->model('Apiusers');
 		$this->load->model('Apiplayers');
 		$this->load->model('Langs');
     }
 
     private function buildPlayerRows()
     {
-        $players = (array) $this->Apiplayers->player();
+        $players = (array) $this->Apiplayers->rank();
         $values = isset($players['Values']) && is_array($players['Values']) ? $players['Values'] : array();
         $rows = array();
+        $position = 1;
 
         foreach ($values as $player) {
             $rows[] = array(
+                'rank' => $position++,
                 'name' => $player['Name'] ?? '',
                 'gender_label' => ((int) ($player['Gender'] ?? 0) === 0) ? 'Hombre' : 'Mujer',
                 'level' => (int) ($player['Level'] ?? 0),

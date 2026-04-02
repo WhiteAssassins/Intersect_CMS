@@ -1,9 +1,9 @@
 <?php
 if (isset($sms) && $tipo == 'error') {
-    echo '<div class="alert alert-info text-center">' . $sms . '</div>';
+    echo '<div class="alert alert-info text-center">' . html_escape($sms) . '</div>';
 }
 if (isset($error)) {
-    echo '<div class="alert alert-info text-center">' . $error . '</div>';
+    echo '<div class="alert alert-info text-center">' . html_escape($error) . '</div>';
 }
 
 $primaryMetrics = array(
@@ -73,6 +73,20 @@ $systemMetrics = array(
       <span class="admin-header__status-label">{site_title}</span>
       <strong class="admin-header__status-value"><?php echo $dashboard_version; ?></strong>
       <span class="admin-header__status-meta">{version}</span>
+      <span class="admin-header__status-meta">
+        API:
+        <?php
+        if (!$dashboard_api_configured) {
+            echo 'no configurada';
+        } elseif ($dashboard_api_online && !$dashboard_api_stale) {
+            echo $dashboard_api_cached ? 'cache OK' : 'en vivo';
+        } elseif ($dashboard_api_stale) {
+            echo 'cache degradada';
+        } else {
+            echo 'sin respuesta';
+        }
+        ?>
+      </span>
     </div>
   </section>
 

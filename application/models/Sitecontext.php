@@ -3,14 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sitecontext extends CI_Model
 {
+    private $visitCookieName = 'cms_visit_hit';
+    private $visitCookieTtl = 21600;
+    private static $configRowCache;
+    private static $visitsRowCache;
+
     public function getConfigRow()
     {
-        return (array) $this->db->get('config')->row_array();
+        if (self::$configRowCache !== null) {
+            return self::$configRowCache;
+        }
+
+        self::$configRowCache = (array) $this->db->get('config')->row_array();
+        return self::$configRowCache;
     }
 
     public function getVisitsRow()
     {
-        return (array) $this->db->get('visits')->row_array();
+        if (self::$visitsRowCache !== null) {
+            return self::$visitsRowCache;
+        }
+
+        self::$visitsRowCache = (array) $this->db->get('visits')->row_array();
+        return self::$visitsRowCache;
     }
 
     public function getConfigContent($field)
@@ -77,9 +92,10 @@ class Sitecontext extends CI_Model
             $this->db->where('id', 1);
             $this->db->update('visits', $resetData);
             $visitsRow = array_merge($visitsRow, $resetData);
+            self::$visitsRowCache = $visitsRow;
         }
 
-        if ((int) $role === 2 || !$isLoggedIn) {
+        if (((int) $role === 2 || !$isLoggedIn) && !$this->hasRecentVisitCookie()) {
             $monthMap = array(
                 'Jan' => 'january',
                 'Feb' => 'february',
@@ -101,10 +117,30 @@ class Sitecontext extends CI_Model
                 $visitsRow[$column] = $currentValue + 1;
                 $this->db->where('id', 1);
                 $this->db->update('visits', array($column => $visitsRow[$column]));
+                $this->markRecentVisit();
+                self::$visitsRowCache = $visitsRow;
             }
         }
 
         return $visitsRow;
+    }
+
+    private function hasRecentVisitCookie()
+    {
+        $cookie = $this->input->cookie($this->visitCookieName, true);
+        return !empty($cookie);
+    }
+
+    private function markRecentVisit()
+    {
+        $secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+        setcookie($this->visitCookieName, '1', array(
+            'expires' => time() + $this->visitCookieTtl,
+            'path' => '/',
+            'secure' => $secure,
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ));
     }
 
     private function getTinymceLanguage($lang)

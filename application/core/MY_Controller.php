@@ -8,7 +8,7 @@ class MY_Controller extends CI_Controller
         $this->output
             ->set_status_header($statusCode)
             ->set_content_type('application/json')
-            ->set_output(json_encode($payload));
+            ->set_output(json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     protected function getConfigRow()
@@ -74,7 +74,7 @@ class MY_Controller extends CI_Controller
 
     protected function renderAdminPage($view, array $data = array())
     {
-        $viewData = array_merge($this->getLanguageData(), $data);
+        $viewData = array_merge($this->getLanguageData(), $this->getAdminChromeData(), $data);
 
         $this->parser->parse('header', $viewData);
         $this->parser->parse('sidebar', $viewData);
@@ -115,5 +115,16 @@ class MY_Controller extends CI_Controller
             'action' => $action,
             'time' => date('F j, Y, g:i a'),
         ));
+    }
+
+    protected function getAdminChromeData()
+    {
+        $this->load->library('releasecheckservice');
+        $releaseState = $this->releasecheckservice->getProjectUpdateState('0.8');
+
+        return array(
+            'has_update_available' => !empty($releaseState['has_update']) ? 1 : 0,
+            'available_version' => $releaseState['available_version'] ?? '',
+        );
     }
 }
