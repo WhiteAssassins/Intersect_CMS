@@ -1636,7 +1636,7 @@ body.admin-layout--desktop .site-footer::before{
 
 .admin-overview-grid{
     display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     gap:1rem;
     margin-bottom:1rem;
 }
@@ -2001,6 +2001,23 @@ body.admin-layout--desktop .site-footer::before{
     font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
+}
+
+.admin-checkbox{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:.9rem 1rem;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    color:rgba(255,255,255,.78);
+}
+
+.admin-checkbox input{
+    width:18px;
+    height:18px;
+    accent-color:var(--brand-accent);
 }
 
 .admin-menu-card{

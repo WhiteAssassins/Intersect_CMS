@@ -8,6 +8,12 @@
       <p class="admin-section__text">{admin_metrics_text}</p>
     </div>
 
+    <?php if ($config_notice_message !== '') { ?>
+      <div class="alert <?php echo $config_notice_type === 'error' ? 'alert-info' : 'alert-success'; ?> mb-4">
+        <?php echo html_escape($config_notice_message); ?>
+      </div>
+    <?php } ?>
+
     <div class="admin-overview-grid">
       <article class="admin-overview-stat">
         <span class="admin-overview-stat__label">{gradient}</span>
@@ -64,6 +70,186 @@
 
       <article class="admin-config-card">
         <div class="admin-config-card__header">
+          <span class="admin-config-card__icon"><i class="fas fa-window-maximize"></i></span>
+          <div>
+            <h3><?php echo html_escape($config_project_title); ?></h3>
+            <p class="admin-form-card__text"><?php echo html_escape($config_project_text); ?></p>
+          </div>
+        </div>
+        <form method="POST" action="<?php echo base_url('config/projectstate'); ?>" class="form-admin">
+          <?php echo cms_csrf_field(); ?>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_project_base_url_label); ?></span>
+            <input type="url" class="form-control" name="base_url" value="<?php echo html_escape($config_state_base_url); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label">{chooselang}</span>
+            <select class="form-control" name="default_lang">
+              <?php foreach ($config_language_options as $languageOption) { ?>
+                <option value="<?php echo html_escape($languageOption['code']); ?>"<?php echo $languageOption['code'] === $config_state_default_lang ? ' selected' : ''; ?>>
+                  <?php echo html_escape($languageOption['short'] . ' - ' . $languageOption['label']); ?>
+                </option>
+              <?php } ?>
+            </select>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_project_download_label); ?></span>
+            <input type="url" class="form-control" name="download_url" placeholder="https://..." value="<?php echo html_escape($config_state_download_url); ?>">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_project_analytics_label); ?></span>
+            <input type="text" class="form-control" name="analytics_id" placeholder="G-XXXXXXXXXX" value="<?php echo html_escape($config_state_analytics_id); ?>">
+          </label>
+          <button type="submit" class="admin-button admin-button--primary">{change}</button>
+        </form>
+      </article>
+
+      <article class="admin-config-card">
+        <div class="admin-config-card__header">
+          <span class="admin-config-card__icon"><i class="fas fa-user-shield"></i></span>
+          <div>
+            <h3><?php echo html_escape($config_admin_title); ?></h3>
+            <p class="admin-form-card__text"><?php echo html_escape($config_admin_text); ?></p>
+          </div>
+        </div>
+        <form method="POST" action="<?php echo base_url('config/adminstate'); ?>" class="form-admin">
+          <?php echo cms_csrf_field(); ?>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_admin_user_label); ?></span>
+            <input type="text" class="form-control" name="admin_user" value="<?php echo html_escape($config_state_admin_user); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_admin_email_label); ?></span>
+            <input type="email" class="form-control" name="admin_email" value="<?php echo html_escape($config_state_admin_email); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_admin_password_label); ?></span>
+            <input type="password" class="form-control" name="admin_pass" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_admin_password_confirm_label); ?></span>
+            <input type="password" class="form-control" name="admin_pass_confirm" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <button type="submit" class="admin-button admin-button--primary">{change}</button>
+        </form>
+      </article>
+
+      <article class="admin-config-card">
+        <div class="admin-config-card__header">
+          <span class="admin-config-card__icon"><i class="fas fa-database"></i></span>
+          <div>
+            <h3><?php echo html_escape($config_database_title); ?></h3>
+            <p class="admin-form-card__text"><?php echo html_escape($config_database_text); ?></p>
+          </div>
+        </div>
+        <form method="POST" action="<?php echo base_url('config/databasestate'); ?>" class="form-admin">
+          <?php echo cms_csrf_field(); ?>
+          <div class="admin-color-pair">
+            <label class="admin-form-group">
+              <span class="admin-form-group__label"><?php echo html_escape($config_database_host_label); ?></span>
+              <input type="text" class="form-control" name="db_host" value="<?php echo html_escape($config_state_db_host); ?>" required>
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label"><?php echo html_escape($config_database_port_label); ?></span>
+              <input type="number" min="1" class="form-control" name="db_port" value="<?php echo html_escape($config_state_db_port); ?>" required>
+            </label>
+          </div>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_database_name_label); ?></span>
+            <input type="text" class="form-control" name="db_name" value="<?php echo html_escape($config_state_db_name); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_database_user_label); ?></span>
+            <input type="text" class="form-control" name="db_user" value="<?php echo html_escape($config_state_db_user); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_database_password_label); ?></span>
+            <input type="password" class="form-control" name="db_pass" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <button type="submit" class="admin-button admin-button--primary">{change}</button>
+        </form>
+      </article>
+
+      <article class="admin-config-card">
+        <div class="admin-config-card__header">
+          <span class="admin-config-card__icon"><i class="fas fa-network-wired"></i></span>
+          <div>
+            <h3><?php echo html_escape($config_integrations_title); ?></h3>
+            <p class="admin-form-card__text"><?php echo html_escape($config_integrations_text); ?></p>
+          </div>
+        </div>
+        <form method="POST" action="<?php echo base_url('config/integrationstate'); ?>" class="form-admin">
+          <?php echo cms_csrf_field(); ?>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_api_host_label); ?></span>
+            <input type="text" class="form-control" name="api_ip" value="<?php echo html_escape($config_state_api_ip); ?>">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_api_user_label); ?></span>
+            <input type="text" class="form-control" name="api_user" value="<?php echo html_escape($config_state_api_user); ?>">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_api_password_label); ?></span>
+            <input type="password" class="form-control" name="api_pass" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <div class="admin-color-pair">
+            <label class="admin-form-group">
+              <span class="admin-form-group__label"><?php echo html_escape($config_api_cache_ttl_label); ?></span>
+              <input type="number" min="5" class="form-control" name="api_cache_ttl" value="<?php echo html_escape($config_state_api_cache_ttl); ?>" required>
+            </label>
+            <label class="admin-form-group">
+              <span class="admin-form-group__label"><?php echo html_escape($config_api_stale_cache_ttl_label); ?></span>
+              <input type="number" min="5" class="form-control" name="api_stale_cache_ttl" value="<?php echo html_escape($config_state_api_stale_cache_ttl); ?>" required>
+            </label>
+          </div>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_qvapay_id_label); ?></span>
+            <input type="text" class="form-control" name="qvapay_id" value="<?php echo html_escape($config_state_qvapay_id); ?>">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_qvapay_secret_label); ?></span>
+            <input type="password" class="form-control" name="qvapay_secret" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_support_email_label); ?></span>
+            <input type="email" class="form-control" name="support_email" value="<?php echo html_escape($config_state_support_email); ?>">
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_support_password_label); ?></span>
+            <input type="password" class="form-control" name="support_email_password" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="new-password">
+          </label>
+          <button type="submit" class="admin-button admin-button--primary">{change}</button>
+        </form>
+      </article>
+
+      <article class="admin-config-card">
+        <div class="admin-config-card__header">
+          <span class="admin-config-card__icon"><i class="fas fa-lock"></i></span>
+          <div>
+            <h3><?php echo html_escape($config_security_title); ?></h3>
+            <p class="admin-form-card__text"><?php echo html_escape($config_security_text); ?></p>
+          </div>
+        </div>
+        <form method="POST" action="<?php echo base_url('config/securitystate'); ?>" class="form-admin">
+          <?php echo cms_csrf_field(); ?>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_session_path_label); ?></span>
+            <input type="text" class="form-control" name="session_path" value="<?php echo html_escape($config_state_session_path); ?>" required>
+          </label>
+          <label class="admin-form-group">
+            <span class="admin-form-group__label"><?php echo html_escape($config_encryption_key_label); ?></span>
+            <input type="text" class="form-control" name="encryption_key" placeholder="<?php echo html_escape($config_secret_placeholder); ?>" autocomplete="off">
+          </label>
+          <label class="admin-checkbox">
+            <input type="checkbox" name="csrf_protection" value="1"<?php echo $config_state_csrf_enabled ? ' checked' : ''; ?>>
+            <span><?php echo html_escape($config_csrf_label); ?></span>
+          </label>
+          <button type="submit" class="admin-button admin-button--primary">{change}</button>
+        </form>
+      </article>
+
+      <article class="admin-config-card">
+        <div class="admin-config-card__header">
           <span class="admin-config-card__icon"><i class="fas fa-fill-drip"></i></span>
           <div>
             <h3>{gradient}</h3>
@@ -82,42 +268,6 @@
               <input name="color2" type="color" value="<?php echo html_escape($config_color2); ?>">
             </label>
           </div>
-          <button type="submit" class="admin-button admin-button--primary">{change}</button>
-        </form>
-      </article>
-
-      <article class="admin-config-card">
-        <div class="admin-config-card__header">
-          <span class="admin-config-card__icon"><i class="fas fa-chart-line"></i></span>
-          <div>
-            <h3>{analytics}</h3>
-            <p class="admin-form-card__text">{admin_config_analytics_text}</p>
-          </div>
-        </div>
-        <form method="POST" action="<?php echo base_url('config/analitycs'); ?>" class="form-admin">
-          <?php echo cms_csrf_field(); ?>
-          <label class="admin-form-group">
-            <span class="admin-form-group__label">{admin_config_analytics_id_label}</span>
-            <input type="text" class="form-control" name="google" placeholder="G-XXXXXXXXXX" value="<?php echo html_escape($config_analytics); ?>">
-          </label>
-          <button type="submit" class="admin-button admin-button--primary">{change}</button>
-        </form>
-      </article>
-
-      <article class="admin-config-card">
-        <div class="admin-config-card__header">
-          <span class="admin-config-card__icon"><i class="fas fa-download"></i></span>
-          <div>
-            <h3>{configdownloadbutton}</h3>
-            <p class="admin-form-card__text">{admin_config_download_text}</p>
-          </div>
-        </div>
-        <form method="POST" action="<?php echo base_url('config/download'); ?>" class="form-admin">
-          <?php echo cms_csrf_field(); ?>
-          <label class="admin-form-group">
-            <span class="admin-form-group__label">{admin_config_download_url_label}</span>
-            <input type="text" class="form-control" name="link" placeholder="https://..." value="<?php echo html_escape($config_download); ?>">
-          </label>
           <button type="submit" class="admin-button admin-button--primary">{change}</button>
         </form>
       </article>
@@ -165,30 +315,6 @@
         <div class="admin-editor__actions">
           <a href="<?php echo base_url('config/menus'); ?>" class="admin-button admin-button--primary">{editmenus}</a>
         </div>
-      </article>
-
-      <article class="admin-config-card">
-        <div class="admin-config-card__header">
-          <span class="admin-config-card__icon"><i class="fas fa-language"></i></span>
-          <div>
-            <h3>{editlang}</h3>
-            <p class="admin-form-card__text">{admin_config_language_text}</p>
-          </div>
-        </div>
-        <form method="POST" action="<?php echo base_url('config/changelang'); ?>" class="form-admin">
-          <?php echo cms_csrf_field(); ?>
-          <label class="admin-form-group">
-            <span class="admin-form-group__label">{chooselang}</span>
-            <select class="form-control" name="lang">
-              <?php foreach ($config_language_options as $languageOption) { ?>
-                <option value="<?php echo html_escape($languageOption['code']); ?>"<?php echo $languageOption['is_current'] ? ' selected' : ''; ?>>
-                  <?php echo html_escape($languageOption['short'] . ' - ' . $languageOption['label']); ?>
-                </option>
-              <?php } ?>
-            </select>
-          </label>
-          <button type="submit" class="admin-button admin-button--primary">{change}</button>
-        </form>
       </article>
     </div>
   </section>

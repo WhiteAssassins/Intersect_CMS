@@ -82,6 +82,20 @@ http://127.0.0.1:8080/install
 - idioma por defecto
 - integraciones opcionales como API de Intersect, QvaPay o correo
 
+Antes de rellenar `API user` y `API password` en el wizard, crea primero un usuario dentro de tu servidor de Intersect y usa esas credenciales para la API del CMS. Despues, desde la consola del servidor de Intersect, dale permisos al usuario con:
+
+```text
+apigrant TU_USUARIO_API UserManage
+apigrant TU_USUARIO_API UserQuery
+```
+
+`TU_USUARIO_API` debe reemplazarse por el nombre real del usuario que creaste en tu servidor. Por ejemplo, si el usuario se llama `WhiteAssassins`, entonces los comandos serian:
+
+```text
+apigrant WhiteAssassins UserManage
+apigrant WhiteAssassins UserQuery
+```
+
 El instalador hace automaticamente:
 
 - prueba de requisitos del servidor
@@ -164,6 +178,7 @@ Estas son las variables mas importantes soportadas hoy por la configuracion:
 - `CMS_API_TIMEOUT`
 - `CMS_API_CONNECT_TIMEOUT`
 - `CMS_API_CACHE_TTL`
+- `CMS_API_STALE_CACHE_TTL`
 - `CMS_API_TOKEN_CACHE_TTL`
 - `CMS_API_VERIFY_SSL`
 - `CMS_QVAPAY_ID`
@@ -174,7 +189,23 @@ Estas son las variables mas importantes soportadas hoy por la configuracion:
 Notas sobre la API de Intersect:
 
 - El CMS habla con la API actual en `/api/v1/` y usa JSON en los endpoints que lo requieren.
+- Debes crear un usuario en tu servidor de Intersect especificamente para la API y usar ese `user` y `password` en `CMS_API_USER` y `CMS_API_PASS` o en el instalador web.
+- Despues de crear ese usuario, debes darle permisos desde la consola del servidor con:
+
+```text
+apigrant TU_USUARIO_API UserManage
+apigrant TU_USUARIO_API UserQuery
+```
+
+- Cambia `TU_USUARIO_API` por el nombre real del usuario creado. Si tu usuario es `WhiteAssassins`, los comandos quedan:
+
+```text
+apigrant WhiteAssassins UserManage
+apigrant WhiteAssassins UserQuery
+```
+
 - `CMS_API_PASS` puede definirse como la contrasena real del usuario API o como su hash SHA-256 de 64 caracteres. Si envias la contrasena en texto plano, el CMS la transforma automaticamente al formato esperado por Intersect antes de pedir el token OAuth.
+- Si usas `application/config/installer.json`, el valor `integrations.api_pass` se guarda hasheado en SHA-256 mayusculas.
 - Las vistas de personajes online, game objects y acciones administrativas ya se apoyan en los endpoints vigentes documentados para Intersect API v1.
 
 Ejemplo rapido en PowerShell:

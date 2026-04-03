@@ -39,7 +39,7 @@ class IntersectApiClient
             'cps' => 0,
         ), array(
             'cache_key' => 'health_stats',
-            'ttl' => $this->getIntConfig('api_cache_ttl', 120),
+            'ttl' => $this->getIntConfig('api_cache_ttl', 15),
         ));
 
         $meta = $this->getLastMeta();
@@ -64,7 +64,10 @@ class IntersectApiClient
     public function requestCachedJson($method, $path, array $fallback = array(), array $options = array())
     {
         $method = strtoupper((string) $method);
-        $cacheTtl = isset($options['ttl']) ? max(1, (int) $options['ttl']) : $this->getIntConfig('api_cache_ttl', 120);
+        $cacheTtl = isset($options['ttl']) ? max(1, (int) $options['ttl']) : $this->getIntConfig('api_cache_ttl', 15);
+        $staleCacheTtl = isset($options['stale_ttl'])
+            ? max($cacheTtl, (int) $options['stale_ttl'])
+            : max($cacheTtl, $this->getIntConfig('api_stale_cache_ttl', 90));
         $cachePayload = array();
         if (!empty($options['query']) && is_array($options['query'])) {
             $cachePayload['query'] = $options['query'];
@@ -96,7 +99,7 @@ class IntersectApiClient
             return $this->mergeFallback($fallback, $result['body']);
         }
 
-        if ($cached !== null) {
+        if ($cached !== null && $this->isWithinTtl($cached, $staleCacheTtl)) {
             $storedAt = $cached['stored_at'] ?? null;
             $this->lastMeta = $this->buildMeta(false, $result['status'] ?? 0, $result['message'] ?? 'Using stale cache.', true, true, $storedAt);
             return $this->mergeFallback($fallback, $cached['payload'] ?? array());
@@ -375,6 +378,11 @@ class IntersectApiClient
         }
 
         return (time() - $storedAt) > (int) $ttl;
+    }
+
+    protected function isWithinTtl(array $cached, $ttl)
+    {
+        return !$this->isExpired($cached, $ttl);
     }
 
     protected function mergeFallback(array $fallback, array $payload)

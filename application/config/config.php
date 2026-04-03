@@ -38,21 +38,29 @@ $is_https_request = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
 	|| filter_var(getenv('CMS_FORCE_HTTPS'), FILTER_VALIDATE_BOOLEAN);
 
 $configured_base_url = getenv('CMS_BASE_URL');
+$request_host = '';
 
-if (($configured_base_url === FALSE || $configured_base_url === '') && $installerBaseUrl !== '') {
-	$configured_base_url = $installerBaseUrl;
+if (!empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+	$forwardedHosts = explode(',', (string) $_SERVER['HTTP_X_FORWARDED_HOST']);
+	$request_host = trim((string) $forwardedHosts[0]);
+} elseif (!empty($_SERVER['HTTP_HOST'])) {
+	$request_host = trim((string) $_SERVER['HTTP_HOST']);
 }
 
 if ($configured_base_url !== FALSE && $configured_base_url !== '')
 {
 	$config['base_url'] = rtrim($configured_base_url, '/').'/';
 }
-elseif (ENVIRONMENT !== 'production' && isset($_SERVER['HTTP_HOST']))
+elseif ($request_host !== '')
 {
 	$scheme = $is_https_request ? 'https' : 'http';
 	$script_path = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
 	$script_path = trim($script_path, '/');
-	$config['base_url'] = $scheme.'://'.$_SERVER['HTTP_HOST'].($script_path !== '' ? '/'.$script_path : '').'/';
+	$config['base_url'] = $scheme.'://'.$request_host.($script_path !== '' ? '/'.$script_path : '').'/';
+}
+elseif ($installerBaseUrl !== '')
+{
+	$config['base_url'] = rtrim($installerBaseUrl, '/').'/';
 }
 else
 {
@@ -567,7 +575,8 @@ $config['apiuser'] = getenv('CMS_API_USER') ?: ($installerIntegrations['api_user
 $config['apipass'] = getenv('CMS_API_PASS') ?: ($installerIntegrations['api_pass'] ?? 'apipass');
 $config['api_timeout'] = getenv('CMS_API_TIMEOUT') ?: ($installerIntegrations['api_timeout'] ?? 0.6);
 $config['api_connect_timeout'] = getenv('CMS_API_CONNECT_TIMEOUT') ?: ($installerIntegrations['api_connect_timeout'] ?? 0.2);
-$config['api_cache_ttl'] = getenv('CMS_API_CACHE_TTL') ?: ($installerIntegrations['api_cache_ttl'] ?? 120);
+$config['api_cache_ttl'] = getenv('CMS_API_CACHE_TTL') ?: ($installerIntegrations['api_cache_ttl'] ?? 15);
+$config['api_stale_cache_ttl'] = getenv('CMS_API_STALE_CACHE_TTL') ?: ($installerIntegrations['api_stale_cache_ttl'] ?? 90);
 $config['api_token_cache_ttl'] = getenv('CMS_API_TOKEN_CACHE_TTL') ?: ($installerIntegrations['api_token_cache_ttl'] ?? 300);
 $config['api_verify_ssl'] = getenv('CMS_API_VERIFY_SSL');
 $config['api_verify_ssl'] = ($config['api_verify_ssl'] === false || $config['api_verify_ssl'] === null || $config['api_verify_ssl'] === '') ? ($installerIntegrations['api_verify_ssl'] ?? true) : filter_var($config['api_verify_ssl'], FILTER_VALIDATE_BOOLEAN);
