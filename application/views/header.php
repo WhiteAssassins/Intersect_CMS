@@ -11,12 +11,16 @@ if ($currentMethod === '') {
     $currentMethod = $currentController === 'admin' ? 'index' : '';
 }
 
-$usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
+$usesDataTables = in_array($currentController, array('users', 'playersonline', 'logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
 $usesMdbCss = $currentController === 'admin' || $currentController === 'config' || $currentController === 'logs' || $currentController === 'installer';
 $analyticsId = trim((string) ('{analytics_id}'));
 $hasAnalyticsId = $analyticsId !== '' && preg_match('/^\{.+\}$/', $analyticsId) !== 1;
 $isLoggedIn = !empty($this->session->userdata('login'));
+$mainCssVersion = @filemtime(FCPATH . 'public/css/main.css') ?: time();
+$bootstrapCssVersion = @filemtime(FCPATH . 'public/css/bootstrap.css') ?: $mainCssVersion;
+$mdbCssVersion = @filemtime(FCPATH . 'public/css/mdb.css') ?: $mainCssVersion;
+$datatablesCssVersion = @filemtime(FCPATH . 'public/css/datatables.min.css') ?: $mainCssVersion;
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -52,14 +56,14 @@ $isLoggedIn = !empty($this->session->userdata('login'));
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css">
     <?php if ($usesDataTables) { ?>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css?v=<?php echo rawurlencode((string) $datatablesCssVersion); ?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
     <?php } ?>
     <?php if ($usesMdbCss) { ?>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/mdb.css?v=<?php echo rawurlencode((string) $mdbCssVersion); ?>">
     <?php } ?>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/bootstrap.css?v=<?php echo rawurlencode((string) $bootstrapCssVersion); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/main.css?v=<?php echo rawurlencode((string) $mainCssVersion); ?>">
 <?php if ($hasAnalyticsId) { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode($analyticsId); ?>"></script>
 <script>

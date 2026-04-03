@@ -56,7 +56,7 @@ if ($currentMethod === '') {
 }
 
 $isAdminUser = (int) $this->session->userdata('rol') === 1;
-$usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
+$usesDataTables = in_array($currentController, array('users', 'playersonline', 'logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
 $usesTinyMce = $isAdminUser && (
     ($currentController === 'admin' && in_array($currentMethod, array('news', 'editnews'), true))
@@ -64,20 +64,26 @@ $usesTinyMce = $isAdminUser && (
 );
 $usesChart = $isAdminUser && $currentController === 'admin' && $currentMethod === 'index';
 $usesMdbJavascript = $isAdminUser;
+$jqueryVersion = @filemtime(FCPATH . 'public/js/jquery.min.js') ?: time();
+$bootstrapJsVersion = @filemtime(FCPATH . 'public/js/bootstrap.js') ?: $jqueryVersion;
+$mdbJsVersion = @filemtime(FCPATH . 'public/js/mdb.min.js') ?: $jqueryVersion;
+$mainJsVersion = @filemtime(FCPATH . 'public/js/main.js') ?: $jqueryVersion;
+$datatablesJsVersion = @filemtime(FCPATH . 'public/js/datatables2.js') ?: $jqueryVersion;
+$tinyMceVersion = @filemtime(FCPATH . 'public/tinymce/tinymce.min.js') ?: $jqueryVersion;
 ?>
-<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/'); ?>js/jquery.min.js?v=<?php echo rawurlencode((string) $jqueryVersion); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/popper.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/bootstrap.js?v=<?php echo rawurlencode((string) $bootstrapJsVersion); ?>"></script>
     <?php if ($usesMdbJavascript) { ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js?v=<?php echo rawurlencode((string) $mdbJsVersion); ?>"></script>
     <?php } ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js?v=<?php echo rawurlencode((string) $mainJsVersion); ?>"></script>
     <?php if ($usesDataTables) { ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js?v=<?php echo rawurlencode((string) $datatablesJsVersion); ?>"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <?php } ?>
     <?php if ($usesTinyMce) { ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/'); ?>tinymce/tinymce.min.js?v=<?php echo rawurlencode((string) $tinyMceVersion); ?>"></script>
     <?php } ?>
     <?php if($usesChart){ ?>
 
