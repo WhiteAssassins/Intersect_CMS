@@ -59,7 +59,7 @@
       </article>
       <article class="admin-overview-stat">
         <span class="admin-overview-stat__label">{status}</span>
-        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $changelogCount > 0 ? 'LIVE' : 'EMPTY'; ?></strong>
+        <strong class="admin-overview-stat__value admin-overview-stat__value--compact"><?php echo $changelogCount > 0 ? '{changelog_state_live}' : '{changelog_state_empty}'; ?></strong>
       </article>
     </div>
 
