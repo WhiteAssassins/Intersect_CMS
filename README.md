@@ -246,7 +246,7 @@ Si quieres usar toda la funcionalidad:
 
 ## Comunidad
 
-- Discord: <https://discord.gg/2XcYgevUws>
+- Discord: <https://discord.gg/2etuZpfr8z>
 - Twitter: <https://twitter.com/whiteassassinsr/>
 - Buy Me a Coffee: <https://www.buymeacoffee.com/whiteassassins>
 
