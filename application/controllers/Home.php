@@ -29,39 +29,39 @@ class Home extends MY_Controller
         $email = $this->getPostString('email');
 
         if ($user === '' || $pass === '' || $pass1 === '' || $email === '') {
-            $payload['sms'] = 'Complete todos los campos';
+            $payload['sms'] = $this->t('form_complete_all_fields', 'Complete all fields.');
             $this->respondJson($payload);
             return;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $payload['sms'] = 'Debe indicar un correo valido';
+            $payload['sms'] = $this->t('form_valid_email_required', 'Please enter a valid email address.');
             $this->respondJson($payload);
             return;
         }
 
         if (strlen($pass) < 6) {
-            $payload['sms'] = 'La contrasena debe tener al menos 6 caracteres';
+            $payload['sms'] = $this->t('password_min_length', 'Password must be at least 6 characters long.');
             $this->respondJson($payload);
             return;
         }
 
         if ($pass !== $pass1) {
-            $payload['sms'] = 'Sus contrasenas deben coincidir';
+            $payload['sms'] = $this->t('passwords_must_match', 'Passwords must match.');
             $this->respondJson($payload);
             return;
         }
 
         $response = $this->intersectauthservice->registerRemoteUser($user, $pass, $email);
         if (empty($response)) {
-            $payload['sms'] = 'No se pudo conectar con la API del juego';
+            $payload['sms'] = $this->t('auth_api_unreachable', 'Could not connect to the game API.');
             $this->respondJson($payload);
             return;
         }
 
         if (empty($response['ok'])) {
             $responseData = (array) ($response['body'] ?? array());
-            $payload['sms'] = $responseData['Message'] ?? ($response['message'] ?? 'No se pudo completar el registro');
+            $payload['sms'] = $responseData['Message'] ?? ($response['message'] ?? $this->t('register_failed_default', 'Could not complete registration.'));
             $this->respondJson($payload);
             return;
         }

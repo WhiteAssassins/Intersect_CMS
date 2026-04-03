@@ -16,7 +16,7 @@ class Callback extends MY_Controller
         $uuid = trim((string) $this->input->get('uuid', true));
 
         if ($remoteId === '' || $paymentId === '' || $uuid === '') {
-            show_error('Invalid payment callback.', 400);
+            show_error($this->t('payment_invalid_callback', 'Invalid payment callback.'), 400);
             return;
         }
 

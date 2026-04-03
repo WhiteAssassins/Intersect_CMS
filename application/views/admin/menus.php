@@ -13,13 +13,13 @@
         <?php echo cms_csrf_field(); ?>
         <div class="admin-helper-link">
           <a href="https://mdbootstrap.com/docs/b4/jquery/content/icons-list/index.html" target="_blank" rel="noopener noreferrer">{iconlist}</a>
-          <span>Example `fas fa-trophy`</span>
+          <span>{admin_menu_icon_example}</span>
         </div>
 
         <div class="admin-form-section">
           <div class="admin-form-section__heading">
-            <h3>Encabezado</h3>
-            <p>Texto principal que introduce los bloques destacados del home.</p>
+            <h3>{admin_menu_header_title}</h3>
+            <p>{admin_menu_header_text}</p>
           </div>
           <label class="admin-form-group">
             <span class="admin-form-group__label">{descriptionmenu}</span>
@@ -32,7 +32,7 @@
             <span class="admin-menu-card__index">01</span>
             <div class="admin-form-section__heading admin-form-section__heading--compact">
               <h3>{titlemenu1}</h3>
-              <p>Primer bloque destacado del home.</p>
+              <p>{admin_menu_card_one_text}</p>
             </div>
             <div class="admin-editor__grid">
               <label class="admin-form-group">
@@ -54,7 +54,7 @@
             <span class="admin-menu-card__index">02</span>
             <div class="admin-form-section__heading admin-form-section__heading--compact">
               <h3>{titlemenu2}</h3>
-              <p>Segundo bloque destacado del home.</p>
+              <p>{admin_menu_card_two_text}</p>
             </div>
             <div class="admin-editor__grid">
               <label class="admin-form-group">
@@ -76,7 +76,7 @@
             <span class="admin-menu-card__index">03</span>
             <div class="admin-form-section__heading admin-form-section__heading--compact">
               <h3>{titlemenu3}</h3>
-              <p>Tercer bloque destacado del home.</p>
+              <p>{admin_menu_card_three_text}</p>
             </div>
             <div class="admin-editor__grid">
               <label class="admin-form-group">

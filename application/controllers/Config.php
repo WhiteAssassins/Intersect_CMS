@@ -107,8 +107,13 @@ class Config extends MY_Controller
 
     public function changelang()
     {
+        $lang = $this->getPostString('lang');
+        if (!$this->Langs->isSupportedLanguage($lang)) {
+            $lang = 'es';
+        }
+
         $this->updateConfigAndRedirect(array(
-            'lang' => $this->getPostString('lang'),
+            'lang' => $lang,
         ));
     }
 
@@ -116,6 +121,7 @@ class Config extends MY_Controller
     {
         $configRow = $this->getConfigRow();
         $apiHealth = $this->intersectapiclient->getHealthSummary();
+        $apiStatus = $this->buildApiStatusLabels($apiHealth);
 
         return array(
             'config_color1' => $configRow['color1'] ?? '#000000',
@@ -124,12 +130,61 @@ class Config extends MY_Controller
             'config_download' => $configRow['download'] ?? '',
             'config_maintenance_enabled' => (int) ($configRow['mant'] ?? 0) === 1,
             'config_current_lang' => $configRow['lang'] ?? 'es',
+            'config_language_options' => $this->Langs->getLanguageOptions($configRow['lang'] ?? 'es'),
             'config_api_configured' => !empty($apiHealth['configured']) ? 1 : 0,
             'config_api_online' => !empty($apiHealth['online']) ? 1 : 0,
             'config_api_cached' => !empty($apiHealth['using_cache']) ? 1 : 0,
             'config_api_stale' => !empty($apiHealth['using_stale_cache']) ? 1 : 0,
             'config_api_last_sync' => $apiHealth['last_sync_label'] ?? 'N/A',
             'config_api_message' => $apiHealth['message'] ?? '',
+            'config_api_status_badge' => $apiStatus['badge'],
+            'config_api_status_text' => $apiStatus['detail'],
+            'config_api_status_readonly' => $apiStatus['status'],
+            'config_maintenance_label' => $this->t('status_on', 'ON'),
+            'config_maintenance_disabled_label' => $this->t('status_off', 'OFF'),
+            'config_download_enabled_label' => $this->t('status_on', 'ON'),
+            'config_download_disabled_label' => $this->t('status_off', 'OFF'),
+        );
+    }
+
+    private function buildApiStatusLabels(array $apiHealth)
+    {
+        if (empty($apiHealth['configured'])) {
+            return array(
+                'badge' => $this->t('api_state_off', 'OFF'),
+                'status' => $this->t('api_status_not_configured', 'Not configured'),
+                'detail' => $this->t('api_detail_not_configured', 'Not configured'),
+            );
+        }
+
+        if (!empty($apiHealth['online']) && empty($apiHealth['using_stale_cache'])) {
+            if (!empty($apiHealth['using_cache'])) {
+                return array(
+                    'badge' => $this->t('api_state_cache', 'CACHE'),
+                    'status' => $this->t('api_status_cache', 'Available from cache'),
+                    'detail' => $this->t('api_detail_cache', 'Available from cache'),
+                );
+            }
+
+            return array(
+                'badge' => $this->t('api_state_live', 'LIVE'),
+                'status' => $this->t('api_status_live', 'Available live'),
+                'detail' => $this->t('api_detail_live', 'Live response'),
+            );
+        }
+
+        if (!empty($apiHealth['using_stale_cache'])) {
+            return array(
+                'badge' => $this->t('api_state_stale', 'STALE'),
+                'status' => $this->t('api_status_stale', 'Stale cache fallback'),
+                'detail' => $this->t('api_detail_stale', 'Stale cache fallback'),
+            );
+        }
+
+        return array(
+            'badge' => $this->t('api_state_down', 'DOWN'),
+            'status' => $this->t('api_status_down', 'No response'),
+            'detail' => $this->t('api_detail_down', 'No response'),
         );
     }
 

@@ -59,7 +59,7 @@ class Userpanel extends MY_Controller
         if (!$this->session->userdata('login')) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'Debe iniciar sesion',
+                'sms' => $this->t('auth_login_required', 'You must be logged in.'),
             ));
             return;
         }
@@ -73,7 +73,7 @@ class Userpanel extends MY_Controller
         if (empty($userData) || !cms_password_verify($oldPassword, $userData['pass'] ?? '')) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'La contrasena actual no es correcta',
+                'sms' => $this->t('password_current_incorrect', 'Current password is incorrect.'),
             ));
             return;
         }
@@ -81,7 +81,7 @@ class Userpanel extends MY_Controller
         if ($newPassword === '' || $newPassword !== $confirmPassword) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'Las contrasenas no coinciden',
+                'sms' => $this->t('passwords_do_not_match', 'Passwords do not match.'),
             ));
             return;
         }
@@ -89,7 +89,7 @@ class Userpanel extends MY_Controller
         if (strlen($newPassword) < 6) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'La nueva contrasena debe tener al menos 6 caracteres',
+                'sms' => $this->t('new_password_min_length', 'New password must be at least 6 characters long.'),
             ));
             return;
         }
@@ -97,7 +97,7 @@ class Userpanel extends MY_Controller
         if ($oldPassword === $newPassword) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'La nueva contrasena debe ser distinta a la actual',
+                'sms' => $this->t('new_password_must_differ', 'New password must be different from the current one.'),
             ));
             return;
         }
@@ -108,7 +108,7 @@ class Userpanel extends MY_Controller
             if (empty($remotePasswordChange['ok'])) {
                 $this->respondJson(array(
                     'status' => 0,
-                    'sms' => $remotePasswordChange['message'] ?? 'No fue posible actualizar la contrasena en Intersect',
+                    'sms' => $remotePasswordChange['message'] ?? $this->t('password_intersect_update_failed', 'Could not update the password in Intersect.'),
                 ));
                 return;
             }
@@ -132,7 +132,7 @@ class Userpanel extends MY_Controller
         if (!$this->session->userdata('login')) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'Debe iniciar sesion',
+                'sms' => $this->t('auth_login_required', 'You must be logged in.'),
             ));
             return;
         }
@@ -146,7 +146,7 @@ class Userpanel extends MY_Controller
         if ($text === '' || $title === '' || $ticketType === '' || empty($userRow)) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'Todos los campos son obligatorios',
+                'sms' => $this->t('form_all_fields_required', 'All fields are required.'),
             ));
             return;
         }

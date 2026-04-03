@@ -46,7 +46,7 @@
         </form>
       <?php } else { ?>
         <div class="product-detail__purchase">
-          <p class="product-detail__description">Inicia sesion para comprar este producto y entregarlo a uno de tus personajes.</p>
+          <p class="product-detail__description">{productdetail_login_required}</p>
           <div class="product-detail__actions">
             <a href="<?php echo base_url('shop'); ?>" class="admin-button admin-button--ghost">{return}</a>
             <button type="button" class="admin-button admin-button--primary btn_modal_login">

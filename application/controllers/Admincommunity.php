@@ -25,7 +25,7 @@ class Admincommunity extends MY_Controller
                 'email' => $email,
                 'rol' => 1,
             ));
-            $this->logAdminAction('Cuenta administrativa creada', $user);
+            $this->logAdminAction($this->t('log_admin_account_created', 'Admin account created'), $user);
         }
 
         $this->redirectTo('admin/adminaccounts');
@@ -40,7 +40,7 @@ class Admincommunity extends MY_Controller
 
         if ($id > 0 && !empty($targetRow) && ($targetRow['user'] ?? '') !== $currentAdmin && $adminCount > 1) {
             $this->db->delete('users', array('id' => $id));
-            $this->logAdminAction('Cuenta administrativa eliminada');
+            $this->logAdminAction($this->t('log_admin_account_deleted', 'Admin account deleted'));
         }
 
         $this->redirectTo('admin/adminaccounts');
@@ -64,7 +64,7 @@ class Admincommunity extends MY_Controller
             'type' => $lastType === 0 ? 1 : 0,
         ));
 
-        $this->logAdminAction('Entrada de changelog creada');
+        $this->logAdminAction($this->t('log_changelog_created', 'Changelog entry created'));
         $this->redirectTo('admin/changelog');
     }
 
@@ -73,7 +73,7 @@ class Admincommunity extends MY_Controller
         $id = (int) $this->input->post('id');
         if ($id > 0) {
             $this->db->delete('changelog', array('id' => $id));
-            $this->logAdminAction('Entrada de changelog eliminada');
+            $this->logAdminAction($this->t('log_changelog_deleted', 'Changelog entry deleted'));
         }
 
         $this->redirectTo('admin/changelog');

@@ -19,8 +19,8 @@ class Admincommands extends MY_Controller
         }
 
         $this->completeCommand(
-            $this->intersectadminapi->sendGlobalMessage('Server: ' . $message),
-            'Mensaje Global'
+            $this->intersectadminapi->sendGlobalMessage($this->serverMessagePrefix() . $message),
+            $this->t('admin_action_global_message', 'Global Message')
         );
     }
 
@@ -34,8 +34,8 @@ class Admincommands extends MY_Controller
         }
 
         $this->completeCommand(
-            $this->intersectadminapi->sendDirectMessage($user, 'Server: ' . $message),
-            'Mensaje Directo',
+            $this->intersectadminapi->sendDirectMessage($user, $this->serverMessagePrefix() . $message),
+            $this->t('admin_action_direct_message', 'Direct Message'),
             $user
         );
     }
@@ -50,8 +50,8 @@ class Admincommands extends MY_Controller
         }
 
         $this->completeCommand(
-            $this->intersectadminapi->sendProximityMessage($map, 'Server: ' . $message),
-            'Mensaje de Proximidad',
+            $this->intersectadminapi->sendProximityMessage($map, $this->serverMessagePrefix() . $message),
+            $this->t('admin_action_proximity_message', 'Proximity Message'),
             $map
         );
     }
@@ -73,7 +73,7 @@ class Admincommands extends MY_Controller
                 'moderator' => $this->session->userdata('user'),
                 'ip' => false,
             )),
-            'Ban',
+            $this->t('admin_action_ban', 'Ban'),
             $user
         );
     }
@@ -88,7 +88,7 @@ class Admincommands extends MY_Controller
 
         $this->completeCommand(
             $this->intersectadminapi->moderateUser($user, 'unban'),
-            'Desbaneado',
+            $this->t('admin_action_unban', 'Unban'),
             $user
         );
     }
@@ -110,7 +110,7 @@ class Admincommands extends MY_Controller
                 'moderator' => $this->session->userdata('user'),
                 'ip' => false,
             )),
-            'Muteado',
+            $this->t('admin_action_mute', 'Mute'),
             $user
         );
     }
@@ -125,7 +125,7 @@ class Admincommands extends MY_Controller
 
         $this->completeCommand(
             $this->intersectadminapi->moderateUser($user, 'unmute'),
-            'Desmuteado',
+            $this->t('admin_action_unmute', 'Unmute'),
             $user
         );
     }
@@ -140,7 +140,7 @@ class Admincommands extends MY_Controller
 
         $this->completeCommand(
             $this->intersectadminapi->moderateUser($user, 'kick'),
-            'Expulsado',
+            $this->t('admin_action_kick', 'Kick'),
             $user
         );
     }
@@ -155,7 +155,7 @@ class Admincommands extends MY_Controller
 
         $this->completeCommand(
             $this->intersectadminapi->moderateUser($user, 'kill'),
-            'Asesinado',
+            $this->t('admin_action_kill', 'Kill'),
             $user
         );
     }
@@ -171,16 +171,21 @@ class Admincommands extends MY_Controller
 
         $this->completeCommand(
             $this->intersectadminapi->warpUserToMap($user, $map),
-            'Teletransportado',
+            $this->t('admin_action_teleport', 'Teleport'),
             $user
         );
     }
 
-    private function errorPayload($message = 'Complete todos los campos')
+    private function serverMessagePrefix()
+    {
+        return $this->t('server_message_prefix', 'Server') . ': ';
+    }
+
+    private function errorPayload($message = null)
     {
         return array(
             'status' => 0,
-            'sms' => $message,
+            'sms' => $message ?: $this->t('form_complete_all_fields', 'Complete all fields.'),
         );
     }
 
@@ -192,7 +197,7 @@ class Admincommands extends MY_Controller
             return;
         }
 
-        $message = $result['message'] ?? 'No fue posible completar la accion.';
+        $message = $result['message'] ?? $this->t('admin_action_failed_default', 'Could not complete the action.');
         $this->respondJson($this->errorPayload($message));
     }
 }

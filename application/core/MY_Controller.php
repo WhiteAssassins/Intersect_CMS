@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+    private $languageDataCache;
+
     protected function respondJson(array $payload, $statusCode = 200)
     {
         $this->output
@@ -38,9 +40,34 @@ class MY_Controller extends CI_Controller
 
     protected function getLanguageData()
     {
-        $this->load->model('Langs');
+        if (is_array($this->languageDataCache)) {
+            return $this->languageDataCache;
+        }
 
-        return $this->Langs->current();
+        $this->load->model('Langs');
+        $languageData = $this->Langs->current();
+        $currentLanguage = $this->Langs->getLanguageMeta($languageData['site_lang'] ?? null);
+
+        $languageData['language_options'] = $this->Langs->getLanguageOptions($currentLanguage['code']);
+        $languageData['current_language_code'] = $currentLanguage['code'];
+        $languageData['current_language_short'] = $currentLanguage['short'];
+        $languageData['current_language_label'] = $currentLanguage['label'];
+        $languageData['current_language_direction'] = $currentLanguage['direction'];
+        $languageData['current_language_is_rtl'] = $currentLanguage['is_rtl'] ? 1 : 0;
+
+        $this->languageDataCache = $languageData;
+        return $this->languageDataCache;
+    }
+
+    protected function t($key, $default = '')
+    {
+        $languageData = $this->getLanguageData();
+
+        if (isset($languageData[$key]) && $languageData[$key] !== '') {
+            return $languageData[$key];
+        }
+
+        return $default;
     }
 
     protected function redirectToMaintenanceIfNeeded()

@@ -33,7 +33,7 @@ class Admincontent extends MY_Controller
         );
 
         $this->newss->insert($record);
-        $this->logAdminAction('Noticia creada');
+        $this->logAdminAction($this->t('log_news_created', 'News created'));
         $this->redirectTo('admin/news');
     }
 
@@ -42,7 +42,7 @@ class Admincontent extends MY_Controller
         $id = (int) $this->input->post('id');
         if ($id > 0) {
             $this->db->delete('news', array('id' => $id));
-            $this->logAdminAction('Noticia eliminada');
+            $this->logAdminAction($this->t('log_news_deleted', 'News deleted'));
         }
 
         $this->redirectTo('admin/news');
@@ -71,14 +71,14 @@ class Admincontent extends MY_Controller
             'txt' => cms_sanitize_rich_text($this->input->post('txt')),
         ));
 
-        $this->logAdminAction('Noticia actualizada');
+        $this->logAdminAction($this->t('log_news_updated', 'News updated'));
         $this->redirectTo('admin/news');
     }
 
     public function statusnews()
     {
         $this->toggleStatus('news', (int) $this->input->post('id'));
-        $this->logAdminAction('Estado de noticia actualizado');
+        $this->logAdminAction($this->t('log_news_status_updated', 'News status updated'));
         $this->redirectTo('admin/news');
     }
 
@@ -103,7 +103,7 @@ class Admincontent extends MY_Controller
         );
 
         $this->shops->insert($record);
-        $this->logAdminAction('Producto creado');
+        $this->logAdminAction($this->t('log_product_created', 'Product created'));
         $this->redirectTo('admin/shop');
     }
 
@@ -112,7 +112,7 @@ class Admincontent extends MY_Controller
         $id = (int) $this->input->post('id');
         if ($id > 0) {
             $this->db->delete('products', array('id' => $id));
-            $this->logAdminAction('Producto eliminado');
+            $this->logAdminAction($this->t('log_product_deleted', 'Product deleted'));
         }
 
         $this->redirectTo('admin/shop');
@@ -147,14 +147,14 @@ class Admincontent extends MY_Controller
             'ingameid' => $this->getPostString('ingameid'),
         ));
 
-        $this->logAdminAction('Producto actualizado');
+        $this->logAdminAction($this->t('log_product_updated', 'Product updated'));
         $this->redirectTo('admin/shop');
     }
 
     public function statusproduct()
     {
         $this->toggleStatus('products', (int) $this->input->post('id'));
-        $this->logAdminAction('Estado de producto actualizado');
+        $this->logAdminAction($this->t('log_product_status_updated', 'Product status updated'));
         $this->redirectTo('admin/shop');
     }
 

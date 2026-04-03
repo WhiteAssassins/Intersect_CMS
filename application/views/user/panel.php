@@ -1,9 +1,9 @@
 <main class="userpanel-shell">
   <section class="userpanel-hero">
     <div class="container">
-      <div class="userpanel-hero__grid">
-        <div class="userpanel-hero__copy">
-          <span class="userpanel-hero__eyebrow">Intersect CMS</span>
+        <div class="userpanel-hero__grid">
+          <div class="userpanel-hero__copy">
+          <span class="userpanel-hero__eyebrow">{site_title}</span>
           <h1 class="userpanel-hero__title"><?php echo html_escape($panel_username); ?></h1>
           <div class="userpanel-hero__balance">
             <span class="userpanel-hero__balance-label">{balanceavailable}</span>
@@ -87,11 +87,11 @@
 
             <div class="userpanel-meta">
               <div class="userpanel-meta__row">
-                <span>OS</span>
+                <span>{userpanel_os_label}</span>
                 <strong><?php echo html_escape($panel_os); ?></strong>
               </div>
               <div class="userpanel-meta__row">
-                <span>IP</span>
+                <span>{userpanel_ip_label}</span>
                 <strong><?php echo html_escape($panel_ip); ?></strong>
               </div>
               <div class="userpanel-meta__row">

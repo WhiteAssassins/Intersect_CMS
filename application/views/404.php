@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="<?php echo html_escape($current_language_code ?? 'es'); ?>" dir="<?php echo html_escape($current_language_direction ?? 'ltr'); ?>">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?php echo html_escape($this->t('notfound_page_title', 'Page not found')); ?></title>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Dosis:300,400,500');
 
@@ -287,7 +293,8 @@ li a:hover {
     }
 }
 </style>
-<body class="bg-purple">
+</head>
+<body class="bg-purple<?php echo !empty($current_language_is_rtl) ? ' site-shell--rtl' : ''; ?>">
         
         <div class="stars">
             <div class="custom-navbar">
@@ -298,8 +305,8 @@ li a:hover {
             </div>
             <div class="central-body">
                 <p style="color:white; font-size:130px;">404</p>
-                <p style="color:white; font-size:20px;">Creo que te Perdiste en el Espacio</p>
-                <a href="<?php echo base_url(); ?>" class="btn-go-home">Vuelve a la Tierra</a>
+                <p style="color:white; font-size:20px;"><?php echo html_escape($this->t('notfound_title', 'Looks like you got lost in space')); ?></p>
+                <a href="<?php echo base_url(); ?>" class="btn-go-home"><?php echo html_escape($this->t('notfound_back_home', 'Return to home')); ?></a>
             </div>
             <div class="objects">
                 <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
@@ -323,3 +330,4 @@ li a:hover {
         </div>
 
     </body>
+</html>

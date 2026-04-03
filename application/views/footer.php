@@ -40,7 +40,7 @@
     <div class="site-footer__bottom-shell">
       <span>{site_title} &copy; {current_year} {copyright}</span>
       <span class="site-footer__divider"></span>
-      <span>AEWhite Devs</span>
+      <span>{site_footer_credit}</span>
     </div>
   </div>
 </footer>
@@ -58,7 +58,6 @@ if ($currentMethod === '') {
 $isAdminUser = (int) $this->session->userdata('rol') === 1;
 $usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
-$usesTimeline = $currentController === 'changelog' || ($currentController === 'admin' && $currentMethod === 'changelog');
 $usesTinyMce = $isAdminUser && (
     ($currentController === 'admin' && in_array($currentMethod, array('news', 'editnews'), true))
     || ($currentController === 'config' && in_array($currentMethod, array('legal', 'terms', 'privacity'), true))
@@ -73,9 +72,6 @@ $usesMdbJavascript = $isAdminUser;
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/mdb.min.js"></script>
     <?php } ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/main.js"></script>
-    <?php if ($usesTimeline) { ?>
-    <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/timeline.min.js"></script>
-    <?php } ?>
     <?php if ($usesDataTables) { ?>
     <script type="text/javascript" src="<?php echo base_url('public/'); ?>js/datatables2.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
@@ -95,10 +91,10 @@ $usesMdbJavascript = $isAdminUser;
     var myLineChart = new Chart(ctxL, {
       type: 'line',
       data: {
-        labels: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+        labels: ["{month_january}","{month_february}","{month_march}","{month_april}","{month_may}","{month_june}","{month_july}","{month_august}","{month_september}","{month_october}","{month_november}","{month_december}"],
         datasets: [
           {
-            label: "Visitas Mensuales",
+            label: "{chart_monthly_visits}",
             data: [{visits_january}, {visits_february}, {visits_march}, {visits_april}, {visits_may}, {visits_june}, {visits_july}, {visits_august}, {visits_september}, {visits_october}, {visits_november}, {visits_december}],
             backgroundColor: gradientFill,
             borderColor: [

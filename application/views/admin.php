@@ -73,20 +73,8 @@ $systemMetrics = array(
       <span class="admin-header__status-label">{site_title}</span>
       <strong class="admin-header__status-value"><?php echo $dashboard_version; ?></strong>
       <span class="admin-header__status-meta">{version}</span>
-      <span class="admin-header__status-meta">
-        API:
-        <?php
-        if (!$dashboard_api_configured) {
-            echo 'no configurada';
-        } elseif ($dashboard_api_online && !$dashboard_api_stale) {
-            echo $dashboard_api_cached ? 'cache OK' : 'en vivo';
-        } elseif ($dashboard_api_stale) {
-            echo 'cache degradada';
-        } else {
-            echo 'sin respuesta';
-        }
-        ?>
-      </span>
+      <span class="admin-header__status-meta">{api}: <?php echo html_escape($dashboard_api_status_badge); ?></span>
+      <span class="admin-header__status-meta"><?php echo html_escape($dashboard_api_status_text); ?></span>
     </div>
   </section>
 

@@ -26,7 +26,7 @@ class Shop extends MY_Controller
         if (!$this->session->userdata('login')) {
             $this->respondJson(array(
                 'status' => 0,
-                'sms' => 'Debe iniciar sesion para comprar.',
+                'sms' => $this->t('shop_login_required', 'You must be logged in to purchase.'),
             ));
             return;
         }

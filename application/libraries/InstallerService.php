@@ -52,6 +52,7 @@ class InstallerService
 
     public function getRequirementChecks()
     {
+        $langCode = $this->getLanguageCode();
         $configDirectory = APPPATH . 'config';
         $cacheDirectory = APPPATH . 'cache';
         $vendorAutoload = FCPATH . 'vendor/autoload.php';
@@ -59,39 +60,47 @@ class InstallerService
 
         return array(
             array(
-                'label' => 'PHP 8.1+',
+                'label' => $this->t('installer_requirement_php_label', 'PHP 8.1+', $langCode),
                 'status' => version_compare(PHP_VERSION, '8.1.0', '>='),
-                'detail' => 'Current: ' . PHP_VERSION,
+                'detail' => sprintf($this->t('installer_requirement_php_detail', 'Current: %s', $langCode), PHP_VERSION),
             ),
             array(
-                'label' => 'MySQLi extension',
+                'label' => $this->t('installer_requirement_mysqli_label', 'MySQLi extension', $langCode),
                 'status' => extension_loaded('mysqli'),
-                'detail' => extension_loaded('mysqli') ? 'Enabled' : 'Required for database install',
+                'detail' => extension_loaded('mysqli')
+                    ? $this->t('installer_requirement_enabled', 'Enabled', $langCode)
+                    : $this->t('installer_requirement_mysqli_missing', 'Required for database install', $langCode),
             ),
             array(
-                'label' => 'JSON extension',
+                'label' => $this->t('installer_requirement_json_label', 'JSON extension', $langCode),
                 'status' => extension_loaded('json'),
-                'detail' => extension_loaded('json') ? 'Enabled' : 'Required for installer state',
+                'detail' => extension_loaded('json')
+                    ? $this->t('installer_requirement_enabled', 'Enabled', $langCode)
+                    : $this->t('installer_requirement_json_missing', 'Required for installer state', $langCode),
             ),
             array(
-                'label' => 'Config directory writable',
+                'label' => $this->t('installer_requirement_config_label', 'Config directory writable', $langCode),
                 'status' => $this->canWriteToPath($configDirectory),
                 'detail' => $configDirectory,
             ),
             array(
-                'label' => 'Cache directory writable',
+                'label' => $this->t('installer_requirement_cache_label', 'Cache directory writable', $langCode),
                 'status' => $this->canWriteToPath($cacheDirectory),
                 'detail' => $cacheDirectory,
             ),
             array(
-                'label' => 'Composer dependencies',
+                'label' => $this->t('installer_requirement_composer_label', 'Composer dependencies', $langCode),
                 'status' => is_file($vendorAutoload),
-                'detail' => is_file($vendorAutoload) ? 'vendor/autoload.php found' : 'Run composer install first',
+                'detail' => is_file($vendorAutoload)
+                    ? $this->t('installer_requirement_composer_ok', 'vendor/autoload.php found', $langCode)
+                    : $this->t('installer_requirement_composer_missing', 'Run composer install first', $langCode),
             ),
             array(
-                'label' => 'Database schema dump',
+                'label' => $this->t('installer_requirement_schema_label', 'Database schema dump', $langCode),
                 'status' => is_file($sqlDump),
-                'detail' => is_file($sqlDump) ? 'intersec.sql found' : 'intersec.sql is missing',
+                'detail' => is_file($sqlDump)
+                    ? $this->t('installer_requirement_schema_ok', 'intersec.sql found', $langCode)
+                    : $this->t('installer_requirement_schema_missing', 'intersec.sql is missing', $langCode),
             ),
         );
     }
@@ -113,7 +122,7 @@ class InstallerService
             if (!$requirement['status']) {
                 return array(
                     'ok' => false,
-                    'errors' => array('Server requirements are not ready for installation.'),
+                    'errors' => array($this->t('installer_error_requirements', 'Server requirements are not ready for installation.', $data['default_lang'])),
                 );
             }
         }
@@ -215,35 +224,35 @@ class InstallerService
         $errors = array();
 
         if (!filter_var($data['base_url'], FILTER_VALIDATE_URL)) {
-            $errors[] = 'Base URL is not valid.';
+            $errors[] = $this->t('installer_error_base_url', 'Base URL is not valid.', $data['default_lang']);
         }
 
         if ($data['db_host'] === '' || $data['db_name'] === '' || $data['db_user'] === '') {
-            $errors[] = 'Database host, name and user are required.';
+            $errors[] = $this->t('installer_error_db_required', 'Database host, name and user are required.', $data['default_lang']);
         }
 
         if (!ctype_digit((string) $data['db_port'])) {
-            $errors[] = 'Database port must be numeric.';
+            $errors[] = $this->t('installer_error_db_port', 'Database port must be numeric.', $data['default_lang']);
         }
 
         if ($data['admin_user'] === '') {
-            $errors[] = 'Admin username is required.';
+            $errors[] = $this->t('installer_error_admin_user', 'Admin username is required.', $data['default_lang']);
         }
 
         if (!filter_var($data['admin_email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Admin email is not valid.';
+            $errors[] = $this->t('installer_error_admin_email', 'Admin email is not valid.', $data['default_lang']);
         }
 
         if (strlen($data['admin_pass']) < 6) {
-            $errors[] = 'Admin password must contain at least 6 characters.';
+            $errors[] = $this->t('installer_error_admin_password_length', 'Admin password must contain at least 6 characters.', $data['default_lang']);
         }
 
         if ($data['admin_pass'] !== $data['admin_pass_confirm']) {
-            $errors[] = 'Admin passwords do not match.';
+            $errors[] = $this->t('installer_error_admin_password_match', 'Admin passwords do not match.', $data['default_lang']);
         }
 
         if (!preg_match('/^[a-z]{2}$/', $data['default_lang'])) {
-            $errors[] = 'Default language is not valid.';
+            $errors[] = $this->t('installer_error_default_language', 'Default language is not valid.', $data['default_lang']);
         }
 
         return $errors;
@@ -269,7 +278,10 @@ class InstallerService
         if ($mysqli->connect_errno) {
             return array(
                 'ok' => false,
-                'error' => 'Database connection failed: ' . $mysqli->connect_error,
+                'error' => sprintf(
+                    $this->t('installer_error_db_connection', 'Database connection failed: %s', $data['default_lang']),
+                    $mysqli->connect_error
+                ),
             );
         }
 
@@ -287,12 +299,12 @@ class InstallerService
         $createSql = "CREATE DATABASE IF NOT EXISTS `{$dbName}` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci";
 
         if (!$mysqli->query($createSql) && !$mysqli->select_db($data['db_name'])) {
-            $error = 'Unable to create or select the target database.';
+            $error = $this->t('installer_error_db_create_or_select', 'Unable to create or select the target database.', $data['default_lang']);
             return false;
         }
 
         if (!$mysqli->select_db($data['db_name'])) {
-            $error = 'Unable to select the target database.';
+            $error = $this->t('installer_error_db_select', 'Unable to select the target database.', $data['default_lang']);
             return false;
         }
 
@@ -320,7 +332,7 @@ class InstallerService
         $sql = @file_get_contents($path);
 
         if ($sql === false) {
-            $error = 'The database schema file could not be read.';
+            $error = $this->t('installer_error_schema_read', 'The database schema file could not be read.', $this->getLanguageCode());
             return false;
         }
 
@@ -336,7 +348,10 @@ class InstallerService
             }
 
             if (!$mysqli->query($statement)) {
-                $error = 'Schema import failed: ' . $mysqli->error;
+                $error = sprintf(
+                    $this->t('installer_error_schema_import', 'Schema import failed: %s', $this->getLanguageCode()),
+                    $mysqli->error
+                );
                 return false;
             }
         }
@@ -358,7 +373,10 @@ class InstallerService
         }
 
         if (!$mysqli->query($sql)) {
-            $error = 'Unable to save project configuration: ' . $mysqli->error;
+            $error = sprintf(
+                $this->t('installer_error_config_save', 'Unable to save project configuration: %s', $data['default_lang']),
+                $mysqli->error
+            );
             return false;
         }
 
@@ -381,7 +399,10 @@ class InstallerService
         }
 
         if (!$mysqli->query($sql)) {
-            $error = 'Unable to create the admin account: ' . $mysqli->error;
+            $error = sprintf(
+                $this->t('installer_error_admin_create', 'Unable to create the admin account: %s', $data['default_lang']),
+                $mysqli->error
+            );
             return false;
         }
 
@@ -429,11 +450,32 @@ class InstallerService
         $encoded = json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         if ($encoded === false || @file_put_contents($this->statePath, $encoded) === false) {
-            $error = 'Unable to write installer state file. Check application/config permissions.';
+            $error = $this->t(
+                'installer_error_state_write',
+                'Unable to write installer state file. Check application/config permissions.',
+                $data['default_lang']
+            );
             return false;
         }
 
         return true;
+    }
+
+    protected function getLanguageCode($fallback = 'es')
+    {
+        $langCode = (string) $this->CI->session->userdata('installer_lang');
+        if ($langCode === '') {
+            $langCode = (string) $fallback;
+        }
+
+        $this->CI->load->model('Langs');
+        return $this->CI->Langs->isSupportedLanguage($langCode) ? $langCode : 'es';
+    }
+
+    protected function t($key, $default, $langCode = null)
+    {
+        $this->CI->load->model('Langs');
+        return $this->CI->Langs->getText($key, $this->getLanguageCode($langCode ?: 'es'), $default);
     }
 
     protected function detectBaseUrl()

@@ -110,6 +110,7 @@ class Admin extends MY_Controller
         $players = (array) $this->Apiplayers->player();
         $metrics = $this->systemmetrics->collect();
         $apiHealth = $this->intersectapiclient->getHealthSummary();
+        $apiStatus = $this->buildApiStatusLabels($apiHealth);
 
         return array_merge($metrics, array(
             'dashboard_total_users' => (int) ($users['Total'] ?? 0),
@@ -123,7 +124,38 @@ class Admin extends MY_Controller
             'dashboard_api_stale' => !empty($apiHealth['using_stale_cache']) ? 1 : 0,
             'dashboard_api_last_sync' => $apiHealth['last_sync_label'] ?? 'N/A',
             'dashboard_api_message' => $apiHealth['message'] ?? '',
+            'dashboard_api_status_badge' => $apiStatus['badge'],
+            'dashboard_api_status_text' => $apiStatus['detail'],
         ));
+    }
+
+    private function buildApiStatusLabels(array $apiHealth)
+    {
+        if (empty($apiHealth['configured'])) {
+            return array(
+                'badge' => $this->t('api_state_off', 'OFF'),
+                'detail' => $this->t('api_detail_not_configured', 'Not configured'),
+            );
+        }
+
+        if (!empty($apiHealth['online']) && empty($apiHealth['using_stale_cache'])) {
+            return array(
+                'badge' => !empty($apiHealth['using_cache']) ? $this->t('api_state_cache', 'CACHE') : $this->t('api_state_live', 'LIVE'),
+                'detail' => !empty($apiHealth['using_cache']) ? $this->t('api_detail_cache', 'Available from cache') : $this->t('api_detail_live', 'Live response'),
+            );
+        }
+
+        if (!empty($apiHealth['using_stale_cache'])) {
+            return array(
+                'badge' => $this->t('api_state_stale', 'STALE'),
+                'detail' => $this->t('api_detail_stale', 'Stale cache fallback'),
+            );
+        }
+
+        return array(
+            'badge' => $this->t('api_state_down', 'DOWN'),
+            'detail' => $this->t('api_detail_down', 'No response'),
+        );
     }
 
     private function buildAdminNewsRows()
@@ -186,11 +218,8 @@ class Admin extends MY_Controller
         $items = array();
 
         foreach ($rows as $row) {
-            $isInverted = (int) ($row['type'] ?? 0) !== 0;
             $items[] = array(
                 'id' => $row['id'] ?? 0,
-                'timeline_item_class' => $isInverted ? 'timeline-inverted' : '',
-                'content_alignment_class' => $isInverted ? 'mr-xl-2' : 'ml-2',
                 'title' => $row['title'] ?? '',
                 'text' => $row['txt'] ?? '',
             );

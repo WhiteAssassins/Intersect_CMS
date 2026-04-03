@@ -24,19 +24,19 @@ class Recover extends MY_Controller {
 	public function rec(){
 		$user = $this->getPostString('user');
         if ($user === '') {
-            $this->session->set_flashdata('recover_message', 'Debe indicar un usuario.');
+            $this->session->set_flashdata('recover_message', $this->t('recover_username_required', 'Please enter a username.'));
             $this->session->set_flashdata('recover_message_type', 'error');
             $this->redirectTo('recover');
         }
 
         $result = $this->intersectapiclient->requestPasswordReset($user);
         if (empty($result['ok'])) {
-            $this->session->set_flashdata('recover_message', $result['message'] ?: 'No se pudo iniciar la recuperacion de contrasena.');
+            $this->session->set_flashdata('recover_message', $result['message'] ?: $this->t('recover_start_failed', 'Could not start password recovery.'));
             $this->session->set_flashdata('recover_message_type', 'error');
             $this->redirectTo('recover');
         }
 
-        $this->session->set_flashdata('recover_message', 'Si el usuario existe y el servidor SMTP esta configurado, se ha enviado el correo de recuperacion.');
+        $this->session->set_flashdata('recover_message', $this->t('recover_email_sent', 'If the user exists and SMTP is configured, the recovery email has been sent.'));
         $this->session->set_flashdata('recover_message_type', 'success');
         $this->redirectTo('recover');
 	}

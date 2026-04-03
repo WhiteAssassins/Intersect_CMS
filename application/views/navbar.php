@@ -41,19 +41,15 @@
       <div class="site-nav__actions">
         <div class="nav-item dropdown site-nav__dropdown">
           <a class="nav-link dropdown-toggle site-nav__link site-nav__link--dropdown" id="siteNavLanguage" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">{language}</a>
+            aria-haspopup="true" aria-expanded="false">
+            {language} - <?php echo html_escape($current_language_short); ?>
+          </a>
           <div class="dropdown-menu dropdown-menu-right site-nav__menu" aria-labelledby="siteNavLanguage">
-            <a class="dropdown-item" href="<?php echo base_url('langs/es'); ?>">ES</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/en'); ?>">EN</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/tr'); ?>">TR</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/jp'); ?>">JP</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/de'); ?>">DE</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/ru'); ?>">RU</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/zh'); ?>">ZH</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/fr'); ?>">FR</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/pt'); ?>">PT</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/hi'); ?>">HI</a>
-            <a class="dropdown-item" href="<?php echo base_url('langs/ar'); ?>">AR</a>
+            <?php foreach ($language_options as $languageOption) { ?>
+              <a class="dropdown-item<?php echo $languageOption['is_current'] ? ' active' : ''; ?>" href="<?php echo html_escape($languageOption['url']); ?>">
+                <?php echo html_escape($languageOption['short'] . ' - ' . $languageOption['label']); ?>
+              </a>
+            <?php } ?>
           </div>
         </div>
 

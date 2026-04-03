@@ -5,7 +5,7 @@
         <div>
           <span class="admin-section__eyebrow">{admin_sidebar_content}</span>
           <h2 class="admin-panel__title">{editproduct}</h2>
-          <p class="admin-section__text">Ajusta la presentacion del item, su precio y los identificadores necesarios para entregarlo dentro del juego.</p>
+          <p class="admin-section__text">{admin_editproduct_text}</p>
         </div>
       </div>
       <form class="admin-editor__form" action="<?php echo base_url('admin/editproducts'); ?>" method="POST">
@@ -13,8 +13,8 @@
         <input type="hidden" name="id" value="<?php echo $product_id; ?>">
         <div class="admin-form-section">
           <div class="admin-form-section__heading">
-            <h3>Basico</h3>
-            <p>Informacion visible para el usuario dentro de la tienda del sitio.</p>
+            <h3>{admin_editproduct_basic_title}</h3>
+            <p>{admin_editproduct_basic_text}</p>
           </div>
           <div class="admin-editor__grid">
             <label class="admin-form-group">
@@ -37,8 +37,8 @@
         </div>
         <div class="admin-form-section">
           <div class="admin-form-section__heading">
-            <h3>Animaciones</h3>
-            <p>Campos de referencia para los efectos visuales asociados a este item.</p>
+            <h3>{admin_editproduct_animation_title}</h3>
+            <p>{admin_editproduct_animation_text}</p>
           </div>
           <div class="admin-editor__grid">
             <label class="admin-form-group">

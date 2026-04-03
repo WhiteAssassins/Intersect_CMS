@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{site_lang}" style="height:100% ;" dir="ltr">
+<html lang="{site_lang}" style="height:100% ;" dir="<?php echo html_escape($current_language_direction); ?>">
 <?php
 $currentController = strtolower((string) $this->uri->segment(1));
 $currentMethod = strtolower((string) $this->uri->segment(2));
@@ -13,7 +13,6 @@ if ($currentMethod === '') {
 
 $usesDataTables = in_array($currentController, array('users', 'players', 'playersonline', 'logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
-$usesTimeline = $currentController === 'changelog' || ($currentController === 'admin' && $currentMethod === 'changelog');
 $usesMdbCss = $currentController === 'admin' || $currentController === 'config' || $currentController === 'logs' || $currentController === 'installer';
 $analyticsId = trim((string) ('{analytics_id}'));
 $hasAnalyticsId = $analyticsId !== '' && preg_match('/^\{.+\}$/', $analyticsId) !== 1;
@@ -52,9 +51,6 @@ $isLoggedIn = !empty($this->session->userdata('login'));
     <link rel="manifest" href="<?php echo base_url('public/favicon'); ?>/manifest.json">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>fontawesome/css/solid.css">
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/fa.css">
-    <?php if ($usesTimeline) { ?>
-    <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/timeline.min.css">
-    <?php } ?>
     <?php if ($usesDataTables) { ?>
     <link rel="stylesheet" href="<?php echo base_url('public/'); ?>css/datatables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
@@ -75,7 +71,7 @@ $isLoggedIn = !empty($this->session->userdata('login'));
 </script>
 <?php } ?>
 </head>
-<body class="site-shell">
+<body class="site-shell<?php echo !empty($current_language_is_rtl) ? ' site-shell--rtl' : ''; ?>">
 <?php if (!$isLoggedIn) { ?>
 <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

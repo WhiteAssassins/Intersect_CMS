@@ -14,7 +14,7 @@ class Ok extends MY_Controller
     {
         $uuid = trim((string) $this->input->get('transaction_uuid', true));
         if ($uuid === '') {
-            show_error('Invalid payment transaction.', 400);
+            show_error($this->t('payment_invalid_transaction', 'Invalid payment transaction.'), 400);
             return;
         }
 
