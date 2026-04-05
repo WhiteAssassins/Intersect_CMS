@@ -11,7 +11,7 @@ if ($currentMethod === '') {
     $currentMethod = $currentController === 'admin' ? 'index' : '';
 }
 
-$usesDataTables = in_array($currentController, array('playersonline', 'logs'), true)
+$usesDataTables = in_array($currentController, array('logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
 $usesMdbCss = $currentController === 'admin' || $currentController === 'config' || $currentController === 'logs' || $currentController === 'installer';
 $analyticsId = trim((string) ('{analytics_id}'));

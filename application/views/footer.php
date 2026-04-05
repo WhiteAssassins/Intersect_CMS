@@ -56,7 +56,7 @@ if ($currentMethod === '') {
 }
 
 $isAdminUser = (int) $this->session->userdata('rol') === 1;
-$usesDataTables = in_array($currentController, array('playersonline', 'logs'), true)
+$usesDataTables = in_array($currentController, array('logs'), true)
     || ($currentController === 'admin' && in_array($currentMethod, array('news', 'shop', 'adminaccounts', 'tickets', 'objects', 'maps', 'events', 'quests'), true));
 $usesTinyMce = $isAdminUser && (
     ($currentController === 'admin' && in_array($currentMethod, array('news', 'editnews'), true))
