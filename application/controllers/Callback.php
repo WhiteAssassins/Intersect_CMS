@@ -20,6 +20,11 @@ class Callback extends MY_Controller
             return;
         }
 
-        $this->paymentservice->registerCallback($paymentId, $remoteId, $uuid);
+        if (!$this->paymentservice->registerCallback($paymentId, $remoteId, $uuid)) {
+            show_error($this->t('payment_invalid_callback', 'Invalid payment callback.'), 400);
+            return;
+        }
+
+        $this->respondJson(array('status' => 200));
     }
 }

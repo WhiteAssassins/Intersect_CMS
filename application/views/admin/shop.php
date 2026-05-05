@@ -103,16 +103,16 @@
             <?php } else { ?>
               <?php foreach ($admin_product_rows as $row) { ?>
                 <tr>
-                  <td><?php echo $row['name']; ?></td>
-                  <td>$<?php echo $row['price']; ?></td>
-                  <td><?php echo $row['description']; ?></td>
-                  <td><?php echo $row['attack_animation']; ?></td>
-                  <td><?php echo $row['interaction_animation']; ?></td>
+                  <td><?php echo html_escape($row['name']); ?></td>
+                  <td>$<?php echo number_format((float) $row['price'], 2, '.', ''); ?></td>
+                  <td><?php echo html_escape($row['description']); ?></td>
+                  <td><?php echo html_escape($row['attack_animation']); ?></td>
+                  <td><?php echo html_escape($row['interaction_animation']); ?></td>
                   <td>
                     <div class="admin-actions">
                       <form method="POST" action="<?php echo base_url('admin/delproduct'); ?>">
                         <?php echo cms_csrf_field(); ?>
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
                         <button class="admin-icon-btn admin-icon-btn--danger" type="submit" aria-label="{action}">
                           <i class="fas fa-trash"></i>
                         </button>
@@ -120,7 +120,7 @@
 
                       <form method="POST" action="<?php echo base_url('admin/editproduct'); ?>">
                         <?php echo cms_csrf_field(); ?>
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
                         <button class="admin-icon-btn admin-icon-btn--warning" type="submit" aria-label="{edit}">
                           <i class="fas fa-pen"></i>
                         </button>
@@ -128,7 +128,7 @@
 
                       <form method="POST" action="<?php echo base_url('admin/statusproduct'); ?>">
                         <?php echo cms_csrf_field(); ?>
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
                         <button class="admin-icon-btn <?php echo $row['is_visible'] ? 'admin-icon-btn--danger' : 'admin-icon-btn--success'; ?>" type="submit" aria-label="{status}">
                           <i class="fas fa-eye"></i>
                         </button>

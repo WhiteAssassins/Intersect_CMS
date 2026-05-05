@@ -23,7 +23,7 @@
           </div>
           <label class="admin-form-group">
             <span class="admin-form-group__label">{descriptionmenu}</span>
-            <input type="text" class="form-control" placeholder="{descriptionmenu}" name="menuheader" value="<?php echo $config_menu_header; ?>">
+            <input type="text" class="form-control" placeholder="{descriptionmenu}" name="menuheader" value="<?php echo html_escape($config_menu_header); ?>">
           </label>
         </div>
 
@@ -37,16 +37,16 @@
             <div class="admin-editor__grid">
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{iconmenu1}</span>
-                <input type="text" class="form-control" placeholder="{iconmenu1}" name="menu1icon" value="<?php echo $config_menu1_icon; ?>">
+                <input type="text" class="form-control" placeholder="{iconmenu1}" name="menu1icon" value="<?php echo html_escape($config_menu1_icon); ?>">
               </label>
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{titlemenu1}</span>
-                <input type="text" class="form-control" placeholder="{titlemenu1}" name="menu1header" value="<?php echo $config_menu1_header; ?>">
+                <input type="text" class="form-control" placeholder="{titlemenu1}" name="menu1header" value="<?php echo html_escape($config_menu1_header); ?>">
               </label>
             </div>
             <label class="admin-form-group">
               <span class="admin-form-group__label">{textmenu1}</span>
-              <input type="text" class="form-control" placeholder="{textmenu1}" name="menu1text" value="<?php echo $config_menu1_text; ?>">
+              <input type="text" class="form-control" placeholder="{textmenu1}" name="menu1text" value="<?php echo html_escape($config_menu1_text); ?>">
             </label>
           </article>
 
@@ -59,16 +59,16 @@
             <div class="admin-editor__grid">
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{iconmenu2}</span>
-                <input type="text" class="form-control" placeholder="{iconmenu2}" name="menu2icon" value="<?php echo $config_menu2_icon; ?>">
+                <input type="text" class="form-control" placeholder="{iconmenu2}" name="menu2icon" value="<?php echo html_escape($config_menu2_icon); ?>">
               </label>
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{titlemenu2}</span>
-                <input type="text" class="form-control" placeholder="{titlemenu2}" name="menu2header" value="<?php echo $config_menu2_header; ?>">
+                <input type="text" class="form-control" placeholder="{titlemenu2}" name="menu2header" value="<?php echo html_escape($config_menu2_header); ?>">
               </label>
             </div>
             <label class="admin-form-group">
               <span class="admin-form-group__label">{textmenu2}</span>
-              <input type="text" class="form-control" placeholder="{textmenu2}" name="menu2text" value="<?php echo $config_menu2_text; ?>">
+              <input type="text" class="form-control" placeholder="{textmenu2}" name="menu2text" value="<?php echo html_escape($config_menu2_text); ?>">
             </label>
           </article>
 
@@ -81,16 +81,16 @@
             <div class="admin-editor__grid">
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{iconmenu3}</span>
-                <input type="text" class="form-control" placeholder="{iconmenu3}" name="menu3icon" value="<?php echo $config_menu3_icon; ?>">
+                <input type="text" class="form-control" placeholder="{iconmenu3}" name="menu3icon" value="<?php echo html_escape($config_menu3_icon); ?>">
               </label>
               <label class="admin-form-group">
                 <span class="admin-form-group__label">{titlemenu3}</span>
-                <input type="text" class="form-control" placeholder="{titlemenu3}" name="menu3header" value="<?php echo $config_menu3_header; ?>">
+                <input type="text" class="form-control" placeholder="{titlemenu3}" name="menu3header" value="<?php echo html_escape($config_menu3_header); ?>">
               </label>
             </div>
             <label class="admin-form-group">
               <span class="admin-form-group__label">{textmenu3}</span>
-              <input type="text" class="form-control" placeholder="{textmenu3}" name="menu3text" value="<?php echo $config_menu3_text; ?>">
+              <input type="text" class="form-control" placeholder="{textmenu3}" name="menu3text" value="<?php echo html_escape($config_menu3_text); ?>">
             </label>
           </article>
         </div>

@@ -70,14 +70,14 @@ if ($ticketCount > 0) {
               <?php foreach ($admin_feedback_rows as $row) { ?>
                 <tr>
                   <td>
-                    <strong><?php echo $row['title']; ?></strong>
-                    <div class="admin-table__meta"><?php echo $row['type']; ?></div>
-                    <div class="admin-table__meta"><?php echo $row['text']; ?></div>
+                    <strong><?php echo html_escape($row['title']); ?></strong>
+                    <div class="admin-table__meta"><?php echo html_escape($row['type']); ?></div>
+                    <div class="admin-table__meta"><?php echo nl2br(html_escape($row['text']), false); ?></div>
                   </td>
-                  <td><?php echo $row['user']; ?></td>
-                  <td><?php echo $row['email']; ?></td>
-                  <td><?php echo $row['status']; ?></td>
-                  <td><?php echo $row['admin']; ?></td>
+                  <td><?php echo html_escape($row['user']); ?></td>
+                  <td><?php echo html_escape($row['email']); ?></td>
+                  <td><?php echo html_escape($row['status']); ?></td>
+                  <td><?php echo html_escape($row['admin']); ?></td>
                 </tr>
               <?php } ?>
             <?php } ?>

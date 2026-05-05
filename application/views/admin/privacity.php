@@ -9,8 +9,8 @@
       </div>
       <form class="admin-editor__form" action="<?php echo base_url('config/changeprivacity'); ?>" method="POST">
         <?php echo cms_csrf_field(); ?>
-        <input type="hidden" name="id" value="<?php echo $config_id; ?>">
-        <textarea id="tiny" name="privacity" placeholder="{textprivacity}"><?php echo $config_content; ?></textarea>
+        <input type="hidden" name="id" value="<?php echo (int) $config_id; ?>">
+        <textarea id="tiny" name="privacity" placeholder="{textprivacity}"><?php echo html_escape($config_content); ?></textarea>
         <div class="admin-editor__actions">
           <button type="submit" class="admin-button admin-button--primary">{edit}</button>
           <a href="<?php echo base_url('config'); ?>" class="admin-button admin-button--ghost">{return}</a>

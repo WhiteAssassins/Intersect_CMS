@@ -142,7 +142,7 @@ CREATE TABLE `payments` (
 
 CREATE TABLE `paymentstatus` (
   `id` int(11) NOT NULL,
-  `uuid` text NOT NULL,
+  `uuid` varchar(191) NOT NULL,
   `status` text NOT NULL,
   `user` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -187,7 +187,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user`, `pass`, `email`, `rol`, `balance`) VALUES
-(1, 'Admin', 'e3afed0047b08059d0fada10f400c1e5', 'admin@admin.admin', 1, 0.00);
+(1, 'Admin', '$2y$10$dVs/bJ/K55VpZpy5VD1XVu7epyGcqBDhwAbAzKfrauykD6DuHIX9.', 'admin@admin.admin', 1, 0.00);
 
 -- --------------------------------------------------------
 
@@ -262,7 +262,8 @@ ALTER TABLE `payments`
 -- Indices de la tabla `paymentstatus`
 --
 ALTER TABLE `paymentstatus`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `paymentstatus_uuid_unique` (`uuid`);
 
 --
 -- Indices de la tabla `products`

@@ -83,14 +83,14 @@
             <?php } else { ?>
               <?php foreach ($admin_account_rows as $row) { ?>
                 <tr>
-                  <td><?php echo $row['id']; ?></td>
-                  <td><?php echo $row['user']; ?></td>
-                  <td><?php echo $row['email']; ?></td>
+                  <td><?php echo (int) $row['id']; ?></td>
+                  <td><?php echo html_escape($row['user']); ?></td>
+                  <td><?php echo html_escape($row['email']); ?></td>
                   <td>
                     <div class="admin-actions">
                       <form method="POST" action="<?php echo base_url('admin/deladminaccount'); ?>">
                         <?php echo cms_csrf_field(); ?>
-                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
                         <button class="admin-icon-btn admin-icon-btn--danger" type="submit" aria-label="{action}">
                           <i class="fas fa-trash"></i>
                         </button>

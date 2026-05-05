@@ -74,12 +74,12 @@
             <div class="admin-feed__marker"></div>
             <div class="admin-feed__card">
               <div class="admin-feed__content">
-                <h3><?php echo $row['title']; ?></h3>
-                <p><?php echo $row['text']; ?></p>
+                <h3><?php echo html_escape($row['title']); ?></h3>
+                <p><?php echo nl2br(html_escape($row['text']), false); ?></p>
               </div>
               <form method="POST" action="<?php echo base_url('admin/delchangelog'); ?>">
                 <?php echo cms_csrf_field(); ?>
-                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
                 <button class="admin-icon-btn admin-icon-btn--danger" type="submit" aria-label="{action}">
                   <i class="fas fa-trash"></i>
                 </button>

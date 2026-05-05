@@ -51,16 +51,16 @@ if ($configured_base_url !== FALSE && $configured_base_url !== '')
 {
 	$config['base_url'] = rtrim($configured_base_url, '/').'/';
 }
-elseif ($request_host !== '')
+elseif ($installerBaseUrl !== '')
+{
+	$config['base_url'] = rtrim($installerBaseUrl, '/').'/';
+}
+elseif ($request_host !== '' && ENVIRONMENT !== 'production')
 {
 	$scheme = $is_https_request ? 'https' : 'http';
 	$script_path = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
 	$script_path = trim($script_path, '/');
 	$config['base_url'] = $scheme.'://'.$request_host.($script_path !== '' ? '/'.$script_path : '').'/';
-}
-elseif ($installerBaseUrl !== '')
-{
-	$config['base_url'] = rtrim($installerBaseUrl, '/').'/';
 }
 else
 {

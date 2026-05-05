@@ -21,16 +21,16 @@ $paymentStatus = $this->Langs->getText('payment_status_label', $langCode, 'Payme
     <div class="row">
           <span><?php echo html_escape($paymentMessage); ?></span><br/>
           <span><?php echo html_escape($paymentItem); ?>:
-              <strong><?php echo $item_number; ?></strong>
+              <strong><?php echo html_escape($item_number); ?></strong>
           </span><br/>
           <span><?php echo html_escape($paymentTxn); ?>:
-              <strong><?php echo $txn_id; ?></strong>
+              <strong><?php echo html_escape($txn_id); ?></strong>
           </span><br/>
           <span><?php echo html_escape($paymentTotal); ?>:
-              <strong>$<?php echo $payment_amt.' '.$currency_code; ?></strong>
+              <strong>$<?php echo html_escape($payment_amt . ' ' . $currency_code); ?></strong>
           </span><br/>
           <span><?php echo html_escape($paymentStatus); ?>:
-              <strong><?php echo $status; ?></strong>
+              <strong><?php echo html_escape($status); ?></strong>
         </span><br/>
     </div>
   </div>
